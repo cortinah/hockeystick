@@ -29,3 +29,9 @@ This is a basic example which shows you how to solve a common problem:
 library(hockeystick)
 ## basic example code
 ```
+
+## Acknowledgments
+
+  - Caching data sets: ROpenSci guide to [Persistent config and data for
+    R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
+    the [getlandsat](https://docs.ropensci.org/getlandsat/) package

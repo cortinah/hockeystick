@@ -15,6 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://github.com/cortinah/hockeystick
 BugReports: https://github.com/cortinah/hockeystick/issues
+Imports: rappdirs
 Suggests: 
     spelling
 Language: en-US
