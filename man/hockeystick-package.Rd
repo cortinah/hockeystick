@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-The goal of hockeystick is to download and visualize essential climate change data.
+The hockeystick package provides access to essential climate change datasets. The package includes functions to download and visualize atmospheric carbon dioxide.
 }
 \seealso{
 Useful links:
