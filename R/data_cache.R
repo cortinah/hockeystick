@@ -1,6 +1,5 @@
 #' Manage cached datasets
 #'
-#' @export
 #' @name hockeystick_cache
 #' @param files (character) one or more complete file names
 #' @param force (logical) Should files be force deleted? Default: `TRUE`
@@ -86,7 +85,8 @@ file_info_ <- function(x) {
   fs <- file.size(x)
   list(file = x,
        type = "rds",
-       size = if (!is.na(fs)) getsize(fs) else NA
+       size = if (!is.na(fs)) getsize(fs) else NA,
+       date = if (!is.na(fs)) file.mtime(x) else NA
   )
 }
 
@@ -95,7 +95,7 @@ file_info_ <- function(x) {
 #' Internal function
 #' @param x filenames
 getsize <- function(x) {
-  round(x/10 ^ 6, 3)
+  round(x/10^6, 3)
 }
 
 #' Display data cache info
@@ -110,6 +110,7 @@ print.hockeystick_cache_info <- function(x, ...) {
   for (i in seq_along(x)) {
     cat(paste0("  file: ", sub(hscache_path(), "", x[[i]]$file)), sep = "\n")
     cat(paste0("  size: ", x[[i]]$size, " mb"), sep = "\n")
+    cat(paste0("  date: ", x[[i]]$date), sep='\n')
     cat("\n")
   }
 }
