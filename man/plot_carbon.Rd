@@ -28,7 +28,7 @@ maunaloa <- get_carbon()
 # Plot output using package's built-in ggplot2 defaults
 plot_carbon(maunaloa)
 
-# Or just call plot_carbon(), which defaults to use_carbon() dataset
+# Or just call plot_carbon(), which defaults to get_carbon() dataset
 plot_carbon()
 
 p <- plot_carbon(maunaloa, print = FALSE)

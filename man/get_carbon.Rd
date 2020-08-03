@@ -18,7 +18,7 @@ Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
 \url{https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html}
 }
 \details{
-\code{fetch_carbon} invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
+\code{get_carbon} invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
 The returned object includes date, year, month, average, interpolated, and trend columns.
 Average and interpolated are basically identical with interpolated filling in a very small number of missing months.
 Trend is NOAA's published trend.  Please refer to above website for details.

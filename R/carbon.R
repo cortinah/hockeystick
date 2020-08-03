@@ -9,7 +9,7 @@
 #'
 #' @return Invisibly returns a tibble with the monthly carbon dioxide series
 #'
-#' @details `fetch_carbon` invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
+#' @details `get_carbon` invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
 #' The returned object includes date, year, month, average, interpolated, and trend columns.
 #' Average and interpolated are basically identical with interpolated filling in a very small number of missing months.
 #' Trend is NOAA's published trend.  Please refer to above website for details.
@@ -85,7 +85,7 @@ invisible(maunaloa)
 #' # Plot output using package's built-in ggplot2 defaults
 #' plot_carbon(maunaloa)
 #'
-#' # Or just call plot_carbon(), which defaults to use_carbon() dataset
+#' # Or just call plot_carbon(), which defaults to get_carbon() dataset
 #' plot_carbon()
 #'
 #' p <- plot_carbon(maunaloa, print = FALSE)
