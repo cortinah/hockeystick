@@ -103,6 +103,7 @@ invisible(gisstemp)
 
 plot_temp <- function(dataset = get_temp(), print=TRUE) {
 
+
 plot <- ggplot(dataset, aes(x=Year, y=`J-D`)) +geom_line(alpha=0.75, aes(color='Annual mean')) + theme_bw(base_size=12) +
   scale_x_date(name=NULL, limits=c(as.Date('1878-01-01'), ymd(max(dataset$Year))), date_breaks='15 years', date_labels='%Y') +
   scale_y_continuous(n.breaks = 8) +geom_smooth(size=1.1, se=F, span=0.3, aes(color='Loess smoothing')) +
@@ -110,6 +111,6 @@ plot <- ggplot(dataset, aes(x=Year, y=`J-D`)) +geom_line(alpha=0.75, aes(color='
        y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/') +
   scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.175, 0.825),legend.background=element_blank())
 
-if (print) print(plot)
+if (print) suppressMessages( print(plot) )
 invisible(plot)
 }

@@ -29,7 +29,7 @@ remotes::install_github("cortinah/hockeystick")
 ## Examples
 
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
-and plot it:
+data and plot it:
 
 ``` r
 library(hockeystick)
@@ -37,13 +37,25 @@ ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
 ```
 
-<img src="man/figures/README-example-1.png" width="70%" />
+<img src="man/figures/README-carbon-1.png" width="60%" />
+
+Retrieve NASA/GISS global surface temperature anomaly data and plot it:
+
+``` r
+anomaly <- get_temp()
+plot_temp(anomaly)
+```
+
+<img src="man/figures/README-temp-1.png" width="60%" />
 
 ## Acknowledgments
 
   - Carbon Dioxide dataset: Dr. Pieter Tans, NOAA/GML
     (www.esrl.noaa.gov/gmd/ccgg/trends/) and Dr. Ralph Keeling, Scripps
     Institution of Oceanography (www.scrippsco2.ucsd.edu/).
+  - Global temperature anomaly: *GISS Surface Temperature Analysis
+    (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute
+    for Space Studies. <https://data.giss.nasa.gov/gistemp/>
   - Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
