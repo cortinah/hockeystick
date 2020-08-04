@@ -18,7 +18,9 @@ Geophys
 getlandsat
 ggplot
 GHCN
+giss
 GISS
+gistemp
 GISTEMP
 github
 gmd
@@ -28,9 +30,11 @@ https
 Lenssen
 Lifecycle
 Loa
+loess
 LOTI
 Mauna
 Menne
+nasa
 noaa
 NOAA
 NOAA's
