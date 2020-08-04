@@ -48,6 +48,20 @@ plot_temp(anomaly)
 
 <img src="man/figures/README-temp-1.png" width="60%" />
 
+Visualize warming using Ed Hawkins styled “warming stripes”:
+
+``` r
+warming_stripes()
+```
+
+<img src="man/figures/README-stripes-1.png" width="60%" />
+
+``` r
+warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
+```
+
+<img src="man/figures/README-stripes2-1.png" width="53%" />
+
 ## Acknowledgments
 
   - Carbon Dioxide dataset: Dr. Pieter Tans, NOAA/GML
@@ -56,6 +70,11 @@ plot_temp(anomaly)
   - Global temperature anomaly: *GISS Surface Temperature Analysis
     (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute
     for Space Studies. <https://data.giss.nasa.gov/gistemp/>
+  - Warming Stripes design from Ed Hawkins’ Climate Lab.
+    <https://www.climate-lab-book.ac.uk/2018/warming-stripes/>. In
+    addition grateful to Dr. Dominic Royé for posting his approach to
+    plotting them using ggplot2, which `warming_stripes()` is based on.
+    <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
   - Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
