@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-The hockeystick package provides access to essential climate change datasets. The package includes functions to download and visualize atmospheric carbon dioxide.
+hockeystick provides easy access to essential Climate Change datasets to non-climate experts. Users can download the latest raw data from authoritative sources and view it via pre-defined ggplot2 charts. Datasets include atmospheric CO2, instrumental and ice-core temperature records, sea levels, and Arctic sea-ice.
 }
 \seealso{
 Useful links:

@@ -17,6 +17,17 @@ CO<sub>2</sub>, instrumental and ice-core temperature records, sea
 levels, and Arctic sea-ice. Additional visualizations using this data
 will be added over time.
 
+The choice of data is based on [Professor Stefan
+Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on
+[The 5 Most Important Data Sets of Climate
+Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I
+came across this on a post on the [Open Mind
+blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/).
+I wrote my own
+[post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/)
+on obtaining and visualizing this data, which is the basis for this
+package.
+
 ## Installation
 
 You can install the development version of `hockeystick` from
@@ -26,7 +37,7 @@ You can install the development version of `hockeystick` from
 remotes::install_github("cortinah/hockeystick")
 ```
 
-## Examples
+## Downloading and viewing climate change data
 
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
 data and plot it:
@@ -62,9 +73,18 @@ warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
 
 <img src="man/figures/README-stripes2-1.png" width="53%" />
 
+Retrieve tide gauge and satellite sea level data and plot it:
+
+``` r
+gmsl <- get_sealevel()
+plot_sealevel(gmsl)
+```
+
+<img src="man/figures/README-sl-1.png" width="60%" />
+
 ## Acknowledgments
 
-  - Carbon Dioxide dataset: Dr. Pieter Tans, NOAA/GML
+  - Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
     (www.esrl.noaa.gov/gmd/ccgg/trends/) and Dr. Ralph Keeling, Scripps
     Institution of Oceanography (www.scrippsco2.ucsd.edu/).
   - Global temperature anomaly: *GISS Surface Temperature Analysis
@@ -75,6 +95,10 @@ warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
     addition grateful to Dr. Dominic Royé for posting his approach to
     plotting them using ggplot2, which `warming_stripes()` is based on.
     <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
+  - Sea level data: NOAA Laboratory for Satellite Altimetry (sat)
+    <https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise>.
+    Commonwealth Scientific and Industrial Research Organisation (tide
+    gauges) <http://www.cmar.csiro.au/sealevel/sl_data_cmar.html>
   - Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
@@ -83,7 +107,8 @@ warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
 
   - While all data is compiled from reliable sources, I am not a climate
     scientist. I am building `hockeystick` because of my interest in
-    tracking climate data and making it available to the community.
+    tracking climate data and making it easily available to the
+    community.
   - Here are some online resources I have found very helpful to learn
     more about climate science:
   - MIT edX Global Warming Science.
