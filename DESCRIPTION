@@ -15,7 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://github.com/cortinah/hockeystick
 BugReports: https://github.com/cortinah/hockeystick/issues
-Imports: ggplot2, lubridate, rappdirs, readr
+Imports: ggplot2, lubridate, rappdirs, readr, dplyr, tidyr, magrittr
 Suggests: 
     spelling
 Language: en-US
