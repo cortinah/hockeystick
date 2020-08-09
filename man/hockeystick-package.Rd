@@ -13,6 +13,7 @@ hockeystick provides easy access to essential Climate Change datasets to non-cli
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://cortinah.github.io/hockeystick/}
   \item \url{https://github.com/cortinah/hockeystick}
   \item Report bugs at \url{https://github.com/cortinah/hockeystick/issues}
 }
