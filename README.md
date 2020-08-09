@@ -82,6 +82,19 @@ plot_sealevel(gmsl)
 
 <img src="man/figures/README-sl-1.png" width="60%" />
 
+Retrieve July annual Arctic Sea Ice Index and plot it:
+
+``` r
+seaice <- get_seaice()
+#> Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.
+plot_seaice(seaice)
+```
+
+<img src="man/figures/README-si-1.png" width="60%" />
+
+`get_seaice()` arguments can be modified to download Antarctic sea ice,
+and allow any month.
+
 ## Acknowledgments
 
   - Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
@@ -99,6 +112,9 @@ plot_sealevel(gmsl)
     <https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise>.
     Commonwealth Scientific and Industrial Research Organisation (tide
     gauges) <http://www.cmar.csiro.au/sealevel/sl_data_cmar.html>
+  - Sea Ice Index: National Snow & Ice Data Center.
+    <https://nsidc.org/>. Data Archive:
+    <https://nsidc.org/data/seaice_index/archives>  
   - Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
