@@ -89,7 +89,7 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version of <code>hockeystick</code> from <a href="https://github.com/cortinah/hockeystick" class="uri">https://github.com/cortinah/hockeystick</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"cortinah/hockeystick"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"cortinah/hockeystick"</span>)</pre></div>
 </div>
 <div id="downloading-and-viewing-climate-change-data" class="section level2">
 <h2 class="hasAnchor">
@@ -112,6 +112,12 @@
 <div class="sourceCode" id="cb6"><pre class="r"><span class="no">gmsl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_sealevel.html">get_sealevel</a></span>()
 <span class="fu"><a href="reference/plot_sealevel.html">plot_sealevel</a></span>(<span class="no">gmsl</span>)</pre></div>
 <p><img src="reference/figures/README-sl-1.png" width="60%"></p>
+<p>Retrieve July annual Arctic Sea Ice Index and plot it:</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="no">seaice</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_seaice.html">get_seaice</a></span>()
+<span class="co">#&gt; Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.</span>
+<span class="fu"><a href="reference/plot_seaice.html">plot_seaice</a></span>(<span class="no">seaice</span>)</pre></div>
+<p><img src="reference/figures/README-si-1.png" width="60%"></p>
+<p><code><a href="reference/get_seaice.html">get_seaice()</a></code> arguments can be modified to download Antarctic sea ice, and allow any month.</p>
 </div>
 <div id="acknowledgments" class="section level2">
 <h2 class="hasAnchor">
@@ -123,6 +129,8 @@
 <li>Warming Stripes design from Ed Hawkins’ Climate Lab. <a href="https://www.climate-lab-book.ac.uk/2018/warming-stripes/" class="uri">https://www.climate-lab-book.ac.uk/2018/warming-stripes/</a>. In addition grateful to Dr. Dominic Royé for posting his approach to plotting them using ggplot2, which <code><a href="reference/warming_stripes.html">warming_stripes()</a></code> is based on. <a href="https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/" class="uri">https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/</a>
 </li>
 <li>Sea level data: NOAA Laboratory for Satellite Altimetry (sat) <a href="https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise" class="uri">https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise</a>. Commonwealth Scientific and Industrial Research Organisation (tide gauges) <a href="http://www.cmar.csiro.au/sealevel/sl_data_cmar.html" class="uri">http://www.cmar.csiro.au/sealevel/sl_data_cmar.html</a>
+</li>
+<li>Sea Ice Index: National Snow &amp; Ice Data Center. <a href="https://nsidc.org/" class="uri">https://nsidc.org/</a>. Data Archive: <a href="https://nsidc.org/data/seaice_index/archives" class="uri">https://nsidc.org/data/seaice_index/archives</a><br>
 </li>
 <li>Caching data sets: ROpenSci guide to <a href="https://blog.r-hub.io/2020/03/12/user-preferences/">Persistent config and data for R packages</a> and the <a href="https://docs.ropensci.org/getlandsat/">getlandsat</a> package.</li>
 </ul>

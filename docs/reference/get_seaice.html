@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download and plot essential climate data — get_carbon • hockeystick</title>
+<title>Download and plot essential climate data — get_seaice • hockeystick</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,10 @@
 
 
 
-<meta property="og:title" content="Download and plot essential climate data — get_carbon" />
-<meta property="og:description" content="Retrieves atmospheric carbon dioxide measurements from National Oceanic and Atmospheric Administration
-Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
-https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html" />
+<meta property="og:title" content="Download and plot essential climate data — get_seaice" />
+<meta property="og:description" content="Retrieves Arctic or Antarctic annual Sea Ice Index (in million square km).
+Source is the National Snow and Ice Data Center, defaults to Arctic (Northern Hemisphere) July sea ice extent.
+https://nsidc.org/data/seaice_index/archives  " />
 <meta property="og:image" content="/reference/figures/logo.png" />
 <meta property="og:image:alt" content="Download and Visualize Essential Climate Change Data" />
 
@@ -123,48 +123,63 @@ https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download and plot essential climate data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/cortinah/hockeystick/blob/master/R/carbon.R'><code>R/carbon.R</code></a></small>
-    <div class="hidden name"><code>get_carbon.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/cortinah/hockeystick/blob/master/R/seaice.R'><code>R/seaice.R</code></a></small>
+    <div class="hidden name"><code>get_seaice.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Retrieves atmospheric carbon dioxide measurements from National Oceanic and Atmospheric Administration
-Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
-<a href='https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html'>https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html</a></p>
+    <p>Retrieves Arctic or Antarctic annual Sea Ice Index (in million square km).
+Source is the National Snow and Ice Data Center, defaults to Arctic (Northern Hemisphere) July sea ice extent.
+<a href='https://nsidc.org/data/seaice_index/archives'>https://nsidc.org/data/seaice_index/archives</a> <br /> <br /></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_carbon</span>(<span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_seaice</span>(<span class='kw'>pole</span> <span class='kw'>=</span> <span class='st'>"N"</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='st'>"07"</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='st'>"extent"</span>, <span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>pole</th>
+      <td><p>'N' for Arctic or 'S' for Antarctic</p></td>
+    </tr>
+    <tr>
+      <th>month</th>
+      <td><p>2-digit month to retrieve sea ice for, defaults to '07' (July)</p></td>
+    </tr>
+    <tr>
+      <th>measure</th>
+      <td><p>Must be 'extent' or 'area', defaults to 'extent'. Please see terminology link in references for details.</p></td>
+    </tr>
+    <tr>
       <th>use_cache</th>
-      <td><p>(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.</p></td>
+      <td><p>(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data, or to change pole or month in cache.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Invisibly returns a tibble with the monthly carbon dioxide series</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>get_carbon</code> invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
-The returned object includes date, year, month, average, interpolated, and trend columns.
-Average and interpolated are basically identical with interpolated filling in a very small number of missing months.
-Trend is NOAA's published trend.  Please refer to above website for details.</p>
+    <p>Invisibly returns a tibble with the annual series of monthly Sea Ice Index since 1979 (in million square km).</p>
+<p><code>get_seaice</code> invisibly returns a tibble with annual series of monthly Sea Ice Index since 1979 (in million square km).</p>
+<p>User may select Arctic or Antarctic sea ice extent or area (in millions of square kilometers) by year for a given month, specified by argument <code>month</code>.
+Defaults to Arctic July sea ice extent.  <a href='https://nsidc.org/arcticseaicenews/faq/#area_extent'>https://nsidc.org/arcticseaicenews/faq/#area_extent</a></p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Dr. Pieter Tans, NOAA/GML <a href='www.esrl.noaa.gov/gmd/ccgg/trends/'>www.esrl.noaa.gov/gmd/ccgg/trends/</a> and Dr. Ralph Keeling, Scripps Institution of Oceanography <a href='scrippsco2.ucsd.edu/'>scrippsco2.ucsd.edu/</a>.</p>
-<p>C.D. Keeling, R.B. Bacastow, A.E. Bainbridge, C.A. Ekdahl, P.R. Guenther, and L.S. Waterman, (1976), Atmospheric carbon dioxide variations at Mauna Loa Observatory, Hawaii, <em>Tellus</em>, vol. 28, 538-551</p>
+    
+<ul>
+<li><p>NSIDC Data Archive: <a href='https://nsidc.org/data/seaice_index/archives'>https://nsidc.org/data/seaice_index/archives</a></p></li>
+<li><p>All About Sea Ice: <a href='https://nsidc.org/cryosphere/seaice/index.html'>https://nsidc.org/cryosphere/seaice/index.html</a></p></li>
+<li><p>Sea Ice terminology: <a href='https://nsidc.org/cryosphere/seaice/data/terminology.html'>https://nsidc.org/cryosphere/seaice/data/terminology.html</a></p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Fetch from cache if available:</span>
-<span class='no'>maunaloa</span> <span class='kw'>&lt;-</span> <span class='fu'>get_carbon</span>()
-<span class='co'>#</span>
+    <pre class="examples"><div class='input'><span class='co'># Fetch sea ice from cache if available:</span>
+<span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>()</div><div class='output co'>#&gt; <span class='message'>Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.</span></div><div class='input'><span class='co'>#</span>
 <span class='co'># Force cache refresh:</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>maunaloa</span> <span class='kw'>&lt;-</span> <span class='fu'>get_carbon</span>(<span class='kw'>use_cache</span><span class='kw'>=</span><span class='fl'>FALSE</span>)}
+<span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>(<span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='co'># change region and month</span>
+<span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>(<span class='kw'>pole</span><span class='kw'>=</span><span class='st'>'S'</span>, <span class='kw'>month</span><span class='kw'>=</span><span class='st'>'09'</span>, <span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)}
 <span class='co'>#</span>
 <span class='co'># Review cache contents and last update dates:</span>
 <span class='fu'><a href='hockeystick_cache.html'>hockeystick_cache_details</a></span>()</div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
@@ -187,7 +202,7 @@ Trend is NOAA's published trend.  Please refer to above website for details.</p>
 #&gt;   date: 2020-08-06 20:45:32
 #&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
-<span class='fu'><a href='plot_carbon.html'>plot_carbon</a></span>(<span class='no'>maunaloa</span>)</div><div class='img'><img src='get_carbon-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='plot_seaice.html'>plot_seaice</a></span>(<span class='no'>seaice</span>)</div><div class='img'><img src='get_seaice-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
