@@ -95,7 +95,7 @@ file_info_ <- function(x) {
 #' Internal function
 #' @param x filenames
 getsize <- function(x) {
-  round(x/10^6, 3)
+  round(x/10^3, 3)
 }
 
 #' Display data cache info
@@ -109,7 +109,7 @@ print.hockeystick_cache_info <- function(x, ...) {
   cat(sprintf("  directory: %s\n", hscache_path()), sep = "\n")
   for (i in seq_along(x)) {
     cat(paste0("  file: ", sub(hscache_path(), "", x[[i]]$file)), sep = "\n")
-    cat(paste0("  size: ", x[[i]]$size, " mb"), sep = "\n")
+    cat(paste0("  size: ", x[[i]]$size, " kB"), sep = "\n")
     cat(paste0("  date: ", x[[i]]$date), sep='\n')
     cat("\n")
   }
