@@ -1,0 +1,6 @@
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^LICENSE\.md$
+^.*\.Rproj$
+^README\.Rmd$
