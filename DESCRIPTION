@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "hch@alum.mit.edu",
            comment = c(ORCID = "0000-0001-6790-4870"))
-Description: hockeystick provides easy access to essential Climate Change datasets to non-climate experts. Users can download the latest raw data from authoritative sources and view it via pre-defined ggplot2 charts. Datasets include atmospheric CO2, instrumental and ice-core temperature records, sea levels, and Arctic sea-ice.
+Description: hockeystick provides easy access to essential Climate Change datasets to non-climate experts. Users can download the latest raw data from authoritative sources and view it via pre-defined ggplot2 charts. Datasets include atmospheric CO2, instrumental and ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,7 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://cortinah.github.io/hockeystick/, https://github.com/cortinah/hockeystick
 BugReports: https://github.com/cortinah/hockeystick/issues
-Imports: ggplot2, lubridate, rappdirs, readr, dplyr, tidyr, magrittr
+Imports: ggplot2, lubridate, rappdirs, readr, dplyr, tidyr, patchwork
 Suggests: 
     spelling
 Language: en-US

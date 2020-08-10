@@ -18,6 +18,7 @@
 #' @import ggplot2
 #'
 #' @examples
+#' \dontrun{
 #' # Draw with axes and legend
 #' stripes <- warming_stripes()
 #'
@@ -27,7 +28,6 @@
 #' # Don't display, store for further modifications
 #' stripes <- warming_stripes(print = FALSE)
 #'
-#' \dontrun{
 #' # Change color palette
 #' stripes <- warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11)) }
 #'
