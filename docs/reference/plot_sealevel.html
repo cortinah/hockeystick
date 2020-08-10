@@ -153,16 +153,18 @@
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Fetch sealevel data:</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Fetch sealevel data:</span>
 <span class='no'>gmsl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_sealevel.html'>get_sealevel</a></span>()
 <span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 defaults</span>
-<span class='fu'>plot_sealevel</span>(<span class='no'>gmsl</span>)</div><div class='img'><img src='plot_sealevel-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot_sealevel</span>(<span class='no'>gmsl</span>)
+
 <span class='co'># Or just call plot_sealevel(), which defaults to get_sealevel() dataset</span>
-<span class='fu'>plot_sealevel</span>()</div><div class='img'><img src='plot_sealevel-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>plot_sealevel</span>()
+
 <span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_sealevel</span>(<span class='no'>gmsl</span>, <span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>p</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span>(<span class='kw'>title</span><span class='kw'>=</span><span class='st'>'Rising Waters'</span>)</div><div class='img'><img src='plot_sealevel-3.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+<span class='no'>p</span> + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/labs.html'>labs</a></span>(<span class='kw'>title</span><span class='kw'>=</span><span class='st'>'Rising Waters'</span>) }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -173,37 +173,20 @@ Defaults to Arctic July sea ice extent.  <a href='https://nsidc.org/arcticseaice
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Fetch sea ice from cache if available:</span>
-<span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>()</div><div class='output co'>#&gt; <span class='message'>Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.</span></div><div class='input'><span class='co'>#</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Fetch sea ice from cache if available:</span>
+<span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>()
+<span class='co'>#</span>
 <span class='co'># Force cache refresh:</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>(<span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='co'># change region and month</span>
-<span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>(<span class='kw'>pole</span><span class='kw'>=</span><span class='st'>'S'</span>, <span class='kw'>month</span><span class='kw'>=</span><span class='st'>'09'</span>, <span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)}
+<span class='no'>seaice</span> <span class='kw'>&lt;-</span> <span class='fu'>get_seaice</span>(<span class='kw'>pole</span><span class='kw'>=</span><span class='st'>'S'</span>, <span class='kw'>month</span><span class='kw'>=</span><span class='st'>'09'</span>, <span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='co'>#</span>
 <span class='co'># Review cache contents and last update dates:</span>
-<span class='fu'><a href='hockeystick_cache.html'>hockeystick_cache_details</a></span>()</div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
-#&gt;   directory: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/gisstemp.rds
-#&gt;   size: 5.299 kB
-#&gt;   date: 2020-08-02 21:00:59
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/maunaloa.rds
-#&gt;   size: 7.593 kB
-#&gt;   date: 2020-08-02 21:11:11
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/seaice.rds
-#&gt;   size: 0.507 kB
-#&gt;   date: 2020-08-09 18:59:22
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/sealevel.rds
-#&gt;   size: 15.697 kB
-#&gt;   date: 2020-08-06 20:45:32
-#&gt; </div><div class='input'><span class='co'>#</span>
+<span class='fu'><a href='hockeystick_cache.html'>hockeystick_cache_details</a></span>()
+<span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
-<span class='fu'><a href='plot_seaice.html'>plot_seaice</a></span>(<span class='no'>seaice</span>)</div><div class='img'><img src='get_seaice-1.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+<span class='fu'><a href='plot_seaice.html'>plot_seaice</a></span>(<span class='no'>seaice</span>) }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
