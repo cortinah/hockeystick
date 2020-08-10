@@ -24,18 +24,18 @@ Average and interpolated are basically identical with interpolated filling in a 
 Trend is NOAA's published trend.  Please refer to above website for details.
 }
 \examples{
+\dontrun{
 # Fetch from cache if available:
 maunaloa <- get_carbon()
 #
 # Force cache refresh:
-\dontrun{
-maunaloa <- get_carbon(use_cache=FALSE)}
+maunaloa <- get_carbon(use_cache=FALSE)
 #
 # Review cache contents and last update dates:
 hockeystick_cache_details()
 #
 # Plot output using package's built-in ggplot2 settings
-plot_carbon(maunaloa)
+plot_carbon(maunaloa) }
 
 }
 \references{

@@ -29,20 +29,20 @@ Source is the National Snow and Ice Data Center, defaults to Arctic (Northern He
 \url{https://nsidc.org/data/seaice_index/archives} \cr \cr
 }
 \examples{
+\dontrun{
 # Fetch sea ice from cache if available:
 seaice <- get_seaice()
 #
 # Force cache refresh:
-\dontrun{
 seaice <- get_seaice(use_cache = FALSE)
 # change region and month
-seaice <- get_seaice(pole='S', month='09', use_cache = FALSE)}
+seaice <- get_seaice(pole='S', month='09', use_cache = FALSE)
 #
 # Review cache contents and last update dates:
 hockeystick_cache_details()
 #
 # Plot output using package's built-in ggplot2 settings
-plot_seaice(seaice)
+plot_seaice(seaice) }
 
 }
 \references{

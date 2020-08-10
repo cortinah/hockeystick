@@ -19,18 +19,18 @@
 #' @importFrom utils download.file
 #'
 #' @examples
+#' \dontrun{
 #' # Fetch from cache if available:
 #' maunaloa <- get_carbon()
 #' #
 #' # Force cache refresh:
-#' \dontrun{
-#' maunaloa <- get_carbon(use_cache=FALSE)}
+#' maunaloa <- get_carbon(use_cache=FALSE)
 #' #
 #' # Review cache contents and last update dates:
 #' hockeystick_cache_details()
 #' #
 #' # Plot output using package's built-in ggplot2 settings
-#' plot_carbon(maunaloa)
+#' plot_carbon(maunaloa) }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
@@ -79,6 +79,7 @@ invisible(maunaloa)
 #' @import ggplot2
 #'
 #' @examples
+#' \dontrun{
 #' # Fetch carbon dioxide data:
 #' maunaloa <- get_carbon()
 #' #
@@ -89,7 +90,7 @@ invisible(maunaloa)
 #' plot_carbon()
 #'
 #' p <- plot_carbon(maunaloa, print = FALSE)
-#' p + ggplot2::labs(title='The Keeling Curve')
+#' p + ggplot2::labs(title='The Keeling Curve') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

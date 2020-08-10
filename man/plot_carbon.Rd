@@ -22,6 +22,7 @@ Plots carbon dioxide data retrieved using \code{get_carbon()} with ggplot2. The 
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
+\dontrun{
 # Fetch carbon dioxide data:
 maunaloa <- get_carbon()
 #
@@ -32,7 +33,7 @@ plot_carbon(maunaloa)
 plot_carbon()
 
 p <- plot_carbon(maunaloa, print = FALSE)
-p + ggplot2::labs(title='The Keeling Curve')
+p + ggplot2::labs(title='The Keeling Curve') }
 
 }
 \author{

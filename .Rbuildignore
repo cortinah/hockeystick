@@ -6,3 +6,4 @@
 ^README\.Rmd$
 ^\.Rproj\.user$
 ^\.travis\.yml$
+cran-comments.md

@@ -24,6 +24,7 @@ Plots the Sea Ice Index data retrieved using \code{get_seaice()} with ggplot2. T
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
+\dontrun{
 # Fetch sea ice data:
 seaice <- get_seaice()
 #
@@ -34,7 +35,7 @@ plot_seaice(seaice)
 plot_seaice()
 
 p <- plot_seaice(seaice, print = FALSE)
-p + ggplot2::labs(title='Shrinking Arctic Sea Ice')
+p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
 
 }
 \author{

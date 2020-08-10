@@ -21,20 +21,20 @@
 #' @importFrom utils download.file read.csv
 #'
 #' @examples
+#' \dontrun{
 #' # Fetch sea ice from cache if available:
 #' seaice <- get_seaice()
 #' #
 #' # Force cache refresh:
-#' \dontrun{
 #' seaice <- get_seaice(use_cache = FALSE)
 #' # change region and month
-#' seaice <- get_seaice(pole='S', month='09', use_cache = FALSE)}
+#' seaice <- get_seaice(pole='S', month='09', use_cache = FALSE)
 #' #
 #' # Review cache contents and last update dates:
 #' hockeystick_cache_details()
 #' #
 #' # Plot output using package's built-in ggplot2 settings
-#' plot_seaice(seaice)
+#' plot_seaice(seaice) }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
@@ -97,6 +97,7 @@ get_seaice <- function(pole='N', month='07', measure='extent', use_cache = TRUE)
 #' @importFrom lubridate ymd ceiling_date month
 #'
 #' @examples
+#' \dontrun{
 #' # Fetch sea ice data:
 #' seaice <- get_seaice()
 #' #
@@ -107,7 +108,7 @@ get_seaice <- function(pole='N', month='07', measure='extent', use_cache = TRUE)
 #' plot_seaice()
 #'
 #' p <- plot_seaice(seaice, print = FALSE)
-#' p + ggplot2::labs(title='Shrinking Arctic Sea Ice')
+#' p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'
