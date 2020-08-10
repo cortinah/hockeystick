@@ -22,9 +22,8 @@
 #' @importFrom readr read_csv
 #' @importFrom lubridate ymd date_decimal round_date
 #' @importFrom utils download.file read.csv unzip
-#' @importFrom dplyr full_join summarize_all filter
-#' @importFrom magrittr `%>%`
-#' @importFrom tidyr gather
+#' @importFrom dplyr full_join summarize_all filter select
+#' @importFrom tidyr pivot_longer
 #'
 #' @examples
 #' \dontrun{
@@ -81,11 +80,12 @@ gmsl_tide$date <- lubridate::ymd(lubridate::round_date(lubridate::date_decimal(g
 
 gmsl <- dplyr::full_join(gmsl_tide, gmsl_sat)
 
-diff <- gmsl %>% dplyr::filter(date >= as.Date('1993-01-01') & date < as.Date('1994-01-01')) %>% dplyr::summarize_all(list(mean=mean), na.rm = TRUE)
+diff <- dplyr::filter(gmsl, date >= as.Date('1993-01-01') & date < as.Date('1994-01-01'))
+diff <- dplyr::summarize_all(list(mean=mean), na.rm = TRUE)
 diff <- diff$gmsl_tide_mean - diff$gmsl_sat_mean
 gmsl$gmsl_sat <- gmsl$gmsl_sat + diff
 
-gmsl <- tidyr::gather(gmsl, key=method, value=gmsl, -date, na.rm = TRUE)
+gmsl <- tidyr::pivot_longer(gmsl, -date, values_drop_na = TRUE, names_to = 'method', values_to = 'gmsl')
 
 saveRDS(gmsl, file.path(hs_path, 'sealevel.rds'))
 
