@@ -95,7 +95,7 @@ file_info_ <- function(x) {
 #' Internal function
 #' @param x filenames
 getsize <- function(x) {
-  round(x/10^3, 3)
+  round(x/10^3, 1)
 }
 
 #' Display data cache info

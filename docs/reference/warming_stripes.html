@@ -177,14 +177,16 @@ By default the chart is also displayed. User may modify color palette or remove 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Draw with axes and legend</span>
-<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>()</div><div class='img'><img src='warming_stripes-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Draw with axes and legend</span>
+<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>()
+
 <span class='co'># Draw stripes only</span>
-<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>(<span class='kw'>stripe_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='warming_stripes-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>(<span class='kw'>stripe_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='co'># Don't display, store for further modifications</span>
 <span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>(<span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Change color palette</span>
 <span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>(<span class='kw'>stripe_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col_strip</span> <span class='kw'>=</span> <span class='kw pkg'>viridisLite</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/viridisLite/man/viridis.html'>viridis</a></span>(<span class='fl'>11</span>)) }</div></pre>
   </div>
