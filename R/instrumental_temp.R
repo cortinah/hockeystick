@@ -85,7 +85,7 @@ invisible(gisstemp)
 #' @import ggplot2
 #'
 #' @examples
-#' \donrtun{
+#' \dontrun{
 #' # Fetch temperature anomaly:
 #' anomaly <- get_temp()
 #' #
