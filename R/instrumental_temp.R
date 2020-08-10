@@ -22,18 +22,18 @@
 #' @importFrom utils download.file
 #'
 #' @examples
+#' \dontrun{
 #' # Fetch temp anomaly from cache if available:
 #' anomaly <- get_temp()
 #' #
 #' # Force cache refresh:
-#' \dontrun{
-#' anomaly <- get_temp(use_cache=FALSE)}
+#' anomaly <- get_temp(use_cache=FALSE)
 #' #
 #' # Review cache contents and last update dates:
 #' hockeystick_cache_details()
 #' #
 #' # Plot output using package's built-in ggplot2 settings
-#' plot_temp(anomaly)
+#' plot_temp(anomaly) }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
@@ -85,6 +85,7 @@ invisible(gisstemp)
 #' @import ggplot2
 #'
 #' @examples
+#' \donrtun{
 #' # Fetch temperature anomaly:
 #' anomaly <- get_temp()
 #' #
@@ -95,7 +96,7 @@ invisible(gisstemp)
 #' plot_temp()
 #'
 #' p <- plot_temp(anomaly, print = FALSE)
-#' p + ggplot2::labs(title='The Signature of Climate Change')
+#' p + ggplot2::labs(title='The Signature of Climate Change') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

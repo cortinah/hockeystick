@@ -26,18 +26,18 @@ Source is NASA/GISS Surface Temperature Analysis (GISTEMP v4), an estimate of gl
 \url{https://data.giss.nasa.gov/gistemp/}
 }
 \examples{
+\dontrun{
 # Fetch temp anomaly from cache if available:
 anomaly <- get_temp()
 #
 # Force cache refresh:
-\dontrun{
-anomaly <- get_temp(use_cache=FALSE)}
+anomaly <- get_temp(use_cache=FALSE)
 #
 # Review cache contents and last update dates:
 hockeystick_cache_details()
 #
 # Plot output using package's built-in ggplot2 settings
-plot_temp(anomaly)
+plot_temp(anomaly) }
 
 }
 \references{

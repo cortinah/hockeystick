@@ -28,18 +28,18 @@ Source for satellite data is NOAA Laboratory for Satellite Altimetry:
 \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/LSA_SLR_timeseries_global.php}
 }
 \examples{
+\dontrun{
 # Fetch sea level from cache if available:
 gmsl <- get_sealevel()
 #
 # Force cache refresh:
-\dontrun{
-gmsl <- get_sealevel(use_cache=FALSE)}
+gmsl <- get_sealevel(use_cache=FALSE)
 #
 # Review cache contents and last update dates:
 hockeystick_cache_details()
 #
 # Plot output using package's built-in ggplot2 settings
-plot_sealevel(gmsl)
+plot_sealevel(gmsl) }
 
 }
 \references{

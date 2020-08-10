@@ -27,18 +27,18 @@
 #' @importFrom tidyr gather
 #'
 #' @examples
+#' \dontrun{
 #' # Fetch sea level from cache if available:
 #' gmsl <- get_sealevel()
 #' #
 #' # Force cache refresh:
-#' \dontrun{
-#' gmsl <- get_sealevel(use_cache=FALSE)}
+#' gmsl <- get_sealevel(use_cache=FALSE)
 #' #
 #' # Review cache contents and last update dates:
 #' hockeystick_cache_details()
 #' #
 #' # Plot output using package's built-in ggplot2 settings
-#' plot_sealevel(gmsl)
+#' plot_sealevel(gmsl) }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
@@ -110,6 +110,7 @@ invisible(gmsl) }
 #' @importFrom lubridate ymd ceiling_date
 #'
 #' @examples
+#' \dontrun{
 #' # Fetch sealevel data:
 #' gmsl <- get_sealevel()
 #' #
@@ -120,7 +121,7 @@ invisible(gmsl) }
 #' plot_sealevel()
 #'
 #' p <- plot_sealevel(gmsl, print = FALSE)
-#' p + ggplot2::labs(title='Rising Waters')
+#' p + ggplot2::labs(title='Rising Waters') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

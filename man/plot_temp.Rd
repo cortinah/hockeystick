@@ -22,6 +22,7 @@ Plots the global temperature anomaly retrieved using \code{get_temp()} with ggpl
 By default the chart is also displayed. Smooths using ggplot2's built-in loess smoother. Users may further modify the output ggplot2 chart.
 }
 \examples{
+\donrtun{
 # Fetch temperature anomaly:
 anomaly <- get_temp()
 #
@@ -32,7 +33,7 @@ plot_temp(anomaly)
 plot_temp()
 
 p <- plot_temp(anomaly, print = FALSE)
-p + ggplot2::labs(title='The Signature of Climate Change')
+p + ggplot2::labs(title='The Signature of Climate Change') }
 
 }
 \author{
