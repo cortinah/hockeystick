@@ -5,3 +5,4 @@
 ^.*\.Rproj$
 ^README\.Rmd$
 ^\.Rproj\.user$
+^\.travis\.yml$
