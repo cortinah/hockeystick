@@ -75,7 +75,7 @@ plot_seaice(seaice)
 
 Retrieve Vostok ice core data and plot it:
 
-```{r paleo, out.width='60%', fig.retina=2}
+```{r paleo, out.width='64%', fig.retina=2}
 vostok <- get_paleo()
 plot_paleo(vostok)
 ```

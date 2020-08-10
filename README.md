@@ -104,7 +104,7 @@ vostok <- get_paleo()
 plot_paleo(vostok)
 ```
 
-<img src="man/figures/README-paleo-1.png" width="60%" />
+<img src="man/figures/README-paleo-1.png" width="64%" />
 
 ## Acknowledgments
 

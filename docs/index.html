@@ -89,7 +89,7 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version of <code>hockeystick</code> from <a href="https://github.com/cortinah/hockeystick" class="uri">https://github.com/cortinah/hockeystick</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"cortinah/hockeystick"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"cortinah/hockeystick"</span>)</pre></div>
 </div>
 <div id="downloading-and-viewing-climate-change-data" class="section level2">
 <h2 class="hasAnchor">
@@ -118,6 +118,10 @@
 <span class="fu"><a href="reference/plot_seaice.html">plot_seaice</a></span>(<span class="no">seaice</span>)</pre></div>
 <p><img src="reference/figures/README-si-1.png" width="60%"></p>
 <p><code><a href="reference/get_seaice.html">get_seaice()</a></code> arguments can be modified to download Antarctic sea ice, and allow any month.</p>
+<p>Retrieve Vostok ice core data and plot it:</p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="no">vostok</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_paleo.html">get_paleo</a></span>()
+<span class="fu"><a href="reference/plot_paleo.html">plot_paleo</a></span>(<span class="no">vostok</span>)</pre></div>
+<p><img src="reference/figures/README-paleo-1.png" width="64%"></p>
 </div>
 <div id="acknowledgments" class="section level2">
 <h2 class="hasAnchor">
@@ -130,7 +134,9 @@
 </li>
 <li>Sea level data: NOAA Laboratory for Satellite Altimetry (sat) <a href="https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise" class="uri">https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise</a>. Commonwealth Scientific and Industrial Research Organisation (tide gauges) <a href="http://www.cmar.csiro.au/sealevel/sl_data_cmar.html" class="uri">http://www.cmar.csiro.au/sealevel/sl_data_cmar.html</a>
 </li>
-<li>Sea Ice Index: National Snow &amp; Ice Data Center. <a href="https://nsidc.org/" class="uri">https://nsidc.org/</a>. Data Archive: <a href="https://nsidc.org/data/seaice_index/archives" class="uri">https://nsidc.org/data/seaice_index/archives</a><br>
+<li>Sea Ice Index: National Snow &amp; Ice Data Center. <a href="https://nsidc.org/" class="uri">https://nsidc.org/</a>. Data Archive: <a href="https://nsidc.org/data/seaice_index/archives" class="uri">https://nsidc.org/data/seaice_index/archives</a>
+</li>
+<li>Vostok carbon dioxide and temperature data: <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" class="uri">https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html</a>
 </li>
 <li>Caching data sets: ROpenSci guide to <a href="https://blog.r-hub.io/2020/03/12/user-preferences/">Persistent config and data for R packages</a> and the <a href="https://docs.ropensci.org/getlandsat/">getlandsat</a> package.</li>
 </ul>
