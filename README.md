@@ -16,8 +16,8 @@ easily available to non-climate experts. `hockeystick` users can
 download the latest raw data from authoritative sources as well as view
 it via pre-defined ggplot2 charts. Datasets include atmospheric
 CO<sub>2</sub>, instrumental and ice-core temperature records, sea
-levels, and Arctic sea-ice. Additional visualizations using this data
-will be added over time.
+levels, and Arctic/Antarctic sea-ice. Additional visualizations using
+this data will be added over time.
 
 The choice of data is based on [Professor Stefan
 Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on
@@ -27,8 +27,8 @@ came across this on a post on the [Open Mind
 blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/).
 I wrote my own
 [post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/)
-on obtaining and visualizing this data, which is the basis for this
-package.
+on obtaining and visualizing this data (now out of date), which is the
+basis for this package.
 
 ## Installation
 
