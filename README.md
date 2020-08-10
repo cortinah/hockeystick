@@ -97,6 +97,15 @@ plot_seaice(seaice)
 `get_seaice()` arguments can be modified to download Antarctic sea ice,
 and allow any month.
 
+Retrieve Vostok ice core data and plot it:
+
+``` r
+vostok <- get_paleo()
+plot_paleo(vostok)
+```
+
+<img src="man/figures/README-paleo-1.png" width="60%" />
+
 ## Acknowledgments
 
   - Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
@@ -116,7 +125,9 @@ and allow any month.
     gauges) <http://www.cmar.csiro.au/sealevel/sl_data_cmar.html>
   - Sea Ice Index: National Snow & Ice Data Center.
     <https://nsidc.org/>. Data Archive:
-    <https://nsidc.org/data/seaice_index/archives>  
+    <https://nsidc.org/data/seaice_index/archives>
+  - Vostok carbon dioxide and temperature data:
+    <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
   - Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
