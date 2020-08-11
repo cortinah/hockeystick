@@ -81,7 +81,7 @@ gmsl_tide$date <- lubridate::ymd(lubridate::round_date(lubridate::date_decimal(g
 gmsl <- dplyr::full_join(gmsl_tide, gmsl_sat)
 
 diff <- dplyr::filter(gmsl, date >= as.Date('1993-01-01') & date < as.Date('1994-01-01'))
-diff <- dplyr::summarize_all(list(mean=mean), na.rm = TRUE)
+diff <- dplyr::summarize_all(diff, list(mean=mean), na.rm = TRUE)
 diff <- diff$gmsl_tide_mean - diff$gmsl_sat_mean
 gmsl$gmsl_sat <- gmsl$gmsl_sat + diff
 
