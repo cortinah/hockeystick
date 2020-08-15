@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_cache.R
 \name{getsize}
 \alias{getsize}
-\title{Get rounded size of file in Mb}
+\title{Get rounded size of file in kB}
 \usage{
 getsize(x)
 }

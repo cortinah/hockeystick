@@ -8,6 +8,7 @@ Bainbridge
 Barkov
 Barnola
 ccgg
+cdiac
 CDIAC
 CLI
 cmar
@@ -25,6 +26,7 @@ Ekdahl
 ERSST
 esrl
 ESRL
+ess
 ESS
 et
 Geophys
@@ -45,7 +47,9 @@ http
 https
 io
 Jouzel
+kB
 Kotlyakov
+lbl
 Lenssen
 Lifecycle
 Loa
@@ -91,6 +95,7 @@ tibble
 TOPEX
 ucsd
 uk
+vostok
 Vostok
 Waterman
 www
