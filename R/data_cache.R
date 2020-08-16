@@ -20,6 +20,7 @@
 #'  \item `hockeystick_cache_details()` prints file name and file size for each file,
 #'  supply with one or more files, or no files (and get details for
 #'  all available)
+#'  \item `hockeystick_update_all()` updates the cache with the latest co2, temperature, sea level, and sea ice data.
 #' }
 #'
 #' @examples \dontrun{
@@ -33,11 +34,14 @@
 #' # List info for all files
 #' hockeystick_cache_details()
 #'
-#' # delete files by name in cache
+#' # Delete files by name in cache
 #' # hockeystick_cache_delete(files = hockeystick_cache_list()[1])
 #'
-#' # delete all files in cache
+#' # Delete all files in cache
 #' # hockeystick_cache_delete_all()
+#'
+#' # Update all cached data
+#' # hockeustick_update_all()
 #' }
 
 #' @export
@@ -90,7 +94,7 @@ file_info_ <- function(x) {
   )
 }
 
-#' Get rounded size of file in Mb
+#' Get rounded size of file in kB
 #'
 #' Internal function
 #' @param x filenames
@@ -119,3 +123,14 @@ print.hockeystick_cache_info <- function(x, ...) {
 #'
 #' Internal Function
 hscache_path <- function() rappdirs::user_cache_dir("hockeystick")
+
+
+#' @export
+#' @rdname hockeystick_cache
+hockeystick_update_all <- function() {
+  get_carbon(use_cache = FALSE)
+  get_temp(use_cache = FALSE)
+  get_seaice(use_cache = FALSE)
+  get_sealevel(use_cache = FALSE)
+  return()
+}

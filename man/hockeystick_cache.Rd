@@ -6,6 +6,7 @@
 \alias{hockeystick_cache_delete}
 \alias{hockeystick_cache_delete_all}
 \alias{hockeystick_cache_details}
+\alias{hockeystick_update_all}
 \title{Manage cached datasets}
 \usage{
 hockeystick_cache_list()
@@ -15,6 +16,8 @@ hockeystick_cache_delete(files, force = TRUE)
 hockeystick_cache_delete_all(force = TRUE)
 
 hockeystick_cache_details(files = NULL)
+
+hockeystick_update_all()
 }
 \arguments{
 \item{files}{(character) one or more complete file names}
@@ -42,6 +45,7 @@ file names
 \item \code{hockeystick_cache_details()} prints file name and file size for each file,
 supply with one or more files, or no files (and get details for
 all available)
+\item \code{hockeystick_update_all()} updates the cache with the latest co2, temperature, sea level, and sea ice data.
 }
 }
 
@@ -57,10 +61,13 @@ hockeystick_cache_details(files = hockeystick_cache_list()[2])
 # List info for all files
 hockeystick_cache_details()
 
-# delete files by name in cache
+# Delete files by name in cache
 # hockeystick_cache_delete(files = hockeystick_cache_list()[1])
 
-# delete all files in cache
+# Delete all files in cache
 # hockeystick_cache_delete_all()
+
+# Update all cached data
+# hockeustick_update_all()
 }
 }
