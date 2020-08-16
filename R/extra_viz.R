@@ -78,3 +78,45 @@ plot <- ggplot(dataset, aes(x = Year, y = 1, fill = `J-D`)) +
 if (print) suppressMessages( print(plot) )
 invisible(plot)
 }
+
+
+#' Download and plot essential climate data
+#'
+#' Plots a 2x2 grid of carbon, temperature, sea ice, and sea level charts.
+#'
+#'
+#' @name climate_grid
+#' @param print (boolean) Display climate grid ggplot2 chart, defaults to TRUE. Use FALSE to not display chart.
+#'
+#' @return Invisibly returns a ggplot2 object with climate grid
+#'
+#' @details `warming_stripes` invisibly returns a ggplot2 object with 2x2 grid of carbon, temperature, sea ice, and sea level charts from `get_carbon`, `get_temp`, `get_seaice`, and `get_sealevel`.
+#' By default the chart is also displayed. Users may further modify the output ggplot2 chart.
+#'
+#' @import ggplot2
+#' @import patchwork
+#'
+#' @examples
+#' \dontrun{
+#' # Draw grid
+#'
+#' grid <- climate_grid() }
+#'
+#' @author Hernando Cortina, \email{hch@@alum.mit.edu}
+#'
+#' @export
+
+climate_grid <- function(print = TRUE) {
+
+  a <- plot_carbon(print = FALSE) +theme_bw(base_size = 9)
+  b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none")
+  c <- suppressMessages( plot_seaice(print = FALSE) +theme_bw(base_size = 9) )
+  d <- plot_sealevel(print = FALSE) +
+  labs(title='Sea Level Rise', subtitle='Tide gauges: 1880-2009; Satellite: 1992-present.', y= 'Variation (mm)',
+       caption='Sources: NOAA Laboratory for Satellite Altimetry (sat)\nhttps://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise\nCSIRO (tide gauge)\nhttp://www.cmar.csiro.au/sealevel/sl_data_cmar.html') +theme_bw(base_size = 9) +theme(legend.position = "none")
+
+  plot <- patchwork::wrap_plots(a, b, c, d, ncol = 2) + patchwork::plot_annotation(title='Carbon and Climate Change')
+
+if (print) suppressMessages( print(plot) )
+invisible(plot)
+}
