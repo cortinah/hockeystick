@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -135,7 +135,9 @@
 
 <span class='fu'>hockeystick_cache_delete_all</span>(<span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>hockeystick_cache_details</span>(<span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>hockeystick_cache_details</span>(<span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>hockeystick_update_all</span>()</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,6 +171,7 @@ file names</p></li>
 <li><p><code>hockeystick_cache_details()</code> prints file name and file size for each file,
 supply with one or more files, or no files (and get details for
 all available)</p></li>
+<li><p><code>hockeystick_update_all()</code> updates the cache with the latest co2, temperature, sea level, and sea ice data.</p></li>
 </ul>
 
 
@@ -184,11 +187,14 @@ all available)</p></li>
 <span class='co'># List info for all files</span>
 <span class='fu'>hockeystick_cache_details</span>()
 
-<span class='co'># delete files by name in cache</span>
+<span class='co'># Delete files by name in cache</span>
 <span class='co'># hockeystick_cache_delete(files = hockeystick_cache_list()[1])</span>
 
-<span class='co'># delete all files in cache</span>
+<span class='co'># Delete all files in cache</span>
 <span class='co'># hockeystick_cache_delete_all()</span>
+
+<span class='co'># Update all cached data</span>
+<span class='co'># hockeustick_update_all()</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
