@@ -106,6 +106,15 @@ plot_paleo(vostok)
 
 <img src="man/figures/README-paleo-1.png" width="64%" />
 
+### Managing the cache
+
+Data is cached for future use the first time it is downloaded using any
+of the `get_` functions. To view the files, date, and size of cached
+info use `hockeystick_cache_details()`. To re-download or update data
+from the source use the `use_cache = FALSE` argument in any of the
+`get_` functions, for example: `get_carbon(use_cache = FALSE)`. To
+delete all cached data use `hockeystick_cache_delete_all()`.
+
 ## Acknowledgments
 
   - Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
