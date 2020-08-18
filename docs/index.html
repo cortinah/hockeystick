@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -96,6 +96,7 @@
 <a href="#downloading-and-viewing-climate-change-data" class="anchor"></a>Downloading and viewing climate change data</h2>
 <p>Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and plot it:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">hockeystick</span>)
+<span class="co">#&gt; hockeystick: Use hockeystick_cache_details() to view cached climate data.</span>
 <span class="no">ml_co2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/get_carbon.html">get_carbon</a></span>()
 <span class="fu"><a href="reference/plot_carbon.html">plot_carbon</a></span>(<span class="no">ml_co2</span>)</pre></div>
 <p><img src="reference/figures/README-carbon-1.png" width="60%"></p>
@@ -126,6 +127,12 @@
 <h3 class="hasAnchor">
 <a href="#managing-the-cache" class="anchor"></a>Managing the cache</h3>
 <p>Data is cached for future use the first time it is downloaded using any of the <code>get_</code> functions. To view the files, date, and size of cached info use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_details()</a></code>. To re-download or update data from the source use the <code>use_cache = FALSE</code> argument in any of the <code>get_</code> functions, for example: <code><a href="reference/get_carbon.html">get_carbon(use_cache = FALSE)</a></code>. To delete all cached data use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_delete_all()</a></code>.</p>
+</div>
+<div id="all-together-climate-data-grid" class="section level3">
+<h3 class="hasAnchor">
+<a href="#all-together-climate-data-grid" class="anchor"></a>All Together: Climate Data Grid</h3>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="fu"><a href="reference/climate_grid.html">climate_grid</a></span>()</pre></div>
+<p><img src="reference/figures/README-grid-1.png" width="80%"></p>
 </div>
 </div>
 <div id="acknowledgments" class="section level2">
