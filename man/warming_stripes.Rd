@@ -51,6 +51,7 @@ stripes <- warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(
 \item Climate Lab. 2018. https://www.climate-lab-book.ac.uk/2018/warming-stripes/
 \item GISS Surface Temperature Analysis (GISTEMP v4): \url{https://data.giss.nasa.gov/gistemp/}
 \item GISTEMP Team, 2020: \emph{GISS Surface Temperature Analysis (GISTEMP), version 4.} NASA Goddard Institute for Space Studies.
+\item Dr. Dominic Roye blog post "How to Create Warming Stripes in R": https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/
 }
 }
 \author{

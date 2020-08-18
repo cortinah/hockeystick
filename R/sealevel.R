@@ -78,7 +78,7 @@ gmsl_tide <- readr::read_csv(file.path(td,'CSIRO_Recons_gmsl_mo_2011.csv'), col_
 colnames(gmsl_tide) <- c('date', 'gmsl_tide')
 gmsl_tide$date <- lubridate::ymd(lubridate::round_date(lubridate::date_decimal(gmsl_tide$date),'day'))
 
-gmsl <- dplyr::full_join(gmsl_tide, gmsl_sat)
+gmsl <- suppressMessages( dplyr::full_join(gmsl_tide, gmsl_sat) )
 
 diff <- dplyr::filter(gmsl, date >= as.Date('1993-01-01') & date < as.Date('1994-01-01'))
 diff <- dplyr::summarize_all(diff, list(mean=mean), na.rm = TRUE)

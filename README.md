@@ -46,6 +46,7 @@ data and plot it:
 
 ``` r
 library(hockeystick)
+#> hockeystick: Use hockeystick_cache_details() to view cached climate data.
 ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
 ```
@@ -114,6 +115,14 @@ info use `hockeystick_cache_details()`. To re-download or update data
 from the source use the `use_cache = FALSE` argument in any of the
 `get_` functions, for example: `get_carbon(use_cache = FALSE)`. To
 delete all cached data use `hockeystick_cache_delete_all()`.
+
+### All Together: Climate Data Grid
+
+``` r
+climate_grid()
+```
+
+<img src="man/figures/README-grid-1.png" width="80%" />
 
 ## Acknowledgments
 

@@ -50,7 +50,7 @@ if (use_cache) {
 file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
 dl <- tempfile()
 download.file(file_url, dl)
-maunaloa <- read_table2(dl, col_names = FALSE, skip = 72)
+maunaloa <- suppressMessages( read_table2(dl, col_names = FALSE, skip = 72) )
 colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'interpolated', 'trend','days')
 maunaloa$date <- ceiling_date(ymd(paste(maunaloa$year, maunaloa$month, '01',sep='-')), unit='month')-1
 

@@ -37,6 +37,7 @@
 #' \item Climate Lab. 2018. https://www.climate-lab-book.ac.uk/2018/warming-stripes/
 #' \item GISS Surface Temperature Analysis (GISTEMP v4): \url{https://data.giss.nasa.gov/gistemp/}
 #' \item GISTEMP Team, 2020: \emph{GISS Surface Temperature Analysis (GISTEMP), version 4.} NASA Goddard Institute for Space Studies.
+#' \item Dr. Dominic Roye blog post "How to Create Warming Stripes in R": https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/
 #'  }
 #'
 #' @export
@@ -109,13 +110,15 @@ invisible(plot)
 climate_grid <- function(print = TRUE) {
 
   a <- plot_carbon(print = FALSE) +theme_bw(base_size = 9)
-  b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none")
+  b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none") +
+    labs(title='Global Land-Ocean Temperature Index', subtitle='Global surface temperature relative to 1951-80 mean',
+         y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/')
   c <- suppressMessages( plot_seaice(print = FALSE) +theme_bw(base_size = 9) )
   d <- plot_sealevel(print = FALSE) +
   labs(title='Sea Level Rise', subtitle='Tide gauges: 1880-2009; Satellite: 1992-present.', y= 'Variation (mm)',
        caption='Sources: NOAA Laboratory for Satellite Altimetry (sat)\nhttps://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise\nCSIRO (tide gauge)\nhttp://www.cmar.csiro.au/sealevel/sl_data_cmar.html') +theme_bw(base_size = 9) +theme(legend.position = "none")
 
-  plot <- patchwork::wrap_plots(a, b, c, d, ncol = 2) + patchwork::plot_annotation(title='Carbon and Climate Change')
+  plot <- patchwork::wrap_plots(a, b, c, d, ncol = 2) + patchwork::plot_annotation(title='Carbon and Global Warming')
 
 if (print) suppressMessages( print(plot) )
 invisible(plot)

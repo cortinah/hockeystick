@@ -116,7 +116,7 @@ get_seaice <- function(pole='N', month='07', measure='extent', use_cache = TRUE)
 
 plot_seaice <- function(dataset = get_seaice(), title='Arctic Sea Ice', print=TRUE) {
 
-  subtitle <- paste0(as.character(lubridate::month(dataset[nrow(dataset),'date'], label=TRUE, abbr = F))," average sea ice ", colnames(dataset)[2],". Linear regression line in blue.")
+  subtitle <- paste0(as.character(lubridate::month(dataset[nrow(dataset),'date'], label=TRUE, abbr = F))," mean sea ice ", colnames(dataset)[2],". Linear regression in blue.")
 
   plot <-  ggplot(dataset, aes_string(x="date", y=colnames(dataset)[2])) +geom_line(size=1, color='firebrick1') +
     scale_x_date(name=NULL, breaks='5 years', date_labels='%Y', limits=c(ymd('1978-01-01'), ceiling_date(max(dataset$date), 'years'))) +

@@ -71,3 +71,6 @@ hockeystick_cache_details()
 # hockeustick_update_all()
 }
 }
+\references{
+Caching data sets: ROpenSci guide to persistent config and data for R packages: https://blog.r-hub.io/2020/03/12/user-preferences/
+}
