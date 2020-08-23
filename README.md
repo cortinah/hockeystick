@@ -46,7 +46,6 @@ data and plot it:
 
 ``` r
 library(hockeystick)
-#> hockeystick: Use hockeystick_cache_details() to view cached climate data.
 ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
 ```
@@ -89,7 +88,6 @@ Retrieve July annual Arctic Sea Ice Index and plot it:
 
 ``` r
 seaice <- get_seaice()
-#> Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.
 plot_seaice(seaice)
 ```
 
@@ -97,6 +95,15 @@ plot_seaice(seaice)
 
 `get_seaice()` arguments can be modified to download Antarctic sea ice,
 and allow any month.
+
+You can also visualize Sea Ice by month and year:
+
+``` r
+arcticice <- get_icecurves()
+plot_icecurves(arcticice)
+```
+
+<img src="man/figures/README-icecurves-1.png" width="60%" />
 
 Retrieve Vostok ice core data and plot it:
 

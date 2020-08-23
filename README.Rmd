@@ -36,7 +36,7 @@ remotes::install_github("cortinah/hockeystick")
 
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and plot it:
 
-```{r carbon, out.width='60%', fig.retina=2}
+```{r carbon, fig.retina=2, message=FALSE, out.width='60%'}
 library(hockeystick)
 ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
@@ -66,12 +66,19 @@ plot_sealevel(gmsl)
 
 Retrieve July annual Arctic Sea Ice Index and plot it:
 
-```{r si, out.width='60%', fig.retina=2}
+```{r si, fig.retina=2, message=FALSE, out.width='60%'}
 seaice <- get_seaice()
 plot_seaice(seaice)
 ```
 
 `get_seaice()` arguments can be modified to download Antarctic sea ice, and allow any month.
+
+You can also visualize Sea Ice by month and year:
+
+```{r icecurves, fig.retina=2, message=FALSE, out.width='60%'}
+arcticice <- get_icecurves()
+plot_icecurves(arcticice)
+```
 
 Retrieve Vostok ice core data and plot it:
 
