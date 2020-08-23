@@ -9,3 +9,7 @@
 # hockeystick 0.2.0
 
 * Add climate_grid() and hockeystick_update_all()
+
+# hockeystick 0.3.0
+
+* Add get_icecurves() and plot_icecurves() to visualize current and historic sea ice
