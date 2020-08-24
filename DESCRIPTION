@@ -1,6 +1,6 @@
 Package: hockeystick
 Title: Download and Visualize Essential Climate Change Data
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     person(given = "Hernando",
            family = "Cortina",

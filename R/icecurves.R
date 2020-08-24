@@ -132,7 +132,7 @@ plot_icecurves <- function(dataset = get_icecurves(), region='Arctic', print=TRU
     scale_x_continuous(breaks = seq(1, 12, 1), minor_breaks = NULL) +
     scale_color_manual(guide = 'none', values = c(rep('darkgrey', length(unique(dataset$year))-1), 'dodgerblue')) +
     scale_size_manual(labels = c(paste0('1979-', current_year-1), current_year), values = c(0.7, 2), breaks = c('Previous','2020')) +
-    labs(title = title, x = 'Month', size = '', y = 'Million square km',
+    labs(title = title, x = 'Month', size = '', y=expression("Million km"^2),
          caption='Source: National Snow & Ice Data Center\nhttps://nsidc.org/data/seaice_index') +
     theme(legend.position = c(0.41, 0.92), legend.background = element_blank()) +
     scale_alpha_manual(guide = 'none', labels = c('Previous','2020'), values = c(0.4, 1), breaks = c('Previous', '2020')) +
