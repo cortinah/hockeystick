@@ -8,7 +8,8 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-hockeystick provides easy access to essential climate change datasets to non-climate experts. Users can download the latest raw data from authoritative sources and view it via pre-defined ggplot2 charts. Datasets include atmospheric CO2, instrumental and ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice.
+This package provides easy access to essential climate change datasets to non-climate experts. Users can download the latest raw data from authoritative sources and view it via pre-defined `ggplot2` charts.
+             Datasets include atmospheric CO2, instrumental and proxy temperature records, sea levels, Arctic/Antarctic sea-ice, and Paleoclimate data. Sources include: NOAA Mauna Loa Laboratory <https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html>, NASA GISTEMP <https://data.giss.nasa.gov/gistemp/>, National Snow and Sea Ice Data Center <https://nsidc.org/data/seaice_index/archives>, CSIRO <http://www.cmar.csiro.au/sealevel/sl_data_cmar.html>, NOAA Laboratory for Satellite Altimetry <https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/>.
 }
 \seealso{
 Useful links:

@@ -4,7 +4,7 @@
 #' Source for tide gauge data is Commonwealth Scientific and Industrial Research Organisation (CSIRO) as described in Church and White (2011).
 #' \url{http://www.cmar.csiro.au/sealevel/sl_data_cmar.html} \cr \cr
 #' Source for satellite data is NOAA Laboratory for Satellite Altimetry:
-#' \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/LSA_SLR_timeseries_global.php}
+#' \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/}
 #'
 #' @name get_sealevel
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
@@ -17,7 +17,7 @@
 #'
 #' The tide gauge data are no longer updated and cover the period from 1880 to 2009, per Church, J. A. and N.J. White (2011) \url{http://www.cmar.csiro.au/sealevel/sl_data_cmar.html}
 #'
-#' Satellite data are updated monthly or more frequently from the NOAA Laboratory for Satellite Altimetry. TOPEX and Jason-1,-2,-3 satellites dataset, with seasonal signals removed. \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/LSA_SLR_timeseries_global.php}
+#' Satellite data are updated monthly or more frequently from the NOAA Laboratory for Satellite Altimetry. TOPEX and Jason-1,-2,-3 satellites dataset, with seasonal signals removed. \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/}
 #'
 #' @importFrom readr read_csv
 #' @importFrom lubridate ymd date_decimal round_date
@@ -43,8 +43,8 @@
 #' @references
 #' \itemize{
 #' \item CSIRO reconstructed tide gauge GMSL for 1880 to 2009: \url{http://www.cmar.csiro.au/sealevel/sl_data_cmar.html}
-#' \item Church, J. A. and N.J. White (2011), Sea-level rise from the late 19th to the early 21st Century. \emph{Surveys in Geophysics}, doi:10.1007/s10712-011-9119-1. \url{http://www.springerlink.com/content/h2575k28311g5146/}
-#' \item NOAA Laboratory for Satellite Altimetry \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/LSA_SLR_timeseries_global.php}
+#' \item Church, J. A. and N.J. White (2011), Sea-level rise from the late 19th to the early 21st Century. \emph{Surveys in Geophysics}, doi:10.1007/s10712-011-9119-1. \url{https://link.springer.com/article/10.1007/s10712-011-9119-1}
+#' \item NOAA Laboratory for Satellite Altimetry \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/}
 #'  }
 #'
 #' @export

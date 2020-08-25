@@ -34,7 +34,7 @@
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
-#' Dr. Pieter Tans, NOAA/GML \url{www.esrl.noaa.gov/gmd/ccgg/trends/} and Dr. Ralph Keeling, Scripps Institution of Oceanography \url{scrippsco2.ucsd.edu/}.
+#' Dr. Pieter Tans, NOAA/GML \url{https://www.esrl.noaa.gov/gmd/ccgg/trends/} and Dr. Ralph Keeling, Scripps Institution of Oceanography \url{https://scrippsco2.ucsd.edu/}.
 #'
 #'
 #' C.D. Keeling, R.B. Bacastow, A.E. Bainbridge, C.A. Ekdahl, P.R. Guenther, and L.S. Waterman, (1976), Atmospheric carbon dioxide variations at Mauna Loa Observatory, Hawaii, \emph{Tellus}, vol. 28, 538-551
