@@ -5,7 +5,7 @@ citEntry(
   title    = "hockeystick: Download and Visualize Essential Climate Change Data",
   author   = "Hernando Cortina",
   year     = "2020",
-  url      = "https://cortinah.github.io/hockeystick",
+  url      = "https://cortinah.github.io/hockeystick/",
   textVersion = "Hernando Cortina. hockeystick: Download and Visualize Essential Climate Change Data (2020)"
 
 )

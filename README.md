@@ -146,7 +146,7 @@ climate_grid()
     plotting them using ggplot2, which `warming_stripes()` is based on.
     <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
   - Sea level data: NOAA Laboratory for Satellite Altimetry (sat)
-    <https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise>.
+    <https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/>
     Commonwealth Scientific and Industrial Research Organisation (tide
     gauges) <http://www.cmar.csiro.au/sealevel/sl_data_cmar.html>
   - Sea Ice Index: National Snow & Ice Data Center.
