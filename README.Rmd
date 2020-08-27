@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build status](https://travis-ci.com/cortinah/hockeystick.svg?branch=master)](https://travis-ci.com/cortinah/hockeystick)
+[![CRAN status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-project.org/package=hockeystick)
 <!-- badges: end -->
 
 The goal of `hockeystick` is to make essential Climate Change datasets easily available to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub>, instrumental and ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice. Additional visualizations using this data will be added over time.
@@ -25,8 +26,7 @@ The goal of `hockeystick` is to make essential Climate Change datasets easily av
 The choice of data is based on [Professor Stefan Rahmstorf's ](http://www.pik-potsdam.de/~stefan/) presentation on [The 5 Most Important Data Sets of Climate Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I came across this on a post on the [Open Mind blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/). I wrote my own [post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/) on obtaining and visualizing this data (now out of date), which is the basis for this package.
 
 ## Installation
-
-You can install the development version of `hockeystick` from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
+You may install the development version of `hockeystick` from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
 
 ``` r
 remotes::install_github("cortinah/hockeystick")
@@ -90,7 +90,7 @@ plot_paleo(vostok)
 ### Managing the cache
 Data is cached for future use the first time it is downloaded using any of the `get_` functions. To view the files, date, and size of cached info use `hockeystick_cache_details()`.  To re-download or update data from the source use the `use_cache = FALSE` argument in any of the `get_` functions, for example: `get_carbon(use_cache = FALSE)`.  To delete all cached data use `hockeystick_cache_delete_all()`.
 
-### All Together: Climate Data Grid
+### All together now: Climate Data Grid
 ```{r grid, out.width='80%', fig.retina=2}
 climate_grid()
 ```
@@ -110,5 +110,3 @@ Data Archive: https://nsidc.org/data/seaice_index/archives
 - Here are some online resources I have found very helpful to learn more about climate science:
 - MIT edX Global Warming Science. https://www.edx.org/course/global-warming-science
 - SDG Academy: Climate Change: The Science and Global Impact. https://sdgacademy.org/course/climate-change-the-science-and-global-impact/
-
-

@@ -9,6 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.com/cortinah/hockeystick.svg?branch=master)](https://travis-ci.com/cortinah/hockeystick)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-project.org/package=hockeystick)
 <!-- badges: end -->
 
 The goal of `hockeystick` is to make essential Climate Change datasets
@@ -32,7 +34,7 @@ basis for this package.
 
 ## Installation
 
-You can install the development version of `hockeystick` from
+You may install the development version of `hockeystick` from
 <https://github.com/cortinah/hockeystick> with:
 
 ``` r
@@ -123,7 +125,7 @@ from the source use the `use_cache = FALSE` argument in any of the
 `get_` functions, for example: `get_carbon(use_cache = FALSE)`. To
 delete all cached data use `hockeystick_cache_delete_all()`.
 
-### All Together: Climate Data Grid
+### All together now: Climate Data Grid
 
 ``` r
 climate_grid()
