@@ -88,7 +88,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version of <code>hockeystick</code> from <a href="https://github.com/cortinah/hockeystick" class="uri">https://github.com/cortinah/hockeystick</a> with:</p>
+<p>You may install the development version of <code>hockeystick</code> from <a href="https://github.com/cortinah/hockeystick" class="uri">https://github.com/cortinah/hockeystick</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"cortinah/hockeystick"</span>)</pre></div>
 </div>
 <div id="downloading-and-viewing-climate-change-data" class="section level2">
@@ -130,9 +130,9 @@
 <a href="#managing-the-cache" class="anchor"></a>Managing the cache</h3>
 <p>Data is cached for future use the first time it is downloaded using any of the <code>get_</code> functions. To view the files, date, and size of cached info use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_details()</a></code>. To re-download or update data from the source use the <code>use_cache = FALSE</code> argument in any of the <code>get_</code> functions, for example: <code><a href="reference/get_carbon.html">get_carbon(use_cache = FALSE)</a></code>. To delete all cached data use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_delete_all()</a></code>.</p>
 </div>
-<div id="all-together-climate-data-grid" class="section level3">
+<div id="all-together-now-climate-data-grid" class="section level3">
 <h3 class="hasAnchor">
-<a href="#all-together-climate-data-grid" class="anchor"></a>All Together: Climate Data Grid</h3>
+<a href="#all-together-now-climate-data-grid" class="anchor"></a>All together now: Climate Data Grid</h3>
 <div class="sourceCode" id="cb10"><pre class="r"><span class="fu"><a href="reference/climate_grid.html">climate_grid</a></span>()</pre></div>
 <p><img src="reference/figures/README-grid-1.png" width="80%"></p>
 </div>
@@ -141,7 +141,7 @@
 <h2 class="hasAnchor">
 <a href="#acknowledgments" class="anchor"></a>Acknowledgments</h2>
 <ul>
-<li>Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (<a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/" class="uri">https://www.esrl.noaa.gov/gmd/ccgg/trends/</a>) and Dr. Ralph Keeling, Scripps Institution of Oceanography (<a href="https://www.scrippsco2.ucsd.edu/" class="uri">https://www.scrippsco2.ucsd.edu/</a>).</li>
+<li>Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (<a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/" class="uri">https://www.esrl.noaa.gov/gmd/ccgg/trends/</a>) and Dr. Ralph Keeling, Scripps Institution of Oceanography (<a href="https://scrippsco2.ucsd.edu/" class="uri">https://scrippsco2.ucsd.edu/</a>).</li>
 <li>Global temperature anomaly: <em>GISS Surface Temperature Analysis (GISTEMP), version 4.</em> GISTEMP Team, 2020: NASA Goddard Institute for Space Studies. <a href="https://data.giss.nasa.gov/gistemp/" class="uri">https://data.giss.nasa.gov/gistemp/</a>
 </li>
 <li>Warming Stripes design from Ed Hawkins’ Climate Lab. <a href="https://www.climate-lab-book.ac.uk/2018/warming-stripes/" class="uri">https://www.climate-lab-book.ac.uk/2018/warming-stripes/</a>. In addition grateful to Dr. Dominic Royé for posting his approach to plotting them using ggplot2, which <code><a href="reference/warming_stripes.html">warming_stripes()</a></code> is based on. <a href="https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/" class="uri">https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/</a>
@@ -205,6 +205,7 @@
 <ul class="list-unstyled">
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://travis-ci.com/cortinah/hockeystick"><img src="https://travis-ci.com/cortinah/hockeystick.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=hockeystick"><img src="https://www.r-pkg.org/badges/version/hockeystick" alt="CRAN status"></a></li>
 </ul>
 </div>
 </div>
