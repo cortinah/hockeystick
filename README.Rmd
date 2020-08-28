@@ -26,9 +26,10 @@ The goal of `hockeystick` is to make essential Climate Change datasets easily av
 The choice of data is based on [Professor Stefan Rahmstorf's ](http://www.pik-potsdam.de/~stefan/) presentation on [The 5 Most Important Data Sets of Climate Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I came across this on a post on the [Open Mind blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/). I wrote my own [post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/) on obtaining and visualizing this data (now out of date), which is the basis for this package.
 
 ## Installation
-You may install the development version of `hockeystick` from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
 
-``` r
+You may install the development version of `hockeystick` from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
+  
+  ``` r
 remotes::install_github("cortinah/hockeystick")
 ```
 
@@ -96,7 +97,7 @@ climate_grid()
 ```
 
 ## Acknowledgments
-- Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (https://www.esrl.noaa.gov/gmd/ccgg/trends/) and Dr. Ralph Keeling, Scripps Institution of Oceanography (https://www.scrippsco2.ucsd.edu/).
+- Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (https://www.esrl.noaa.gov/gmd/ccgg/trends/) and Dr. Ralph Keeling, Scripps Institution of Oceanography (https://scrippsco2.ucsd.edu/).
 - Global temperature anomaly: *GISS Surface Temperature Analysis (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute for Space Studies. https://data.giss.nasa.gov/gistemp/
 - Warming Stripes design from Ed Hawkins' Climate Lab. https://www.climate-lab-book.ac.uk/2018/warming-stripes/. In addition grateful to Dr. Dominic Royé for posting his approach to plotting them using ggplot2, which `warming_stripes()` is based on. https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/
 - Sea level data: NOAA Laboratory for Satellite Altimetry (sat) https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/ Commonwealth Scientific and Industrial Research Organisation (tide gauges) http://www.cmar.csiro.au/sealevel/sl_data_cmar.html

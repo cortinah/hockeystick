@@ -138,7 +138,7 @@ climate_grid()
   - Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
     (<https://www.esrl.noaa.gov/gmd/ccgg/trends/>) and Dr. Ralph
     Keeling, Scripps Institution of Oceanography
-    (<https://www.scrippsco2.ucsd.edu/>).
+    (<https://scrippsco2.ucsd.edu/>).
   - Global temperature anomaly: *GISS Surface Temperature Analysis
     (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute
     for Space Studies. <https://data.giss.nasa.gov/gistemp/>
