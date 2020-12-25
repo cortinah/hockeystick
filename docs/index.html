@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@
 <div id="managing-the-cache" class="section level3">
 <h3 class="hasAnchor">
 <a href="#managing-the-cache" class="anchor"></a>Managing the cache</h3>
-<p>Data is cached for future use the first time it is downloaded using any of the <code>get_</code> functions. To view the files, date, and size of cached info use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_details()</a></code>. To re-download or update data from the source use the <code>use_cache = FALSE</code> argument in any of the <code>get_</code> functions, for example: <code><a href="reference/get_carbon.html">get_carbon(use_cache = FALSE)</a></code>. To delete all cached data use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_delete_all()</a></code>.</p>
+<p>By default, no climate data is cached, and all data is downloaded every time any of the <code>get_</code> functions is called. To cache data for future use, use the <code>write_cache = TRUE</code> option, available in all of the <code>get_</code> functions. To download and cache all data use <code><a href="reference/hockeystick_cache.html">hockeystick_update_all()</a></code>. To view the files, date, and size of cached data use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_details()</a></code>. To re-download data from the source use the <code>use_cache = FALSE</code> argument in any of the <code>get_</code> functions, for example: <code><a href="reference/get_carbon.html">get_carbon(use_cache = FALSE, write_cache = TRUE)</a></code>. To delete all cached data use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_delete_all()</a></code>.</p>
 </div>
 <div id="all-together-now-climate-data-grid" class="section level3">
 <h3 class="hasAnchor">

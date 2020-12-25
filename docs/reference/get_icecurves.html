@@ -83,7 +83,7 @@ https://nsidc.org/data/seaice_index/archives  " />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -133,7 +133,12 @@ Source is the National Snow and Ice Data Center, defaults to Arctic (Northern He
 <a href='https://nsidc.org/data/seaice_index/archives'>https://nsidc.org/data/seaice_index/archives</a> <br /> <br /></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_icecurves</span><span class='op'>(</span>pole <span class='op'>=</span> <span class='st'>"N"</span>, measure <span class='op'>=</span> <span class='st'>"extent"</span>, use_cache <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_icecurves</span><span class='op'>(</span>
+  pole <span class='op'>=</span> <span class='st'>"N"</span>,
+  measure <span class='op'>=</span> <span class='st'>"extent"</span>,
+  use_cache <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  write_cache <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,6 +154,10 @@ Source is the National Snow and Ice Data Center, defaults to Arctic (Northern He
     <tr>
       <th>use_cache</th>
       <td><p>(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data, or to change pole or month in cache.</p></td>
+    </tr>
+    <tr>
+      <th>write_cache</th>
+      <td><p>(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.</p></td>
     </tr>
     </table>
 
@@ -188,27 +197,11 @@ Defaults to Arctic sea ice extent.  <a href='https://nsidc.org/arcticseaicenews/
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/gisstemp.rds
 #&gt;   size: 5.3 kB
-#&gt;   date: 2020-08-18 11:52:38
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/icecurves.rds
-#&gt;   size: 1.7 kB
-#&gt;   date: 2020-12-24 21:16:57
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/maunaloa.rds
-#&gt;   size: 9.3 kB
-#&gt;   date: 2020-12-24 21:16:43
+#&gt;   date: 2020-12-24 22:34:55
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/paleo.rds
 #&gt;   size: 20.2 kB
-#&gt;   date: 2020-12-24 21:04:56
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/seaice.rds
-#&gt;   size: 0.5 kB
-#&gt;   date: 2020-12-24 21:04:58
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/sealevel.rds
-#&gt;   size: 15.8 kB
-#&gt;   date: 2020-12-24 21:05:03
+#&gt;   date: 2020-12-24 23:20:24
 #&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
 <span class='fu'><a href='plot_icecurves.html'>plot_icecurves</a></span><span class='op'>(</span><span class='va'>icecurves</span><span class='op'>)</span> <span class='co'># }</span>

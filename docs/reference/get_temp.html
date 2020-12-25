@@ -83,7 +83,7 @@ https://data.giss.nasa.gov/gistemp/" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ Source is NASA/GISS Surface Temperature Analysis (GISTEMP v4), an estimate of gl
 <a href='https://data.giss.nasa.gov/gistemp/'>https://data.giss.nasa.gov/gistemp/</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_temp</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_temp</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span>, write_cache <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +141,10 @@ Source is NASA/GISS Surface Temperature Analysis (GISTEMP v4), an estimate of gl
     <tr>
       <th>use_cache</th>
       <td><p>(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.</p></td>
+    </tr>
+    <tr>
+      <th>write_cache</th>
+      <td><p>(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.</p></td>
     </tr>
     </table>
 

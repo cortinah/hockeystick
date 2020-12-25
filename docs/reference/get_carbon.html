@@ -83,7 +83,7 @@ https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
 <a href='https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html'>https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_carbon</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_carbon</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span>, write_cache <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +141,10 @@ Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
     <tr>
       <th>use_cache</th>
       <td><p>(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.</p></td>
+    </tr>
+    <tr>
+      <th>write_cache</th>
+      <td><p>(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.</p></td>
     </tr>
     </table>
 
@@ -150,8 +154,7 @@ Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>get_carbon</code> invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
-The returned object includes date, year, month, average, interpolated, and trend columns.
-Average and interpolated are basically identical with interpolated filling in a very small number of missing months.
+The returned object includes date, year, month, average, trend, std dev, and uncertainty columns.
 Trend is NOAA's published trend.  Please refer to above website for details.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -176,31 +179,19 @@ Trend is NOAA's published trend.  Please refer to above website for details.</p>
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/gisstemp.rds
 #&gt;   size: 5.3 kB
-#&gt;   date: 2020-08-18 11:52:38
+#&gt;   date: 2020-12-24 22:34:55
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/icecurves.rds
-#&gt;   size: 1.7 kB
-#&gt;   date: 2020-12-24 21:04:54
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/maunaloa.rds
-#&gt;   size: 9.3 kB
-#&gt;   date: 2020-12-24 21:16:43
+#&gt;   size: 1.6 kB
+#&gt;   date: 2020-12-24 23:24:47
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/paleo.rds
 #&gt;   size: 20.2 kB
-#&gt;   date: 2020-12-24 21:04:56
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/seaice.rds
-#&gt;   size: 0.5 kB
-#&gt;   date: 2020-12-24 21:04:58
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/sealevel.rds
-#&gt;   size: 15.8 kB
-#&gt;   date: 2020-12-24 21:05:03
+#&gt;   date: 2020-12-24 23:20:24
 #&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
 <span class='fu'><a href='plot_carbon.html'>plot_carbon</a></span><span class='op'>(</span><span class='va'>maunaloa</span><span class='op'>)</span> <span class='co'># }</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 734 row(s) containing missing values (geom_path).</span></div><div class='img'><img src='get_carbon-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='img'><img src='get_carbon-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
