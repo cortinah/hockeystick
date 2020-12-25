@@ -3,12 +3,15 @@ Altimetry
 Atmos
 Bacastow
 Bainbridge
+Barboza
 Barkov
 Barnola
+Butterworth
 CDIAC
 CLI
 CMD
 CSIRO
+Cowtan
 Delaygue
 ERSST
 ESRL
@@ -20,6 +23,7 @@ GISTEMP
 GML
 GMSL
 Geophys
+Geosci
 Guenther
 Hawkins’
 Jouzel
@@ -34,6 +38,7 @@ Menne
 NOAA
 NOAA's
 NSIDC
+Neukom
 ORCID
 Organisation
 Paleo
@@ -65,6 +70,7 @@ cmar
 config
 cortinah
 csiro
+dev
 doi
 dominicroye
 edX
@@ -87,10 +93,12 @@ kB
 lbl
 loess
 lsa
+multidecadal
 nasa
 nesdis
 noaa
 nsidc
+palaeoclimate
 pre
 releveled
 scrippsco
