@@ -21,7 +21,7 @@
 #' @importFrom utils download.file read.csv
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch sea ice from cache if available:
 #' seaice <- get_seaice()
 #' #
@@ -97,7 +97,7 @@ get_seaice <- function(pole='N', month='07', measure='extent', use_cache = TRUE)
 #' @importFrom lubridate ymd ceiling_date month
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch sea ice data:
 #' seaice <- get_seaice()
 #' #

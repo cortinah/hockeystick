@@ -20,7 +20,7 @@ Plots a 2x2 grid of carbon, temperature, sea ice, and sea level charts.
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
-\dontrun{
+\donttest{
 # Draw grid
 
 grid <- climate_grid() }

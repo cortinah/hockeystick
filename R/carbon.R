@@ -19,7 +19,7 @@
 #' @importFrom utils download.file
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch from cache if available:
 #' maunaloa <- get_carbon()
 #' #
@@ -79,7 +79,7 @@ invisible(maunaloa)
 #' @import ggplot2
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch carbon dioxide data:
 #' maunaloa <- get_carbon()
 #' #

@@ -50,7 +50,7 @@ all available)
 }
 
 \examples{
-\dontrun{
+\donttest{
 # list files in cache
 hockeystick_cache_list()
 

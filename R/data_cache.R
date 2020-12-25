@@ -23,7 +23,7 @@
 #'  \item `hockeystick_update_all()` updates the cache with the latest co2, temperature, sea level, and sea ice data.
 #' }
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # list files in cache
 #' hockeystick_cache_list()
 #'

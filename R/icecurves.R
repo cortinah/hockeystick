@@ -19,7 +19,7 @@
 #' @importFrom utils download.file read.csv
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch monthly sea ice history from cache if available:
 #' icecurves <- get_icecurves()
 #' #
@@ -99,7 +99,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE) {
 #' @import ggplot2
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch historic monthly sea ice data since 1979:
 #' icecurves <- get_icecurves()
 #' #

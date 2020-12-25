@@ -28,7 +28,7 @@ Source for satellite data is NOAA Laboratory for Satellite Altimetry:
 \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/}
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch sea level from cache if available:
 gmsl <- get_sealevel()
 #

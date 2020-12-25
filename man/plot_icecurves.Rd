@@ -25,7 +25,7 @@ By default the chart is also displayed. Users may further modify the output ggpl
 Chart consists of one line per year showing monthly sea ice from January through December. Current year is highlighted.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch historic monthly sea ice data since 1979:
 icecurves <- get_icecurves()
 #

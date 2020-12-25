@@ -26,7 +26,7 @@
 #' @importFrom tidyr pivot_longer
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch sea level from cache if available:
 #' gmsl <- get_sealevel()
 #' #
@@ -110,7 +110,7 @@ invisible(gmsl) }
 #' @importFrom lubridate ymd ceiling_date
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch sealevel data:
 #' gmsl <- get_sealevel()
 #' #

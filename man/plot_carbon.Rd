@@ -22,7 +22,7 @@ Plots carbon dioxide data retrieved using \code{get_carbon()} with ggplot2. The 
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch carbon dioxide data:
 maunaloa <- get_carbon()
 #

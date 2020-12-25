@@ -22,7 +22,7 @@ Plots the global mean sea level data retrieved using \code{get_sealevel()} with 
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch sealevel data:
 gmsl <- get_sealevel()
 #

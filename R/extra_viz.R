@@ -18,7 +18,7 @@
 #' @import ggplot2
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Draw with axes and legend
 #' stripes <- warming_stripes()
 #'
@@ -98,7 +98,7 @@ invisible(plot)
 #' @import patchwork
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Draw grid
 #'
 #' grid <- climate_grid() }

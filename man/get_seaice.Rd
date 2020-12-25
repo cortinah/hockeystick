@@ -29,7 +29,7 @@ Source is the National Snow and Ice Data Center, defaults to Arctic (Northern He
 \url{https://nsidc.org/data/seaice_index/archives} \cr \cr
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch sea ice from cache if available:
 seaice <- get_seaice()
 #

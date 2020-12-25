@@ -20,7 +20,7 @@
 #' @importFrom tidyr pivot_longer
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch Vostok paleo carbon and temperature data from cache if available:
 #' vostok <- get_paleo()
 #' #
@@ -92,7 +92,7 @@ invisible(paleo) }
 #' @importFrom scales unit_format
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch Vostok data:
 #' vostok <- get_paleo()
 #' #

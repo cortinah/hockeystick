@@ -32,7 +32,7 @@ Function can output stripes chart with legend or a minimal chart. The output ggp
 By default the chart is also displayed. User may modify color palette or remove axes and legend. Users may further modify the output ggplot2 chart.
 }
 \examples{
-\dontrun{
+\donttest{
 # Draw with axes and legend
 stripes <- warming_stripes()
 

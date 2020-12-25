@@ -23,7 +23,7 @@ The returned chart stacks carbon dioxide concentration over temperature over 420
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch Vostok data:
 vostok <- get_paleo()
 #

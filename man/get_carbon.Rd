@@ -24,7 +24,7 @@ Average and interpolated are basically identical with interpolated filling in a 
 Trend is NOAA's published trend.  Please refer to above website for details.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch from cache if available:
 maunaloa <- get_carbon()
 #

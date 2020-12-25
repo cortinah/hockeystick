@@ -23,7 +23,7 @@ Source of data is the U.S. Department of Energy’s (DOE) Environmental System S
 \url{https://ess-dive.lbl.gov/} and \url{https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html}
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch Vostok paleo carbon and temperature data from cache if available:
 vostok <- get_paleo()
 #
