@@ -89,7 +89,7 @@ plot_paleo(vostok)
 ```
 
 ### Managing the cache
-Data is cached for future use the first time it is downloaded using any of the `get_` functions. To view the files, date, and size of cached info use `hockeystick_cache_details()`.  To re-download or update data from the source use the `use_cache = FALSE` argument in any of the `get_` functions, for example: `get_carbon(use_cache = FALSE)`.  To delete all cached data use `hockeystick_cache_delete_all()`.
+By default, no climate data is cached, and all data is downloaded every time any of the `get_` functions is called. To cache data for future use, use the `write_cache = TRUE` option, available in all of the `get_` functions. To download and cache all data use `hockeystick_update_all()`. To view the files, date, and size of cached data use `hockeystick_cache_details()`.  To re-download data from the source use the `use_cache = FALSE` argument in any of the `get_` functions, for example: `get_carbon(use_cache = FALSE, write_cache = TRUE)`.  To delete all cached data use `hockeystick_cache_delete_all()`.
 
 ### All together now: Climate Data Grid
 ```{r grid, out.width='80%', fig.retina=2}

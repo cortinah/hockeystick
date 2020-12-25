@@ -13,3 +13,7 @@
 # hockeystick 0.3.0
 
 * Add get_icecurves() and plot_icecurves() to visualize current and historic sea ice
+
+# hockeystick 0.3.4
+
+* Don't cache data by default, added write_cache options
