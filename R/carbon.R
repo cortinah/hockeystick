@@ -11,8 +11,7 @@
 #' @return Invisibly returns a tibble with the monthly carbon dioxide series
 #'
 #' @details `get_carbon` invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
-#' The returned object includes date, year, month, average, interpolated, and trend columns.
-#' Average and interpolated are basically identical with interpolated filling in a very small number of missing months.
+#' The returned object includes date, year, month, average, trend, std dev, and uncertainty columns.
 #' Trend is NOAA's published trend.  Please refer to above website for details.
 #'
 #' @importFrom readr read_table2
@@ -51,8 +50,8 @@ if (use_cache) {
 file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
 dl <- tempfile()
 download.file(file_url, dl)
-maunaloa <- suppressMessages( read_table2(dl, col_names = FALSE, skip = 72) )
-colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'interpolated', 'trend','days')
+maunaloa <- suppressMessages( read_table2(dl, col_names = FALSE, skip = 63) )
+colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'trend', 'ndays','stdev','unc')
 maunaloa$date <- ceiling_date(ymd(paste(maunaloa$year, maunaloa$month, '01',sep='-')), unit='month')-1
 
 dir.create(hs_path, showWarnings = FALSE, recursive = TRUE)
@@ -99,7 +98,7 @@ invisible(maunaloa)
 
 plot_carbon <- function(dataset = get_carbon(), print=TRUE) {
 
-plot <- ggplot(dataset, aes(x=date, y=interpolated)) +geom_line(color='dodgerblue2', alpha=0.7) + theme_bw(base_size=12) +
+plot <- ggplot(dataset, aes(x=date, y=average)) +geom_line(color='dodgerblue2', alpha=0.7) + theme_bw(base_size=12) +
     scale_x_date(name=NULL, date_breaks='10 years', limits=c(ymd('1954-01-01'), ymd(paste0(max(dataset$year)+1,'-01-01'))), date_labels='%Y') +
     scale_y_continuous(limits=c(300, round(max(dataset$average),-1)), breaks=seq(300, round(max(dataset$average),-1), 20)) +
     geom_line(aes(y=trend), size=1, col='firebrick1') +
