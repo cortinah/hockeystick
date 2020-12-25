@@ -6,6 +6,7 @@
 #'
 #' @name get_carbon
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
 #'
 #' @return Invisibly returns a tibble with the monthly carbon dioxide series
 #'
@@ -39,7 +40,7 @@
 #'
 #' C.D. Keeling, R.B. Bacastow, A.E. Bainbridge, C.A. Ekdahl, P.R. Guenther, and L.S. Waterman, (1976), Atmospheric carbon dioxide variations at Mauna Loa Observatory, Hawaii, \emph{Tellus}, vol. 28, 538-551
 #' @export
-get_carbon <- function(use_cache = TRUE) {
+get_carbon <- function(use_cache = TRUE, write_cache = FALSE) {
 
 hs_path <- rappdirs::user_cache_dir("hockeystick")
 
@@ -55,7 +56,7 @@ colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'interpolated', 'tre
 maunaloa$date <- ceiling_date(ymd(paste(maunaloa$year, maunaloa$month, '01',sep='-')), unit='month')-1
 
 dir.create(hs_path, showWarnings = FALSE, recursive = TRUE)
-saveRDS(maunaloa, file.path(hs_path, 'maunaloa.rds'))
+if (write_cache) saveRDS(maunaloa, file.path(hs_path, 'maunaloa.rds'))
 
 invisible(maunaloa)
 }

@@ -6,6 +6,7 @@
 #'
 #' @name get_paleo
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
 #'
 #' @return Invisibly returns a tibble with the age of the ice (years before C.E.), carbon dioxide (ppm) and temperature (degrees C).
 #'
@@ -44,7 +45,7 @@
 #' @export
 
 
-get_paleo <- function(use_cache = TRUE) {
+get_paleo <- function(use_cache = TRUE, write_cache = TRUE) {
 
   hs_path <- rappdirs::user_cache_dir("hockeystick")
 
@@ -68,7 +69,7 @@ suppressMessages( paleo <- dplyr::full_join(vostok, paleotemp) )
 paleo <- dplyr::select(paleo, age_ice, co2, temp)
 paleo <- tidyr::pivot_longer(paleo, -age_ice, values_drop_na = TRUE)
 
-saveRDS(paleo, file.path(hs_path, 'paleo.rds'))
+if (write_cache) saveRDS(paleo, file.path(hs_path, 'paleo.rds'))
 
 invisible(paleo) }
 

@@ -130,10 +130,10 @@ hscache_path <- function() rappdirs::user_cache_dir("hockeystick")
 #' @export
 #' @rdname hockeystick_cache
 hockeystick_update_all <- function() {
-  get_carbon(use_cache = FALSE)
-  get_temp(use_cache = FALSE)
-  get_seaice(use_cache = FALSE)
-  get_sealevel(use_cache = FALSE)
-  get_icecurves(use_cache = FALSE)
+  get_carbon(use_cache = FALSE, write_cache = TRUE)
+  get_temp(use_cache = FALSE, write_cache = TRUE)
+  get_seaice(use_cache = FALSE, write_cache = TRUE)
+  get_sealevel(use_cache = FALSE, write_cache = TRUE)
+  get_icecurves(use_cache = FALSE, write_cache = TRUE)
   invisible(0)
 }

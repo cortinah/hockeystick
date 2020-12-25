@@ -8,6 +8,7 @@
 #' @param pole 'N' for Arctic or 'S' for Antarctic
 #' @param measure Must be 'extent' or 'area', defaults to 'extent'. Please see terminology link in references for details.
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data, or to change pole or month in cache.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
 #'
 #' @return Invisibly returns a tibble with the series of monthly Sea Ice Index since 1979 (in million square km).
 #'
@@ -44,7 +45,7 @@
 #'
 #' @export
 
-get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE) {
+get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_cache = FALSE) {
 
   if (pole!='S' & pole!='N') stop("pole must be 'N' or 'S'")
     if (measure!='extent' & measure!='area') stop("measure must be 'extent' or 'area'")
@@ -77,7 +78,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE) {
 
   icecurves <- lapply(month, curve)
   icecurves <- do.call("rbind", icecurves)
-  saveRDS(icecurves, file.path(hs_path, 'icecurves.rds'))
+  if (write_cache) saveRDS(icecurves, file.path(hs_path, 'icecurves.rds'))
 
   invisible(icecurves) }
 
@@ -131,11 +132,11 @@ plot_icecurves <- function(dataset = get_icecurves(), region='Arctic', print=TRU
     geom_line() +scale_y_continuous(limits=c(0, 20)) +theme_bw() +
     scale_x_continuous(breaks = seq(1, 12, 1), minor_breaks = NULL) +
     scale_color_manual(guide = 'none', values = c(rep('darkgrey', length(unique(dataset$year))-1), 'dodgerblue')) +
-    scale_size_manual(labels = c(paste0('1979-', current_year-1), current_year), values = c(0.7, 2), breaks = c('Previous','2020')) +
+    scale_size_manual(labels = c(paste0('1979-', current_year-1), current_year), values = c(0.7, 2), breaks = c('Previous',as.character(current_year))) +
     labs(title = title, x = 'Month', size = '', y=expression("Million km"^2),
          caption='Source: National Snow & Ice Data Center\nhttps://nsidc.org/data/seaice_index') +
     theme(legend.position = c(0.41, 0.92), legend.background = element_blank()) +
-    scale_alpha_manual(guide = 'none', labels = c('Previous','2020'), values = c(0.4, 1), breaks = c('Previous', '2020')) +
+    scale_alpha_manual(guide = 'none', labels = c('Previous', as.character(current_year)), values = c(0.4, 1), breaks = c('Previous', '2020')) +
     guides(size = guide_legend(override.aes=list(colour=c('darkgrey', "dodgerblue"))))
 
 

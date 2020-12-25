@@ -4,10 +4,12 @@
 \alias{get_carbon}
 \title{Download and plot essential climate data}
 \usage{
-get_carbon(use_cache = TRUE)
+get_carbon(use_cache = TRUE, write_cache = FALSE)
 }
 \arguments{
 \item{use_cache}{(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.}
+
+\item{write_cache}{(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.}
 }
 \value{
 Invisibly returns a tibble with the monthly carbon dioxide series

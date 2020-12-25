@@ -6,6 +6,7 @@
 #'
 #' @name get_temp
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
 #'
 #' @return Invisibly returns a tibble with the annual mean and monthly Combined Land-Surface Air and Sea-Surface Water Temperature Anomalies.
 #'
@@ -45,7 +46,7 @@
 #'  }
 #'
 #' @export
-get_temp <- function(use_cache = TRUE) {
+get_temp <- function(use_cache = TRUE, write_cache = FALSE) {
 
 hs_path <- rappdirs::user_cache_dir("hockeystick")
 
@@ -61,7 +62,7 @@ gisstemp <- suppressMessages( readr::read_csv(dl, skip=1, na='***') )
 gisstemp[nrow(gisstemp), 'J-D'] <- mean(as.numeric(gisstemp[nrow(gisstemp), 2:13]), na.rm = T)
 gisstemp$Year <- ymd(paste(gisstemp$Year,'12','31',sep='-'))
 dir.create(hs_path, showWarnings = FALSE, recursive = TRUE)
-saveRDS(gisstemp, file.path(hs_path, 'gisstemp.rds'))
+if (write_cache) saveRDS(gisstemp, file.path(hs_path, 'gisstemp.rds'))
 
 invisible(gisstemp)
 }

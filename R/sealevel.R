@@ -8,6 +8,7 @@
 #'
 #' @name get_sealevel
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
 #'
 #' @return Invisibly returns a tibble with the global mean sea level time series (in mm) over 1880-2009 using tide gauges and since 1993 for satellite measurements.
 #'
@@ -49,7 +50,7 @@
 #'
 #' @export
 
-get_sealevel <- function(use_cache = TRUE) {
+get_sealevel <- function(use_cache = TRUE, write_cache = FALSE) {
 
   hs_path <- rappdirs::user_cache_dir("hockeystick")
 
@@ -87,7 +88,7 @@ gmsl$gmsl_sat <- gmsl$gmsl_sat + diff
 
 gmsl <- tidyr::pivot_longer(gmsl, -date, values_drop_na = TRUE, names_to = 'method', values_to = 'gmsl')
 
-saveRDS(gmsl, file.path(hs_path, 'sealevel.rds'))
+if (write_cache) saveRDS(gmsl, file.path(hs_path, 'sealevel.rds'))
 
 invisible(gmsl) }
 

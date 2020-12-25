@@ -9,6 +9,7 @@
 #' @param month 2-digit month to retrieve sea ice for, defaults to '07' (July)
 #' @param measure Must be 'extent' or 'area', defaults to 'extent'. Please see terminology link in references for details.
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data, or to change pole or month in cache.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
 #'
 #' @return Invisibly returns a tibble with the annual series of monthly Sea Ice Index since 1979 (in million square km).
 #'
@@ -46,11 +47,12 @@
 #'
 #' @export
 
-get_seaice <- function(pole='N', month='07', measure='extent', use_cache = TRUE) {
+get_seaice <- function(pole='N', month='07', measure='extent',
+                       use_cache = TRUE, write_cache = FALSE) {
 
   if (pole!='S' & pole!='N') stop("pole must be 'N' or 'S'")
   if (!(month %in% c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'))) stop("Month must be one of '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ")
-  if (measure!='extent' & measure!='area') stop("measure must be 'extent' or 'area'")
+  if (measure != 'extent' & measure != 'area') stop("measure must be 'extent' or 'area'")
 
   hs_path <- rappdirs::user_cache_dir("hockeystick")
 
@@ -72,7 +74,7 @@ get_seaice <- function(pole='N', month='07', measure='extent', use_cache = TRUE)
 
   if (measure == 'extent') seaice <- seaice[,c('date', 'extent')] else seaice <- seaice[,c('date', 'area')]
 
-  saveRDS(seaice, file.path(hs_path, 'seaice.rds'))
+  if (write_cache) saveRDS(seaice, file.path(hs_path, 'seaice.rds'))
 
   invisible(seaice) }
 

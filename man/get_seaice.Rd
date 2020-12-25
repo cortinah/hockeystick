@@ -4,7 +4,13 @@
 \alias{get_seaice}
 \title{Download and plot essential climate data}
 \usage{
-get_seaice(pole = "N", month = "07", measure = "extent", use_cache = TRUE)
+get_seaice(
+  pole = "N",
+  month = "07",
+  measure = "extent",
+  use_cache = TRUE,
+  write_cache = FALSE
+)
 }
 \arguments{
 \item{pole}{'N' for Arctic or 'S' for Antarctic}
@@ -14,6 +20,8 @@ get_seaice(pole = "N", month = "07", measure = "extent", use_cache = TRUE)
 \item{measure}{Must be 'extent' or 'area', defaults to 'extent'. Please see terminology link in references for details.}
 
 \item{use_cache}{(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data, or to change pole or month in cache.}
+
+\item{write_cache}{(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.}
 }
 \value{
 Invisibly returns a tibble with the annual series of monthly Sea Ice Index since 1979 (in million square km).
