@@ -89,7 +89,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/cortinah/hockeystick/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,7 +129,7 @@
     <p>Plots a 2x2 grid of carbon, temperature, sea ice, and sea level charts.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>climate_grid</span>(<span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>climate_grid</span><span class='op'>(</span>print <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,12 +147,17 @@
 
     <p><code>warming_stripes</code> invisibly returns a ggplot2 object with 2x2 grid of carbon, temperature, sea ice, and sea level charts from <code>get_carbon</code>, <code>get_temp</code>, <code>get_seaice</code>, and <code>get_sealevel</code>.
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hernando Cortina, <a href='mailto:hch@alum.mit.edu'>hch@alum.mit.edu</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Draw grid</span>
 
-<span class='no'>grid</span> <span class='kw'>&lt;-</span> <span class='fu'>climate_grid</span>() }</div></pre>
+<span class='va'>grid</span> <span class='op'>&lt;-</span> <span class='fu'>climate_grid</span><span class='op'>(</span><span class='op'>)</span> <span class='co'># }</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 734 row(s) containing missing values (geom_path).</span></div><div class='img'><img src='climate_grid-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -168,7 +173,7 @@ By default the chart is also displayed. Users may further modify the output ggpl
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

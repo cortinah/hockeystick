@@ -91,7 +91,7 @@ https://nsidc.org/data/seaice_index/archives  " />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -105,7 +105,7 @@ https://nsidc.org/data/seaice_index/archives  " />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/cortinah/hockeystick/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,7 +133,7 @@ Source is the National Snow and Ice Data Center, defaults to Arctic (Northern He
 <a href='https://nsidc.org/data/seaice_index/archives'>https://nsidc.org/data/seaice_index/archives</a> <br /> <br /></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_icecurves</span>(<span class='kw'>pole</span> <span class='kw'>=</span> <span class='st'>"N"</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='st'>"extent"</span>, <span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_icecurves</span><span class='op'>(</span>pole <span class='op'>=</span> <span class='st'>"N"</span>, measure <span class='op'>=</span> <span class='st'>"extent"</span>, use_cache <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,22 +167,53 @@ Defaults to Arctic sea ice extent.  <a href='https://nsidc.org/arcticseaicenews/
 <li><p>Sea Ice terminology: <a href='https://nsidc.org/cryosphere/seaice/data/terminology.html'>https://nsidc.org/cryosphere/seaice/data/terminology.html</a></p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hernando Cortina, <a href='mailto:hch@alum.mit.edu'>hch@alum.mit.edu</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Fetch monthly sea ice history from cache if available:</span>
-<span class='no'>icecurves</span> <span class='kw'>&lt;-</span> <span class='fu'>get_icecurves</span>()
-<span class='co'>#</span>
+<span class='va'>icecurves</span> <span class='op'>&lt;-</span> <span class='fu'>get_icecurves</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Please set use_cache=FALSE if you are changing pole or measure from last cached data.</span></div><div class='input'><span class='co'>#</span>
 <span class='co'># Force cache refresh:</span>
-<span class='no'>icecurves</span> <span class='kw'>&lt;-</span> <span class='fu'>get_icecurves</span>(<span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='va'>icecurves</span> <span class='op'>&lt;-</span> <span class='fu'>get_icecurves</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'># change region</span>
-<span class='no'>south_icecurves</span> <span class='kw'>&lt;-</span> <span class='fu'>get_icecurves</span>(<span class='kw'>pole</span><span class='kw'>=</span><span class='st'>'S'</span>,  <span class='kw'>use_cache</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='va'>south_icecurves</span> <span class='op'>&lt;-</span> <span class='fu'>get_icecurves</span><span class='op'>(</span>pole<span class='op'>=</span><span class='st'>'S'</span>,  use_cache <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='co'>#</span>
 <span class='co'># Review cache contents and last update dates:</span>
-<span class='fu'><a href='hockeystick_cache.html'>hockeystick_cache_details</a></span>()
-<span class='co'>#</span>
+<span class='fu'><a href='hockeystick_cache.html'>hockeystick_cache_details</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
+#&gt;   directory: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/gisstemp.rds
+#&gt;   size: 5.3 kB
+#&gt;   date: 2020-08-18 11:52:38
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/icecurves.rds
+#&gt;   size: 1.7 kB
+#&gt;   date: 2020-12-24 21:16:57
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/maunaloa.rds
+#&gt;   size: 9.3 kB
+#&gt;   date: 2020-12-24 21:16:43
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/paleo.rds
+#&gt;   size: 20.2 kB
+#&gt;   date: 2020-12-24 21:04:56
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/seaice.rds
+#&gt;   size: 0.5 kB
+#&gt;   date: 2020-12-24 21:04:58
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/sealevel.rds
+#&gt;   size: 15.8 kB
+#&gt;   date: 2020-12-24 21:05:03
+#&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
-<span class='fu'><a href='plot_icecurves.html'>plot_icecurves</a></span>(<span class='no'>icecurves</span>) }</div></pre>
+<span class='fu'><a href='plot_icecurves.html'>plot_icecurves</a></span><span class='op'>(</span><span class='va'>icecurves</span><span class='op'>)</span> <span class='co'># }</span>
+</div><div class='img'><img src='get_icecurves-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -198,7 +229,7 @@ Defaults to Arctic sea ice extent.  <a href='https://nsidc.org/arcticseaicenews/
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

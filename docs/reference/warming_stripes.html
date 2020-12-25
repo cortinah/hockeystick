@@ -90,7 +90,7 @@ Function can output stripes chart with legend or a minimal chart. The output ggp
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -104,7 +104,7 @@ Function can output stripes chart with legend or a minimal chart. The output ggp
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/cortinah/hockeystick/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -131,12 +131,12 @@ Function can output stripes chart with legend or a minimal chart. The output ggp
 Function can output stripes chart with legend or a minimal chart. The output ggplot2 object may be further modified.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>warming_stripes</span>(
-  <span class='kw'>dataset</span> <span class='kw'>=</span> <span class='fu'><a href='get_temp.html'>get_temp</a></span>(),
-  <span class='kw'>stripe_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>col_strip</span> <span class='kw'>=</span> <span class='kw pkg'>RColorBrewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span>(<span class='fl'>11</span>, <span class='st'>"RdBu"</span>),
-  <span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>warming_stripes</span><span class='op'>(</span>
+  dataset <span class='op'>=</span> <span class='fu'><a href='get_temp.html'>get_temp</a></span><span class='op'>(</span><span class='op'>)</span>,
+  stripe_only <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  col_strip <span class='op'>=</span> <span class='fu'>RColorBrewer</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html'>brewer.pal</a></span><span class='op'>(</span><span class='fl'>11</span>, <span class='st'>"RdBu"</span><span class='op'>)</span>,
+  print <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,20 +176,25 @@ By default the chart is also displayed. User may modify color palette or remove 
 <li><p>Dr. Dominic Roye blog post "How to Create Warming Stripes in R": https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/</p></li>
 </ul>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hernando Cortina, <a href='mailto:hch@alum.mit.edu'>hch@alum.mit.edu</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Draw with axes and legend</span>
-<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>()
-
+<span class='va'>stripes</span> <span class='op'>&lt;-</span> <span class='fu'>warming_stripes</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='warming_stripes-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Draw stripes only</span>
-<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>(<span class='kw'>stripe_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
+<span class='va'>stripes</span> <span class='op'>&lt;-</span> <span class='fu'>warming_stripes</span><span class='op'>(</span>stripe_only <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='warming_stripes-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Don't display, store for further modifications</span>
-<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>(<span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='va'>stripes</span> <span class='op'>&lt;-</span> <span class='fu'>warming_stripes</span><span class='op'>(</span>print <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='co'># Change color palette</span>
-<span class='no'>stripes</span> <span class='kw'>&lt;-</span> <span class='fu'>warming_stripes</span>(<span class='kw'>stripe_only</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col_strip</span> <span class='kw'>=</span> <span class='kw pkg'>viridisLite</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/viridisLite/man/viridis.html'>viridis</a></span>(<span class='fl'>11</span>)) }</div></pre>
+<span class='va'>stripes</span> <span class='op'>&lt;-</span> <span class='fu'>warming_stripes</span><span class='op'>(</span>stripe_only <span class='op'>=</span> <span class='cn'>TRUE</span>, col_strip <span class='op'>=</span> <span class='fu'>viridisLite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/viridisLite/man/viridis.html'>viridis</a></span><span class='op'>(</span><span class='fl'>11</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># }</span>
+</div><div class='img'><img src='warming_stripes-3.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -205,7 +210,7 @@ By default the chart is also displayed. User may modify color palette or remove 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

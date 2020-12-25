@@ -89,7 +89,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/cortinah/hockeystick/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,7 +129,7 @@
     <p>Plots the Vostok ice core data retrieved using <code><a href='get_paleo.html'>get_paleo()</a></code> with ggplot2. The output ggplot2 object may be further modified.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_paleo</span>(<span class='kw'>dataset</span> <span class='kw'>=</span> <span class='fu'><a href='get_paleo.html'>get_paleo</a></span>(), <span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_paleo</span><span class='op'>(</span>dataset <span class='op'>=</span> <span class='fu'><a href='get_paleo.html'>get_paleo</a></span><span class='op'>(</span><span class='op'>)</span>, print <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,20 +155,25 @@ By default the chart is also displayed. Users may further modify the output ggpl
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Barnola, J.-M., D. Raynaud, C. Lorius, and N.I. Barkov. 2003. Historical CO2 record from the Vostok ice core. In Trends: A Compendium of Data on Global Change. Carbon Dioxide Information Analysis Center, Oak Ridge National Laboratory, U.S. Department of Energy, Oak Ridge, Tenn., U.S.A</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hernando Cortina, <a href='mailto:hch@alum.mit.edu'>hch@alum.mit.edu</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Fetch Vostok data:</span>
-<span class='no'>vostok</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_paleo.html'>get_paleo</a></span>()
+<span class='va'>vostok</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_paleo.html'>get_paleo</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 defaults</span>
-<span class='fu'>plot_paleo</span>(<span class='no'>vostok</span>)
-
+<span class='fu'>plot_paleo</span><span class='op'>(</span><span class='va'>vostok</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_paleo-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Or just call plot_paleo(), which defaults to get_paleo() dataset</span>
-<span class='fu'>plot_paleo</span>()
-
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_paleo</span>(<span class='no'>vostok</span>, <span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>p</span> + <span class='kw pkg'>patchwork</span><span class='kw ns'>::</span><span class='fu'><a href='https://patchwork.data-imaginist.com/reference/plot_annotation.html'>plot_annotation</a></span>(<span class='kw'>title</span><span class='kw'>=</span><span class='st'>'A Long History of Carbon'</span>) }</div></pre>
+<span class='fu'>plot_paleo</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_paleo-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_paleo</span><span class='op'>(</span><span class='va'>vostok</span>, print <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>+</span> <span class='fu'>patchwork</span><span class='fu'>::</span><span class='fu'><a href='https://patchwork.data-imaginist.com/reference/plot_annotation.html'>plot_annotation</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>'A Long History of Carbon'</span><span class='op'>)</span> <span class='co'># }</span>
+</div><div class='img'><img src='plot_paleo-3.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -184,7 +189,7 @@ By default the chart is also displayed. Users may further modify the output ggpl
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
