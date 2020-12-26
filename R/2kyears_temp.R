@@ -60,9 +60,9 @@ temp2k <- suppressMessages( read_table2(dl, col_names = FALSE, skip = 5,
 colnames(temp2k) <- c('year', 'instrumental', 'ensemble_median', 'ensemble_2.5', 'ensemble_97.5', 'filtered_instrumental',
                        'filtered_ensemble_median', 'filtered_ensemble_2.5', 'filtered_ensemble_97.5')
 
-temp2k_l <- pivot_longer(temp2k, -year)
+temp2k_l <- pivot_longer(temp2k, -year, names_to='measure')
 
-temp2k_l <- filter(temp2k_l, name %in% c('instrumental', 'ensemble_median', 'filtered_instrumental', 'filtered_ensemble_median'))
+temp2k_l <- filter(temp2k_l, measure %in% c('instrumental', 'ensemble_median', 'filtered_instrumental', 'filtered_ensemble_median'))
 
 dir.create(hs_path, showWarnings = FALSE, recursive = TRUE)
 if (write_cache) saveRDS(temp2k_l, file.path(hs_path, 'temp2k.rds'))
@@ -110,16 +110,16 @@ invisible(temp2k_l)
 plot_temp2k <- function(dataset = get_temp2k(), instrumental = TRUE,
                         filtered = TRUE, print = TRUE) {
 
-  if (filtered) dataset <- filter(dataset, substr(name,1, 8) == "filtered") else
-                dataset <- filter(dataset, substr(name,1, 8) != "filtered")
+  if (filtered) dataset <- filter(dataset, substr(measure,1, 8) == "filtered") else
+                dataset <- filter(dataset, substr(measure,1, 8) != "filtered")
 
-  if (!instrumental) dataset <- filter(dataset, name != "filtered_instrumental" & name != "instrumental")
+  if (!instrumental) dataset <- filter(dataset, measure != "filtered_instrumental" & measure != "instrumental")
 
-plot <- ggplot(dataset, aes(x=year, y=value, color=name)) +geom_line(aes(color=name)) + theme_bw(base_size=12) +  scale_y_continuous(n.breaks = 10, minor_breaks = NULL) +
-  scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1'),labels=waiver()) +theme(legend.position = c(0.3, 0.85),legend.background=element_blank()) +
+plot <- ggplot(dataset, aes(x=year, y=value, color=measure)) +geom_line(aes(color=measure), size=1.05) + theme_bw(base_size=12) +  scale_y_continuous(n.breaks = 10, minor_breaks = NULL) +
+  scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.3, 0.85),legend.background=element_blank()) +
   labs(title='Global Common Era Temperature Reconstruction', subtitle='Global surface temperature relative to 1961-1990 mean', x='Year C.E.',
        y='Temperature Anomaly (C\U00B0)', caption='Source: PAGES2k Consortium, NOAA\nhttps://www.ncdc.noaa.gov/paleo-search/study/26872')
 
-if (print) suppressMessages( print(plot) )
+if (print) suppressWarnings( print(plot) )
 invisible(plot)
 }
