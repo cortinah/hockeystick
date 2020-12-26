@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -83,8 +83,8 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of <code>hockeystick</code> is to make essential Climate Change datasets easily available to non-climate experts. <code>hockeystick</code> users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub>, instrumental and ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice. Additional visualizations using this data will be added over time.</p>
-<p>The choice of data is based on <a href="http://www.pik-potsdam.de/~stefan/">Professor Stefan Rahmstorf’s</a> presentation on <a href="http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf">The 5 Most Important Data Sets of Climate Science</a>. I came across this on a post on the <a href="https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/">Open Mind blog</a>. I wrote my own <a href="http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/">post</a> on obtaining and visualizing this data (now out of date), which is the basis for this package.</p>
+<p>The goal of <code>hockeystick</code> is to make essential Climate Change datasets easily available to non-climate experts. <code>hockeystick</code> users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub>, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice.</p>
+<p>The choice of data was originally based on <a href="http://www.pik-potsdam.de/~stefan/">Professor Stefan Rahmstorf’s</a> presentation on <a href="http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf">The 5 Most Important Data Sets of Climate Science</a>. I came across this on a post on the <a href="https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/">Open Mind blog</a>. I wrote my own <a href="http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/">post</a> on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over time.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -129,8 +129,13 @@
 <code class="sourceCode R"><span class="va">arcticice</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_icecurves.html">get_icecurves</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="reference/plot_icecurves.html">plot_icecurves</a></span><span class="op">(</span><span class="va">arcticice</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-icecurves-1.png" width="60%"></p>
-<p>Retrieve Vostok ice core data and plot it:</p>
+<p>Retrieve Common Era temperature reconstruction and plot it with instrumental record:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">anomaly2k</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_temp2k.html">get_temp2k</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="reference/plot_temp2k.html">plot_temp2k</a></span><span class="op">(</span><span class="va">anomaly2k</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-2ktemp-1.png" width="60%"></p>
+<p>Retrieve Vostok ice core data and plot it:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">vostok</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_paleo.html">get_paleo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="reference/plot_paleo.html">plot_paleo</a></span><span class="op">(</span><span class="va">vostok</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-paleo-1.png" width="64%"></p>
@@ -142,7 +147,7 @@
 <div id="all-together-now-climate-data-grid" class="section level3">
 <h3 class="hasAnchor">
 <a href="#all-together-now-climate-data-grid" class="anchor"></a>All together now: Climate Data Grid</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/climate_grid.html">climate_grid</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-grid-1.png" width="80%"></p>
 </div>
@@ -151,17 +156,18 @@
 <h2 class="hasAnchor">
 <a href="#acknowledgments" class="anchor"></a>Acknowledgments</h2>
 <ul>
-<li>Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (<a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/" class="uri">https://www.esrl.noaa.gov/gmd/ccgg/trends/</a>) and Dr. Ralph Keeling, Scripps Institution of Oceanography (<a href="https://scrippsco2.ucsd.edu/" class="uri">https://scrippsco2.ucsd.edu/</a>).</li>
+<li>Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (<a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/" class="uri">https://www.esrl.noaa.gov/gmd/ccgg/trends/</a>) and Dr. Ralph Keeling, <a href="https://scrippsco2.ucsd.edu/">Scripps Institution of Oceanography</a>.</li>
 <li>Global temperature anomaly: <em>GISS Surface Temperature Analysis (GISTEMP), version 4.</em> GISTEMP Team, 2020: NASA Goddard Institute for Space Studies. <a href="https://data.giss.nasa.gov/gistemp/" class="uri">https://data.giss.nasa.gov/gistemp/</a>
 </li>
 <li>Warming Stripes design from Ed Hawkins’ Climate Lab. <a href="https://www.climate-lab-book.ac.uk/2018/warming-stripes/" class="uri">https://www.climate-lab-book.ac.uk/2018/warming-stripes/</a>. In addition grateful to Dr. Dominic Royé for posting his approach to plotting them using ggplot2, which <code><a href="reference/warming_stripes.html">warming_stripes()</a></code> is based on. <a href="https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/" class="uri">https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/</a>
 </li>
-<li>Sea level data: NOAA Laboratory for Satellite Altimetry (sat) <a href="https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/" class="uri">https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/</a> Commonwealth Scientific and Industrial Research Organisation (tide gauges) <a href="http://www.cmar.csiro.au/sealevel/sl_data_cmar.html" class="uri">http://www.cmar.csiro.au/sealevel/sl_data_cmar.html</a>
+<li>Sea level data: <a href="https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/">NOAA Laboratory for Satellite Altimetry (sat)</a> and <a href="http://www.cmar.csiro.au/sealevel/sl_data_cmar.html">Commonwealth Scientific and Industrial Research Organisation (tide gauges)</a>
 </li>
-<li>Sea Ice Index: National Snow &amp; Ice Data Center. <a href="https://nsidc.org/" class="uri">https://nsidc.org/</a>. Data Archive: <a href="https://nsidc.org/data/seaice_index/archives" class="uri">https://nsidc.org/data/seaice_index/archives</a>
+<li>Sea Ice Index: <a href="https://nsidc.org/">National Snow &amp; Ice Data Center</a>. Data Archive: <a href="https://nsidc.org/data/seaice_index/archives" class="uri">https://nsidc.org/data/seaice_index/archives</a>
 </li>
 <li>Vostok carbon dioxide and temperature data: <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" class="uri">https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html</a>
 </li>
+<li>Common Era reconstructed temperature data: <a href="https://www.ncdc.noaa.gov/paleo-search/study/26872">PAGES2k Consortium and NOAA</a>.</li>
 <li>Caching data sets: ROpenSci guide to <a href="https://blog.r-hub.io/2020/03/12/user-preferences/">Persistent config and data for R packages</a> and the <a href="https://docs.ropensci.org/getlandsat/">getlandsat</a> package.</li>
 </ul>
 </div>
@@ -169,7 +175,7 @@
 <h2 class="hasAnchor">
 <a href="#notes-and-resources" class="anchor"></a>Notes and Resources</h2>
 <ul>
-<li>While all data is compiled from reliable sources, I am not a climate scientist. I am building <code>hockeystick</code> because of my interest in tracking climate data and making it easily available to the community.</li>
+<li>All data is compiled to the best of my ability from reliable and peer-reviewed sources. Please open an issue if you are aware of enhanced or additional data that may be added to the package. Building <code>hockeystick</code> is driven by my interest in tracking climate data and making it easily available to the community.</li>
 <li>Here are some online resources I have found very helpful to learn more about climate science:</li>
 <li>MIT edX Global Warming Science. <a href="https://www.edx.org/course/global-warming-science" class="uri">https://www.edx.org/course/global-warming-science</a>
 </li>

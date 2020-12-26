@@ -17,3 +17,7 @@
 # hockeystick 0.3.4
 
 * Don't cache data by default, added write_cache options
+
+# hockeystick 0.4.0
+
+* Add get_temp2k() and plot_temp2k() to visualize global Common Era reconstructed temp
