@@ -16,11 +16,10 @@ The goal of `hockeystick` is to make essential Climate Change datasets
 easily available to non-climate experts. `hockeystick` users can
 download the latest raw data from authoritative sources as well as view
 it via pre-defined ggplot2 charts. Datasets include atmospheric
-CO<sub>2</sub>, instrumental and ice-core temperature records, sea
-levels, and Arctic/Antarctic sea-ice. Additional visualizations using
-this data will be added over time.
+CO<sub>2</sub>, instrumental, reconstructed, and paleo ice-core
+temperature records, sea levels, and Arctic/Antarctic sea-ice.
 
-The choice of data is based on [Professor Stefan
+The choice of data was originally based on [Professor Stefan
 Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on
 [The 5 Most Important Data Sets of Climate
 Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I
@@ -29,7 +28,8 @@ blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-
 I wrote my own
 [post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/)
 on obtaining and visualizing this data (now out of date), which is the
-basis for this package.
+basis for this package. Additional datasets and visualizations have been
+added over time.
 
 ## Installation
 
@@ -106,6 +106,16 @@ plot_icecurves(arcticice)
 
 <img src="man/figures/README-icecurves-1.png" width="60%" />
 
+Retrieve Common Era temperature reconstruction and plot it with
+instrumental record:
+
+``` r
+anomaly2k <- get_temp2k()
+plot_temp2k(anomaly2k)
+```
+
+<img src="man/figures/README-2ktemp-1.png" width="60%" />
+
 Retrieve Vostok ice core data and plot it:
 
 ``` r
@@ -139,8 +149,8 @@ climate_grid()
 
   - Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
     (<https://www.esrl.noaa.gov/gmd/ccgg/trends/>) and Dr. Ralph
-    Keeling, Scripps Institution of Oceanography
-    (<https://scrippsco2.ucsd.edu/>).
+    Keeling, [Scripps Institution of
+    Oceanography](https://scrippsco2.ucsd.edu/).
   - Global temperature anomaly: *GISS Surface Temperature Analysis
     (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute
     for Space Studies. <https://data.giss.nasa.gov/gistemp/>
@@ -149,25 +159,28 @@ climate_grid()
     addition grateful to Dr. Dominic Royé for posting his approach to
     plotting them using ggplot2, which `warming_stripes()` is based on.
     <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
-  - Sea level data: NOAA Laboratory for Satellite Altimetry (sat)
-    <https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/>
-    Commonwealth Scientific and Industrial Research Organisation (tide
-    gauges) <http://www.cmar.csiro.au/sealevel/sl_data_cmar.html>
-  - Sea Ice Index: National Snow & Ice Data Center.
-    <https://nsidc.org/>. Data Archive:
+  - Sea level data: [NOAA Laboratory for Satellite Altimetry
+    (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and
+    [Commonwealth Scientific and Industrial Research Organisation (tide
+    gauges)](http://www.cmar.csiro.au/sealevel/sl_data_cmar.html)
+  - Sea Ice Index: [National Snow & Ice Data
+    Center](https://nsidc.org/). Data Archive:
     <https://nsidc.org/data/seaice_index/archives>
   - Vostok carbon dioxide and temperature data:
     <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
+  - Common Era reconstructed temperature data: [PAGES2k Consortium and
+    NOAA](https://www.ncdc.noaa.gov/paleo-search/study/26872).
   - Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
 
 ## Notes and Resources
 
-  - While all data is compiled from reliable sources, I am not a climate
-    scientist. I am building `hockeystick` because of my interest in
-    tracking climate data and making it easily available to the
-    community.
+  - All data is compiled to the best of my ability from reliable and
+    peer-reviewed sources. Please open an issue if you are aware of
+    enhanced or additional data that may be added to the package.
+    Building `hockeystick` is driven by my interest in tracking climate
+    data and making it easily available to the community.
   - Here are some online resources I have found very helpful to learn
     more about climate science:
   - MIT edX Global Warming Science.
