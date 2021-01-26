@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 ![R-CMD-check](https://github.com/cortinah/hockeystick/workflows/R-CMD-check/badge.svg)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-project.org/package=hockeystick)
@@ -20,8 +20,8 @@ CO<sub>2</sub>, instrumental, reconstructed, and paleo ice-core
 temperature records, sea levels, and Arctic/Antarctic sea-ice.
 
 The choice of data was originally based on [Professor Stefan
-Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on
-[The 5 Most Important Data Sets of Climate
+Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on [The 5
+Most Important Data Sets of Climate
 Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I
 came across this on a post on the [Open Mind
 blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/).
@@ -134,8 +134,9 @@ functions. To download and cache all data use
 `hockeystick_update_all()`. To view the files, date, and size of cached
 data use `hockeystick_cache_details()`. To re-download data from the
 source use the `use_cache = FALSE` argument in any of the `get_`
-functions, for example: `get_carbon(use_cache = FALSE, write_cache =
-TRUE)`. To delete all cached data use `hockeystick_cache_delete_all()`.
+functions, for example:
+`get_carbon(use_cache = FALSE, write_cache = TRUE)`. To delete all
+cached data use `hockeystick_cache_delete_all()`.
 
 ### All together now: Climate Data Grid
 
@@ -147,43 +148,43 @@ climate_grid()
 
 ## Acknowledgments
 
-  - Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
+-   Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
     (<https://www.esrl.noaa.gov/gmd/ccgg/trends/>) and Dr. Ralph
     Keeling, [Scripps Institution of
     Oceanography](https://scrippsco2.ucsd.edu/).
-  - Global temperature anomaly: *GISS Surface Temperature Analysis
+-   Global temperature anomaly: *GISS Surface Temperature Analysis
     (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute
     for Space Studies. <https://data.giss.nasa.gov/gistemp/>
-  - Warming Stripes design from Ed Hawkins’ Climate Lab.
+-   Warming Stripes design from Ed Hawkins’ Climate Lab.
     <https://www.climate-lab-book.ac.uk/2018/warming-stripes/>. In
     addition grateful to Dr. Dominic Royé for posting his approach to
     plotting them using ggplot2, which `warming_stripes()` is based on.
     <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
-  - Sea level data: [NOAA Laboratory for Satellite Altimetry
+-   Sea level data: [NOAA Laboratory for Satellite Altimetry
     (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and
     [Commonwealth Scientific and Industrial Research Organisation (tide
     gauges)](http://www.cmar.csiro.au/sealevel/sl_data_cmar.html)
-  - Sea Ice Index: [National Snow & Ice Data
+-   Sea Ice Index: [National Snow & Ice Data
     Center](https://nsidc.org/). Data Archive:
     <https://nsidc.org/data/seaice_index/archives>
-  - Vostok carbon dioxide and temperature data:
+-   Vostok carbon dioxide and temperature data:
     <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
-  - Common Era reconstructed temperature data: [PAGES2k Consortium and
+-   Common Era reconstructed temperature data: [PAGES2k Consortium and
     NOAA](https://www.ncdc.noaa.gov/paleo-search/study/26872).
-  - Caching data sets: ROpenSci guide to [Persistent config and data for
+-   Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
 
 ## Notes and Resources
 
-  - All data is compiled to the best of my ability from reliable and
+-   All data is compiled to the best of my ability from reliable and
     peer-reviewed sources. Please open an issue if you are aware of
     enhanced or additional data that may be added to the package.
     Building `hockeystick` is driven by my interest in tracking climate
     data and making it easily available to the community.
-  - Here are some online resources I have found very helpful to learn
+-   Here are some online resources I have found very helpful to learn
     more about climate science:
-  - MIT edX Global Warming Science.
+-   MIT edX Global Warming Science.
     <https://www.edx.org/course/global-warming-science>
-  - SDG Academy: Climate Change: The Science and Global Impact.
+-   SDG Academy: Climate Change: The Science and Global Impact.
     <https://sdgacademy.org/course/climate-change-the-science-and-global-impact/>

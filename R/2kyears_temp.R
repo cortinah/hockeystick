@@ -39,7 +39,7 @@
 #' @references
 #' \itemize{
 #' \item PAGES2k Common Era Surface Temperature Reconstructions. \url{https://www.ncdc.noaa.gov/paleo-search/study/26872}
-#' \item PAGES 2k Consortium., Neukom, R., Barboza, L.A. et al. Consistent multidecadal variability in global temperature reconstructions and simulations over the Common Era. \emph{Nat. Geosci.} 12, 643–649 (2019).  \url{https://doi.org/10.1038/s41561-019-0400-0}
+#' \item PAGES 2k Consortium., Neukom, R., Barboza, L.A. et al. Consistent multidecadal variability in global temperature reconstructions and simulations over the Common Era. \emph{Nat. Geosci.} 12, 643–649 (2019).  \doi{10.1038/s41561-019-0400-0}
 #'  }
 #'
 #' @export
