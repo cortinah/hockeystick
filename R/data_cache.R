@@ -14,12 +14,10 @@
 #' @section Functions:
 #' \itemize{
 #'  \item `hockeystick_cache_list()` returns a character vector of full path
-#'  file names
+#'  file names in cache
 #'  \item `hockeystick_cache_delete()` deletes one or more files, returns nothing
 #'  \item `hockeystick_cache_delete_all()` delete all files, returns nothing
-#'  \item `hockeystick_cache_details()` prints file name and file size for each file,
-#'  supply with one or more files, or no files (and get details for
-#'  all available)
+#'  \item `hockeystick_cache_details()` prints file name and file size of each file, supply with one or more files, or no files (and get details for all available)
 #'  \item `hockeystick_update_all()` updates the cache with the latest co2, temperature, sea level, and sea ice data.
 #' }
 #'
@@ -35,18 +33,19 @@
 #' hockeystick_cache_details()
 #'
 #' # Delete files by name in cache
-#' # hockeystick_cache_delete(files = hockeystick_cache_list()[1])
+#' hockeystick_cache_delete(files = hockeystick_cache_list()[1])
 #'
 #' # Delete all files in cache
-#' # hockeystick_cache_delete_all()
+#' hockeystick_cache_delete_all()
 #'
 #' # Update all cached data
-#' # hockeustick_update_all()
+#' hockeystick_update_all()
 #' }
 #' @references
 #' Caching data sets: ROpenSci guide to persistent config and data for R packages: https://blog.r-hub.io/2020/03/12/user-preferences/
 
 #' @export
+#' @return `hockeystick_cache_list()` returns a character vector of full path filenames in cache.
 #' @rdname hockeystick_cache
 hockeystick_cache_list <- function() {
   list.files(hscache_path(), pattern = ".rds", ignore.case = TRUE,
@@ -54,6 +53,7 @@ hockeystick_cache_list <- function() {
 }
 
 #' @export
+#' @return `hockeystick_cache_delete()` no return value, called for side effect.
 #' @rdname hockeystick_cache
 hockeystick_cache_delete <- function(files, force = TRUE) {
   if (!all(file.exists(files))) {
@@ -64,6 +64,7 @@ hockeystick_cache_delete <- function(files, force = TRUE) {
 }
 
 #' @export
+#' @return `hockeystick_cache_delete_all()` no return value, called for side effect.
 #' @rdname hockeystick_cache
 hockeystick_cache_delete_all <- function(force = TRUE) {
   files <- list.files(hscache_path(), pattern = ".rds", ignore.case = TRUE,
@@ -72,6 +73,7 @@ hockeystick_cache_delete_all <- function(force = TRUE) {
 }
 
 #' @export
+#' @return `hockeystick_cache_details()` returns list of filenames and sizes of cached files.
 #' @rdname hockeystick_cache
 hockeystick_cache_details <- function(files = NULL) {
   if (is.null(files)) {
@@ -108,6 +110,7 @@ getsize <- function(x) {
 #' Shows filenames and cache file sizes
 #' @param x filenames
 #' @param ... Additional parameters
+#' @return Display data cache info. No return value, called for side effect.
 #' @export
 #' @method print hockeystick_cache_info
 print.hockeystick_cache_info <- function(x, ...) {
@@ -121,13 +124,15 @@ print.hockeystick_cache_info <- function(x, ...) {
   }
 }
 
-#' Return path of data cache
+#' Return path of data cache directory
 #'
 #' Internal Function
+#' @return Return path of data cache directory
 hscache_path <- function() rappdirs::user_cache_dir("hockeystick")
 
 
 #' @export
+#' @return `hockeystick_update_all()` updates all datasets. No return value, called for side effect.
 #' @rdname hockeystick_cache
 hockeystick_update_all <- function() {
   get_carbon(use_cache = FALSE, write_cache = TRUE)

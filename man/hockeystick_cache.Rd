@@ -24,6 +24,17 @@ hockeystick_update_all()
 
 \item{force}{(logical) Should files be force deleted? Default: \code{TRUE}}
 }
+\value{
+\code{hockeystick_cache_list()} returns a character vector of full path filenames in cache.
+
+\code{hockeystick_cache_delete()} no return value, called for side effect.
+
+\code{hockeystick_cache_delete_all()} no return value, called for side effect.
+
+\code{hockeystick_cache_details()} returns list of filenames and sizes of cached files.
+
+\code{hockeystick_update_all()} updates all datasets. No return value, called for side effect.
+}
 \description{
 Manage cached datasets
 }
@@ -39,12 +50,10 @@ folder by executing \code{rappdirs::user_cache_dir("hockeystick")}
 
 \itemize{
 \item \code{hockeystick_cache_list()} returns a character vector of full path
-file names
+file names in cache
 \item \code{hockeystick_cache_delete()} deletes one or more files, returns nothing
 \item \code{hockeystick_cache_delete_all()} delete all files, returns nothing
-\item \code{hockeystick_cache_details()} prints file name and file size for each file,
-supply with one or more files, or no files (and get details for
-all available)
+\item \code{hockeystick_cache_details()} prints file name and file size of each file, supply with one or more files, or no files (and get details for all available)
 \item \code{hockeystick_update_all()} updates the cache with the latest co2, temperature, sea level, and sea ice data.
 }
 }
@@ -62,13 +71,13 @@ hockeystick_cache_details(files = hockeystick_cache_list()[2])
 hockeystick_cache_details()
 
 # Delete files by name in cache
-# hockeystick_cache_delete(files = hockeystick_cache_list()[1])
+hockeystick_cache_delete(files = hockeystick_cache_list()[1])
 
 # Delete all files in cache
-# hockeystick_cache_delete_all()
+hockeystick_cache_delete_all()
 
 # Update all cached data
-# hockeustick_update_all()
+hockeystick_update_all()
 }
 }
 \references{

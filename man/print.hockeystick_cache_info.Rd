@@ -12,6 +12,9 @@ Shows filenames and cache file sizes}
 
 \item{...}{Additional parameters}
 }
+\value{
+Display data cache info. No return value, called for side effect.
+}
 \description{
 Display data cache info
 Shows filenames and cache file sizes

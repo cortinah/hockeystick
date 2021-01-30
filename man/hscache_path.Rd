@@ -2,9 +2,12 @@
 % Please edit documentation in R/data_cache.R
 \name{hscache_path}
 \alias{hscache_path}
-\title{Return path of data cache}
+\title{Return path of data cache directory}
 \usage{
 hscache_path()
+}
+\value{
+Return path of data cache directory
 }
 \description{
 Internal Function
