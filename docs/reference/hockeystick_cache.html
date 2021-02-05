@@ -152,25 +152,30 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>hockeystick_cache_list()</code> returns a character vector of full path filenames in cache.</p>
+<p><code>hockeystick_cache_delete()</code> no return value, called for side effect.</p>
+<p><code>hockeystick_cache_delete_all()</code> no return value, called for side effect.</p>
+<p><code>hockeystick_cache_details()</code> returns list of filenames and sizes of cached files.</p>
+<p><code>hockeystick_update_all()</code> updates all datasets. No return value, called for side effect.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>cache_delete</code> only accepts 1 file name, while <code>cache_delete_all</code>
 doesn't accept any names, but deletes all files. For deleting many
 specific files, use <code>cache_delete</code> in a <code><a href='https://rdrr.io/r/base/lapply.html'>lapply()</a></code> type call</p>
-<p>We cache using <code><a href='https://rdrr.io/pkg/rappdirs/man/user_cache_dir.html'>rappdirs::user_cache_dir()</a></code>, find your cache
-folder by executing <code><a href='https://rdrr.io/pkg/rappdirs/man/user_cache_dir.html'>rappdirs::user_cache_dir("hockeystick")</a></code></p>
+<p>We cache using <code><a href='https://rappdirs.r-lib.org/reference/user_cache_dir.html'>rappdirs::user_cache_dir()</a></code>, find your cache
+folder by executing <code><a href='https://rappdirs.r-lib.org/reference/user_cache_dir.html'>rappdirs::user_cache_dir("hockeystick")</a></code></p>
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
 
 <ul>
 <li><p><code>hockeystick_cache_list()</code> returns a character vector of full path
-file names</p></li>
+file names in cache</p></li>
 <li><p><code>hockeystick_cache_delete()</code> deletes one or more files, returns nothing</p></li>
 <li><p><code>hockeystick_cache_delete_all()</code> delete all files, returns nothing</p></li>
-<li><p><code>hockeystick_cache_details()</code> prints file name and file size for each file,
-supply with one or more files, or no files (and get details for
-all available)</p></li>
+<li><p><code>hockeystick_cache_details()</code> prints file name and file size of each file, supply with one or more files, or no files (and get details for all available)</p></li>
 <li><p><code>hockeystick_update_all()</code> updates the cache with the latest co2, temperature, sea level, and sea ice data.</p></li>
 </ul>
 
@@ -182,40 +187,65 @@ all available)</p></li>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># list files in cache</span>
 <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "C:\\Users\\hch\\AppData\\Local\\hockeystick\\hockeystick\\Cache/paleo.rds"</div><div class='input'>
+</div><div class='output co'>#&gt; [1] "C:\\Users\\hch\\AppData\\Local/hockeystick/hockeystick/Cache/gisstemp.rds"
+#&gt; [2] "C:\\Users\\hch\\AppData\\Local/hockeystick/hockeystick/Cache/maunaloa.rds"
+#&gt; [3] "C:\\Users\\hch\\AppData\\Local/hockeystick/hockeystick/Cache/paleo.rds"   
+#&gt; [4] "C:\\Users\\hch\\AppData\\Local/hockeystick/hockeystick/Cache/seaice.rds"  
+#&gt; [5] "C:\\Users\\hch\\AppData\\Local/hockeystick/hockeystick/Cache/sealevel.rds"
+#&gt; [6] "C:\\Users\\hch\\AppData\\Local/hockeystick/hockeystick/Cache/temp2k.rds"  </div><div class='input'>
 <span class='co'># List info for single files</span>
 <span class='fu'>hockeystick_cache_details</span><span class='op'>(</span>files <span class='op'>=</span> <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
-#&gt;   directory: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache
+#&gt;   directory: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/paleo.rds
-#&gt;   size: 20.2 kB
-#&gt;   date: 2021-01-26 16:15:09
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/gisstemp.rds
+#&gt;   size: 5.3 kB
+#&gt;   date: 2021-01-29 21:49:51
 #&gt; </div><div class='input'><span class='fu'>hockeystick_cache_details</span><span class='op'>(</span>files <span class='op'>=</span> <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
-#&gt;   directory: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache
+#&gt;   directory: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache
 #&gt; 
-#&gt;   file: NA
-#&gt;   size: NA kB
-#&gt;   date: NA
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/maunaloa.rds
+#&gt;   size: 9.4 kB
+#&gt;   date: 2021-01-29 21:49:51
 #&gt; </div><div class='input'>
 <span class='co'># List info for all files</span>
 <span class='fu'>hockeystick_cache_details</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
-#&gt;   directory: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache
+#&gt;   directory: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local\hockeystick\hockeystick\Cache/paleo.rds
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/gisstemp.rds
+#&gt;   size: 5.3 kB
+#&gt;   date: 2021-01-29 21:49:51
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/maunaloa.rds
+#&gt;   size: 9.4 kB
+#&gt;   date: 2021-01-29 21:49:51
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/paleo.rds
 #&gt;   size: 20.2 kB
-#&gt;   date: 2021-01-26 16:15:09
+#&gt;   date: 2021-02-05 10:05:12
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/seaice.rds
+#&gt;   size: 0.5 kB
+#&gt;   date: 2021-01-29 21:49:52
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/sealevel.rds
+#&gt;   size: 15.8 kB
+#&gt;   date: 2021-01-29 21:49:53
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/temp2k.rds
+#&gt;   size: 21.8 kB
+#&gt;   date: 2021-01-29 21:50:00
 #&gt; </div><div class='input'>
 <span class='co'># Delete files by name in cache</span>
-<span class='co'># hockeystick_cache_delete(files = hockeystick_cache_list()[1])</span>
-
+<span class='fu'>hockeystick_cache_delete</span><span class='op'>(</span>files <span class='op'>=</span> <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># Delete all files in cache</span>
-<span class='co'># hockeystick_cache_delete_all()</span>
-
+<span class='fu'>hockeystick_cache_delete_all</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
 <span class='co'># Update all cached data</span>
-<span class='co'># hockeustick_update_all()</span>
+<span class='fu'>hockeystick_update_all</span><span class='op'>(</span><span class='op'>)</span>
 <span class='co'># }</span>
 </div></pre>
   </div>
