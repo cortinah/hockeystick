@@ -29,11 +29,19 @@ I wrote my own
 [post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/)
 on obtaining and visualizing this data (now out of date), which is the
 basis for this package. Additional datasets and visualizations have been
-added over time.
+added over The name of the package stems from the well known
+[hockeystick](https://en.wikipedia.org/wiki/Hockey_stick_graph)
+temperature chart.
 
 ## Installation
 
-You may install the development version of `hockeystick` from
+To install the latest `hockeystick` release from CRAN type:
+
+``` r
+install.packages("hockeystick")
+```
+
+You may alternatively install the development version from
 <https://github.com/cortinah/hockeystick> with:
 
 ``` r
@@ -97,7 +105,7 @@ plot_seaice(seaice)
 `get_seaice()` arguments can be modified to download Antarctic sea ice,
 and allow any month.
 
-You can also visualize Sea Ice by month and year:
+You can also visualize sea ice by month and year:
 
 ``` r
 arcticice <- get_icecurves()
@@ -138,7 +146,7 @@ functions, for example:
 `get_carbon(use_cache = FALSE, write_cache = TRUE)`. To delete all
 cached data use `hockeystick_cache_delete_all()`.
 
-### All together now: Climate Data Grid
+### All together now: climate data grid
 
 ``` r
 climate_grid()
@@ -175,7 +183,7 @@ climate_grid()
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
 
-## Notes and Resources
+## Notes and resources
 
 -   All data is compiled to the best of my ability from reliable and
     peer-reviewed sources. Please open an issue if you are aware of

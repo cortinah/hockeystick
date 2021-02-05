@@ -23,13 +23,19 @@ knitr::opts_chunk$set(
 
 The goal of `hockeystick` is to make essential Climate Change datasets easily available to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub>, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice.
 
-The choice of data was originally based on [Professor Stefan Rahmstorf's ](http://www.pik-potsdam.de/~stefan/) presentation on [The 5 Most Important Data Sets of Climate Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I came across this on a post on the [Open Mind blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/). I wrote my own [post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/) on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over time.
+The choice of data was originally based on [Professor Stefan Rahmstorf's ](http://www.pik-potsdam.de/~stefan/) presentation on [The 5 Most Important Data Sets of Climate Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I came across this on a post on the [Open Mind blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/). I wrote my own [post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/) on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over  The name of the package stems from the well known [hockeystick](https://en.wikipedia.org/wiki/Hockey_stick_graph) temperature chart.
 
 ## Installation
+To install the latest `hockeystick` release from CRAN type:
 
-You may install the development version of `hockeystick` from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
+``` r
+install.packages("hockeystick")
+```
+
+
+You may alternatively install the development version from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
   
-  ``` r
+``` r
 remotes::install_github("cortinah/hockeystick")
 ```
 
@@ -74,7 +80,7 @@ plot_seaice(seaice)
 
 `get_seaice()` arguments can be modified to download Antarctic sea ice, and allow any month.
 
-You can also visualize Sea Ice by month and year:
+You can also visualize sea ice by month and year:
 
 ```{r icecurves, fig.retina=2, message=FALSE, out.width='60%'}
 arcticice <- get_icecurves()
@@ -98,7 +104,7 @@ plot_paleo(vostok)
 ### Managing the cache
 By default, no climate data is cached, and all data is downloaded every time any of the `get_` functions is called. To cache data for future use, use the `write_cache = TRUE` option, available in all of the `get_` functions. To download and cache all data use `hockeystick_update_all()`. To view the files, date, and size of cached data use `hockeystick_cache_details()`.  To re-download data from the source use the `use_cache = FALSE` argument in any of the `get_` functions, for example: `get_carbon(use_cache = FALSE, write_cache = TRUE)`.  To delete all cached data use `hockeystick_cache_delete_all()`.
 
-### All together now: Climate Data Grid
+### All together now: climate data grid
 ```{r grid, out.width='80%', fig.retina=2}
 climate_grid()
 ```
@@ -114,7 +120,7 @@ Data Archive: https://nsidc.org/data/seaice_index/archives
 - Common Era reconstructed temperature data: [PAGES2k Consortium and NOAA](https://www.ncdc.noaa.gov/paleo-search/study/26872). 
 - Caching data sets: ROpenSci guide to [Persistent config and data for R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
 
-## Notes and Resources
+## Notes and resources
 - All data is compiled to the best of my ability from reliable and peer-reviewed sources. Please open an issue if you are aware of enhanced or additional data that may be added to the package. Building `hockeystick` is driven by my interest in tracking climate data and making it easily available to the community.
 - Here are some online resources I have found very helpful to learn more about climate science:
 - MIT edX Global Warming Science. https://www.edx.org/course/global-warming-science
