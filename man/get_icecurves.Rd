@@ -8,7 +8,7 @@ get_icecurves(
   pole = "N",
   measure = "extent",
   use_cache = TRUE,
-  write_cache = FALSE
+  write_cache = getOption("hs_write_cache")
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ get_icecurves(
 
 \item{use_cache}{(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data, or to change pole or month in cache.}
 
-\item{write_cache}{(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.}
+\item{write_cache}{(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)}
 }
 \value{
 Invisibly returns a tibble with the series of monthly Sea Ice Index since 1979 (in million square km).

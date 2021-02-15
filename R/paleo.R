@@ -6,7 +6,7 @@
 #'
 #' @name get_paleo
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
-#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)
 #'
 #' @return Invisibly returns a tibble with the age of the ice (years before C.E.), carbon dioxide (ppm) and temperature (degrees C).
 #'
@@ -45,7 +45,7 @@
 #' @export
 
 
-get_paleo <- function(use_cache = TRUE, write_cache = TRUE) {
+get_paleo <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache")) {
 
   hs_path <- rappdirs::user_cache_dir("hockeystick")
 

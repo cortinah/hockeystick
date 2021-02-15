@@ -6,7 +6,7 @@
 #'
 #' @name get_temp
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
-#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)
 #'
 #' @return Invisibly returns a tibble with the annual mean and monthly Combined Land-Surface Air and Sea-Surface Water Temperature Anomalies.
 #'
@@ -46,7 +46,7 @@
 #'  }
 #'
 #' @export
-get_temp <- function(use_cache = TRUE, write_cache = FALSE) {
+get_temp <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache")) {
 
 hs_path <- rappdirs::user_cache_dir("hockeystick")
 
