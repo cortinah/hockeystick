@@ -4,12 +4,12 @@
 \alias{get_paleo}
 \title{Download and plot essential climate data}
 \usage{
-get_paleo(use_cache = TRUE, write_cache = TRUE)
+get_paleo(use_cache = TRUE, write_cache = getOption("hs_write_cache"))
 }
 \arguments{
 \item{use_cache}{(boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.}
 
-\item{write_cache}{(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.}
+\item{write_cache}{(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)}
 }
 \value{
 Invisibly returns a tibble with the age of the ice (years before C.E.), carbon dioxide (ppm) and temperature (degrees C).
