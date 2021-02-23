@@ -57,10 +57,10 @@ hockeystick_cache_list <- function() {
 #' @rdname hockeystick_cache
 hockeystick_cache_delete <- function(files, force = TRUE) {
   if (!all(file.exists(files))) {
-    stop("These files don't exist or can't be found: \n",
+    message("These files don't exist or can't be found: \n",
          strwrap(files[!file.exists(files)], indent = 5), call. = FALSE)
   }
-  file.remove(files)
+  invisible(file.remove(files))
 }
 
 #' @export
@@ -69,7 +69,7 @@ hockeystick_cache_delete <- function(files, force = TRUE) {
 hockeystick_cache_delete_all <- function(force = TRUE) {
   files <- list.files(hscache_path(), pattern = ".rds", ignore.case = TRUE,
                       full.names = TRUE, recursive = TRUE)
-  file.remove(files)
+  invisible(file.remove(files))
 }
 
 #' @export
