@@ -1,6 +1,6 @@
 Package: hockeystick
 Title: Download and Visualize Essential Climate Change Data
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: 
     person(given = "Hernando",
            family = "Cortina",
@@ -15,7 +15,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://cortinah.github.io/hockeystick/, https://github.com/cortinah/hockeystick
 BugReports: https://github.com/cortinah/hockeystick/issues
-Imports: ggplot2, lubridate, rappdirs, readr, dplyr, tidyr, patchwork, scales, viridisLite
+Imports: ggplot2, lubridate, rappdirs, readr, dplyr, tidyr, patchwork, scales, rvest
 Suggests: 
-    spelling
+    spelling, viridisLite
 Language: en-US
