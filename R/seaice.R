@@ -122,7 +122,7 @@ plot_seaice <- function(dataset = get_seaice(), title='Arctic Sea Ice', print=TR
 
   plot <-  ggplot(dataset, aes_string(x="date", y=colnames(dataset)[2])) +geom_line(size=1, color='firebrick1') +
     scale_x_date(name=NULL, breaks='5 years', date_labels='%Y', limits=c(ymd('1978-01-01'), ceiling_date(max(dataset$date), 'years'))) +
-    scale_y_continuous(n.breaks = 6) + geom_smooth(method='lm', se=F, linetype=2, size=0.5) + theme_bw(base_size = 12) +
+    scale_y_continuous(n.breaks = 6, limits=c(0,max(dataset[,2]))) + geom_smooth(method='lm', se=F, linetype=2, size=0.5) + theme_bw(base_size = 12) +
     labs(title=title,
          subtitle=subtitle, y=expression("Million km"^2),
          caption='Source: National Snow & Ice Data Center\nhttps://nsidc.org/data/seaice_index')
