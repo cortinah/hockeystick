@@ -20,6 +20,7 @@
 #'
 #' @importFrom lubridate ymd ceiling_date
 #' @importFrom utils download.file read.csv
+#' @importFrom tibble tibble
 #'
 #' @examples
 #' \donttest{
