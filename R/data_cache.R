@@ -141,5 +141,6 @@ hockeystick_update_all <- function() {
   get_sealevel(use_cache = FALSE, write_cache = TRUE)
   get_icecurves(use_cache = FALSE, write_cache = TRUE)
   get_temp2k(use_cache = FALSE, write_cache = TRUE)
+  get_hurricanes(use_cache = FALSE, write_cache = TRUE)
   invisible(0)
 }
