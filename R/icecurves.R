@@ -18,6 +18,7 @@
 #' Defaults to Arctic sea ice extent.  \url{https://nsidc.org/arcticseaicenews/faq/#area_extent}
 #'
 #' @importFrom utils download.file read.csv
+#' @importFrom tibble tibble
 #'
 #' @examples
 #' \donttest{
@@ -78,7 +79,9 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
 
   icecurves <- lapply(month, curve)
   icecurves <- do.call("rbind", icecurves)
-  if (write_cache) saveRDS(icecurves, file.path(hs_path, 'icecurves.rds'))
+  icecurves <- tibble::tibble(icecurves)
+
+    if (write_cache) saveRDS(icecurves, file.path(hs_path, 'icecurves.rds'))
 
   invisible(icecurves) }
 
