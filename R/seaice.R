@@ -74,6 +74,8 @@ get_seaice <- function(pole='N', month='07', measure='extent',
 
   if (measure == 'extent') seaice <- seaice[,c('date', 'extent')] else seaice <- seaice[,c('date', 'area')]
 
+  seaice <- tibble::tibble(seaice)
+
   if (write_cache) saveRDS(seaice, file.path(hs_path, 'seaice.rds'))
 
   invisible(seaice) }
@@ -118,7 +120,7 @@ get_seaice <- function(pole='N', month='07', measure='extent',
 
 plot_seaice <- function(dataset = get_seaice(), title='Arctic Sea Ice', print=TRUE) {
 
-  subtitle <- paste0(as.character(lubridate::month(dataset[nrow(dataset),'date'], label=TRUE, abbr = F))," mean sea ice ", colnames(dataset)[2],". Linear regression in blue.")
+  subtitle <- paste0(as.character(lubridate::month(dataset[nrow(dataset),'date', drop=TRUE], label=TRUE, abbr=FALSE))," mean sea ice ", colnames(dataset)[2],". Linear regression in blue.")
 
   plot <-  ggplot(dataset, aes_string(x="date", y=colnames(dataset)[2])) +geom_line(size=1, color='firebrick1') +
     scale_x_date(name=NULL, breaks='5 years', date_labels='%Y', limits=c(ymd('1978-01-01'), ceiling_date(max(dataset$date), 'years'))) +

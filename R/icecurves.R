@@ -78,7 +78,9 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
 
   icecurves <- lapply(month, curve)
   icecurves <- do.call("rbind", icecurves)
-  if (write_cache) saveRDS(icecurves, file.path(hs_path, 'icecurves.rds'))
+  icecurves <- tibble::tibble(icecurves)
+
+    if (write_cache) saveRDS(icecurves, file.path(hs_path, 'icecurves.rds'))
 
   invisible(icecurves) }
 
