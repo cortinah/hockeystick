@@ -23,7 +23,7 @@
 #' @importFrom utils download.file
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch temp anomaly from cache if available:
 #' anomaly <- get_temp()
 #' #
@@ -86,7 +86,7 @@ invisible(gisstemp)
 #' @import ggplot2
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch temperature anomaly:
 #' anomaly <- get_temp()
 #' #

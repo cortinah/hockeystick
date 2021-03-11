@@ -27,7 +27,7 @@ Source is PAGES2k Consortium and NOAA National Centers for Environmental Informa
 \url{https://www.ncdc.noaa.gov/paleo-search/study/26872}
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch temp anomaly from cache if available:
 anomaly <- get_temp2k()
 #

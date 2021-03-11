@@ -28,7 +28,7 @@ Source is NASA/GISS Surface Temperature Analysis (GISTEMP v4), an estimate of gl
 \url{https://data.giss.nasa.gov/gistemp/}
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch temp anomaly from cache if available:
 anomaly <- get_temp()
 #

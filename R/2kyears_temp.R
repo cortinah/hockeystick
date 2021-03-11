@@ -22,7 +22,7 @@
 #' @importFrom utils download.file
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch temp anomaly from cache if available:
 #' anomaly <- get_temp2k()
 #' #
@@ -90,7 +90,7 @@ invisible(temp2k_l)
 #' @import ggplot2
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Fetch temperature anomaly:
 #' anomaly <- get_temp2k()
 #' #

@@ -31,7 +31,7 @@ Plots the Common Era 2000-year global temperature anomaly retrieved using \code{
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch temperature anomaly:
 anomaly <- get_temp2k()
 #

@@ -22,7 +22,7 @@ Plots the global temperature anomaly retrieved using \code{get_temp()} with ggpl
 By default the chart is also displayed. Smooths using ggplot2's built-in loess smoother. Users may further modify the output ggplot2 chart.
 }
 \examples{
-\dontrun{
+\donttest{
 # Fetch temperature anomaly:
 anomaly <- get_temp()
 #
