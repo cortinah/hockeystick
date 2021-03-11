@@ -18,6 +18,7 @@
 #' Defaults to Arctic sea ice extent.  \url{https://nsidc.org/arcticseaicenews/faq/#area_extent}
 #'
 #' @importFrom utils download.file read.csv
+#' @importFrom tibble tibble
 #'
 #' @examples
 #' \donttest{
