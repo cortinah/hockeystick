@@ -33,6 +33,9 @@ added over The name of the package stems from the well known
 [hockeystick](https://en.wikipedia.org/wiki/Hockey_stick_graph)
 temperature chart.
 
+**NEW in version 0.5.0:** North Atlantic hurricane data from NOAA (see
+below).
+
 ## Installation
 
 To install the latest `hockeystick` release from CRAN type:
@@ -133,6 +136,21 @@ plot_paleo(vostok)
 
 <img src="man/figures/README-paleo-1.png" width="64%" />
 
+Retrieve NOAA HURDAT2 hurricane data and plot it:
+
+``` r
+hurricanes <- get_hurricanes()
+plot_hurricanes(hurricanes)
+```
+
+<img src="man/figures/README-hurricanes-1.png" width="64%" />
+
+``` r
+plot_hurricane_nrg(hurricanes)
+```
+
+<img src="man/figures/README-hurricanes-2.png" width="64%" />
+
 ### Managing the cache
 
 By default, no climate data is cached, and all data is downloaded every
@@ -145,6 +163,9 @@ source use the `use_cache = FALSE` argument in any of the `get_`
 functions, for example:
 `get_carbon(use_cache = FALSE, write_cache = TRUE)`. To delete all
 cached data use `hockeystick_cache_delete_all()`.
+
+Users may also cache data by default by adding
+`options(hs_write_cache = TRUE)`to their script or `.Rprofile` file.
 
 ### All together now: climate data grid
 
@@ -179,6 +200,10 @@ climate_grid()
     <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
 -   Common Era reconstructed temperature data: [PAGES2k Consortium and
     NOAA](https://www.ncdc.noaa.gov/paleo-search/study/26872).
+-   Hurricane data: National Oceanic and Atmospheric Administration
+    HURDAT Atlantic Hurricane Database [Re-analysis
+    Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html),
+    particularly Dr. Chris Landsea.
 -   Caching data sets: ROpenSci guide to [Persistent config and data for
     R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
     the [getlandsat](https://docs.ropensci.org/getlandsat/) package.

@@ -21,3 +21,7 @@
 # hockeystick 0.4.0
 
 * Add get_temp2k() and plot_temp2k() to visualize global Common Era reconstructed temp
+
+# hockeystick 0.5.0
+
+* Add Atlantic hurricane data, get_hurricanes(), plot_hurricanes(), plot_hurricane_nrg()
