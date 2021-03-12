@@ -83,7 +83,7 @@ https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
 <a href='https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html'>https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_carbon</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span>, write_cache <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_carbon</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span>, write_cache <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"hs_write_cache"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,7 +144,7 @@ Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
     </tr>
     <tr>
       <th>write_cache</th>
-      <td><p>(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.</p></td>
+      <td><p>(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)</p></td>
     </tr>
     </table>
 
@@ -179,31 +179,35 @@ Trend is NOAA's published trend.  Please refer to above website for details.</p>
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/gisstemp.rds
 #&gt;   size: 5.3 kB
-#&gt;   date: 2021-01-29 21:49:51
+#&gt;   date: 2021-03-11 17:12:11
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/hurricanes.rds
+#&gt;   size: 1.6 kB
+#&gt;   date: 2021-03-11 17:12:20
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/icecurves.rds
 #&gt;   size: 1.6 kB
-#&gt;   date: 2021-01-29 21:49:59
+#&gt;   date: 2021-03-11 17:12:19
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/maunaloa.rds
-#&gt;   size: 9.4 kB
-#&gt;   date: 2021-01-29 21:49:51
+#&gt;   size: 9.5 kB
+#&gt;   date: 2021-03-11 17:12:11
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/paleo.rds
 #&gt;   size: 20.2 kB
-#&gt;   date: 2021-01-29 21:50:02
+#&gt;   date: 2021-03-11 19:43:44
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/seaice.rds
 #&gt;   size: 0.5 kB
-#&gt;   date: 2021-01-29 21:49:52
+#&gt;   date: 2021-03-11 17:12:12
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/sealevel.rds
 #&gt;   size: 15.8 kB
-#&gt;   date: 2021-01-29 21:49:53
+#&gt;   date: 2021-03-11 17:12:13
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/temp2k.rds
 #&gt;   size: 21.8 kB
-#&gt;   date: 2021-01-29 21:50:00
+#&gt;   date: 2021-03-11 17:12:20
 #&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
 <span class='fu'><a href='plot_carbon.html'>plot_carbon</a></span><span class='op'>(</span><span class='va'>maunaloa</span><span class='op'>)</span> <span class='co'># }</span>

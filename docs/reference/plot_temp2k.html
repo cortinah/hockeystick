@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -169,19 +169,19 @@ By default the chart is also displayed. Users may further modify the output ggpl
     <p>Hernando Cortina, <a href='mailto:hch@alum.mit.edu'>hch@alum.mit.edu</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Fetch temperature anomaly:</span>
 <span class='va'>anomaly</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_temp2k.html'>get_temp2k</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 defaults</span>
 <span class='fu'>plot_temp2k</span><span class='op'>(</span><span class='va'>anomaly</span><span class='op'>)</span>
-
+</div><div class='img'><img src='plot_temp2k-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Or just call plot_temp2k(), which defaults to get_temp2k() dataset</span>
 <span class='fu'>plot_temp2k</span><span class='op'>(</span><span class='op'>)</span>
-
+</div><div class='img'><img src='plot_temp2k-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_temp2k</span><span class='op'>(</span><span class='va'>anomaly</span>, print <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>p</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>'Temperature Increase in the Common Era'</span><span class='op'>)</span> <span class='op'>}</span>
-
+<span class='va'>p</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>'Temperature Increase in the Common Era'</span><span class='op'>)</span> <span class='co'># }</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1926 row(s) containing missing values (geom_path).</span></div><div class='img'><img src='plot_temp2k-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

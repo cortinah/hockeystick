@@ -83,7 +83,7 @@ https://ess-dive.lbl.gov/ and https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ Source of data is the U.S. Department of Energy’s (DOE) Environmental System S
 <a href='https://ess-dive.lbl.gov/'>https://ess-dive.lbl.gov/</a> and <a href='https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html'>https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_paleo</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span>, write_cache <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_paleo</span><span class='op'>(</span>use_cache <span class='op'>=</span> <span class='cn'>TRUE</span>, write_cache <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"hs_write_cache"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,7 +144,7 @@ Source of data is the U.S. Department of Energy’s (DOE) Environmental System S
     </tr>
     <tr>
       <th>write_cache</th>
-      <td><p>(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use.</p></td>
+      <td><p>(boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)</p></td>
     </tr>
     </table>
 
@@ -196,27 +196,31 @@ Petit J R ; Raynaud D ; Lorius C ; Delaygue G ; Jouzel J ; Barkov N I ; Kotlyako
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/gisstemp.rds
 #&gt;   size: 5.3 kB
-#&gt;   date: 2021-01-29 21:49:51
+#&gt;   date: 2021-03-11 17:12:11
+#&gt; 
+#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/hurricanes.rds
+#&gt;   size: 1.6 kB
+#&gt;   date: 2021-03-11 17:12:20
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/maunaloa.rds
-#&gt;   size: 9.4 kB
-#&gt;   date: 2021-01-29 21:49:51
+#&gt;   size: 9.5 kB
+#&gt;   date: 2021-03-11 17:12:11
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/paleo.rds
 #&gt;   size: 20.2 kB
-#&gt;   date: 2021-02-05 10:05:12
+#&gt;   date: 2021-03-11 19:43:44
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/seaice.rds
 #&gt;   size: 0.5 kB
-#&gt;   date: 2021-01-29 21:49:52
+#&gt;   date: 2021-03-11 17:12:12
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/sealevel.rds
 #&gt;   size: 15.8 kB
-#&gt;   date: 2021-01-29 21:49:53
+#&gt;   date: 2021-03-11 17:12:13
 #&gt; 
 #&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/temp2k.rds
 #&gt;   size: 21.8 kB
-#&gt;   date: 2021-01-29 21:50:00
+#&gt;   date: 2021-03-11 17:12:20
 #&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
 <span class='fu'><a href='plot_paleo.html'>plot_paleo</a></span><span class='op'>(</span><span class='va'>vostok</span><span class='op'>)</span> <span class='co'># }</span>

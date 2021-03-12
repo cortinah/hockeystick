@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -85,6 +85,7 @@
 
 <p>The goal of <code>hockeystick</code> is to make essential Climate Change datasets easily available to non-climate experts. <code>hockeystick</code> users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub>, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice.</p>
 <p>The choice of data was originally based on <a href="http://www.pik-potsdam.de/~stefan/">Professor Stefan Rahmstorf’s</a> presentation on <a href="http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf">The 5 Most Important Data Sets of Climate Science</a>. I came across this on a post on the <a href="https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/">Open Mind blog</a>. I wrote my own <a href="http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/">post</a> on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over The name of the package stems from the well known <a href="https://en.wikipedia.org/wiki/Hockey_stick_graph">hockeystick</a> temperature chart.</p>
+<p><strong>NEW in version 0.5.0:</strong> North Atlantic hurricane data from NOAA (see below).</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -142,15 +143,24 @@
 <code class="sourceCode R"><span class="va">vostok</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_paleo.html">get_paleo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="reference/plot_paleo.html">plot_paleo</a></span><span class="op">(</span><span class="va">vostok</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-paleo-1.png" width="64%"></p>
+<p>Retrieve NOAA HURDAT2 hurricane data and plot it:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">hurricanes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_hurricanes.html">get_hurricanes</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="reference/plot_hurricanes.html">plot_hurricanes</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-hurricanes-1.png" width="64%"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/plot_hurricane_nrg.html">plot_hurricane_nrg</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-hurricanes-2.png" width="64%"></p>
 <div id="managing-the-cache" class="section level3">
 <h3 class="hasAnchor">
 <a href="#managing-the-cache" class="anchor"></a>Managing the cache</h3>
 <p>By default, no climate data is cached, and all data is downloaded every time any of the <code>get_</code> functions is called. To cache data for future use, use the <code>write_cache = TRUE</code> option, available in all of the <code>get_</code> functions. To download and cache all data use <code><a href="reference/hockeystick_cache.html">hockeystick_update_all()</a></code>. To view the files, date, and size of cached data use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_details()</a></code>. To re-download data from the source use the <code>use_cache = FALSE</code> argument in any of the <code>get_</code> functions, for example: <code><a href="reference/get_carbon.html">get_carbon(use_cache = FALSE, write_cache = TRUE)</a></code>. To delete all cached data use <code><a href="reference/hockeystick_cache.html">hockeystick_cache_delete_all()</a></code>.</p>
+<p>Users may also cache data by default by adding <code><a href="https://rdrr.io/r/base/options.html">options(hs_write_cache = TRUE)</a></code>to their script or <code>.Rprofile</code> file.</p>
 </div>
 <div id="all-together-now-climate-data-grid" class="section level3">
 <h3 class="hasAnchor">
 <a href="#all-together-now-climate-data-grid" class="anchor"></a>All together now: climate data grid</h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/climate_grid.html">climate_grid</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-grid-1.png" width="80%"></p>
 </div>
@@ -171,6 +181,7 @@
 <li>Vostok carbon dioxide and temperature data: <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html" class="uri">https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html</a>
 </li>
 <li>Common Era reconstructed temperature data: <a href="https://www.ncdc.noaa.gov/paleo-search/study/26872">PAGES2k Consortium and NOAA</a>.</li>
+<li>Hurricane data: National Oceanic and Atmospheric Administration HURDAT Atlantic Hurricane Database <a href="https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html">Re-analysis Project</a>, particularly Dr. Chris Landsea.</li>
 <li>Caching data sets: ROpenSci guide to <a href="https://blog.r-hub.io/2020/03/12/user-preferences/">Persistent config and data for R packages</a> and the <a href="https://docs.ropensci.org/getlandsat/">getlandsat</a> package.</li>
 </ul>
 </div>

@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -166,13 +166,13 @@ By default the chart is also displayed. Users may further modify the output ggpl
 </div><div class='output co'>#&gt; <span class='message'>Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.</span></div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 defaults</span>
 <span class='fu'>plot_seaice</span><span class='op'>(</span><span class='va'>seaice</span><span class='op'>)</span>
-</div><div class='img'><img src='plot_seaice-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_smooth).</span></div><div class='img'><img src='plot_seaice-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Or just call plot_seaice(), which defaults to get_seaice() dataset</span>
 <span class='fu'>plot_seaice</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.</span></div><div class='img'><img src='plot_seaice-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'>Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_smooth).</span></div><div class='img'><img src='plot_seaice-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_seaice</span><span class='op'>(</span><span class='va'>seaice</span>, print <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='va'>p</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>'Shrinking Arctic Sea Ice'</span><span class='op'>)</span> <span class='co'># }</span>
-</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using formula 'y ~ x'</span></div><div class='img'><img src='plot_seaice-3.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using formula 'y ~ x'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_smooth).</span></div><div class='img'><img src='plot_seaice-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
