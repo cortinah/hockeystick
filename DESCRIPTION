@@ -17,5 +17,9 @@ URL: https://cortinah.github.io/hockeystick/, https://github.com/cortinah/hockey
 BugReports: https://github.com/cortinah/hockeystick/issues
 Imports: ggplot2, lubridate, rappdirs, readr, dplyr, tidyr, patchwork, scales, rvest, tibble
 Suggests: 
-    spelling, viridisLite
+    rmarkdown,
+    knitr,
+    spelling,
+    viridisLite
 Language: en-US
+VignetteBuilder: knitr
