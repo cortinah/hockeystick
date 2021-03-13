@@ -33,12 +33,12 @@
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
-#' HURDAT North Atlantic Hurricane Database Re-analysis Project, Hurricane Research Division, NOAA \url{https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html/}.
+#' HURDAT North Atlantic Hurricane Database Re-analysis Project, Hurricane Research Division, NOAA \url{https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html}.
 #'
-#' Data from: \url{https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html/}
+#' Data from: \url{https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html}
 #'
 #'
-#' \url{https://en.wikipedia.org/wiki/Accumulated_cyclone_energy/}
+#' \url{https://en.wikipedia.org/wiki/Accumulated_cyclone_energy}
 #' @export
 get_hurricanes <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache")) {
 
