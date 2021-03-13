@@ -10,6 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 ![R-CMD-check](https://github.com/cortinah/hockeystick/workflows/R-CMD-check/badge.svg)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-project.org/package=hockeystick)
+[![](https://cranlogs.r-pkg.org/badges/hockeystick)](https://cran.r-project.org/package=hockeystick)
 <!-- badges: end -->
 
 The goal of `hockeystick` is to make essential Climate Change datasets

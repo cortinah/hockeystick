@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 ![R-CMD-check](https://github.com/cortinah/hockeystick/workflows/R-CMD-check/badge.svg)
 [![CRAN status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-project.org/package=hockeystick)
+[![](https://cranlogs.r-pkg.org/badges/hockeystick)](https://cran.r-project.org/package=hockeystick)
 <!-- badges: end -->
 
 The goal of `hockeystick` is to make essential Climate Change datasets easily available to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub>, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, and Arctic/Antarctic sea-ice.
