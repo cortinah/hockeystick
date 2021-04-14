@@ -193,7 +193,7 @@ climate_grid()
 -   Sea level data: [NOAA Laboratory for Satellite Altimetry
     (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and
     [Commonwealth Scientific and Industrial Research Organisation (tide
-    gauges)](http://www.cmar.csiro.au/sealevel/sl_data_cmar.html)
+    gauges)](https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/)
 -   Sea Ice Index: [National Snow & Ice Data
     Center](https://nsidc.org/). Data Archive:
     <https://nsidc.org/data/seaice_index/archives>

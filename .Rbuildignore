@@ -8,3 +8,5 @@
 ^\.travis\.yml$
 cran-comments.md
 ^\.github$
+^doc$
+^Meta$
