@@ -55,7 +55,7 @@ get_seaice <- function(pole='N', month='07', measure='extent',
   if (!(month %in% c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'))) stop("Month must be one of '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ")
   if (measure != 'extent' & measure != 'area') stop("measure must be 'extent' or 'area'")
 
-  hs_path <- rappdirs::user_cache_dir("hockeystick")
+  hs_path <- tools::R_user_dir("hockeystick","cache")
 
   if (use_cache) {
     message('Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.')

@@ -51,7 +51,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
   if (pole!='S' & pole!='N') stop("pole must be 'N' or 'S'")
     if (measure!='extent' & measure!='area') stop("measure must be 'extent' or 'area'")
 
-  hs_path <- rappdirs::user_cache_dir("hockeystick")
+  hs_path <- tools::R_user_dir("hockeystick","cache")
 
   if (use_cache) {
     message('Please set use_cache=FALSE if you are changing pole or measure from last cached data.')

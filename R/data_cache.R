@@ -8,8 +8,8 @@
 #' doesn't accept any names, but deletes all files. For deleting many
 #' specific files, use `cache_delete` in a [lapply()] type call
 #'
-#' @details We cache using [rappdirs::user_cache_dir()], find your cache
-#' folder by executing `rappdirs::user_cache_dir("hockeystick")`
+#' @details We cache using [tools::R_user_dir()], find your cache
+#' folder by executing `tools::R_user_dir("hockeystick","cache")`
 #'
 #' @section Functions:
 #' \itemize{
@@ -128,7 +128,7 @@ print.hockeystick_cache_info <- function(x, ...) {
 #'
 #' Internal Function
 #' @return Return path of data cache directory
-hscache_path <- function() rappdirs::user_cache_dir("hockeystick")
+hscache_path <- function() tools::R_user_dir("hockeystick","cache")
 
 
 #' @export
