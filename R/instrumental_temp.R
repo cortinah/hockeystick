@@ -48,7 +48,7 @@
 #' @export
 get_temp <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache")) {
 
-hs_path <- rappdirs::user_cache_dir("hockeystick")
+hs_path <- tools::R_user_dir("hockeystick","cache")
 
 if (use_cache) {
   if (file.exists(file.path(hs_path,'gisstemp.rds'))) return(invisible(readRDS((file.path(hs_path,'gisstemp.rds')))))

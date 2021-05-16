@@ -205,9 +205,6 @@ climate_grid()
     HURDAT Atlantic Hurricane Database [Re-analysis
     Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html),
     particularly Dr. Chris Landsea.
--   Caching data sets: ROpenSci guide to [Persistent config and data for
-    R packages](https://blog.r-hub.io/2020/03/12/user-preferences/) and
-    the [getlandsat](https://docs.ropensci.org/getlandsat/) package.
 
 ## Notes and resources
 
