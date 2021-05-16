@@ -25,3 +25,7 @@
 # hockeystick 0.5.0
 
 * Add Atlantic hurricane data, get_hurricanes(), plot_hurricanes(), plot_hurricane_nrg()
+
+# hockeystick 0.5.1
+
+* Update caching approach to comply with CRAN policies
