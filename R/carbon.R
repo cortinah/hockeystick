@@ -2,7 +2,7 @@
 #'
 #' Retrieves atmospheric carbon dioxide measurements from National Oceanic and Atmospheric Administration
 #' Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
-#' \url{https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html}
+#' \url{https://gml.noaa.gov/ccgg/trends/data.html}
 #'
 #' @name get_carbon
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
@@ -34,7 +34,7 @@
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
-#' Dr. Pieter Tans, NOAA/GML \url{https://www.esrl.noaa.gov/gmd/ccgg/trends/} and Dr. Ralph Keeling, Scripps Institution of Oceanography \url{https://scrippsco2.ucsd.edu/}.
+#' Dr. Pieter Tans, NOAA/GML \url{https://gml.noaa.gov/ccgg/trends/} and Dr. Ralph Keeling, Scripps Institution of Oceanography \url{https://scrippsco2.ucsd.edu/}.
 #'
 #'
 #' C.D. Keeling, R.B. Bacastow, A.E. Bainbridge, C.A. Ekdahl, P.R. Guenther, and L.S. Waterman, (1976), Atmospheric carbon dioxide variations at Mauna Loa Observatory, Hawaii, \emph{Tellus}, vol. 28, 538-551
@@ -103,7 +103,7 @@ plot <- ggplot(dataset, aes(x=date, y=average)) +geom_line(color='dodgerblue2', 
     scale_y_continuous(limits=c(300, round(max(dataset$average),-1)), breaks=seq(300, round(max(dataset$average),-1), 20)) +
     geom_line(aes(y=trend), size=1, col='firebrick1') +
     labs(title=expression('Atmospheric '*CO[2]*' (Keeling Curve)'), subtitle=expression('Mauna Loa '*CO[2]*' monthly mean ppm'),
-    y=expression(CO[2]*' concentration in air' ), caption='Source: NOAA/ESRL and Scripps Institution of Oceanography.\nhttps://www.esrl.noaa.gov/gmd/ccgg/trends/data.html')
+    y=expression(CO[2]*' concentration in air' ), caption='Source: NOAA/ESRL and Scripps Institution of Oceanography.\nhttps://gml.noaa.gov/ccgg/trends/data.html')
 
 if (print) print(plot)
 invisible(plot)

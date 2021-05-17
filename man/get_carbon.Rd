@@ -17,7 +17,7 @@ Invisibly returns a tibble with the monthly carbon dioxide series
 \description{
 Retrieves atmospheric carbon dioxide measurements from National Oceanic and Atmospheric Administration
 Earth System Research Laboratories monitoring laboratory in Mauna Loa, Hawaii.
-\url{https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html}
+\url{https://gml.noaa.gov/ccgg/trends/data.html}
 }
 \details{
 \code{get_carbon} invisibly returns a tibble with NOAA's monthly average carbon dioxide measurement.
@@ -40,7 +40,7 @@ plot_carbon(maunaloa) }
 
 }
 \references{
-Dr. Pieter Tans, NOAA/GML \url{https://www.esrl.noaa.gov/gmd/ccgg/trends/} and Dr. Ralph Keeling, Scripps Institution of Oceanography \url{https://scrippsco2.ucsd.edu/}.
+Dr. Pieter Tans, NOAA/GML \url{https://gml.noaa.gov/ccgg/trends/} and Dr. Ralph Keeling, Scripps Institution of Oceanography \url{https://scrippsco2.ucsd.edu/}.
 
 C.D. Keeling, R.B. Bacastow, A.E. Bainbridge, C.A. Ekdahl, P.R. Guenther, and L.S. Waterman, (1976), Atmospheric carbon dioxide variations at Mauna Loa Observatory, Hawaii, \emph{Tellus}, vol. 28, 538-551
 }
