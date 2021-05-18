@@ -123,7 +123,7 @@ climate_grid()
 ```
 
 ## Acknowledgments
-- Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (https://www.esrl.noaa.gov/gmd/ccgg/trends/) and Dr. Ralph Keeling, [Scripps Institution of Oceanography](https://scrippsco2.ucsd.edu/).
+- Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (https://gml.noaa.gov/ccgg/trends/) and Dr. Ralph Keeling, [Scripps Institution of Oceanography](https://scrippsco2.ucsd.edu/).
 - Global temperature anomaly: *GISS Surface Temperature Analysis (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute for Space Studies. https://data.giss.nasa.gov/gistemp/
 - Warming Stripes design from Ed Hawkins' Climate Lab. https://www.climate-lab-book.ac.uk/2018/warming-stripes/. In addition grateful to Dr. Dominic Royé for posting his approach to plotting them using ggplot2, which `warming_stripes()` is based on. https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/
 - Sea level data: [NOAA Laboratory for Satellite Altimetry (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and [Commonwealth Scientific and Industrial Research Organisation (tide gauges)](https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/)
