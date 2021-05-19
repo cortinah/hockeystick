@@ -49,7 +49,7 @@
 <meta property="og:title" content="Download and plot essential climate data — get_sealevel" />
 <meta property="og:description" content="Retrieves global mean sea level (GMSL) data from historic tide gauge and recent satellite altimeter observations (in mm).
 Source for tide gauge data is Commonwealth Scientific and Industrial Research Organisation (CSIRO) as described in Church and White (2011).
-http://www.cmar.csiro.au/sealevel/sl_data_cmar.html  
+https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/  
 Source for satellite data is NOAA Laboratory for Satellite Altimetry:
 https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/" />
 <meta property="og:image" content="/reference/figures/logo.png" />
@@ -85,7 +85,7 @@ https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -99,18 +99,6 @@ https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/" />
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/using_hockeystick.html">Using hockeystick</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -144,7 +132,7 @@ https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/" />
     <div class="ref-description">
     <p>Retrieves global mean sea level (GMSL) data from historic tide gauge and recent satellite altimeter observations (in mm).
 Source for tide gauge data is Commonwealth Scientific and Industrial Research Organisation (CSIRO) as described in Church and White (2011).
-<a href='http://www.cmar.csiro.au/sealevel/sl_data_cmar.html'>http://www.cmar.csiro.au/sealevel/sl_data_cmar.html</a> <br /> <br />
+<a href='https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/'>https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/</a> <br /> <br />
 Source for satellite data is NOAA Laboratory for Satellite Altimetry:
 <a href='https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/'>https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/</a></p>
     </div>
@@ -166,16 +154,16 @@ Source for satellite data is NOAA Laboratory for Satellite Altimetry:
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Invisibly returns a tibble with the global mean sea level time series (in mm) over 1880-2009 using tide gauges and since 1993 for satellite measurements.</p>
+    <p>Invisibly returns a tibble with the global mean sea level time series (in mm) over 1880-2013 using tide gauges and since 1993 for satellite measurements.</p>
 <p><code>get_sealevel</code> invisibly returns a tibble with mean sea level in mm time series from tide gauges and satellite observations.</p>
 <p>The satellite observations have been releveled so that their mean level in 1993 matches that of the tide gauges.</p>
-<p>The tide gauge data are no longer updated and cover the period from 1880 to 2009, per Church, J. A. and N.J. White (2011) <a href='http://www.cmar.csiro.au/sealevel/sl_data_cmar.html'>http://www.cmar.csiro.au/sealevel/sl_data_cmar.html</a></p>
+<p>The tide gauge data are no longer updated and cover the period from 1880 to 2013, per Church, J. A. and N.J. White (2011) <a href='https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/'>https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/</a></p>
 <p>Satellite data are updated monthly or more frequently from the NOAA Laboratory for Satellite Altimetry. TOPEX and Jason-1,-2,-3 satellites dataset, with seasonal signals removed. <a href='https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/'>https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/</a></p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
 <ul>
-<li><p>CSIRO reconstructed tide gauge GMSL for 1880 to 2009: <a href='http://www.cmar.csiro.au/sealevel/sl_data_cmar.html'>http://www.cmar.csiro.au/sealevel/sl_data_cmar.html</a></p></li>
+<li><p>CSIRO reconstructed tide gauge GMSL for 1880 to 2009: <a href='https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/'>https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/</a></p></li>
 <li><p>Church, J. A. and N.J. White (2011), Sea-level rise from the late 19th to the early 21st Century. <em>Surveys in Geophysics</em>, doi:10.1007/s10712-011-9119-1. <a href='https://link.springer.com/article/10.1007/s10712-011-9119-1'>https://link.springer.com/article/10.1007/s10712-011-9119-1</a></p></li>
 <li><p>NOAA Laboratory for Satellite Altimetry <a href='https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/'>https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/</a></p></li>
 </ul>
@@ -191,39 +179,35 @@ Source for satellite data is NOAA Laboratory for Satellite Altimetry:
 <span class='co'>#</span>
 <span class='co'># Force cache refresh:</span>
 <span class='va'>gmsl</span> <span class='op'>&lt;-</span> <span class='fu'>get_sealevel</span><span class='op'>(</span>use_cache<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='co'>#</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: InternetOpenUrl failed: 'The server name or address could not be resolved'</span></div><div class='output co'>#&gt; <span class='error'>Error in download.file(file_url, dl, mode = "wb"): cannot open URL 'https://research.csiro.au/slrwavescoast/?ddownload=327'</span></div><div class='input'><span class='co'>#</span>
 <span class='co'># Review cache contents and last update dates:</span>
 <span class='fu'><a href='hockeystick_cache.html'>hockeystick_cache_details</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
-#&gt;   directory: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache
+#&gt;   directory: C:\Users\hch\AppData\Local/R/cache/R/hockeystick
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/gisstemp.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/gisstemp.rds
 #&gt;   size: 5.3 kB
-#&gt;   date: 2021-03-12 00:09:24
+#&gt;   date: 2021-05-18 07:41:36
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/hurricanes.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/hurricanes.rds
 #&gt;   size: 1.6 kB
-#&gt;   date: 2021-03-12 00:09:51
+#&gt;   date: 2021-05-18 07:41:45
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/maunaloa.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/maunaloa.rds
 #&gt;   size: 9.5 kB
-#&gt;   date: 2021-03-12 00:09:24
+#&gt;   date: 2021-05-18 07:41:35
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/paleo.rds
-#&gt;   size: 20.2 kB
-#&gt;   date: 2021-03-13 11:24:27
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/seaice.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/seaice.rds
 #&gt;   size: 0.5 kB
-#&gt;   date: 2021-03-12 00:09:25
+#&gt;   date: 2021-05-18 07:41:36
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/sealevel.rds
-#&gt;   size: 15.8 kB
-#&gt;   date: 2021-03-12 00:09:26
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/sealevel.rds
+#&gt;   size: 16.1 kB
+#&gt;   date: 2021-05-18 07:41:39
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/temp2k.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/temp2k.rds
 #&gt;   size: 21.8 kB
-#&gt;   date: 2021-03-12 00:09:51
+#&gt;   date: 2021-05-18 07:41:45
 #&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
 <span class='fu'><a href='plot_sealevel.html'>plot_sealevel</a></span><span class='op'>(</span><span class='va'>gmsl</span><span class='op'>)</span> <span class='co'># }</span>

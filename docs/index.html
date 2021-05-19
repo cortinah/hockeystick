@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -53,18 +53,6 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/using_hockeystick.html">Using hockeystick</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
@@ -127,7 +115,7 @@
 <code class="sourceCode R"><span class="fu"><a href="reference/warming_stripes.html">warming_stripes</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-stripes-1.png" width="60%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/warming_stripes.html">warming_stripes</a></span><span class="op">(</span>stripe_only <span class="op">=</span> <span class="cn">TRUE</span>, col_strip <span class="op">=</span> <span class="fu">viridisLite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/viridisLite/man/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/warming_stripes.html">warming_stripes</a></span><span class="op">(</span>stripe_only <span class="op">=</span> <span class="cn">TRUE</span>, col_strip <span class="op">=</span> <span class="fu">viridisLite</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-stripes2-1.png" width="53%"></p>
 <p>Retrieve tide gauge and satellite sea level data and plot it:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -181,12 +169,12 @@
 <h2 class="hasAnchor">
 <a href="#acknowledgments" class="anchor"></a>Acknowledgments</h2>
 <ul>
-<li>Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (<a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/" class="uri">https://www.esrl.noaa.gov/gmd/ccgg/trends/</a>) and Dr. Ralph Keeling, <a href="https://scrippsco2.ucsd.edu/">Scripps Institution of Oceanography</a>.</li>
+<li>Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML (<a href="https://gml.noaa.gov/ccgg/trends/" class="uri">https://gml.noaa.gov/ccgg/trends/</a>) and Dr. Ralph Keeling, <a href="https://scrippsco2.ucsd.edu/">Scripps Institution of Oceanography</a>.</li>
 <li>Global temperature anomaly: <em>GISS Surface Temperature Analysis (GISTEMP), version 4.</em> GISTEMP Team, 2020: NASA Goddard Institute for Space Studies. <a href="https://data.giss.nasa.gov/gistemp/" class="uri">https://data.giss.nasa.gov/gistemp/</a>
 </li>
 <li>Warming Stripes design from Ed Hawkins’ Climate Lab. <a href="https://www.climate-lab-book.ac.uk/2018/warming-stripes/" class="uri">https://www.climate-lab-book.ac.uk/2018/warming-stripes/</a>. In addition grateful to Dr. Dominic Royé for posting his approach to plotting them using ggplot2, which <code><a href="reference/warming_stripes.html">warming_stripes()</a></code> is based on. <a href="https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/" class="uri">https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/</a>
 </li>
-<li>Sea level data: <a href="https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/">NOAA Laboratory for Satellite Altimetry (sat)</a> and <a href="http://www.cmar.csiro.au/sealevel/sl_data_cmar.html">Commonwealth Scientific and Industrial Research Organisation (tide gauges)</a>
+<li>Sea level data: <a href="https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/">NOAA Laboratory for Satellite Altimetry (sat)</a> and <a href="https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/">Commonwealth Scientific and Industrial Research Organisation (tide gauges)</a>
 </li>
 <li>Sea Ice Index: <a href="https://nsidc.org/">National Snow &amp; Ice Data Center</a>. Data Archive: <a href="https://nsidc.org/data/seaice_index/archives" class="uri">https://nsidc.org/data/seaice_index/archives</a>
 </li>
@@ -194,7 +182,6 @@
 </li>
 <li>Common Era reconstructed temperature data: <a href="https://www.ncdc.noaa.gov/paleo-search/study/26872">PAGES2k Consortium and NOAA</a>.</li>
 <li>Hurricane data: National Oceanic and Atmospheric Administration HURDAT Atlantic Hurricane Database <a href="https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html">Re-analysis Project</a>, particularly Dr. Chris Landsea.</li>
-<li>Caching data sets: ROpenSci guide to <a href="https://blog.r-hub.io/2020/03/12/user-preferences/">Persistent config and data for R packages</a> and the <a href="https://docs.ropensci.org/getlandsat/">getlandsat</a> package.</li>
 </ul>
 </div>
 <div id="notes-and-resources" class="section level2">

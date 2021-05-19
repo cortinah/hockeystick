@@ -83,7 +83,7 @@ https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -97,18 +97,6 @@ https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html" />
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/using_hockeystick.html">Using hockeystick</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -170,9 +158,9 @@ The returned object includes Year, and number of named storms, hurricanes, major
 <p>ACE is an index that combines the number of systems, how long they existed and how intense they became. It is calculated by squaring the maximum sustained surface wind in the system every six hours that the cyclone is a Named Storm and summing it up for the season. Please refer to above website for details.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>HURDAT North Atlantic Hurricane Database Re-analysis Project, Hurricane Research Division, NOAA <a href='https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html/'>https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html/</a>.</p>
-<p>Data from: <a href='https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html/'>https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html/</a></p>
-<p><a href='https://en.wikipedia.org/wiki/Accumulated_cyclone_energy/'>https://en.wikipedia.org/wiki/Accumulated_cyclone_energy/</a></p>
+    <p>HURDAT North Atlantic Hurricane Database Re-analysis Project, Hurricane Research Division, NOAA <a href='https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html'>https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html</a>.</p>
+<p>Data from: <a href='https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html'>https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html</a></p>
+<p><a href='https://en.wikipedia.org/wiki/Accumulated_cyclone_energy'>https://en.wikipedia.org/wiki/Accumulated_cyclone_energy</a></p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Hernando Cortina, <a href='mailto:hch@alum.mit.edu'>hch@alum.mit.edu</a></p>
@@ -184,43 +172,39 @@ The returned object includes Year, and number of named storms, hurricanes, major
 <span class='co'>#</span>
 <span class='co'># Force cache refresh:</span>
 <span class='va'>hurricanes</span> <span class='op'>&lt;-</span> <span class='fu'>get_hurricanes</span><span class='op'>(</span>use_cache<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='co'>#</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in open.connection(x, "rb"): Could not resolve host: www.aoml.noaa.gov</span></div><div class='input'><span class='co'>#</span>
 <span class='co'># Review cache contents and last update dates:</span>
 <span class='fu'><a href='hockeystick_cache.html'>hockeystick_cache_details</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
-#&gt;   directory: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache
+#&gt;   directory: C:\Users\hch\AppData\Local/R/cache/R/hockeystick
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/gisstemp.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/gisstemp.rds
 #&gt;   size: 5.3 kB
-#&gt;   date: 2021-03-12 00:09:24
+#&gt;   date: 2021-05-18 07:41:36
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/hurricanes.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/hurricanes.rds
 #&gt;   size: 1.6 kB
-#&gt;   date: 2021-03-12 00:09:51
+#&gt;   date: 2021-05-18 07:41:45
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/icecurves.rds
-#&gt;   size: 1.6 kB
-#&gt;   date: 2021-03-12 00:09:50
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/icecurves.rds
+#&gt;   size: 1.7 kB
+#&gt;   date: 2021-05-18 07:41:45
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/maunaloa.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/maunaloa.rds
 #&gt;   size: 9.5 kB
-#&gt;   date: 2021-03-12 00:09:24
+#&gt;   date: 2021-05-18 07:41:35
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/paleo.rds
-#&gt;   size: 20.2 kB
-#&gt;   date: 2021-03-13 11:24:27
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/seaice.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/seaice.rds
 #&gt;   size: 0.5 kB
-#&gt;   date: 2021-03-12 00:09:25
+#&gt;   date: 2021-05-18 07:41:36
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/sealevel.rds
-#&gt;   size: 15.8 kB
-#&gt;   date: 2021-03-12 00:09:26
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/sealevel.rds
+#&gt;   size: 16.1 kB
+#&gt;   date: 2021-05-18 07:41:39
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/hockeystick/hockeystick/Cache/temp2k.rds
+#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/temp2k.rds
 #&gt;   size: 21.8 kB
-#&gt;   date: 2021-03-12 00:09:51
+#&gt;   date: 2021-05-18 07:41:45
 #&gt; </div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 settings</span>
 <span class='fu'><a href='plot_hurricanes.html'>plot_hurricanes</a></span><span class='op'>(</span><span class='va'>hurricanes</span><span class='op'>)</span> <span class='co'># }</span>
