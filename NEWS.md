@@ -29,3 +29,7 @@
 # hockeystick 0.5.1
 
 * Update caching approach to comply with CRAN policies
+
+# hockeystick 0.5.2
+
+* Add date/value annotations to charts
