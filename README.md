@@ -34,6 +34,11 @@ added over The name of the package stems from the well known
 [hockeystick](https://en.wikipedia.org/wiki/Hockey_stick_graph)
 temperature chart.
 
+`hockeystick` was highlighted on the RStudio
+[Rviews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/)
+blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
+February 2021.
+
 **NEW in version 0.5.0:** North Atlantic hurricane data from NOAA (see
 below).
 
@@ -178,7 +183,7 @@ climate_grid()
 
 ## Acknowledgments
 
--   Carbon Dioxide data: Dr. Pieter Tans, NOAA/GML
+-   Carbon Dioxide concentration data: Dr. Pieter Tans, NOAA/GML
     (<https://gml.noaa.gov/ccgg/trends/>) and Dr. Ralph Keeling,
     [Scripps Institution of Oceanography](https://scrippsco2.ucsd.edu/).
 -   Global temperature anomaly: *GISS Surface Temperature Analysis
