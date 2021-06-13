@@ -33,3 +33,7 @@
 # hockeystick 0.5.2
 
 * Add date/value annotations to charts
+
+# hockeystick 0.6.0
+
+* Add global emissions from GCP: get_emissions(), plot_emissions()

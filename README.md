@@ -39,8 +39,10 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**NEW in version 0.5.0:** North Atlantic hurricane data from NOAA (see
-below).
+**NEW in version 0.5.0:** North Atlantic hurricane data from NOAA.
+
+**NEW in version 0.6.0:** Global CO<sub>2</sub> emissions by region and
+country from GCP (see below).
 
 ## Installation
 
@@ -60,7 +62,7 @@ remotes::install_github("cortinah/hockeystick")
 ## Downloading and viewing climate change data
 
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
-data and plot it:
+data and plot:
 
 ``` r
 library(hockeystick)
@@ -70,7 +72,16 @@ plot_carbon(ml_co2)
 
 <img src="man/figures/README-carbon-1.png" width="60%" />
 
-Retrieve NASA/GISS global surface temperature anomaly data and plot it:
+Retrieve GCP global CO<sub>2</sub> emissions and plot:
+
+``` r
+emissions <- get_emissions()
+plot_emissions(emissions)
+```
+
+<img src="man/figures/README-emissions-1.png" width="60%" />
+
+Retrieve NASA/GISS global surface temperature anomaly data and plot:
 
 ``` r
 anomaly <- get_temp()
@@ -93,7 +104,7 @@ warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
 
 <img src="man/figures/README-stripes2-1.png" width="53%" />
 
-Retrieve tide gauge and satellite sea level data and plot it:
+Retrieve tide gauge and satellite sea level data and plot:
 
 ``` r
 gmsl <- get_sealevel()
@@ -102,7 +113,7 @@ plot_sealevel(gmsl)
 
 <img src="man/figures/README-sl-1.png" width="60%" />
 
-Retrieve July annual Arctic Sea Ice Index and plot it:
+Retrieve July annual Arctic Sea Ice Index and plot:
 
 ``` r
 seaice <- get_seaice()
@@ -133,29 +144,29 @@ plot_temp2k(anomaly2k)
 
 <img src="man/figures/README-2ktemp-1.png" width="60%" />
 
-Retrieve Vostok ice core data and plot it:
-
-``` r
-vostok <- get_paleo()
-plot_paleo(vostok)
-```
-
-<img src="man/figures/README-paleo-1.png" width="64%" />
-
-Retrieve NOAA HURDAT2 hurricane data and plot it:
+Retrieve NOAA HURDAT2 hurricane data and plot:
 
 ``` r
 hurricanes <- get_hurricanes()
 plot_hurricanes(hurricanes)
 ```
 
-<img src="man/figures/README-hurricanes-1.png" width="64%" />
+<img src="man/figures/README-hurricanes-1.png" width="60%" />
 
 ``` r
 plot_hurricane_nrg(hurricanes)
 ```
 
-<img src="man/figures/README-hurricanes-2.png" width="64%" />
+<img src="man/figures/README-hurricanes-2.png" width="60%" />
+
+Retrieve Vostok paleo ice core data and plot:
+
+``` r
+vostok <- get_paleo()
+plot_paleo(vostok)
+```
+
+<img src="man/figures/README-paleo-1.png" width="60%" />
 
 ### Managing the cache
 
@@ -183,7 +194,7 @@ climate_grid()
 
 ## Acknowledgments
 
--   Carbon Dioxide concentration data: Dr. Pieter Tans, NOAA/GML
+-   Carbon Dioxide concentrations: Dr. Pieter Tans, NOAA/GML
     (<https://gml.noaa.gov/ccgg/trends/>) and Dr. Ralph Keeling,
     [Scripps Institution of Oceanography](https://scrippsco2.ucsd.edu/).
 -   Global temperature anomaly: *GISS Surface Temperature Analysis
@@ -205,10 +216,13 @@ climate_grid()
     <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
 -   Common Era reconstructed temperature data: [PAGES2k Consortium and
     NOAA](https://www.ncdc.noaa.gov/paleo-search/study/26872).
--   Hurricane data: National Oceanic and Atmospheric Administration
-    HURDAT Atlantic Hurricane Database [Re-analysis
+-   Hurricanes: National Oceanic and Atmospheric Administration HURDAT
+    Atlantic Hurricane Database [Re-analysis
     Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html),
     particularly Dr. Chris Landsea.
+-   Carbon Dioxide emissions: [Global Carbon
+    Project](https://www.globalcarbonproject.org/carbonbudget/20/data.htm)
+    and [Our World In Data](https://github.com/owid/co2-data)
 
 ## Notes and resources
 
