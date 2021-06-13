@@ -79,7 +79,7 @@ emissions <- get_emissions()
 plot_emissions(emissions)
 ```
 
-<img src="man/figures/README-emissions-1.png" width="64%" />
+<img src="man/figures/README-emissions-1.png" width="60%" />
 
 Retrieve NASA/GISS global surface temperature anomaly data and plot:
 
@@ -151,13 +151,13 @@ hurricanes <- get_hurricanes()
 plot_hurricanes(hurricanes)
 ```
 
-<img src="man/figures/README-hurricanes-1.png" width="64%" />
+<img src="man/figures/README-hurricanes-1.png" width="60%" />
 
 ``` r
 plot_hurricane_nrg(hurricanes)
 ```
 
-<img src="man/figures/README-hurricanes-2.png" width="64%" />
+<img src="man/figures/README-hurricanes-2.png" width="60%" />
 
 Retrieve Vostok paleo ice core data and plot:
 
@@ -166,7 +166,7 @@ vostok <- get_paleo()
 plot_paleo(vostok)
 ```
 
-<img src="man/figures/README-paleo-1.png" width="64%" />
+<img src="man/figures/README-paleo-1.png" width="60%" />
 
 ### Managing the cache
 

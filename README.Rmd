@@ -58,7 +58,7 @@ plot_carbon(ml_co2)
 
 Retrieve GCP global CO~2~ emissions and plot:
 
-```{r emissions, out.width='64%', fig.retina=2, message=FALSE}
+```{r emissions, out.width='60%', fig.retina=2, message=FALSE}
 emissions <- get_emissions()
 plot_emissions(emissions)
 ```
@@ -110,7 +110,7 @@ plot_temp2k(anomaly2k)
 
 Retrieve NOAA HURDAT2 hurricane data and plot:
 
-```{r hurricanes, out.width='64%', fig.retina=2, message=FALSE}
+```{r hurricanes, out.width='60%', fig.retina=2, message=FALSE}
 hurricanes <- get_hurricanes()
 plot_hurricanes(hurricanes)
 plot_hurricane_nrg(hurricanes)
@@ -118,7 +118,7 @@ plot_hurricane_nrg(hurricanes)
 
 Retrieve Vostok paleo ice core data and plot:
 
-```{r paleo, out.width='64%', fig.retina=2, message=FALSE}
+```{r paleo, out.width='60%', fig.retina=2, message=FALSE}
 vostok <- get_paleo()
 plot_paleo(vostok)
 ```
