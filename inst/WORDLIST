@@ -17,6 +17,9 @@ ERSST
 ESRL
 ESS
 Ekdahl
+Friedlingstein
+GCP
+GCP's
 GHCN
 GISS
 GISTEMP
@@ -42,6 +45,7 @@ NOAA's
 NSIDC
 Neukom
 ORCID
+OWID
 Organisation
 Paleo
 Paleoclimate
@@ -65,6 +69,7 @@ SeaLevelRise
 TOPEX
 Tellus
 Vostok
+WRL
 Waterman
 Zyss
 al
@@ -75,6 +80,7 @@ cdiac
 config
 cortinah
 csiro
+decompositions
 dev
 doi
 dominicroye
