@@ -13,7 +13,7 @@
 #' The returned object includes ISO code, country, year, co2 emissions, growth rates, per capita, and decompositions by industry and gas type.
 #' Please refer to above website for details.
 #'
-#' @importFrom readr read_csv
+#' @importFrom readr read_csv col_skip cols
 #' @importFrom utils download.file
 #'
 #' @examples
