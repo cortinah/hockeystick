@@ -109,7 +109,7 @@ invisible(plot)
 
 climate_grid <- function(print = TRUE) {
 
-  a <- plot_carbon(print = FALSE) +theme_bw(base_size = 9)
+  a <- plot_carbon(print = FALSE, annot=FALSE) +theme_bw(base_size = 9)
   b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none") +
     labs(title='Global Land-Ocean Temperature Index', subtitle='Global surface temperature relative to 1951-80 mean',
          y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/')
