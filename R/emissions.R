@@ -107,7 +107,7 @@ plot_emissions <- function(dataset = get_emissions(),
   dataset <- filter(dataset, year >= start_year)
   dataset$co2 <- dataset$co2/1000
 
-plot <- ggplot(dataset, aes(x=year, y=co2)) +geom_line(color='dodgerblue2') + theme_bw(base_size=12) + scale_x_continuous(n.breaks = 10, minor_breaks = NULL) + scale_y_continuous(limits = c(0, max(dataset$co2)), n.breaks = 6)  +  labs(title=expression('Atmospheric '*CO[2]*' Emissions'), subtitle=dataset$country[1],
+plot <- ggplot(dataset, aes(x=year, y=co2)) +geom_line(size=1, color='firebrick1') + theme_bw(base_size=12) + scale_x_continuous(n.breaks = 10, minor_breaks = NULL) + scale_y_continuous(limits = c(0, max(dataset$co2)), n.breaks = 6)  +  labs(title=expression('Atmospheric '*CO[2]*' Emissions'), subtitle=dataset$country[1],
     y=expression('Gt '*CO[2]*' per year' ), caption='Source: Global Carbon Project and Our World In Data.\nhttps://github.com/owid/co2-data')
 
 if (annot) {
@@ -117,7 +117,7 @@ dtmin <- pull(slice(dataset, which.min(year)), year)
 vl <- pull(slice(dataset, which.max(year)), co2)
 vl <- round(vl, 1)
 
-plot <- plot + annotate("text",x = dtmin+(dtmax-dtmin)/10, y=vl, label=paste(dtmax, vl,sep=": "), color='red')
+plot <- plot + annotate("text",x = dtmin+(dtmax-dtmin)/10, y=vl*0.9, label=paste(dtmax, vl,sep=": "), color='red')
 }
 
 if (print) print(plot)

@@ -35,7 +35,7 @@ added over The name of the package stems from the well known
 temperature chart.
 
 `hockeystick` was highlighted on the RStudio
-[Rviews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/)
+[RViews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/)
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
