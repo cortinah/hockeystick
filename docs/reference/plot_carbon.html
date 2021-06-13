@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
     <p>Plots carbon dioxide data retrieved using <code><a href='get_carbon.html'>get_carbon()</a></code> with ggplot2. The output ggplot2 object may be modified.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_carbon</span><span class='op'>(</span>dataset <span class='op'>=</span> <span class='fu'><a href='get_carbon.html'>get_carbon</a></span><span class='op'>(</span><span class='op'>)</span>, print <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plot_carbon</span><span class='op'>(</span>dataset <span class='op'>=</span> <span class='fu'><a href='get_carbon.html'>get_carbon</a></span><span class='op'>(</span><span class='op'>)</span>, print <span class='op'>=</span> <span class='cn'>TRUE</span>, annot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +141,10 @@
     <tr>
       <th>print</th>
       <td><p>(boolean) Display carbon dioxide ggplot2 chart, defaults to TRUE. Use FALSE to not display chart.</p></td>
+    </tr>
+    <tr>
+      <th>annot</th>
+      <td><p>(boolean) Include chart annotation with latest date and value, defaults to TRUE.</p></td>
     </tr>
     </table>
 
