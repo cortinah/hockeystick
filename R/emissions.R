@@ -60,7 +60,7 @@ invisible(emissions)
 
 #' Download and plot essential climate data
 #'
-#' Plots carbon dioxide emissions retrieved using `get_emissions()` with ggplot2. The output ggplot2 object may be modified.
+#' Plots carbon dioxide emissions retrieved using `get_emissions()` with ggplot2. The output ggplot2 object may be modified. Alternative columns from the dataset may also be plotted.
 #'
 #'
 #' @name plot_emissions
@@ -69,10 +69,14 @@ invisible(emissions)
 #' @param annot (boolean) Include chart annotation with latest date and value, defaults to TRUE.
 #' @param start_year Year to start plot at. Defaults to 1900. Data is available since 1750.
 #' @param region ISO code of region to plot. Defaults to 'OWID_WRL' which signifies entire world.
+#' @param field Field from GCP dataset to be plotted, defaults to 'co2'
+#' @param title_expression Chart title, defaults to CO2 emissions
+#' @param yaxis_expression y-axis label, defaults to Gt CO2 emissions
+#'
 #'
 #' @return Invisibly returns a ggplot2 object with carbon dioxide emissions chart
 #'
-#' @details `plot_emissions` invisibly returns a ggplot2 object with a pre-defined carbon dioxide emissions chart using data from `get_emissions`.
+#' @details `plot_emissions` invisibly returns a ggplot2 object with a pre-defined carbon dioxide emissions chart using data from `get_emissions`.  Use the `field` parameter to select alternative columns from the data set such as co2_per_capita.
 #' By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 #'
 #' @import ggplot2
@@ -82,7 +86,7 @@ invisible(emissions)
 #' \donttest{
 #' # Fetch carbon dioxide emissions:
 #' emissions <- get_emissions()
-#' #
+#'
 #' # Plot output using package's built-in ggplot2 defaults
 #' plot_emissions(emissions)
 #'
@@ -93,7 +97,10 @@ invisible(emissions)
 #' plot_emissions(region='USA', start_year=1950)
 #' p <- plot_emissions(emissions, print = FALSE)
 #'
-#' p + ggplot2::labs(title='Anthropogenic Carbon Emissions') }
+#' p + ggplot2::labs(title='Anthropogenic Carbon Emissions')
+#'
+#' # Plot a different field from GCP dataset
+#' plot_emissions(field='co2_per_capita', yaxis_expression=expression(CO[2]*' per capita' ))}
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'
@@ -101,20 +108,22 @@ invisible(emissions)
 
 plot_emissions <- function(dataset = get_emissions(),
                   start_year = 1900, region = 'OWID_WRL',
-                  print = TRUE, annot = TRUE) {
+                  field = 'co2', print = TRUE, annot = TRUE,
+                  title_expression = expression('Atmospheric '*CO[2]*' Emissions'),
+                  yaxis_expression = expression('Gt '*CO[2]*' per year' )) {
 
   dataset <- filter(dataset, iso_code == region)
   dataset <- filter(dataset, year >= start_year)
   dataset$co2 <- dataset$co2/1000
 
-plot <- ggplot(dataset, aes(x=year, y=co2)) +geom_line(size=1, color='firebrick1') + theme_bw(base_size=12) + scale_x_continuous(n.breaks = 10, minor_breaks = NULL) + scale_y_continuous(limits = c(0, max(dataset$co2)), n.breaks = 6)  +  labs(title=expression('Atmospheric '*CO[2]*' Emissions'), subtitle=dataset$country[1],
-    y=expression('Gt '*CO[2]*' per year' ), caption='Source: Global Carbon Project and Our World In Data.\nhttps://github.com/owid/co2-data')
+plot <- ggplot(dataset, aes(x=year, y=get(field))) +geom_line(size=1, color='firebrick1') + theme_bw(base_size=12) + scale_x_continuous(n.breaks = 10, minor_breaks = NULL) + scale_y_continuous(limits = c(0, max(dataset[, field])), n.breaks = 6)  +  labs(title =  title_expression, subtitle=dataset$country[1],
+    y = yaxis_expression, caption='Source: Global Carbon Project and Our World In Data.\nhttps://github.com/owid/co2-data')
 
 if (annot) {
 
 dtmax <- pull(slice(dataset, which.max(year)), year)
 dtmin <- pull(slice(dataset, which.min(year)), year)
-vl <- pull(slice(dataset, which.max(year)), co2)
+vl <- pull(slice(dataset, which.max(year)), field)
 vl <- round(vl, 1)
 
 plot <- plot + annotate("text",x = dtmin+(dtmax-dtmin)/10, y=vl*0.9, label=paste(dtmax, vl,sep=": "), color='red')
