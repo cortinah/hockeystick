@@ -8,8 +8,11 @@ plot_emissions(
   dataset = get_emissions(),
   start_year = 1900,
   region = "OWID_WRL",
+  field = "co2",
   print = TRUE,
-  annot = TRUE
+  annot = TRUE,
+  title_expression = expression("Atmospheric " * CO[2] * " Emissions"),
+  yaxis_expression = expression("Gt " * CO[2] * " per year")
 )
 }
 \arguments{
@@ -19,25 +22,31 @@ plot_emissions(
 
 \item{region}{ISO code of region to plot. Defaults to 'OWID_WRL' which signifies entire world.}
 
+\item{field}{Field from GCP dataset to be plotted, defaults to 'co2'}
+
 \item{print}{(boolean) Display carbon dioxide emissions ggplot2 chart, defaults to TRUE. Use FALSE to not display chart.}
 
 \item{annot}{(boolean) Include chart annotation with latest date and value, defaults to TRUE.}
+
+\item{title_expression}{Chart title, defaults to CO2 emissions}
+
+\item{yaxis_expression}{y-axis label, defaults to Gt CO2 emissions}
 }
 \value{
 Invisibly returns a ggplot2 object with carbon dioxide emissions chart
 }
 \description{
-Plots carbon dioxide emissions retrieved using \code{get_emissions()} with ggplot2. The output ggplot2 object may be modified.
+Plots carbon dioxide emissions retrieved using \code{get_emissions()} with ggplot2. The output ggplot2 object may be modified. Alternative columns from the dataset may also be plotted.
 }
 \details{
-\code{plot_emissions} invisibly returns a ggplot2 object with a pre-defined carbon dioxide emissions chart using data from \code{get_emissions}.
+\code{plot_emissions} invisibly returns a ggplot2 object with a pre-defined carbon dioxide emissions chart using data from \code{get_emissions}.  Use the \code{field} parameter to select alternative columns from the data set such as co2_per_capita.
 By default the chart is also displayed. Users may further modify the output ggplot2 chart.
 }
 \examples{
 \donttest{
 # Fetch carbon dioxide emissions:
 emissions <- get_emissions()
-#
+
 # Plot output using package's built-in ggplot2 defaults
 plot_emissions(emissions)
 
@@ -48,7 +57,10 @@ plot_emissions()
 plot_emissions(region='USA', start_year=1950)
 p <- plot_emissions(emissions, print = FALSE)
 
-p + ggplot2::labs(title='Anthropogenic Carbon Emissions') }
+p + ggplot2::labs(title='Anthropogenic Carbon Emissions')
+
+# Plot a different field from GCP dataset
+plot_emissions(field='co2_per_capita', yaxis_expression=expression(CO[2]*' per capita' ))}
 
 }
 \author{
