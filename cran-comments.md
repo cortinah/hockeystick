@@ -1,5 +1,5 @@
 ## Test environments:
-* local Windows install, R 4.0.4
+* local Windows install, R 4.1.0
 * GitHub Actions: Ubuntu 20.04 (R release and devel), macOS-latest (release), windows-latest (release) 
 
 ## R CMD check results
