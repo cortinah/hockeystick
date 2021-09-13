@@ -27,7 +27,7 @@ Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I
 came across this on a post on the [Open Mind
 blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/).
 I wrote my own
-[post](http://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/)
+[post](https://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/)
 on obtaining and visualizing this data (now out of date), which is the
 basis for this package. Additional datasets and visualizations have been
 added over The name of the package stems from the well known
