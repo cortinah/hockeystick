@@ -33,7 +33,7 @@ hockeystick_update_all()
 
 \code{hockeystick_cache_details()} returns list of filenames and sizes of cached files.
 
-\code{hockeystick_update_all()} updates all datasets. No return value, called for side effect.
+\code{hockeystick_update_all()} updates all datasets and caches them. No return value, called for side effect.
 }
 \description{
 Manage cached datasets
@@ -70,14 +70,14 @@ hockeystick_cache_details(files = hockeystick_cache_list()[2])
 # List info for all files
 hockeystick_cache_details()
 
-# Delete files by name in cache
+# Delete cached files by name
 hockeystick_cache_delete(files = hockeystick_cache_list()[1])
 
-# Delete all files in cache
-hockeystick_cache_delete_all()
-
-# Update all cached data
+# Update all hockeystick data and place in cache
 hockeystick_update_all()
+
+# Delete all cached data
+hockeystick_cache_delete_all()
 }
 }
 \references{

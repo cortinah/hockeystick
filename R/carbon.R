@@ -20,10 +20,10 @@
 #'
 #' @examples
 #' \donttest{
-#' # Fetch from cache if available:
+#' # Fetch from cache if available, otherwise download:
 #' maunaloa <- get_carbon()
 #' #
-#' # Force cache refresh:
+#' # Force fetch from source:
 #' maunaloa <- get_carbon(use_cache=FALSE)
 #' #
 #' # Review cache contents and last update dates:

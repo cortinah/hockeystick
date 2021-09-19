@@ -32,14 +32,14 @@
 #' # List info for all files
 #' hockeystick_cache_details()
 #'
-#' # Delete files by name in cache
+#' # Delete cached files by name
 #' hockeystick_cache_delete(files = hockeystick_cache_list()[1])
 #'
-#' # Delete all files in cache
-#' hockeystick_cache_delete_all()
-#'
-#' # Update all cached data
+#' # Update all hockeystick data and place in cache
 #' hockeystick_update_all()
+#'
+#' # Delete all cached data
+#' hockeystick_cache_delete_all()
 #' }
 #' @references
 #' Caching data sets: ROpenSci guide to persistent config and data for R packages: https://blog.r-hub.io/2020/03/12/user-preferences/
@@ -132,7 +132,7 @@ hscache_path <- function() tools::R_user_dir("hockeystick","cache")
 
 
 #' @export
-#' @return `hockeystick_update_all()` updates all datasets. No return value, called for side effect.
+#' @return `hockeystick_update_all()` updates all datasets and caches them. No return value, called for side effect.
 #' @rdname hockeystick_cache
 hockeystick_update_all <- function() {
   get_carbon(use_cache = FALSE, write_cache = TRUE)

@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -163,16 +163,44 @@ By default the chart is also displayed. Users may further modify the output ggpl
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># Fetch Vostok data:</span>
 <span class='va'>vostok</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_paleo.html'>get_paleo</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: InternetOpenUrl failed: 'The server name or address could not be resolved'</span></div><div class='output co'>#&gt; <span class='error'>Error in download.file(file_url, dl): cannot open URL 'http://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'</span></div><div class='input'><span class='co'>#</span>
+</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
+#&gt; <span class='message'>cols(</span>
+#&gt; <span class='message'>  X1 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X2 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X3 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X4 = <span style='color: #00BB00;'>col_double()</span></span>
+#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
+#&gt; <span class='message'>cols(</span>
+#&gt; <span class='message'>  X1 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X2 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X3 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X4 = <span style='color: #00BB00;'>col_double()</span></span>
+#&gt; <span class='message'>)</span></div><div class='input'><span class='co'>#</span>
 <span class='co'># Plot output using package's built-in ggplot2 defaults</span>
 <span class='fu'>plot_paleo</span><span class='op'>(</span><span class='va'>vostok</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(dataset[dataset$name == "co2", ], aes(x = age_ice, y = value)): object 'vostok' not found</span></div><div class='input'>
+</div><div class='img'><img src='plot_paleo-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Or just call plot_paleo(), which defaults to get_paleo() dataset</span>
 <span class='fu'>plot_paleo</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: InternetOpenUrl failed: 'The server name or address could not be resolved'</span></div><div class='output co'>#&gt; <span class='error'>Error in download.file(file_url, dl): cannot open URL 'http://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
+#&gt; <span class='message'>cols(</span>
+#&gt; <span class='message'>  X1 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X2 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X3 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X4 = <span style='color: #00BB00;'>col_double()</span></span>
+#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
+#&gt; <span class='message'>cols(</span>
+#&gt; <span class='message'>  X1 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X2 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X3 = <span style='color: #00BB00;'>col_double()</span>,</span>
+#&gt; <span class='message'>  X4 = <span style='color: #00BB00;'>col_double()</span></span>
+#&gt; <span class='message'>)</span></div><div class='img'><img src='plot_paleo-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'>plot_paleo</span><span class='op'>(</span><span class='va'>vostok</span>, print <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(dataset[dataset$name == "co2", ], aes(x = age_ice, y = value)): object 'vostok' not found</span></div><div class='input'><span class='va'>p</span> <span class='op'>+</span> <span class='fu'>patchwork</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/patchwork/man/plot_annotation.html'>plot_annotation</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>'A Long History of Carbon'</span><span class='op'>)</span> <span class='co'># }</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'p' not found</span></div><div class='input'>
+<span class='va'>p</span> <span class='op'>+</span> <span class='fu'>patchwork</span><span class='fu'>::</span><span class='fu'><a href='https://patchwork.data-imaginist.com/reference/plot_annotation.html'>plot_annotation</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>'A Long History of Carbon'</span><span class='op'>)</span> <span class='co'># }</span>
+</div><div class='img'><img src='plot_paleo-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hockeystick</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -158,7 +158,7 @@
 <p><code>hockeystick_cache_delete()</code> no return value, called for side effect.</p>
 <p><code>hockeystick_cache_delete_all()</code> no return value, called for side effect.</p>
 <p><code>hockeystick_cache_details()</code> returns list of filenames and sizes of cached files.</p>
-<p><code>hockeystick_update_all()</code> updates all datasets. No return value, called for side effect.</p>
+<p><code>hockeystick_update_all()</code> updates all datasets and caches them. No return value, called for side effect.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>cache_delete</code> only accepts 1 file name, while <code>cache_delete_all</code>
@@ -187,71 +187,38 @@ file names in cache</p></li>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'># list files in cache</span>
 <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/emissions.rds" 
-#&gt; [2] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/gisstemp.rds"  
-#&gt; [3] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/hurricanes.rds"
-#&gt; [4] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/maunaloa.rds"  
-#&gt; [5] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/seaice.rds"    
-#&gt; [6] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/sealevel.rds"  
-#&gt; [7] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/temp2k.rds"    </div><div class='input'>
+</div><div class='output co'>#&gt; character(0)</div><div class='input'>
 <span class='co'># List info for single files</span>
 <span class='fu'>hockeystick_cache_details</span><span class='op'>(</span>files <span class='op'>=</span> <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
 #&gt;   directory: C:\Users\hch\AppData\Local/R/cache/R/hockeystick
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/emissions.rds
-#&gt;   size: 1699.5 kB
-#&gt;   date: 2021-06-13 00:11:14
+#&gt;   file: NA
+#&gt;   size: NA kB
+#&gt;   date: NA
 #&gt; </div><div class='input'><span class='fu'>hockeystick_cache_details</span><span class='op'>(</span>files <span class='op'>=</span> <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
 #&gt;   directory: C:\Users\hch\AppData\Local/R/cache/R/hockeystick
 #&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/gisstemp.rds
-#&gt;   size: 5.3 kB
-#&gt;   date: 2021-06-13 00:10:57
+#&gt;   file: NA
+#&gt;   size: NA kB
+#&gt;   date: NA
 #&gt; </div><div class='input'>
 <span class='co'># List info for all files</span>
 <span class='fu'>hockeystick_cache_details</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;hockeystick cached files&gt;
 #&gt;   directory: C:\Users\hch\AppData\Local/R/cache/R/hockeystick
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/emissions.rds
-#&gt;   size: 1699.5 kB
-#&gt;   date: 2021-06-13 00:11:14
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/gisstemp.rds
-#&gt;   size: 5.3 kB
-#&gt;   date: 2021-06-13 00:10:57
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/hurricanes.rds
-#&gt;   size: 1.6 kB
-#&gt;   date: 2021-06-13 00:11:12
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/maunaloa.rds
-#&gt;   size: 9.5 kB
-#&gt;   date: 2021-06-13 00:10:56
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/seaice.rds
-#&gt;   size: 0.5 kB
-#&gt;   date: 2021-06-13 00:10:57
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/sealevel.rds
-#&gt;   size: 16.1 kB
-#&gt;   date: 2021-06-13 00:11:03
-#&gt; 
-#&gt;   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/temp2k.rds
-#&gt;   size: 21.8 kB
-#&gt;   date: 2021-06-13 00:11:12
 #&gt; </div><div class='input'>
-<span class='co'># Delete files by name in cache</span>
+<span class='co'># Delete cached files by name</span>
 <span class='fu'>hockeystick_cache_delete</span><span class='op'>(</span>files <span class='op'>=</span> <span class='fu'>hockeystick_cache_list</span><span class='op'>(</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-
-<span class='co'># Delete all files in cache</span>
-<span class='fu'>hockeystick_cache_delete_all</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># Update all cached data</span>
+</div><div class='output co'>#&gt; <span class='message'>These files don't exist or can't be found: </span>
+#&gt; <span class='message'>     NAFALSE</span></div><div class='input'>
+<span class='co'># Update all hockeystick data and place in cache</span>
 <span class='fu'>hockeystick_update_all</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: InternetOpenUrl failed: 'The server name or address could not be resolved'</span></div><div class='output co'>#&gt; <span class='error'>Error in download.file(file_url, dl): cannot open URL 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'</span></div><div class='input'><span class='co'># }</span>
+
+<span class='co'># Delete all cached data</span>
+<span class='fu'>hockeystick_cache_delete_all</span><span class='op'>(</span><span class='op'>)</span>
+<span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
