@@ -37,3 +37,7 @@
 # hockeystick 0.6.0
 
 * Add global emissions from GCP: get_emissions(), plot_emissions()
+
+# hockeystick 0.6.1
+
+* Fix leaving example data in cache
