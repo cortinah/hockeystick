@@ -3,12 +3,5 @@ home:
   description: hockeystick provides easy access to essential Climate Change datasets to non-climate experts. Users can download the latest raw data from authoritative sources and view it via pre-defined ggplot2 charts.
 
 template:
- params:
-    bootswatch: spacelab
- opengraph:
-    image:
-      src: man/figures/logo.png
-      alt: "Download and Visualize Essential Climate Change Data"
- twitter:
-      creator: "@cortinah"
-      card: summary_large_image
+   bootstrap: 5
+   bootswatch: spacelab
