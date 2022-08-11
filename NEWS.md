@@ -41,3 +41,7 @@
 # hockeystick 0.6.1
 
 * Fix leaving example data in cache
+
+# hockeystick 0.6.2
+
+* Update documentation to confirm with R version 4.2
