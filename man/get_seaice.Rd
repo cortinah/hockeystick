@@ -56,8 +56,8 @@ plot_seaice(seaice) }
 \references{
 \itemize{
 \item NSIDC Data Archive: \url{https://nsidc.org/data/seaice_index/archives}
-\item All About Sea Ice: \url{https://nsidc.org/cryosphere/seaice/index.html}
-\item Sea Ice terminology: \url{https://nsidc.org/cryosphere/seaice/data/terminology.html}
+\item All About Sea Ice: \url{https://nsidc.org/learn/parts-cryosphere/sea-ice}
+\item Sea Ice terminology: \url{https://nsidc.org/learn)}
 }
 }
 \author{

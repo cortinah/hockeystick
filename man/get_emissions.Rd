@@ -39,7 +39,7 @@ plot_emissions(emissions) }
 
 }
 \references{
-\url{https://www.globalcarbonproject.org/carbonbudget/20/data.htm}
+\url{https://www.globalcarbonproject.org/carbonbudget/}
 
 Friedlingstein, P. et al (2020), Global Carbon Budget 2020, \emph{Earth System Science Data}, vol. 12, 3269-3340 \doi{10.5194/essd-12-3269-2020}
 }

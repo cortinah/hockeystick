@@ -2,7 +2,7 @@
 #'
 #' Retrieves the Common Era Global Surface Temperature Reconstructions.
 #' Source is PAGES2k Consortium and NOAA National Centers for Environmental Information.
-#' \url{https://www.ncdc.noaa.gov/paleo-search/study/26872}
+#' \url{https://www.ncei.noaa.gov/access/paleo-search/study/26872)}
 #'
 #' @name get_temp2k
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
