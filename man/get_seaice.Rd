@@ -34,7 +34,7 @@ Defaults to Arctic July sea ice extent.  \url{https://nsidc.org/arcticseaicenews
 \description{
 Retrieves Arctic or Antarctic annual Sea Ice Index (in million square km).
 Source is the National Snow and Ice Data Center, defaults to Arctic (Northern Hemisphere) July sea ice extent.
-\url{https://nsidc.org/data/seaice_index/archives} \cr \cr
+\url{https://nsidc.org/data/explore-data} \cr \cr
 }
 \examples{
 \donttest{
@@ -55,7 +55,7 @@ plot_seaice(seaice) }
 }
 \references{
 \itemize{
-\item NSIDC Data Archive: \url{https://nsidc.org/data/seaice_index/archives}
+\item NSIDC Data Archive: \url{https://nsidc.org/data/explore-data}
 \item All About Sea Ice: \url{https://nsidc.org/learn/parts-cryosphere/sea-ice}
 \item Sea Ice terminology: \url{https://nsidc.org/learn)}
 }

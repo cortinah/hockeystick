@@ -211,18 +211,18 @@ climate_grid()
     gauges)](https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/)
 -   Sea Ice Index: [National Snow & Ice Data
     Center](https://nsidc.org/). Data Archive:
-    <https://nsidc.org/data/seaice_index/archives>
+    <https://nsidc.org/data/explore-data>
 -   Vostok carbon dioxide and temperature data:
     <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
 -   Common Era reconstructed temperature data: [PAGES2k Consortium and
-    NOAA](https://www.ncdc.noaa.gov/paleo-search/study/26872).
+    NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)).
 -   Hurricanes: National Oceanic and Atmospheric Administration HURDAT
     Atlantic Hurricane Database [Re-analysis
     Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html),
     particularly Dr. Chris Landsea.
 -   Carbon Dioxide emissions: [Global Carbon
-    Project](https://www.globalcarbonproject.org/carbonbudget/20/data.htm)
-    and [Our World In Data](https://github.com/owid/co2-data)
+    Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our
+    World In Data](https://github.com/owid/co2-data)
 
 ## Notes and resources
 

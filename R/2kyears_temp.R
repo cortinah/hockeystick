@@ -38,7 +38,7 @@
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
 #' \itemize{
-#' \item PAGES2k Common Era Surface Temperature Reconstructions. \url{https://www.ncdc.noaa.gov/paleo-search/study/26872}
+#' \item PAGES2k Common Era Surface Temperature Reconstructions. \url{https://www.ncei.noaa.gov/access/paleo-search/study/26872}
 #' \item PAGES 2k Consortium., Neukom, R., Barboza, L.A. et al. Consistent multidecadal variability in global temperature reconstructions and simulations over the Common Era. \emph{Nat. Geosci.} 12, 643–649 (2019).  \doi{10.1038/s41561-019-0400-0}
 #'  }
 #'
@@ -118,7 +118,7 @@ plot_temp2k <- function(dataset = get_temp2k(), instrumental = TRUE,
 plot <- ggplot(dataset, aes(x=year, y=value, color=measure)) +geom_line(aes(color=measure), size=1.05) + theme_bw(base_size=12) +  scale_y_continuous(n.breaks = 10, minor_breaks = NULL) +
   scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.3, 0.85),legend.background=element_blank()) +
   labs(title='Global Common Era Temperature Reconstruction', subtitle='Global surface temperature relative to 1961-1990 mean', x='Year C.E.',
-       y='Temperature Anomaly (C\U00B0)', caption='Source: PAGES2k Consortium, NOAA\nhttps://www.ncdc.noaa.gov/paleo-search/study/26872')
+       y='Temperature Anomaly (C\U00B0)', caption='Source: PAGES2k Consortium, NOAA\nhttps://www.ncei.noaa.gov/access/paleo-search/study/26872')
 
 if (print) suppressWarnings( print(plot) )
 invisible(plot)

@@ -31,7 +31,7 @@ Defaults to Arctic sea ice extent.  \url{https://nsidc.org/arcticseaicenews/faq/
 \description{
 Retrieves Arctic or Antarctic monthly Sea Ice Index time series (in million square km).
 Source is the National Snow and Ice Data Center, defaults to Arctic (Northern Hemisphere) monthly sea ice extent since 1979.
-\url{https://nsidc.org/data/seaice_index/archives} \cr \cr
+\url{https://nsidc.org/data/explore-data} \cr \cr
 }
 \examples{
 \donttest{
@@ -52,9 +52,9 @@ plot_icecurves(icecurves) }
 }
 \references{
 \itemize{
-\item NSIDC Data Archive: \url{https://nsidc.org/data/seaice_index/archives}
-\item All About Sea Ice: \url{https://nsidc.org/cryosphere/seaice/index.html}
-\item Sea Ice terminology: \url{https://nsidc.org/cryosphere/seaice/data/terminology.html}
+\item NSIDC Data Archive: \url{https://nsidc.org/data/explore-data/}
+\item All About Sea Ice: \url{https://nsidc.org/learn/parts-cryosphere/sea-ice/}
+\item Sea Ice terminology: \url{https://nsidc.org/learn/}
 }
 }
 \author{
