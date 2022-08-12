@@ -39,9 +39,9 @@
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
 #' \itemize{
-#' \item NSIDC Data Archive: \url{https://nsidc.org/data/explore-data/}
-#' \item All About Sea Ice: \url{https://nsidc.org/learn/parts-cryosphere/sea-ice/}
-#' \item Sea Ice terminology: \url{https://nsidc.org/learn/}
+#' \item NSIDC Data Archive: \url{https://nsidc.org/data/explore-data}
+#' \item All About Sea Ice: \url{https://nsidc.org/learn/parts-cryosphere/sea-ice}
+#' \item Sea Ice terminology: \url{https://nsidc.org/learn}
 #'  }
 #'
 #' @export
