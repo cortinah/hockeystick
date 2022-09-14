@@ -77,6 +77,8 @@ Retrieve GCP global CO<sub>2</sub> emissions and plot:
 ``` r
 emissions <- get_emissions()
 plot_emissions(emissions)
+#> Warning in max(structure(logical(0), dim = 0:1, dimnames = list(NULL, "co2")), :
+#> no non-missing arguments to max; returning -Inf
 ```
 
 <img src="man/figures/README-emissions-1.png" width="60%" />
@@ -223,6 +225,8 @@ climate_grid()
 -   Carbon Dioxide emissions: [Global Carbon
     Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our
     World In Data](https://github.com/owid/co2-data)
+-   Thank you to Dirk Eddelbuettel for providing the .isConnected
+    function from his tint package to test for internet connectivity.
 
 ## Notes and resources
 

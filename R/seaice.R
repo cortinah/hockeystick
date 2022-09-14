@@ -62,6 +62,9 @@ get_seaice <- function(pole='N', month='07', measure='extent',
     if (file.exists(file.path(hs_path,'seaice.rds'))) return(invisible(readRDS((file.path(hs_path,'seaice.rds')))))
     }
 
+  connected <- .isConnected()
+  if (!connected) stop("Retrieving remote data requires internet connectivity.")
+
   if (pole=='N') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/'
   if (pole=='S') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/south/monthly/data/'
 

@@ -58,6 +58,9 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
     if (file.exists(file.path(hs_path,'icecurves.rds'))) return(invisible(readRDS((file.path(hs_path,'icecurves.rds')))))
     }
 
+  connected <- .isConnected()
+  if (!connected) stop("Retrieving remote data requires internet connectivity.")
+
   if (pole=='N') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/'
   if (pole=='S') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/south/monthly/data/'
 

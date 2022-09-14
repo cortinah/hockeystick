@@ -45,3 +45,7 @@
 # hockeystick 0.6.2
 
 * Update documentation to conform with R version 4.2
+
+# hockeystick 0.6.3
+
+* Add connectivity checks to conform with CRAN requirements

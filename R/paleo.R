@@ -53,6 +53,9 @@ get_paleo <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"
     if (file.exists(file.path(hs_path,'paleo.rds'))) return(invisible(readRDS((file.path(hs_path,'paleo.rds')))))
   }
 
+connected <- .isConnected()
+if (!connected) stop("Retrieving remote data requires internet connectivity.")
+
 file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'
 dl <- tempfile()
 download.file(file_url, dl)

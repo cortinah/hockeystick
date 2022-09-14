@@ -45,6 +45,9 @@ if (use_cache & !write_cache) {
   if (file.exists(file.path(hs_path,'emissions.rds'))) return(invisible(readRDS((file.path(hs_path,'emissions.rds')))))
   }
 
+connected <- .isConnected()
+if (!connected) stop("Retrieving remote data requires internet connectivity.")
+
 file_url <- 'https://github.com/owid/co2-data/raw/master/owid-co2-data.csv'
 dl <- tempfile()
 download.file(file_url, dl)
@@ -126,7 +129,7 @@ dtmin <- pull(slice(dataset, which.min(year)), year)
 vl <- pull(slice(dataset, which.max(year)), field)
 vl <- round(vl, 1)
 
-plot <- plot + annotate("text",x = dtmin+(dtmax-dtmin)/10, y=vl*0.9, label=paste(dtmax, vl,sep=": "), color='red')
+plot <- plot + annotate("text", x = dtmin+(dtmax-dtmin)/10, y=vl*0.9, label=paste(dtmax, vl,sep=": "), color='red')
 }
 
 if (print) print(plot)

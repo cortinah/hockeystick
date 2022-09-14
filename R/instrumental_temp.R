@@ -54,6 +54,9 @@ if (use_cache) {
   if (file.exists(file.path(hs_path,'gisstemp.rds'))) return(invisible(readRDS((file.path(hs_path,'gisstemp.rds')))))
   }
 
+connected <- .isConnected()
+if (!connected) stop("Retrieving remote data requires internet connectivity.")
+
 file_url <- 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'
 dl <- tempfile()
 download.file(file_url, dl)

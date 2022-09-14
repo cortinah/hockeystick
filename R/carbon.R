@@ -47,6 +47,9 @@ if (use_cache & !write_cache) {
   if (file.exists(file.path(hs_path,'maunaloa.rds'))) return(invisible(readRDS((file.path(hs_path,'maunaloa.rds')))))
   }
 
+connected <- .isConnected()
+if (!connected) stop("Retrieving remote data requires internet connectivity.")
+
 file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
 dl <- tempfile()
 download.file(file_url, dl)
