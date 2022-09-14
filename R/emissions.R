@@ -110,12 +110,12 @@ invisible(emissions)
 #' @export
 
 plot_emissions <- function(dataset = get_emissions(),
-                  start_year = 1900, region = 'OWID_WRL',
+                  start_year = 1900, region = 'World',
                   field = 'co2', print = TRUE, annot = TRUE,
                   title_expression = expression('Atmospheric '*CO[2]*' Emissions'),
                   yaxis_expression = expression('Gt '*CO[2]*' per year' )) {
 
-  dataset <- filter(dataset, iso_code == region)
+  dataset <- filter(dataset, country == region)
   dataset <- filter(dataset, year >= start_year)
   dataset$co2 <- dataset$co2/1000
 

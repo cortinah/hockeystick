@@ -77,8 +77,6 @@ Retrieve GCP global CO<sub>2</sub> emissions and plot:
 ``` r
 emissions <- get_emissions()
 plot_emissions(emissions)
-#> Warning in max(structure(logical(0), dim = 0:1, dimnames = list(NULL, "co2")), :
-#> no non-missing arguments to max; returning -Inf
 ```
 
 <img src="man/figures/README-emissions-1.png" width="60%" />
