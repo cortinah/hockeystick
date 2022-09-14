@@ -7,7 +7,7 @@
 plot_emissions(
   dataset = get_emissions(),
   start_year = 1900,
-  region = "OWID_WRL",
+  region = "World",
   field = "co2",
   print = TRUE,
   annot = TRUE,
