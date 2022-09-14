@@ -48,6 +48,9 @@ if (use_cache) {
   if (file.exists(file.path(hs_path,'hurricanes.rds'))) return(invisible(readRDS((file.path(hs_path,'hurricanes.rds')))))
   }
 
+connected <- .isConnected()
+if (!connected) stop("Retrieving remote data requires internet connectivity.")
+
 hurricanes <- read_html("https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html")
 hurricanes <- html_node(hurricanes, xpath='//*[(@id = "tdcontent")]//table')
 hurricanes <- html_table(hurricanes)
