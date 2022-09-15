@@ -144,7 +144,7 @@ Data Archive: https://nsidc.org/data/explore-data
 - Common Era reconstructed temperature data: [PAGES2k Consortium and NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)). 
 - Hurricanes: National Oceanic and Atmospheric Administration HURDAT Atlantic Hurricane Database [Re-analysis Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html), particularly Dr. Chris Landsea.
 - Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
-- Thank you to Dirk Eddelbuettel for providing the .isConnected function from his tint package to test for internet connectivity.
+- Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://cran.r-project.org/web/packages/tint/index.html) package to test for internet connectivity.
 
 ## Notes and resources
 - All data is compiled to the best of my ability from reliable and peer-reviewed sources. Please open an issue if you are aware of enhanced or additional data that may be added to the package. Building `hockeystick` is driven by my interest in tracking climate data and making it easily available to the community.

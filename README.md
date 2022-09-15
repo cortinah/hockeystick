@@ -224,7 +224,9 @@ climate_grid()
     Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our
     World In Data](https://github.com/owid/co2-data)
 -   Thank you to Dirk Eddelbuettel for providing the .isConnected
-    function from his tint package to test for internet connectivity.
+    function from his
+    [tint](https://cran.r-project.org/web/packages/tint/index.html)
+    package to test for internet connectivity.
 
 ## Notes and resources
 
