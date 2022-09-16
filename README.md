@@ -210,7 +210,7 @@ climate_grid()
     [Commonwealth Scientific and Industrial Research Organisation (tide
     gauges)](https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/)
 -   Sea Ice Index: [National Snow & Ice Data
-    Center](https://nsidc.org/). Data Archive:
+    Center](https://nsidc.org/home). Data Archive:
     <https://nsidc.org/data/explore-data>
 -   Vostok carbon dioxide and temperature data:
     <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
@@ -224,8 +224,7 @@ climate_grid()
     Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our
     World In Data](https://github.com/owid/co2-data)
 -   Thank you to Dirk Eddelbuettel for providing the .isConnected
-    function from his
-    [tint](https://cran.r-project.org/web/packages/tint/index.html)
+    function from his [tint](https://CRAN.R-project.org/package=tint)
     package to test for internet connectivity.
 
 ## Notes and resources
@@ -235,8 +234,8 @@ climate_grid()
     enhanced or additional data that may be added to the package.
     Building `hockeystick` is driven by my interest in tracking climate
     data and making it easily available to the community.
--   Here are some online resources I have found very helpful to learn
-    more about climate science:
+-   Here are some online resources I have found very helpful to learn mo
+    re about climate science:
 -   MIT edX Global Warming Science.
     <https://www.edx.org/course/global-warming-science>
 -   SDG Academy: Climate Change: The Science and Global Impact.
