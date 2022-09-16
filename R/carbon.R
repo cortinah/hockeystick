@@ -48,7 +48,7 @@ if (use_cache & !write_cache) {
   }
 
 connected <- .isConnected()
-if (!connected) stop("Retrieving remote data requires internet connectivity.")
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
 dl <- tempfile()
@@ -103,6 +103,8 @@ invisible(maunaloa)
 
 plot_carbon <- function(dataset = get_carbon(),
                         print = TRUE, annot = TRUE) {
+
+if (is.null(dataset)) return(invisible(NULL))
 
 plot <- ggplot(dataset, aes(x=date, y=average)) +geom_line(color='dodgerblue2', alpha=0.7) + theme_bw(base_size=12) +
     scale_x_date(name=NULL, date_breaks='10 years', limits=c(ymd('1954-01-01'), ymd(paste0(max(dataset$year)+1,'-01-01'))), date_labels='%Y', minor_breaks = NULL) +

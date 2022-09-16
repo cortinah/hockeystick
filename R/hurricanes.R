@@ -49,7 +49,7 @@ if (use_cache) {
   }
 
 connected <- .isConnected()
-if (!connected) stop("Retrieving remote data requires internet connectivity.")
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 hurricanes <- read_html("https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html")
 hurricanes <- html_node(hurricanes, xpath='//*[(@id = "tdcontent")]//table')
@@ -104,7 +104,9 @@ invisible(hurricanes)
 #' @export
 plot_hurricanes <- function(dataset = get_hurricanes(), print=TRUE) {
 
-  plot <- ggplot(dataset, aes(x=Year, y=RevisedMajorHurricanes)) +geom_line(alpha=0.75, aes(color='Hurricanes')) + theme_bw(base_size=12) +
+  if (is.null(dataset)) return(invisible(NULL))
+
+    plot <- ggplot(dataset, aes(x=Year, y=RevisedMajorHurricanes)) +geom_line(alpha=0.75, aes(color='Hurricanes')) + theme_bw(base_size=12) +
     scale_x_continuous(name=NULL, breaks=seq(1850, 2025,25)) +
     scale_y_continuous(n.breaks = 8) +geom_smooth(size=1.1, se=F, aes(color='Loess smooth')) +
     scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.15, 0.825),legend.background=element_blank()) +

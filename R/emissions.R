@@ -46,7 +46,7 @@ if (use_cache & !write_cache) {
   }
 
 connected <- .isConnected()
-if (!connected) stop("Retrieving remote data requires internet connectivity.")
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 file_url <- 'https://github.com/owid/co2-data/raw/master/owid-co2-data.csv'
 dl <- tempfile()
@@ -114,6 +114,8 @@ plot_emissions <- function(dataset = get_emissions(),
                   field = 'co2', print = TRUE, annot = TRUE,
                   title_expression = expression('Atmospheric '*CO[2]*' Emissions'),
                   yaxis_expression = expression('Gt '*CO[2]*' per year' )) {
+
+  if (is.null(dataset)) return(invisible(NULL))
 
   dataset <- filter(dataset, country == region)
   dataset <- filter(dataset, year >= start_year)

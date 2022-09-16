@@ -46,6 +46,8 @@ warming_stripes <- function(dataset = get_temp(), stripe_only = FALSE,
                             col_strip = RColorBrewer::brewer.pal(11, "RdBu"),
                             print = TRUE) {
 
+if (is.null(dataset)) return(invisible(NULL))
+
 theme_strip <- function() theme_bw(base_size=12) +
   theme(axis.text.y = element_blank(),
         axis.line.y = element_blank(),
@@ -110,6 +112,9 @@ invisible(plot)
 climate_grid <- function(print = TRUE) {
 
   a <- plot_carbon(print = FALSE, annot=FALSE) +theme_bw(base_size = 9)
+
+  if (is.null(a)) return(invisible(NULL))
+
   b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none") +
     labs(title='Global Land-Ocean Temperature Index', subtitle='Global surface temperature relative to 1951-80 mean',
          y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/')
