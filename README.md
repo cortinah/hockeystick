@@ -17,8 +17,9 @@ The goal of `hockeystick` is to make essential Climate Change datasets
 easily available to non-climate experts. `hockeystick` users can
 download the latest raw data from authoritative sources as well as view
 it via pre-defined ggplot2 charts. Datasets include atmospheric
-CO<sub>2</sub>, instrumental, reconstructed, and paleo ice-core
-temperature records, sea levels, and Arctic/Antarctic sea-ice.
+CO<sub>2</sub>, emissions, instrumental, reconstructed, and paleo
+ice-core temperature records, sea levels, hurricanes, and
+Arctic/Antarctic sea-ice.
 
 The choice of data was originally based on [Professor Stefan
 Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on [The 5
@@ -194,49 +195,49 @@ climate_grid()
 
 ## Acknowledgments
 
--   Carbon Dioxide concentrations: Dr. Pieter Tans, NOAA/GML
-    (<https://gml.noaa.gov/ccgg/trends/>) and Dr. Ralph Keeling,
-    [Scripps Institution of Oceanography](https://scrippsco2.ucsd.edu/).
--   Global temperature anomaly: *GISS Surface Temperature Analysis
-    (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute
-    for Space Studies. <https://data.giss.nasa.gov/gistemp/>
--   Warming Stripes design from Ed Hawkins’ Climate Lab.
-    <https://www.climate-lab-book.ac.uk/2018/warming-stripes/>. In
-    addition grateful to Dr. Dominic Royé for posting his approach to
-    plotting them using ggplot2, which `warming_stripes()` is based on.
-    <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
--   Sea level data: [NOAA Laboratory for Satellite Altimetry
-    (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and
-    [Commonwealth Scientific and Industrial Research Organisation (tide
-    gauges)](https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/)
--   Sea Ice Index: [National Snow & Ice Data
-    Center](https://nsidc.org/home). Data Archive:
-    <https://nsidc.org/data/explore-data>
--   Vostok carbon dioxide and temperature data:
-    <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
--   Common Era reconstructed temperature data: [PAGES2k Consortium and
-    NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)).
--   Hurricanes: National Oceanic and Atmospheric Administration HURDAT
-    Atlantic Hurricane Database [Re-analysis
-    Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html),
-    particularly Dr. Chris Landsea.
--   Carbon Dioxide emissions: [Global Carbon
-    Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our
-    World In Data](https://github.com/owid/co2-data)
--   Thank you to Dirk Eddelbuettel for providing the .isConnected
-    function from his [tint](https://CRAN.R-project.org/package=tint)
-    package to test for internet connectivity.
+- Carbon Dioxide concentrations: Dr. Pieter Tans, NOAA/GML
+  (<https://gml.noaa.gov/ccgg/trends/>) and Dr. Ralph Keeling, [Scripps
+  Institution of Oceanography](https://scrippsco2.ucsd.edu/).
+- Global temperature anomaly: *GISS Surface Temperature Analysis
+  (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute for
+  Space Studies. <https://data.giss.nasa.gov/gistemp/>
+- Warming Stripes design from Ed Hawkins’ Climate Lab.
+  <https://www.climate-lab-book.ac.uk/2018/warming-stripes/>. In
+  addition grateful to Dr. Dominic Royé for posting his approach to
+  plotting them using ggplot2, which `warming_stripes()` is based on.
+  <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
+- Sea level data: [NOAA Laboratory for Satellite Altimetry
+  (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and
+  [Commonwealth Scientific and Industrial Research Organisation (tide
+  gauges)](https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/)
+- Sea Ice Index: [National Snow & Ice Data
+  Center](https://nsidc.org/home). Data Archive:
+  <https://nsidc.org/data/explore-data>
+- Vostok carbon dioxide and temperature data:
+  <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
+- Common Era reconstructed temperature data: [PAGES2k Consortium and
+  NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)).
+- Hurricanes: National Oceanic and Atmospheric Administration HURDAT
+  Atlantic Hurricane Database [Re-analysis
+  Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html),
+  particularly Dr. Chris Landsea.
+- Carbon Dioxide emissions: [Global Carbon
+  Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our
+  World In Data](https://github.com/owid/co2-data)
+- Thank you to Dirk Eddelbuettel for providing the .isConnected function
+  from his [tint](https://CRAN.R-project.org/package=tint) package to
+  test for internet connectivity.
 
 ## Notes and resources
 
--   All data is compiled to the best of my ability from reliable and
-    peer-reviewed sources. Please open an issue if you are aware of
-    enhanced or additional data that may be added to the package.
-    Building `hockeystick` is driven by my interest in tracking climate
-    data and making it easily available to the community.
--   Here are some online resources I have found very helpful to learn mo
-    re about climate science:
--   MIT edX Global Warming Science.
-    <https://www.edx.org/course/global-warming-science>
--   SDG Academy: Climate Change: The Science and Global Impact.
-    <https://sdgacademy.org/course/climate-change-the-science-and-global-impact/>
+- All data is compiled to the best of my ability from reliable and
+  peer-reviewed sources. Please open an issue if you are aware of
+  enhanced or additional data that may be added to the package. Building
+  `hockeystick` is driven by my interest in tracking climate data and
+  making it easily available to the community.
+- Here are some online resources I have found very helpful to learn mo
+  re about climate science:
+- MIT edX Global Warming Science.
+  <https://www.edx.org/course/global-warming-science>
+- SDG Academy: Climate Change: The Science and Global Impact.
+  <https://sdgacademy.org/course/climate-change-the-science-and-global-impact/>
