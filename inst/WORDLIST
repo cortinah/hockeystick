@@ -13,6 +13,7 @@ CMD
 CSIRO
 Cowtan
 Delaygue
+Dlugokencky
 ERSST
 ESRL
 ESS
@@ -34,6 +35,7 @@ Hawkins’
 Jouzel
 Kotlyakov
 LOTI
+Lan
 Landsea
 Lenssen
 Lifecycle
@@ -43,6 +45,7 @@ Mauna
 Menne
 NOAA
 NOAA's
+NOAA’s
 NSIDC
 Neukom
 ORCID
@@ -68,6 +71,7 @@ SDG
 Scripps
 TOPEX
 Tellus
+Thoning
 Vostok
 WRL
 Waterman
@@ -98,13 +102,16 @@ isConnected
 kB
 lbl
 loess
+mol
 multidecadal
+nanomol
 nasa
 noaa
 nrg
 nsidc
 palaeoclimate
 paleo
+ppb
 pre
 releveled
 sdgacademy

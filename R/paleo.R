@@ -15,7 +15,7 @@
 #' Data are from: Barnola J; Raynaud D; Lorius C; Barkov N  (2003): Historical Carbon Dioxide Record from the Vostok Ice Core (417,160 - 2,342 years BP) and
 #' Petit J R ; Raynaud D ; Lorius C ; Delaygue G ; Jouzel J ; Barkov N I ; Kotlyakov V M  (2000): Historical Isotopic Temperature Record from the Vostok Ice Core. CDIAC.
 #'
-#' @importFrom readr read_table2
+#' @importFrom readr read_table
 #' @importFrom utils download.file
 #' @importFrom dplyr full_join select
 #' @importFrom tidyr pivot_longer
@@ -59,13 +59,13 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'
 dl <- tempfile()
 download.file(file_url, dl)
-vostok <- readr::read_table2(dl, col_names = FALSE, skip = 21)
+vostok <- readr::read_table(dl, col_names = FALSE, skip = 21)
 colnames(vostok) <- c('depth', 'age_ice', 'age_air', 'co2')
 
 file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/temp/vostok/vostok.1999.temp.dat'
 dl <- tempfile()
 download.file(file_url, dl)
-paleotemp <- readr::read_table2(dl, col_names = FALSE, skip = 60)
+paleotemp <- readr::read_table(dl, col_names = FALSE, skip = 60)
 colnames(paleotemp) <- c('depth', 'age_ice', 'deuterium', 'temp')
 
 suppressMessages( paleo <- dplyr::full_join(vostok, paleotemp) )

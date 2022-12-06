@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![](https://cranlogs.r-pkg.org/badges/hockeystick)](https://cran.r-project.org/package=hockeystick)
 <!-- badges: end -->
 
-The goal of `hockeystick` is to make essential Climate Change datasets easily available to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub>, emissions, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.
+The goal of `hockeystick` is to make essential Climate Change datasets easily available to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.
 
 The choice of data was originally based on [Professor Stefan Rahmstorf's ](http://www.pik-potsdam.de/~stefan/) presentation on [The 5 Most Important Data Sets of Climate Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I came across this on a post on the [Open Mind blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/). I wrote my own [post](https://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/) on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over  The name of the package stems from the well known [hockeystick](https://en.wikipedia.org/wiki/Hockey_stick_graph) temperature chart. 
 
@@ -30,7 +30,9 @@ The choice of data was originally based on [Professor Stefan Rahmstorf's ](http:
 
 **NEW in version 0.5.0:** North Atlantic hurricane data from NOAA.
 
-**NEW in version 0.6.0:** Global CO~2~ emissions by region and country from GCP (see below).
+**NEW in version 0.6.0:** Global CO~2~ emissions by region and country from GCP.
+
+**NEW in version 0.7.0:** Globally averaged methane (CH~4~) concentration from NOAA (see below).
 
 ## Installation
 To install the latest `hockeystick` release from CRAN type:
@@ -116,6 +118,14 @@ plot_hurricanes(hurricanes)
 plot_hurricane_nrg(hurricanes)
 ```
 
+Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
+
+```{r methane, fig.retina=2, message=FALSE, out.width='60%'}
+library(hockeystick)
+ch4 <- get_methane()
+plot_methane(ch4)
+```
+
 Retrieve Vostok paleo ice core data and plot:
 
 ```{r paleo, out.width='60%', fig.retina=2, message=FALSE}
@@ -144,6 +154,7 @@ Data Archive: https://nsidc.org/data/explore-data
 - Common Era reconstructed temperature data: [PAGES2k Consortium and NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)). 
 - Hurricanes: National Oceanic and Atmospheric Administration HURDAT Atlantic Hurricane Database [Re-analysis Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html), particularly Dr. Chris Landsea.
 - Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
+- Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (https://gml.noaa.gov/ccgg/trends_ch4/).
 - Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
 
 ## Notes and resources
