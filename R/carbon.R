@@ -14,7 +14,7 @@
 #' The returned object includes date, year, month, average, trend, std dev, and uncertainty columns.
 #' Trend is NOAA's published trend.  Please refer to above website for details.
 #'
-#' @importFrom readr read_table2
+#' @importFrom readr read_table
 #' @importFrom lubridate ymd ceiling_date
 #' @importFrom utils download.file
 #'
@@ -53,7 +53,7 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
 dl <- tempfile()
 download.file(file_url, dl)
-maunaloa <- suppressMessages( read_table2(dl, col_names = FALSE, skip = 63) )
+maunaloa <- suppressMessages( read_table(dl, col_names = FALSE, skip = 63) )
 colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'trend', 'ndays','stdev','unc')
 maunaloa$date <- ceiling_date(ymd(paste(maunaloa$year, maunaloa$month, '01',sep='-')), unit='month')-1
 

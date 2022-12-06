@@ -17,9 +17,9 @@ The goal of `hockeystick` is to make essential Climate Change datasets
 easily available to non-climate experts. `hockeystick` users can
 download the latest raw data from authoritative sources as well as view
 it via pre-defined ggplot2 charts. Datasets include atmospheric
-CO<sub>2</sub>, emissions, instrumental, reconstructed, and paleo
-ice-core temperature records, sea levels, hurricanes, and
-Arctic/Antarctic sea-ice.
+CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental,
+reconstructed, and paleo ice-core temperature records, sea levels,
+hurricanes, and Arctic/Antarctic sea-ice.
 
 The choice of data was originally based on [Professor Stefan
 Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on [The 5
@@ -43,7 +43,10 @@ February 2021.
 **NEW in version 0.5.0:** North Atlantic hurricane data from NOAA.
 
 **NEW in version 0.6.0:** Global CO<sub>2</sub> emissions by region and
-country from GCP (see below).
+country from GCP.
+
+**NEW in version 0.7.0:** Globally averaged methane (CH<sub>4</sub>)
+concentration from NOAA (see below).
 
 ## Installation
 
@@ -160,6 +163,16 @@ plot_hurricane_nrg(hurricanes)
 
 <img src="man/figures/README-hurricanes-2.png" width="60%" />
 
+Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
+
+``` r
+library(hockeystick)
+ch4 <- get_methane()
+plot_methane(ch4)
+```
+
+<img src="man/figures/README-methane-1.png" width="60%" />
+
 Retrieve Vostok paleo ice core data and plot:
 
 ``` r
@@ -224,6 +237,8 @@ climate_grid()
 - Carbon Dioxide emissions: [Global Carbon
   Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our
   World In Data](https://github.com/owid/co2-data)
+- Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global
+  Monitoring Laboratory (<https://gml.noaa.gov/ccgg/trends_ch4/>).
 - Thank you to Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
   test for internet connectivity.

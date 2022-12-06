@@ -57,7 +57,7 @@ file_url <- 'https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/neukom2019temp/re
 
 dl <- tempfile()
 download.file(file_url, dl)
-temp2k <- suppressMessages( read_table2(dl, col_names = FALSE, skip = 5,
+temp2k <- suppressMessages( read_table(dl, col_names = FALSE, skip = 5,
                                          col_types = 'innnnnnnn') )
 
 colnames(temp2k) <- c('year', 'instrumental', 'ensemble_median', 'ensemble_2.5', 'ensemble_97.5', 'filtered_instrumental',
