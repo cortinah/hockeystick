@@ -128,3 +128,53 @@ climate_grid <- function(print = TRUE) {
 if (print) suppressMessages( print(plot) )
 invisible(plot)
 }
+
+
+
+#' Download and plot essential climate data
+#'
+#' Plots a treemap of cumulative co2 emissions by country since 1900.
+#'
+#'
+#' @name emissions_map
+#' @param print (boolean) Display emissions treemap, defaults to TRUE. Use FALSE to not display chart.
+#' @param since (numeric) Start year for cumulative emissions, defaults to 1900 if omitted
+#' @param number (numeric) Number of countries to display in treemap, defaults to all if omitted
+#' @param title (string) Manually specify chart title
+#'
+#' @return Invisibly returns a ggplot2 object with emissions treemap
+#'
+#' @details `emissions_map` invisibly returns a ggplot2 object with cumulative emissions treemap by country since 1900 from `get_emissions`.
+#' By default the chart is also displayed. Users may further modify the output ggplot2 chart.
+#'
+#' @import ggplot2
+#' @import dplyr
+#' @import treemapify
+#'
+#' @examples
+#' \donttest{
+#' # Draw treemap
+#'
+#' co2map <- emissions_map() }
+#'
+#' @author Hernando Cortina, \email{hch@@alum.mit.edu}
+#'
+#' @export
+
+emissions_map <- function(print = TRUE, since=1900, number="all",
+                          title = expression('1900-2021 Cumulative '*CO[2]*" Emissions by Country")) {
+
+treemap <- get_emissions() |> filter(year >= since) |> group_by(country) |>
+  summarize(cumco2=sum(co2, na.rm = T)) |> arrange(-cumco2) |>
+  filter(!grepl("World|Europe|Asia|Africa|America|OECD|transport|Oceania|Middle|countries", country))
+
+if(number!="all") treemap <- slice_head(treemap, n=number)
+
+plot <- ggplot(treemap, aes(area = cumco2, fill = cumco2, label = country)) + theme_minimal(base_size = 14) +
+        geom_treemap() + geom_treemap_text(color=c("white", "black", rep("white", nrow(treemap)-2))) + scale_fill_viridis_c(option = "H") +
+        theme(legend.position = "none") +
+        labs(title = title, caption="Source: Global Carbon Project and Our World In Data")
+
+if (print) suppressMessages( print(plot) )
+invisible(plot)
+}
