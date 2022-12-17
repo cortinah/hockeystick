@@ -119,16 +119,16 @@ file names in cache</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># list files in cache</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "C:\\Users\\hch\\AppData\\Local/R/cache/R/hockeystick/emissions.rds"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List info for single files</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_details</span><span class="op">(</span>files <span class="op">=</span> <span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;hockeystick cached files&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   directory: C:\Users\hch\AppData\Local/R/cache/R/hockeystick</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/emissions.rds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   size: 3291.7 kB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date: 2022-12-17 12:01:29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   file: NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   size: NA kB</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date: NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_details</span><span class="op">(</span>files <span class="op">=</span> <span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;hockeystick cached files&gt;</span>
@@ -144,13 +144,11 @@ file names in cache</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;hockeystick cached files&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   directory: C:\Users\hch\AppData\Local/R/cache/R/hockeystick</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   file: C:\Users\hch\AppData\Local/R/cache/R/hockeystick/emissions.rds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   size: 3291.7 kB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date: 2022-12-17 12:01:29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Delete cached files by name</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_delete</span><span class="op">(</span>files <span class="op">=</span> <span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> These files don't exist or can't be found: </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>      NAFALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Update all hockeystick data and place in cache</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_update_all</span><span class="op">(</span><span class="op">)</span></span></span>

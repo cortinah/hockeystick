@@ -52,4 +52,4 @@
 
 # hockeystick 0.7.0
 
-^ Added methane data and cumulative co2 emissions treemap visualization 
+* Added methane data and cumulative co2 emissions treemap visualization 
