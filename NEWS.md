@@ -49,3 +49,7 @@
 # hockeystick 0.6.3
 
 * Add connectivity checks to conform with CRAN requirements
+
+# hockeystick 0.7.0
+
+^ Added methane data and cumulative co2 emissions treemap visualization 
