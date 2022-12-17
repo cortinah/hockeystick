@@ -40,17 +40,20 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**NEW in version 0.5.0:** North Atlantic hurricane data from NOAA.
+New in version 0.5.0: North Atlantic hurricane data from NOAA.
 
-**NEW in version 0.6.0:** Global CO<sub>2</sub> emissions by region and
+New in version 0.6.0: Global CO<sub>2</sub> emissions by region and
 country from GCP.
 
-**NEW in version 0.7.0:** Globally averaged methane (CH<sub>4</sub>)
+**New in version 0.7.0:** Globally averaged methane (CH<sub>4</sub>)
 concentration from NOAA (see below).
 
-## Installation
+**New in version 0.7.0:** Cumulative emissions by country visualization
+(see below).
 
-To install the latest `hockeystick` release from CRAN type:
+version 0.7.0:\*\* Globally averaged methane (CH<sub>4</sub>)
+concentration from NOAA (see below). \## Installation To install the
+latest `hockeystick` release from CRAN type:
 
 ``` r
 install.packages("hockeystick")
@@ -84,6 +87,14 @@ plot_emissions(emissions)
 ```
 
 <img src="man/figures/README-emissions-1.png" width="60%" />
+
+Visualize cumulative emissions by country:
+
+``` r
+emissions_map()
+```
+
+<img src="man/figures/README-emissionsmap-1.png" width="60%" />
 
 Retrieve NASA/GISS global surface temperature anomaly data and plot:
 

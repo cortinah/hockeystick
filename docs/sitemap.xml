@@ -28,6 +28,9 @@
     <loc>/reference/climate_grid.html</loc>
   </url>
   <url>
+    <loc>/reference/emissions_map.html</loc>
+  </url>
+  <url>
     <loc>/reference/file_info_.html</loc>
   </url>
   <url>
@@ -44,6 +47,9 @@
   </url>
   <url>
     <loc>/reference/get_icecurves.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_methane.html</loc>
   </url>
   <url>
     <loc>/reference/get_paleo.html</loc>
@@ -86,6 +92,9 @@
   </url>
   <url>
     <loc>/reference/plot_icecurves.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot_methane.html</loc>
   </url>
   <url>
     <loc>/reference/plot_paleo.html</loc>

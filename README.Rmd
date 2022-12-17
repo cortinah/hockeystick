@@ -28,12 +28,15 @@ The choice of data was originally based on [Professor Stefan Rahmstorf's ](http:
 
 `hockeystick` was highlighted on the RStudio [RViews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/) blog by Joseph Rickert as one of the "Top 40" new packages on CRAN in February 2021.
 
-**NEW in version 0.5.0:** North Atlantic hurricane data from NOAA.
+New in version 0.5.0: North Atlantic hurricane data from NOAA.
 
-**NEW in version 0.6.0:** Global CO~2~ emissions by region and country from GCP.
+New in version 0.6.0: Global CO~2~ emissions by region and country from GCP.
 
-**NEW in version 0.7.0:** Globally averaged methane (CH~4~) concentration from NOAA (see below).
+**New in version 0.7.0:** Globally averaged methane (CH~4~) concentration from NOAA (see below).
 
+**New in version 0.7.0:** Cumulative emissions by country visualization (see below).
+
+version 0.7.0:** Globally averaged methane (CH~4~) concentration from NOAA (see below).
 ## Installation
 To install the latest `hockeystick` release from CRAN type:
 
@@ -63,6 +66,11 @@ Retrieve GCP global CO~2~ emissions and plot:
 ```{r emissions, out.width='60%', fig.retina=2, message=FALSE}
 emissions <- get_emissions()
 plot_emissions(emissions)
+```
+
+Visualize cumulative emissions by country:
+```{r emissionsmap, out.width='60%', fig.retina=2}
+emissions_map()
 ```
 
 Retrieve NASA/GISS global surface temperature anomaly data and plot:
