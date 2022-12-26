@@ -6,15 +6,16 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 ![R-CMD-check](https://github.com/cortinah/hockeystick/workflows/R-CMD-check/badge.svg)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-project.org/package=hockeystick)
 [![](https://cranlogs.r-pkg.org/badges/hockeystick)](https://cran.r-project.org/package=hockeystick)
+
 <!-- badges: end -->
 
-The goal of `hockeystick` is to make essential Climate Change datasets
-easily available to non-climate experts. `hockeystick` users can
+The goal of `hockeystick` is to make essential Global Heating datasets
+easily available in R to non-climate experts. `hockeystick` users can
 download the latest raw data from authoritative sources as well as view
 it via pre-defined ggplot2 charts. Datasets include atmospheric
 CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental,
@@ -66,7 +67,7 @@ You may alternatively install the development version from
 remotes::install_github("cortinah/hockeystick")
 ```
 
-## Downloading and viewing climate change data
+## Downloading and viewing global heating data
 
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
 data and plot:
