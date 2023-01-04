@@ -19,7 +19,7 @@ Retrieves Global Carbon Project (GCP) annual global carbon dioxide emissions sin
 \url{https://github.com/owid/co2-data}
 }
 \details{
-\code{get_emissions} invisibly returns a tibble with GCP's annual carbon dioxide emissions in aggregate and for every nation.
+\code{get_emissions} invisibly returns a tibble with GCP's annual carbon dioxide emissions from fossil fuels in aggregate and for every nation.
 The returned object includes ISO code, country, year, co2 emissions, growth rates, per capita, and decompositions by industry and gas type.
 Please refer to above website for details.
 }
