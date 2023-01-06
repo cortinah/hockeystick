@@ -164,6 +164,7 @@ invisible(plot)
 #'
 #' @import ggplot2
 #' @importFrom dplyr pull slice
+#' @importFrom stats na.omit
 #'
 #' @examples
 #' \donttest{
@@ -177,7 +178,7 @@ invisible(plot)
 #' plot_emissions_with_land()
 #'
 #' # You can also select a region by name and starting year
-#' plot_emission_with_land(region='United States', start_year=1950)
+#' plot_emissions_with_land(region='United States', start_year=1950)
 #' p <- plot_emissions_with_land(emissions, print = FALSE)
 #'
 #' p + ggplot2::labs(title='Anthropogenic Carbon Emissions')}
