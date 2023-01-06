@@ -164,7 +164,7 @@ invisible(plot)
 #' @export
 
 emissions_map <- function(print = TRUE, since=1900, number="all",
-                          title = expression('1900-2021 Cumulative '*CO[2]*" Emissions by Country")) {
+                          title = substitute(paste(since,'-2021 Cumulative '*CO[2]*" Emissions by Country"), list(since=since))) {
 
 treemap <- get_emissions() |> filter(year >= since) |> group_by(country) |>
   summarize(cumco2=sum(co2, na.rm = T)) |> arrange(-cumco2) |>
