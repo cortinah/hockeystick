@@ -89,6 +89,12 @@ plot_emissions(emissions)
 
 <img src="man/figures/README-emissions-1.png" width="60%" />
 
+``` r
+plot_emissions_with_land(emissions)
+```
+
+<img src="man/figures/README-emissions-2.png" width="60%" />
+
 Visualize cumulative emissions by country:
 
 ``` r

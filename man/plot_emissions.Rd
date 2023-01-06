@@ -11,7 +11,7 @@ plot_emissions(
   field = "co2",
   print = TRUE,
   annot = TRUE,
-  title_expression = expression("Fossil " * CO[2] * " Emissions"),
+  title_expression = expression("Fossil Combustion " * CO[2] * " Emissions"),
   yaxis_expression = expression("Gt " * CO[2] * " per year")
 )
 }
