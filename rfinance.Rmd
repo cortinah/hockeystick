@@ -1,0 +1,147 @@
+---
+title: "2023 R/Finance Call for Papers"
+author: "Hernando Cortina"
+date: "hch@alum.mit.edu"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(hs_write_cache = TRUE)
+```
+
+## Lightning Talk Proposal
+# Hockeystick: Visualizing Global Warming with R
+
+Previously relegated to a niche corner of the investment landscape, the impact of global warming on financial markets has become an active topic of research and policy at central banks and financial regulators. For instance, the European Central Bank^[Climate change and monetary policy in the euro area,” 2021. ECB Strategy Review.], the US Federal Reserve^[https://www.federalreserve.gov/newsevents/pressreleases/other20220929a.htm], and the Financial Stability Board^[Financial Stability Board, “Supervisory and Regulatory Approaches to Climate-related Risks,” April 2022. Interim report] all have active regulatory studies and pilot programs to measure and manage climate risks.  In addition, the US Securities and Exchange Comission (SEC) has proposed requiring listed corporations to include enhanced climate disclosures in their statements^[https://www.sec.gov/news/press-release/2022-46].
+
+Accordingly, as the risk and returns from global warming enter the mainstream of finance, there is an urgent need for all practioners to gain a basic understanding of the data and the mechanics of global warming. There are a multitude of publicly-available data sources regarding global warming from a large variety of academic and scientific organizations around the world, for example NASA, the European ECMWF, UK Met Office, the Japan Meteorological Service, to name but a few. For financial practitioners without climate training navigating these complex sources can be daunting and potentially error-prone. 
+
+The goal of the `hockeystick`^[hockeystick: Download and Visualize Essential Climate Change Data. https://cran.r-project.org/package=hockeystick; https://cortinah.github.io/hockeystick/] R package is to make essential global warming datasets easily available in R to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO~2~ and CH~4~, carbon emissions, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, hurricanes, and Arctic/Antarctic sea-ice. All data is compiled from authoritative, reliable, peer-reviewed sources and traceable to their original sources and documented.  `hockeystick` does not store any data itself, but serves as an api wrapper to always obtain the most up-to-date data. Uses may use the dataframes returned by the package functions or use the pre-defined charts for their own purposes.
+
+The package is designed to facilitate extensibility and permit users to analyze and reuse the data as they see fit. During the lightning talk I propose to demonstrate the use of the package and its visualization capabilities. Some visual examples follow below.
+
+Overall, as more entity-level climate data become available, I hope that the talk and package will allow conference attendees to place such data in the greater planetary-level climate context, and easily available in R to complement their standard workflows.
+
+## Package demo
+
+Retrieve NOAA/ESRL Mauna Loa CO~2~ Observatory concentration data and plot:
+
+```{r carbon, fig.retina=2, message=FALSE, out.width='75%'}
+library(hockeystick)
+ml_co2 <- get_carbon()
+plot_carbon(ml_co2)
+```
+
+Retrieve GCP global CO~2~ emissions and plot:
+
+```{r emissions, out.width='75%', fig.retina=2, message=FALSE}
+emissions <- get_emissions()
+plot_emissions(emissions)
+```
+
+\newpage
+  
+```{r emissions2, out.width='75%', fig.retina=2, message=FALSE}
+plot_emissions_with_land(emissions)
+```
+
+
+Visualize cumulative emissions by country:
+```{r emissionsmap, out.width='75%', fig.retina=2}
+emissions_map()
+```
+
+\newpage
+
+Retrieve NASA/GISS global surface temperature anomaly data and plot:
+
+```{r temp, out.width='75%', fig.retina=2}
+anomaly <- get_temp()
+plot_temp(anomaly)
+```
+
+Visualize warming using Ed Hawkins styled "warming stripes":
+```{r stripes, out.width='75%', fig.retina=2}
+warming_stripes()
+```
+
+\newpage 
+
+Retrieve tide gauge and satellite sea level data and plot:
+
+```{r sl, out.width='75%', fig.retina=2}
+gmsl <- get_sealevel()
+plot_sealevel(gmsl)
+```
+
+Retrieve July annual Arctic Sea Ice Index and plot:
+
+```{r si, fig.retina=2, message=FALSE, out.width='75%', warning=FALSE}
+seaice <- get_seaice()
+plot_seaice(seaice)
+```
+
+`get_seaice()` arguments can be modified to download Antarctic sea ice, and allow any month.
+
+\newpage
+
+You can also visualize sea ice by month and year:
+
+```{r icecurves, fig.retina=2, message=FALSE, out.width='75%'}
+arcticice <- get_icecurves()
+plot_icecurves(arcticice)
+```
+
+Retrieve Common Era temperature reconstruction and plot it with instrumental record:
+
+```{r 2ktemp, out.width='75%', fig.retina=2}
+anomaly2k <- get_temp2k()
+plot_temp2k(anomaly2k)
+```
+
+\newpage
+
+Retrieve NOAA HURDAT2 hurricane data and plot:
+
+```{r hurricanes, out.width='75%', fig.retina=2, message=FALSE}
+hurricanes <- get_hurricanes()
+plot_hurricanes(hurricanes)
+```
+
+```{r hurricanes2, out.width='75%', fig.retina=2, message=FALSE}
+plot_hurricane_nrg(hurricanes)
+```
+
+\newpage
+
+Retrieve NOAA/ESRL CH~4~ Globally averaged mean data and plot:
+
+```{r methane, fig.retina=2, message=FALSE, out.width='75%'}
+ch4 <- get_methane()
+plot_methane(ch4)
+```
+
+Retrieve Vostok paleo ice core data and plot:
+
+```{r paleo, out.width='75%', fig.retina=2, message=FALSE}
+vostok <- get_paleo()
+plot_paleo(vostok)
+```
+
+
+## Acknowledgments
+- Carbon Dioxide concentrations: Dr. Pieter Tans, NOAA/GML (https://gml.noaa.gov/ccgg/trends/) and Dr. Ralph Keeling, [Scripps Institution of Oceanography](https://scrippsco2.ucsd.edu/).
+- Global temperature anomaly: *GISS Surface Temperature Analysis (GISTEMP), version 4.* GISTEMP Team, 2020: NASA Goddard Institute for Space Studies. https://data.giss.nasa.gov/gistemp/
+- Warming Stripes design from Ed Hawkins' Climate Lab. https://www.climate-lab-book.ac.uk/2018/warming-stripes/. In addition grateful to Dr. Dominic Royé for posting his approach to plotting them using ggplot2, which `warming_stripes()` is based on. https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/
+- Sea level data: [NOAA Laboratory for Satellite Altimetry (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and [Commonwealth Scientific and Industrial Research Organisation (tide gauges)](https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/)
+- Sea Ice Index: [National Snow & Ice Data Center](https://nsidc.org/home).
+Data Archive: https://nsidc.org/data/explore-data
+- Vostok carbon dioxide and temperature data: https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html
+- Common Era reconstructed temperature data: [PAGES2k Consortium and NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)). 
+- Hurricanes: National Oceanic and Atmospheric Administration HURDAT Atlantic Hurricane Database [Re-analysis Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html), particularly Dr. Chris Landsea.
+- Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
+- Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (https://gml.noaa.gov/ccgg/trends_ch4/).
+- Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
+
+
