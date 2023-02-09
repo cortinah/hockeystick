@@ -16,6 +16,7 @@
 #' By default the chart is also displayed. User may modify color palette or remove axes and legend. Users may further modify the output ggplot2 chart.
 #'
 #' @import ggplot2
+#' @importFrom RColorBrewer brewer.pal
 #'
 #' @examples
 #' \donttest{
