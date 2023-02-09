@@ -66,6 +66,7 @@ Retrieve GCP global CO~2~ emissions and plot:
 ```{r emissions, out.width='60%', fig.retina=2, message=FALSE}
 emissions <- get_emissions()
 plot_emissions(emissions)
+plot_emissions_with_land(emissions)
 ```
 
 Visualize cumulative emissions by country:
