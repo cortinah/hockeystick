@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
 <span>  field <span class="op">=</span> <span class="st">"co2"</span>,</span>
 <span>  print <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  annot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  title_expression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="st">"Atmospheric "</span> <span class="op">*</span> <span class="va">CO</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="st">" Emissions"</span><span class="op">)</span>,</span>
+<span>  title_expression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="st">"Fossil Combustion "</span> <span class="op">*</span> <span class="va">CO</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="st">" Emissions"</span><span class="op">)</span>,</span>
 <span>  yaxis_expression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="st">"Gt "</span> <span class="op">*</span> <span class="va">CO</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="st">" per year"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -127,9 +127,8 @@ By default the chart is also displayed. Users may further modify the output ggpl
 <span class="r-in"><span><span class="fu">plot_emissions</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_emissions-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># You can also select a region by ISO code and start year</span></span></span>
-<span class="r-in"><span><span class="fu">plot_emissions</span><span class="op">(</span>region<span class="op">=</span><span class="st">'USA'</span>, start_year<span class="op">=</span><span class="fl">1950</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no non-missing arguments to max; returning -Inf</span>
+<span class="r-in"><span><span class="co"># You can also select a region by name and start year</span></span></span>
+<span class="r-in"><span><span class="fu">plot_emissions</span><span class="op">(</span>region<span class="op">=</span><span class="st">'United States'</span>, start_year<span class="op">=</span><span class="fl">1950</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_emissions-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_emissions</span><span class="op">(</span><span class="va">emissions</span>, print <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
