@@ -1,7 +1,7 @@
 citHeader("To cite hockeystick in publications use:")
 
-citEntry(
-  entry    = "Manual",
+bibentry(
+  bibtype    = "Manual",
   title    = "hockeystick: Download and Visualize Essential Climate Change Data",
   author   = "Hernando Cortina",
   year     = "2020",
