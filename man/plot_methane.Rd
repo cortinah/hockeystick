@@ -35,7 +35,7 @@ plot_methane(ch4)
 plot_methane()
 
 p <- plot_methane(ch4, print = FALSE)
-p + ggplot2::labs(title='Trend in Atmospheric Methane') }
+# Modify plot such as: p + ggplot2::labs(title='Trend in Atmospheric Methane') }
 
 }
 \author{

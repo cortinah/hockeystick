@@ -62,7 +62,7 @@ get_seaice <- function(pole='N', month='07', measure='extent',
     if (file.exists(file.path(hs_path,'seaice.rds'))) return(invisible(readRDS((file.path(hs_path,'seaice.rds')))))
     }
 
-  connected <- .isConnected()
+  connected <- .isConnected('ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/')
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   if (pole=='N') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/'
@@ -116,7 +116,7 @@ get_seaice <- function(pole='N', month='07', measure='extent',
 #' plot_seaice()
 #'
 #' p <- plot_seaice(seaice, print = FALSE)
-#' p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
+#' # Modify plot such as: p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

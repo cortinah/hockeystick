@@ -33,7 +33,7 @@ plot_sealevel(gmsl)
 plot_sealevel()
 
 p <- plot_sealevel(gmsl, print = FALSE)
-p + ggplot2::labs(title='Rising Waters') }
+# Modify plot such as: p + ggplot2::labs(title='Rising Waters') }
 
 }
 \author{

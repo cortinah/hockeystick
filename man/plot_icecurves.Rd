@@ -36,7 +36,7 @@ plot_icecurves(icecurves)
 plot_icecurves()
 
 p <- plot_icecurves(icecurves, print = FALSE)
-p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
+# Modify plot such as: p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
 
 }
 \author{

@@ -35,7 +35,7 @@ plot_hurricane_nrg(hurricanes)
 plot_hurricane_nrg()
 
 p <- plot_hurricane_nrg(hurricanes, print = FALSE)
-p + ggplot2::labs(title='Accumulated Cyclone Energy') }
+# Modify plot such as: p + ggplot2::labs(title='Accumulated Cyclone Energy') }
 
 }
 \author{

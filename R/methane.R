@@ -48,10 +48,10 @@ if (use_cache & !write_cache) {
   if (file.exists(file.path(hs_path,'methane.rds'))) return(invisible(readRDS((file.path(hs_path,'methane.rds')))))
   }
 
-connected <- .isConnected()
+file_url <- 'https://gml.noaa.gov/webdata/ccgg/trends/ch4/ch4_mm_gl.txt'
+connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-file_url <- 'https://gml.noaa.gov/webdata/ccgg/trends/ch4/ch4_mm_gl.txt'
 dl <- tempfile()
 download.file(file_url, dl)
 ch4 <- suppressMessages( read_table(dl, col_names = FALSE, skip = 65) )
@@ -96,7 +96,7 @@ invisible(ch4)
 #' plot_methane()
 #'
 #' p <- plot_methane(ch4, print = FALSE)
-#' p + ggplot2::labs(title='Trend in Atmospheric Methane') }
+#' # Modify plot such as: p + ggplot2::labs(title='Trend in Atmospheric Methane') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'
@@ -119,7 +119,7 @@ if (annot) {
 dt <- pull(slice(dataset, which.max(date)), date)
 vl <- pull(slice(dataset, which.max(date)), average)
 
-plot <- plot + annotate("text",x=as.Date('1989-01-01'), y=1970, label=paste(dt, vl,sep=": "), color='red')
+plot <- plot + annotate("text", x=as.Date('1989-01-01'), y=1970, label=paste(dt, vl,sep=": "), color='red')
 }
 
 if (print) print(plot)

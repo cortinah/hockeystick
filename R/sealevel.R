@@ -58,10 +58,10 @@ get_sealevel <- function(use_cache = TRUE, write_cache = getOption("hs_write_cac
     if (file.exists(file.path(hs_path,'sealevel.rds'))) return(invisible(readRDS((file.path(hs_path,'sealevel.rds')))))
   }
 
-connected <- .isConnected()
+file_url <- 'https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/slr/slr_sla_gbl_free_txj1j2_90.csv'
+connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-file_url <- 'https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/slr/slr_sla_gbl_free_txj1j2_90.csv'
 dl <- tempfile()
 download.file(file_url, dl)
 
@@ -125,7 +125,7 @@ invisible(gmsl) }
 #' plot_sealevel()
 #'
 #' p <- plot_sealevel(gmsl, print = FALSE)
-#' p + ggplot2::labs(title='Rising Waters') }
+#' # Modify plot such as: p + ggplot2::labs(title='Rising Waters') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

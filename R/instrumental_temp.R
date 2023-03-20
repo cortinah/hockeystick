@@ -54,10 +54,10 @@ if (use_cache) {
   if (file.exists(file.path(hs_path,'gisstemp.rds'))) return(invisible(readRDS((file.path(hs_path,'gisstemp.rds')))))
   }
 
-connected <- .isConnected()
+file_url <- 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'
+connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-file_url <- 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'
 dl <- tempfile()
 download.file(file_url, dl)
 gisstemp <- suppressMessages( readr::read_csv(dl, skip=1, na='***') )
@@ -100,7 +100,7 @@ invisible(gisstemp)
 #' plot_temp()
 #'
 #' p <- plot_temp(anomaly, print = FALSE)
-#' p + ggplot2::labs(title='The Signature of Climate Change') }
+#' # Modify plot such as: p + ggplot2::labs(title='The Signature of Climate Change') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

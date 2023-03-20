@@ -33,7 +33,7 @@ plot_hurricanes(hurricanes)
 plot_hurricanes()
 
 p <- plot_hurricanes(hurricanes, print = FALSE)
-p + ggplot2::labs(title='Growing number of North Atlantic named storms') }
+# Modify plot such as: p + ggplot2::labs(title='Growing number of North Atlantic named storms') }
 
 }
 \author{

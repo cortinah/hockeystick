@@ -50,10 +50,9 @@ hs_path <- tools::R_user_dir("hockeystick","cache")
 if (use_cache) {
   if (file.exists(file.path(hs_path,'temp2k.rds'))) return(invisible(readRDS((file.path(hs_path,'temp2k.rds')))))   }
 
-connected <- .isConnected()
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
-
 file_url <- 'https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/neukom2019temp/recons/Full_ensemble_median_and_95pct_range.txt'
+connected <- .isConnected(file_url)
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
 download.file(file_url, dl)
@@ -104,7 +103,7 @@ invisible(temp2k_l)
 #' plot_temp2k()
 #'
 #' p <- plot_temp2k(anomaly, print = FALSE)
-#' p + ggplot2::labs(title='Temperature Increase in the Common Era') }
+#' # Modify plot such as: p + ggplot2::labs(title='Temperature Increase in the Common Era') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'
