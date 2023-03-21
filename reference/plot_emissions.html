@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,12 +132,11 @@ By default the chart is also displayed. Users may further modify the output ggpl
 <span class="r-plt img"><img src="plot_emissions-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_emissions</span><span class="op">(</span><span class="va">emissions</span>, print <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Anthropogenic Carbon Emissions'</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_emissions-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="co"># Modify plot such as: p + ggplot2::labs(title='Anthropogenic Carbon Emissions')</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot a different field from GCP dataset</span></span></span>
 <span class="r-in"><span><span class="fu">plot_emissions</span><span class="op">(</span>field<span class="op">=</span><span class="st">'co2_per_capita'</span>, yaxis_expression<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">CO</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="st">' per capita'</span> <span class="op">)</span><span class="op">)</span><span class="co"># }</span></span></span>
-<span class="r-plt img"><img src="plot_emissions-5.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="plot_emissions-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
