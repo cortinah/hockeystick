@@ -76,6 +76,7 @@ data and plot:
 library(hockeystick)
 ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
+#> Warning: Removed 1 row containing missing values (`geom_line()`).
 ```
 
 <img src="man/figures/README-carbon-1.png" width="60%" />
