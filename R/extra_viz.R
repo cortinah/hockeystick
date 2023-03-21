@@ -168,6 +168,7 @@ climate_grid <- function(print = TRUE) {
 emissions_map <- function(dataset=get_emissions(), print = TRUE, since=1900, number="all",
                           title = substitute(paste(since,'-',to,' Cumulative '*CO[2]*" Emissions by Country"),
                                              list(since=since, to=as.character(dataset[nrow(dataset), 2])))) {
+
   if (is.null(dataset)) return(invisible(NULL))
 
   treemap <- dataset |> filter(year >= since) |> group_by(country) |>
