@@ -35,7 +35,7 @@ plot_seaice(seaice)
 plot_seaice()
 
 p <- plot_seaice(seaice, print = FALSE)
-p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
+# Modify plot such as: p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
 
 }
 \author{

@@ -48,10 +48,11 @@ if (use_cache) {
   if (file.exists(file.path(hs_path,'hurricanes.rds'))) return(invisible(readRDS((file.path(hs_path,'hurricanes.rds')))))
   }
 
-connected <- .isConnected()
+file_url <- "https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html"
+connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-hurricanes <- read_html("https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html")
+hurricanes <- read_html(file_url)
 hurricanes <- html_node(hurricanes, xpath='//*[(@id = "tdcontent")]//table')
 hurricanes <- html_table(hurricanes)
 
@@ -97,7 +98,7 @@ invisible(hurricanes)
 #' plot_hurricanes()
 #'
 #' p <- plot_hurricanes(hurricanes, print = FALSE)
-#' p + ggplot2::labs(title='Growing number of North Atlantic named storms') }
+#' # Modify plot such as: p + ggplot2::labs(title='Growing number of North Atlantic named storms') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'
@@ -148,12 +149,14 @@ plot_hurricanes <- function(dataset = get_hurricanes(), print=TRUE) {
 #' plot_hurricane_nrg()
 #'
 #' p <- plot_hurricane_nrg(hurricanes, print = FALSE)
-#' p + ggplot2::labs(title='Accumulated Cyclone Energy') }
+#' # Modify plot such as: p + ggplot2::labs(title='Accumulated Cyclone Energy') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'
 #' @export
 plot_hurricane_nrg <- function(dataset = get_hurricanes(), print=TRUE) {
+
+  if (is.null(dataset)) return(invisible(NULL))
 
   plot <- ggplot(dataset, aes(x=Year, y=RevisedACE)) +geom_line(alpha=0.75, aes(color='ACE')) + theme_bw(base_size=12) +
     scale_x_continuous(name=NULL, breaks=seq(1850, 2025,25)) +

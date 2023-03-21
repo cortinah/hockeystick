@@ -34,7 +34,7 @@ plot_paleo(vostok)
 plot_paleo()
 
 p <- plot_paleo(vostok, print = FALSE)
-p + patchwork::plot_annotation(title='A Long History of Carbon') }
+# Modify plot such as: p + patchwork::plot_annotation(title='A Long History of Carbon') }
 
 }
 \references{

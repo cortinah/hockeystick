@@ -42,7 +42,7 @@ plot_temp2k(anomaly)
 plot_temp2k()
 
 p <- plot_temp2k(anomaly, print = FALSE)
-p + ggplot2::labs(title='Temperature Increase in the Common Era') }
+# Modify plot such as: p + ggplot2::labs(title='Temperature Increase in the Common Era') }
 
 }
 \author{

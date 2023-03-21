@@ -121,13 +121,13 @@ climate_grid <- function(print = TRUE) {
          y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/')
   c <- suppressMessages( plot_seaice(print = FALSE) +theme_bw(base_size = 9) )
   d <- plot_sealevel(print = FALSE) +
-  labs(title='Sea Level Rise', subtitle='Tide gauges: 1880-2009; Satellite: 1992-present.', y= 'Variation (mm)',
-       caption='Sources: NOAA Laboratory for Satellite Altimetry (sat)\nhttps://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise\nCSIRO (tide gauge)\nhttp://www.cmar.csiro.au/sealevel/sl_data_cmar.html') +theme_bw(base_size = 9) +theme(legend.position = "none")
+    labs(title='Sea Level Rise', subtitle='Tide gauges: 1880-2009; Satellite: 1992-present.', y= 'Variation (mm)',
+         caption='Sources: NOAA Laboratory for Satellite Altimetry (sat)\nhttps://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise\nCSIRO (tide gauge)\nhttp://www.cmar.csiro.au/sealevel/sl_data_cmar.html') +theme_bw(base_size = 9) +theme(legend.position = "none")
 
   plot <- patchwork::wrap_plots(a, b, c, d, ncol = 2) + patchwork::plot_annotation(title='Carbon and Global Warming')
 
-if (print) suppressMessages( print(plot) )
-invisible(plot)
+  if (print) suppressMessages( print(plot) )
+  invisible(plot)
 }
 
 
@@ -169,17 +169,19 @@ emissions_map <- function(dataset=get_emissions(), print = TRUE, since=1900, num
                           title = substitute(paste(since,'-',to,' Cumulative '*CO[2]*" Emissions by Country"),
                                              list(since=since, to=as.character(dataset[nrow(dataset), 2])))) {
 
-treemap <- dataset |> filter(year >= since) |> group_by(country) |>
-  summarize(cumco2=sum(co2, na.rm = T)) |> arrange(-cumco2) |>
-  filter(!grepl("World|Europe|Asia|Africa|America|OECD|transport|Oceania|Middle|countries", country))
+  if (is.null(dataset)) return(invisible(NULL))
 
-if(number!="all") treemap <- slice_head(treemap, n=number)
+  treemap <- dataset |> filter(year >= since) |> group_by(country) |>
+    summarize(cumco2=sum(co2, na.rm = T)) |> arrange(-cumco2) |>
+    filter(!grepl("World|Europe|Asia|Africa|America|OECD|transport|Oceania|Middle|countries", country))
 
-plot <- ggplot(treemap, aes(area = cumco2, fill = cumco2, label = country)) + theme_minimal(base_size = 14) +
-        geom_treemap() + geom_treemap_text(color=c("white", "black", rep("white", nrow(treemap)-2))) + scale_fill_viridis_c(option = "H") +
-        theme(legend.position = "none") +
-        labs(title = title, caption="Source: Global Carbon Project and Our World In Data")
+  if(number!="all") treemap <- slice_head(treemap, n=number)
 
-if (print) suppressMessages( print(plot) )
-invisible(plot)
+  plot <- ggplot(treemap, aes(area = cumco2, fill = cumco2, label = country)) + theme_minimal(base_size = 14) +
+    geom_treemap() + geom_treemap_text(color=c("white", "black", rep("white", nrow(treemap)-2))) + scale_fill_viridis_c(option = "H") +
+    theme(legend.position = "none") +
+    labs(title = title, caption="Source: Global Carbon Project and Our World In Data")
+
+  if (print) suppressMessages( print(plot) )
+  invisible(plot)
 }

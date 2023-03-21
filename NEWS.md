@@ -57,3 +57,7 @@
 # hockeystick 0.7.1
 
 * Plot GCP emissions with land use change
+
+# hockeystick 0.7.2
+
+* url-specific connectivity checks

@@ -45,10 +45,10 @@ if (use_cache & !write_cache) {
   if (file.exists(file.path(hs_path,'emissions.rds'))) return(invisible(readRDS((file.path(hs_path,'emissions.rds')))))
   }
 
-connected <- .isConnected()
+file_url <- 'https://github.com/owid/co2-data/raw/master/owid-co2-data.csv'
+connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-file_url <- 'https://github.com/owid/co2-data/raw/master/owid-co2-data.csv'
 dl <- tempfile()
 download.file(file_url, dl)
 emissions <- suppressMessages( read_csv(dl,  col_types = cols(other_industry_co2 = col_skip(), other_co2_per_capita = col_skip())) )
@@ -100,7 +100,7 @@ invisible(emissions)
 #' plot_emissions(region='United States', start_year=1950)
 #' p <- plot_emissions(emissions, print = FALSE)
 #'
-#' p + ggplot2::labs(title='Anthropogenic Carbon Emissions')
+#' # Modify plot such as: p + ggplot2::labs(title='Anthropogenic Carbon Emissions')
 #'
 #' # Plot a different field from GCP dataset
 #' plot_emissions(field='co2_per_capita', yaxis_expression=expression(CO[2]*' per capita' ))}
@@ -181,7 +181,7 @@ invisible(plot)
 #' plot_emissions_with_land(region='United States', start_year=1950)
 #' p <- plot_emissions_with_land(emissions, print = FALSE)
 #'
-#' p + ggplot2::labs(title='Anthropogenic Carbon Emissions')}
+#' # Modify plot such as: p + ggplot2::labs(title='Anthropogenic Carbon Emissions')}
 #'
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}

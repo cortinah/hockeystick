@@ -47,10 +47,10 @@ if (use_cache & !write_cache) {
   if (file.exists(file.path(hs_path,'maunaloa.rds'))) return(invisible(readRDS((file.path(hs_path,'maunaloa.rds')))))
   }
 
-connected <- .isConnected()
+file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
+connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
 dl <- tempfile()
 download.file(file_url, dl)
 maunaloa <- suppressMessages( read_table(dl, col_names = FALSE, skip = 63) )
@@ -95,7 +95,7 @@ invisible(maunaloa)
 #' plot_carbon()
 #'
 #' p <- plot_carbon(maunaloa, print = FALSE)
-#' p + ggplot2::labs(title='The Keeling Curve') }
+#' # Modify plot such as: p + ggplot2::labs(title='The Keeling Curve') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

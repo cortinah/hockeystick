@@ -10,4 +10,4 @@ By default NO files are written to the local filesystem.
 If user chooses to cache data locally with (write_cache=TRUE option) then location based on the rappdirs package is used, following the ROpenSci Persistent config and data for R packages recommendations.
 
 ## Internet connectivity
-Since version 0.6.3 tests for connectivity before initiating transfers to conform with CRAN rules.
+Version 0.7.2 tests for url-specific connectivity before initiating transfers to conform with CRAN rules.

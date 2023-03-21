@@ -35,7 +35,7 @@ plot_carbon(maunaloa)
 plot_carbon()
 
 p <- plot_carbon(maunaloa, print = FALSE)
-p + ggplot2::labs(title='The Keeling Curve') }
+# Modify plot such as: p + ggplot2::labs(title='The Keeling Curve') }
 
 }
 \author{

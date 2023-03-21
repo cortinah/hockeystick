@@ -53,10 +53,10 @@ get_paleo <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"
     if (file.exists(file.path(hs_path,'paleo.rds'))) return(invisible(readRDS((file.path(hs_path,'paleo.rds')))))
   }
 
-connected <- .isConnected()
+file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'
+connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'
 dl <- tempfile()
 download.file(file_url, dl)
 vostok <- readr::read_table(dl, col_names = FALSE, skip = 21)
@@ -107,7 +107,7 @@ invisible(paleo) }
 #' plot_paleo()
 #'
 #' p <- plot_paleo(vostok, print = FALSE)
-#' p + patchwork::plot_annotation(title='A Long History of Carbon') }
+#' # Modify plot such as: p + patchwork::plot_annotation(title='A Long History of Carbon') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references

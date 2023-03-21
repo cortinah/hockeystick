@@ -33,7 +33,7 @@ plot_temp(anomaly)
 plot_temp()
 
 p <- plot_temp(anomaly, print = FALSE)
-p + ggplot2::labs(title='The Signature of Climate Change') }
+# Modify plot such as: p + ggplot2::labs(title='The Signature of Climate Change') }
 
 }
 \author{

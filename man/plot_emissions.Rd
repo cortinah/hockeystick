@@ -57,7 +57,7 @@ plot_emissions()
 plot_emissions(region='United States', start_year=1950)
 p <- plot_emissions(emissions, print = FALSE)
 
-p + ggplot2::labs(title='Anthropogenic Carbon Emissions')
+# Modify plot such as: p + ggplot2::labs(title='Anthropogenic Carbon Emissions')
 
 # Plot a different field from GCP dataset
 plot_emissions(field='co2_per_capita', yaxis_expression=expression(CO[2]*' per capita' ))}

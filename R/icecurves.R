@@ -58,7 +58,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
     if (file.exists(file.path(hs_path,'icecurves.rds'))) return(invisible(readRDS((file.path(hs_path,'icecurves.rds')))))
     }
 
-  connected <- .isConnected()
+  connected <- .isConnected('ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/')
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   if (pole=='N') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/'
@@ -117,7 +117,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
 #' plot_icecurves()
 #'
 #' p <- plot_icecurves(icecurves, print = FALSE)
-#' p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
+#' # Modify plot such as: p + ggplot2::labs(title='Shrinking Arctic Sea Ice') }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #'

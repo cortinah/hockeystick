@@ -54,7 +54,7 @@ plot_emissions_with_land()
 plot_emissions_with_land(region='United States', start_year=1950)
 p <- plot_emissions_with_land(emissions, print = FALSE)
 
-p + ggplot2::labs(title='Anthropogenic Carbon Emissions')}
+# Modify plot such as: p + ggplot2::labs(title='Anthropogenic Carbon Emissions')}
 
 
 }
