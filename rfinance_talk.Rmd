@@ -6,7 +6,7 @@ institute: "R in Finance Conference"
 date: "Chicago, May 2023"
 output:
   xaringan::moon_reader:
-    self_contained: true
+    self_contained: false
     css:
       - default
       - default-fonts
