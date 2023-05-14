@@ -112,7 +112,7 @@ class: top
 --
 <br />
 
-- 1856: Eunice Foote published a scientific paper demonstrating the absorption of heat by CO2.
+- 1856: Eunice Foote published a scientific paper demonstrating the absorption of heat by CO<sub>2</sub>.
 
 --
 
@@ -120,7 +120,7 @@ class: top
 
 --
 
--  1960: Charles Keeling demonstrated that the level of CO2 in the atmosphere was rising.
+-  1960: Charles Keeling demonstrated that the level of CO<sub>2</sub> in the atmosphere was rising.
 
 --
 
@@ -186,7 +186,7 @@ plot_carbon(co2)
 ]
 ---
 class: left
-### Global Annual CO2 Emissions:
+### Global Annual CO<sub>2</sub> Emissions:
 
 .small-code[
 ```{r emissions, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
@@ -263,7 +263,7 @@ plot_hurricanes(hurricanes)
 ]
 ---
 class: left
-### Methane Traps 80x As Much Heat as CO2 Over 20 Years
+### Methane Traps 80x As Much Heat as CO<sub>2</sub> Over 20 Years
 .small-code[
 ```{r methane, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
 ch4 <- get_methane()
