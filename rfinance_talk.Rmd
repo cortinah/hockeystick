@@ -16,9 +16,24 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+    seal: false
 ---
 
-class: bottom
+class: nopagenum, center
+
+<br><br><br>
+# hockeystick
+# Visualizing Global Heating With R
+
+<br><br> 
+## Hernando Cortina
+## R in Finance Conference
+## Chicago, 19 May 2023
+
+
+---
+
+class: nopagenum
 
 background-image: url(https://github.com/cortinah/hockeystick/blob/main/man/figures/logo.png?raw=true)
 
@@ -29,7 +44,7 @@ options(htmltools.dir.version = FALSE)
 
 ---
 
-# Hockeystick R Package
+# hockeystick R Package
 
 - The impact of global heating on markets is an active research topic
 
@@ -37,7 +52,7 @@ options(htmltools.dir.version = FALSE)
 
 - The EU has specific regulation on Paris-Aligned Benchmarks and funds
 
-- There are multitudes of climate-oriented active and passive funds
+- There are multitudes of climate-oriented active and passive funds  
 
 .footnote[
 Opinions are my own and may not reflect those of my employer.
@@ -45,13 +60,16 @@ Opinions are my own and may not reflect those of my employer.
 
 
 --
+<br />
+
 - **The Challenge**: most finance practitioners are not climate experts
 
 - However, we like to look at data -- but which climate data?
 
-- The volume of climate research and data on the web is vast and complex
+- The volume of climate research and data on the web is vast and complex  
 
 --
+<br />
 
 - `hockeystick` makes essential climate data easily available in R to non-climate experts
 
@@ -92,6 +110,7 @@ class: top
 ## A Brief and Incomplete History of Climate Science
 
 --
+<br />
 
 - 1856: Eunice Foote published a scientific paper demonstrating the absorption of heat by CO2.
 
@@ -253,14 +272,18 @@ plot_methane(ch4)
 ]
 
 ---
-# Hockeystick Summary
+# hockeystick Summary
+
  - Easy to use access to peer-reviewed climate data
- --
- - Access data frames or use predefined plots
- --
+ 
+ - Returns data frames or predefined plots
+ 
  - Plenty of customization options
- --
- - Please send suggestions or PRs
- --
+ 
+ - Please open issues or submit PRs via github
+ 
+ - Collaborators very welcome
+ 
  ## https://github.com/cortinah/hockeystick
+ 
  # Thank you!

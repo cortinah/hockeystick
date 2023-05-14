@@ -3,3 +3,7 @@
 }
 
 *{ margin-bottom: -6px; }
+
+.nopagenum .remark-slide-number {
+  display: none;
+}
