@@ -6,6 +6,7 @@ institute: "R in Finance Conference"
 date: "Chicago, May 2023"
 output:
   xaringan::moon_reader:
+    self_contained: true
     css:
       - default
       - default-fonts
@@ -257,7 +258,7 @@ plot_methane(ch4)
  --
  - Access data frames or use predefined plots
  --
- - Lots of customization options
+ - Plenty of customization options
  --
  - Please send suggestions or PRs
  --
