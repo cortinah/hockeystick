@@ -157,7 +157,7 @@ background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/
 background-size: 600px
 background-positio: 30% 10%
 
-Early Warning on Climate Change
+Early Warning on Climate Change, 1902
 
 ---
 
@@ -168,7 +168,7 @@ background-size: 600px
 background-positio: 30% 10%
 
 
-Prescient Warning from 1912, Based on Popular Mechanics Article
+Prescient Warning from 1912, Based on Popular Mechanics article
 
 ---
 class: middle, center
@@ -176,7 +176,7 @@ class: middle, center
 # Let's Get to the Code!
 ---
 class: left
-### Carbon Concentration in the Atmosphere, Mauna Loa, since 1958
+### Carbon Concentration in the Atmosphere, Mauna Loa, Since 1958
 
 .small-code[
 ```{r carbon, fig.retina=2, message=FALSE, warning=FALSE, out.width='70%', fig.align='center'}
@@ -276,7 +276,7 @@ plot_methane(ch4)
 
  - Easy to use access to peer-reviewed climate data
  
- - Returns data frames or predefined plots
+ - Returns data frames or pre-defined plots
  
  - Plenty of customization options
  
