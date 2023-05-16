@@ -1,5 +1,5 @@
 ## Test environments:
-* local Windows install, R 4.2.2
+* local Windows install, R 4.3.0
 * GitHub Actions: ubuntu-latest (oldrel-1, release, and devel), macOS-latest (release), windows-latest (release) 
 
 ## R CMD check results
@@ -11,3 +11,4 @@ If user chooses to cache data locally with (write_cache=TRUE option) then locati
 
 ## Internet connectivity
 Version 0.7.2 tests for url-specific connectivity before initiating transfers to conform with CRAN rules.
+Version 0.7.3 fixes climate_grid bug
