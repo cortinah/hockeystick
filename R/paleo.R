@@ -119,10 +119,10 @@ plot_paleo <- function(dataset = get_paleo(), print=TRUE) {
 
 if (is.null(dataset)) return(invisible(NULL))
 
-a <- ggplot(dataset[dataset$name=='co2',], aes(x=age_ice, y=value)) +geom_line(size=.8, col='firebrick1') +scale_x_reverse(lim=c(423000,0)) +
+a <- ggplot(dataset[dataset$name=='co2',], aes(x=age_ice, y=value)) +geom_line(linewidth=.8, col='firebrick1') +scale_x_reverse(lim=c(423000,0)) +
             theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank()) +labs(y=expression(CO[2]*' concentration' ))
 
-b <- ggplot(dataset[dataset$name=='temp',], aes(x=age_ice, y=value)) +geom_line(size=.8, col='dodgerblue2') +scale_x_reverse(lim=c(423000, 0), labels = scales::unit_format(unit='', scale = 1e-3)) +
+b <- ggplot(dataset[dataset$name=='temp',], aes(x=age_ice, y=value)) +geom_line(linewidth=.8, col='dodgerblue2') +scale_x_reverse(lim=c(423000, 0), labels = scales::unit_format(unit='', scale = 1e-3)) +
             labs(x='Millennia before present', y='Temperature (C\U00B0)') +theme_bw()
 
 plot <- patchwork::wrap_plots(a, b, ncol=1) + patchwork::plot_annotation(title = expression('Paleoclimate: The Link Between '*CO[2]*' and Temperature'),

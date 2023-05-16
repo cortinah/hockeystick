@@ -114,14 +114,16 @@ climate_grid <- function(print = TRUE) {
 
   a <- plot_carbon(print = FALSE, annot=FALSE) +theme_bw(base_size = 9)
 
-  if (is.null(a)) return(invisible(NULL))
-
-  b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none") +
+    b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none") +
     labs(title='Global Land-Ocean Temperature Index', subtitle='Global surface temperature relative to 1951-80 mean',
          y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/')
   c <- suppressMessages( plot_seaice(print = FALSE) +theme_bw(base_size = 9) )
-  d <- plot_sealevel(print = FALSE) +
-    labs(title='Sea Level Rise', subtitle='Tide gauges: 1880-2009; Satellite: 1992-present.', y= 'Variation (mm)',
+
+  d <- plot_sealevel(print = FALSE)
+
+  if (is.null(a) | is.null(b) | is.null(c) | is.null(d)) return(invisible(NULL))
+
+  d <- d +  labs(title='Sea Level Rise', subtitle='Tide gauges: 1880-2009; Satellite: 1992-present.', y= 'Variation (mm)',
          caption='Sources: NOAA Laboratory for Satellite Altimetry (sat)\nhttps://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise\nCSIRO (tide gauge)\nhttp://www.cmar.csiro.au/sealevel/sl_data_cmar.html') +theme_bw(base_size = 9) +theme(legend.position = "none")
 
   plot <- patchwork::wrap_plots(a, b, c, d, ncol = 2) + patchwork::plot_annotation(title='Carbon and Global Warming')

@@ -61,3 +61,7 @@
 # hockeystick 0.7.2
 
 * url-specific connectivity checks
+
+# hockeystick 0.7.3
+
+* Fix climate grid connectivity checks

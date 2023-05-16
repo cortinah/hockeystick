@@ -121,7 +121,7 @@ plot_emissions <- function(dataset = get_emissions(),
   dataset <- filter(dataset, year >= start_year)
   dataset$co2 <- dataset$co2/1000
 
-plot <- ggplot(dataset, aes(x=year, y=get(field))) +geom_line(size=1, color='firebrick1') + theme_bw(base_size=12) +
+plot <- ggplot(dataset, aes(x=year, y=get(field))) +geom_line(linewidth=1, color='firebrick1') + theme_bw(base_size=12) +
   scale_x_continuous(n.breaks = 10, minor_breaks = NULL) + scale_y_continuous(limits = c(0, max(dataset[, field])), n.breaks = 6)  +
   labs(title =  title_expression, subtitle=dataset$country[1], x=element_blank(),
     y = yaxis_expression, caption='Source: Global Carbon Project and Our World In Data.\nhttps://github.com/owid/co2-data')

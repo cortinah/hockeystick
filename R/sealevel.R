@@ -135,7 +135,7 @@ plot_sealevel <- function(dataset = get_sealevel(), print=TRUE) {
 
 if (is.null(dataset)) return(invisible(NULL))
 
-plot <-  ggplot(dataset, aes(x=date, color=method, y=gmsl)) +geom_line(size=1) + theme_bw(base_size = 12) +
+plot <-  ggplot(dataset, aes(x=date, color=method, y=gmsl)) +geom_line(linewidth=1) + theme_bw(base_size = 12) +
          scale_x_date(name=NULL, breaks='15 years', limits = c(ymd('1878-01-01'), ceiling_date(max(dataset$date), 'years')), date_labels ='%Y') +
          scale_color_manual(values=c('dodgerblue2','firebrick1'), labels=c('Satellite observations','Coastal tide gauge records')) +theme(legend.position = c(0.30,0.84), legend.background=element_blank(), legend.title = element_blank()) +
          scale_y_continuous(n.breaks = 8) +
