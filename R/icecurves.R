@@ -146,7 +146,7 @@ plot_icecurves <- function(dataset = get_icecurves(), region = 'Arctic', print =
          linewidth = NULL) +
     theme(legend.position = c(0.41, 0.91), legend.background = element_blank()) +
     scale_alpha_manual(guide = 'none', labels = c('Previous', as.character(current_year)), values = c(0.4, 1), breaks = c('Previous', '2023')) +
-    guides(linewidth = guide_legend(override.aes=list(colour=c('darkgrey', "dodgerblue"))))
+    guides(linewidth = guide_legend(override.aes=list(color = c('darkgrey', "dodgerblue"))))
 
 
   if (print) suppressMessages( print(plot) )
