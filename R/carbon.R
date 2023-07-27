@@ -108,7 +108,7 @@ if (is.null(dataset)) return(invisible(NULL))
 
 plot <- ggplot(dataset, aes(x=date, y=average)) +geom_line(color='dodgerblue2', alpha=0.7) + theme_bw(base_size=12) +
     scale_x_date(name=NULL, date_breaks='10 years', limits=c(ymd('1954-01-01'), ymd(paste0(max(dataset$year)+1,'-01-01'))), date_labels='%Y', minor_breaks = NULL) +
-    scale_y_continuous(limits=c(300, round(max(dataset$average),-1)), breaks=seq(300, round(max(dataset$average),-1), 20)) +
+    scale_y_continuous(limits=c(300, 20+round(max(dataset$average),-1)), breaks=seq(300, 20+round(max(dataset$average),-1), 20)) +
     geom_line(aes(y=trend), size=1, col='firebrick1') +
     labs(title=expression('Atmospheric '*CO[2]*' (Keeling Curve)'), subtitle=expression('Mauna Loa '*CO[2]*' monthly mean ppm'),
     y=expression(CO[2]*' concentration in air' ), caption='Source: NOAA/ESRL and Scripps Institution of Oceanography.\nhttps://gml.noaa.gov/ccgg/trends/data.html')
