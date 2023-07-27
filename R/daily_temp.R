@@ -58,7 +58,8 @@ invisible(daily_temperature)
 
 # draw plot
 
-plot_dailytemp <- function(dataset = get_dailytemp(), print=TRUE, anomaly = TRUE, current_year = as.numeric(substr(Sys.Date(), 1, 4))) {
+plot_dailytemp <- function(dataset = get_dailytemp(), print = TRUE, anomaly = TRUE,
+                           current_year = as.numeric(substr(Sys.Date(), 1, 4))) {
 
   if (is.null(dataset)) return(invisible(NULL))
 
