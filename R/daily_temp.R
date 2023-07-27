@@ -4,16 +4,23 @@ library(RColorBrewer)
 
 
 get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"),
-                          mean_start = 1979, mean_end = 2020) {
+                          region = 'W', mean_start = 1979, mean_end = 2020) {
 
-  hs_path <- tools::R_user_dir("hockeystick","cache")
+  hs_path <- tools::R_user_dir("hockeystick", "cache")
 
   if (use_cache) {
-    if (file.exists(file.path(hs_path,'dailytemp.rds'))) return(invisible(readRDS((file.path(hs_path,'dailytemp.rds')))))
+    if (file.exists(file.path(hs_path, 'dailytemp.rds'))) return(invisible(readRDS((file.path(hs_path,'dailytemp.rds')))))
   }
 
-  file_url <- 'https://climatereanalyzer.org/clim/t2_daily/json/cfsr_world_t2_day.json'
-  connected <- .isConnected(file_url)
+  file_url <- switch(region,
+                     W='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_world_t2_day.json',      # World
+                     NH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_nh_t2_day.json',        # Northern Hemi
+                     SH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_sh_t2_day.json',        # Southern Hemi
+                     AR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_arctic_t2_day.json',    # Arctic
+                     AN='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_antarctic_t2_day.json', # #Antarctic
+                     TR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_tropics_t2_day.json')   # Tropics
+
+                     connected <- .isConnected(file_url)
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   dl <- tempfile()
@@ -59,7 +66,8 @@ invisible(daily_temperature)
 # draw plot
 
 plot_dailytemp <- function(dataset = get_dailytemp(), print = TRUE, anomaly = TRUE,
-                           current_year = as.numeric(substr(Sys.Date(), 1, 4))) {
+                           current_year = as.numeric(substr(Sys.Date(), 1, 4)),
+                           title_lab = 'Daily Global Average Air Temperature') {
 
   if (is.null(dataset)) return(invisible(NULL))
 
@@ -74,7 +82,7 @@ plot <- ggplot(dataset) +
     scale_x_date(name=element_blank(), breaks = c(as.Date('1975-01-01'), as.Date('1975-04-01'),
                                                   as.Date('1975-07-01'), as.Date('1975-10-01'), as.Date('1975-12-31')),
                  date_labels = '%b-%d', date_minor_breaks = '1 month') +
-    labs(title = 'Daily Global Average Air Temperature', subtitle = '2-meter temperature since 1979 and mean',
+    labs(title = title_lab, subtitle = '2-meter temperature since 1979 and mean',
          y = 'Temperature (C\U00B0)',
          caption = paste0('Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ', latest),
          color = NULL) +
