@@ -19,7 +19,7 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
   download.file(file_url, dl)
   temp_json <- fromJSON(dl)
 
-leap_years <- seq.int(1980, 2028, 4)
+leap_years <- seq.int(1980, 2032, 4)
 
 
 suppressWarnings(
@@ -57,11 +57,11 @@ invisible(daily_temperature)
 
 # draw plot
 
-plot_dailytemp <- function(dataset = get_dailytemp(), print=TRUE) {
+plot_dailytemp <- function(dataset = get_dailytemp(), print=TRUE, anomaly = TRUE) {
 
   if (is.null(dataset)) return(invisible(NULL))
 
-latest <- paste(pull(tail(dataset,1)[1]),substr(pull(tail(dataset,1)[6]),6,7), substr(pull(tail(dataset,1)[6]),9,10),sep = '-')
+latest <- paste(pull(tail(dataset,1)[1]), substr(pull(tail(dataset,1)[6]),6,7), substr(pull(tail(dataset,1)[6]),9,10), sep = '-')
 current_year <- as.numeric(substr(Sys.Date(), 1, 4))
 
 plot <- ggplot(dataset) +
@@ -78,16 +78,20 @@ plot <- ggplot(dataset) +
          caption = paste0('Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ', latest),
          color = NULL) +
     scale_color_manual(values=c('firebrick', 'black', 'grey'), labels = c(current_year, '1979-2000 Mean'), breaks=c('L', 'M')) +
-    geom_rect(data = filter(dataset, year == current_year),
-              aes(xmin = dummy_date - 1,
-                  xmax = dummy_date,
-                  ymin = mean_temp,
-                  ymax = mean_temp + temp_anom,
-                  fill = temp_anom)) +
     geom_line(data = filter(dataset, year == current_year),
               aes(dummy_date, temp, color='L'), linewidth = 1.3) +
     theme(legend.position="top") + theme(legend.key.size = unit(0.5, 'cm'),
                                          legend.margin = margin(5, 0, 0, 0))
+
+if (anomaly) plot <- plot +
+          geom_rect(data = filter(dataset, year == current_year),
+          aes(xmin = dummy_date - 1,
+              xmax = dummy_date,
+              ymin = mean_temp,
+              ymax = mean_temp + temp_anom,
+              fill = temp_anom)) +
+          geom_line(data = filter(dataset, year == current_year),
+            aes(dummy_date, temp, color='L'), linewidth = 1.3)
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)
