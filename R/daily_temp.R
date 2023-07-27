@@ -21,7 +21,8 @@
 #' Data are updated daily. For day-of-year mean removes observations from February 29 on leap years.
 #'
 #' @importFrom jsonlite fromJSON
-#' @importFrom utils download.file
+#' @importFrom utils download.file head tail
+#' @importFrom readr parse_number
 #' @import tidyr
 #' @import dplyr
 #'
@@ -81,9 +82,9 @@ leap_years <- seq.int(1980, 2032, 4)
 
 suppressWarnings(
 daily_temperature <- as_tibble(temp_json) |>
-  separate_wider_delim(data, delim=',', names_sep='') |>
+  separate_wider_delim('data', delim=',', names_sep = '') |>
   mutate(data1 = parse_number(data1),
-         data366 = parse_number(data366, na='NA)')) |>
+         data366 = parse_number(data366, na = 'NA)')) |>
   head(-3) |> mutate_all(as.numeric) |>
   pivot_longer(2:367, names_to = 'day_of_year') |>
   rename(year = name,
@@ -162,8 +163,8 @@ plot_dailytemp <- function(dataset = get_dailytemp(), print = TRUE, anomaly = TR
 latest <- paste(pull(tail(dataset,1)[1]), substr(pull(tail(dataset,1)[6]),6,7), substr(pull(tail(dataset,1)[6]),9,10), sep = '-')
 
 plot <- ggplot(dataset) +
-    geom_line(aes(dummy_date, temp, group = year), alpha = 0.7, color='grey') +
-    scale_fill_gradientn(name='Anomaly (C\U00B0)', colors = RColorBrewer::brewer.pal(9, 'YlOrRd'), labels=scales::label_number(accuracy = 0.1)) +
+    geom_line(aes(dummy_date, temp, group = year), alpha = 0.7, color = 'grey') +
+    scale_fill_gradientn(name = 'Anomaly (C\U00B0)', colors = RColorBrewer::brewer.pal(9, 'YlOrRd'), labels = scales::label_number(accuracy = 0.1)) +
     geom_line(aes(dummy_date, mean_temp, color = 'M'), linetype = 'dashed', linewidth = 1.1) +
     scale_y_continuous(n.breaks = 9) +
     theme_bw(base_size = 12) +
@@ -174,10 +175,10 @@ plot <- ggplot(dataset) +
          y = 'Temperature (C\U00B0)',
          caption = paste0('Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ', latest),
          color = NULL) +
-    scale_color_manual(values=c('firebrick', 'black', 'grey'), labels = c(current_year, '1979-2000 Mean'), breaks=c('L', 'M')) +
+    scale_color_manual(values = c('firebrick', 'black', 'grey'), labels = c(current_year, '1979-2000 Mean'), breaks = c('L', 'M')) +
     geom_line(data = filter(dataset, year == current_year),
-              aes(dummy_date, temp, color='L'), linewidth = 1.3) +
-    theme(legend.position="top") + theme(legend.key.size = unit(0.5, 'cm'),
+              aes(dummy_date, temp, color = 'L'), linewidth = 1.3) +
+    theme(legend.position = "top") + theme(legend.key.size = unit(0.5, 'cm'),
                                          legend.margin = margin(5, 0, 0, 0))
 
 if (anomaly) plot <- plot +
