@@ -49,15 +49,15 @@ current_year <- as.numeric(substr(Sys.Date(), 1, 4))
     geom_line(aes(date, temp, group = year), alpha = 0.7, color='grey') +
     scale_fill_gradientn(name='Anomaly (C\U00B0)', colors = brewer.pal(9, 'YlOrRd')) +
     geom_line(aes(date, mean_temp, color = 'M'), linetype = 'dashed', linewidth = 1.1) +
-
     scale_y_continuous(n.breaks = 9) +
     theme_bw(base_size = 12) +
     scale_x_date(name=element_blank(), breaks = c(as.Date('1975-01-01'), as.Date('1975-04-01'),
                                                   as.Date('1975-07-01'), as.Date('1975-10-01'), as.Date('1975-12-31')),
                  date_labels = '%b-%d', date_minor_breaks = '1 month') +
     labs(title = 'Daily Global Average Air Temperature', subtitle = '2-meter temperature since 1979, mean, and current anomaly',
-         y = 'Temperature (C\U00B0)', caption = paste0('Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ', latest),
-         color=NULL) +
+         y = 'Temperature (C\U00B0)',
+         caption = paste0('Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ', latest),
+         color = NULL) +
     scale_color_manual(values=c('firebrick', 'black', 'grey'), labels = c(current_year, '1979-2000 Mean'), breaks=c('L', 'M')) +
     geom_rect(data = filter(daily_temperature, year == current_year),
               aes(xmin = date - 1,
