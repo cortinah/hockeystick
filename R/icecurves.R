@@ -123,7 +123,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
 #'
 #' @export
 
-plot_icecurves <- function(dataset = get_icecurves(), region='Arctic', print=TRUE) {
+plot_icecurves <- function(dataset = get_icecurves(), region = 'Arctic', print = TRUE) {
 
   if (is.null(dataset)) return(invisible(NULL))
 
@@ -133,19 +133,20 @@ plot_icecurves <- function(dataset = get_icecurves(), region='Arctic', print=TRU
 
   colnames(dataset) <- c('year', 'month', 'measure')
   current_year <- max(dataset$year)
-  dataset$size <- ifelse(dataset$year == current_year, current_year, 'Previous')
+  dataset$linew <- ifelse(dataset$year == current_year, current_year, 'Previous')
   dataset <- dataset[dataset[,3] != '-9999', ]
 
-  plot <- ggplot(dataset, aes(x=month, y=measure, alpha=as.factor(size), size=as.factor(size), color=as.factor(year))) +
+  plot <- ggplot(dataset, aes(x=month, y=measure, alpha=as.factor(linew), linewidth=as.factor(linew), color=as.factor(year))) +
     geom_line() +scale_y_continuous(limits=c(0, 20)) +theme_bw() +
     scale_x_continuous(breaks = seq(1, 12, 1), minor_breaks = NULL) +
     scale_color_manual(guide = 'none', values = c(rep('darkgrey', length(unique(dataset$year))-1), 'dodgerblue')) +
-    scale_size_manual(labels = c(paste0('1979-', current_year-1), current_year), values = c(0.7, 2), breaks = c('Previous',as.character(current_year))) +
-    labs(title = title, x = 'Month', size = '', y=expression("Million km"^2),
-         caption='Source: National Snow & Ice Data Center\nhttps://nsidc.org/data/seaice_index') +
-    theme(legend.position = c(0.41, 0.92), legend.background = element_blank()) +
-    scale_alpha_manual(guide = 'none', labels = c('Previous', as.character(current_year)), values = c(0.4, 1), breaks = c('Previous', '2020')) +
-    guides(size = guide_legend(override.aes=list(colour=c('darkgrey', "dodgerblue"))))
+    scale_linewidth_manual(labels = c(paste0('1979-', current_year-1), current_year), values = c(0.7, 2), breaks = c('Previous', as.character(current_year))) +
+    labs(title = title, x = 'Month', y = expression("Million km"^2),
+         caption = 'Source: National Snow & Ice Data Center\nhttps://nsidc.org/data/seaice_index',
+         linewidth = NULL) +
+    theme(legend.position = c(0.41, 0.91), legend.background = element_blank()) +
+    scale_alpha_manual(guide = 'none', labels = c('Previous', as.character(current_year)), values = c(0.4, 1), breaks = c('Previous', '2023')) +
+    guides(linewidth = guide_legend(override.aes=list(colour=c('darkgrey', "dodgerblue"))))
 
 
   if (print) suppressMessages( print(plot) )
