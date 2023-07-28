@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,10 +78,10 @@
 <p>The goal of <code>hockeystick</code> is to make essential Global Heating datasets easily available in R to non-climate experts. <code>hockeystick</code> users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.</p>
 <p>The choice of data was originally based on <a href="http://www.pik-potsdam.de/~stefan/" class="external-link">Professor Stefan Rahmstorf’s</a> presentation on <a href="http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf" class="external-link">The 5 Most Important Data Sets of Climate Science</a>. I came across this on a post on the <a href="https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/" class="external-link">Open Mind blog</a>. I wrote my own <a href="https://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/" class="external-link">post</a> on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over The name of the package stems from the well known <a href="https://en.wikipedia.org/wiki/Hockey_stick_graph" class="external-link">hockeystick</a> temperature chart.</p>
 <p><code>hockeystick</code> was highlighted on the RStudio <a href="https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/" class="external-link">RViews</a> blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in February 2021.</p>
-<p><strong>New in version 0.7.0:</strong> Globally averaged methane (CH<sub>4</sub>) concentration from NOAA (see below).</p>
-<p><strong>New in version 0.7.0:</strong> Cumulative emissions by country visualization (see below).</p>
+<p><strong>New in version 0.8.0:</strong> Daily temperature data from ClimateReanalyzer.com (see below).</p>
+<p>New in version 0.7.0: Globally averaged methane (CH<sub>4</sub>) concentration from NOAA.</p>
+<p>New in version 0.7.0: Cumulative emissions by country visualization.</p>
 <p>New in version 0.6.0: Global CO<sub>2</sub> emissions by region and country from GCP.</p>
-<p>New in version 0.5.0: North Atlantic hurricane data from NOAA.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -95,73 +95,77 @@
 <div class="section level2">
 <h2 id="downloading-and-viewing-global-heating-data">Downloading and viewing global heating data<a class="anchor" aria-label="anchor" href="#downloading-and-viewing-global-heating-data"></a>
 </h2>
-<p>Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and plot:</p>
+<p>New: Plot daily global temperatures since 1979 and current anomaly:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cortinah.github.io/hockeystick/" class="external-link">hockeystick</a></span><span class="op">)</span></span>
-<span><span class="va">ml_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_carbon.html">get_carbon</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">globaldaily</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_dailytemp.html">get_dailytemp</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/plot_dailytemp.html">plot_dailytemp</a></span><span class="op">(</span><span class="va">globaldaily</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-dailytemp-1.png" width="60%"></p>
+<p>Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and plot:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ml_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_carbon.html">get_carbon</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_carbon.html">plot_carbon</a></span><span class="op">(</span><span class="va">ml_co2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-carbon-1.png" width="60%"></p>
 <p>Retrieve GCP global CO<sub>2</sub> emissions and plot:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">emissions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_emissions.html">get_emissions</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_emissions.html">plot_emissions</a></span><span class="op">(</span><span class="va">emissions</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-emissions-1.png" width="60%"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plot_emissions_with_land.html">plot_emissions_with_land</a></span><span class="op">(</span><span class="va">emissions</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-emissions-2.png" width="60%"></p>
 <p>Visualize cumulative emissions by country:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/emissions_map.html">emissions_map</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-emissionsmap-1.png" width="60%"></p>
 <p>Retrieve NASA/GISS global surface temperature anomaly data and plot:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anomaly</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_temp.html">get_temp</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_temp.html">plot_temp</a></span><span class="op">(</span><span class="va">anomaly</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-temp-1.png" width="60%"></p>
 <p>Visualize warming using Ed Hawkins styled “warming stripes”:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/warming_stripes.html">warming_stripes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-stripes-1.png" width="60%"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/warming_stripes.html">warming_stripes</a></span><span class="op">(</span>stripe_only <span class="op">=</span> <span class="cn">TRUE</span>, col_strip <span class="op">=</span> <span class="fu">viridisLite</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">viridis</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-stripes2-1.png" width="53%"></p>
 <p>Retrieve tide gauge and satellite sea level data and plot:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gmsl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_sealevel.html">get_sealevel</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_sealevel.html">plot_sealevel</a></span><span class="op">(</span><span class="va">gmsl</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-sl-1.png" width="60%"></p>
 <p>Retrieve July annual Arctic Sea Ice Index and plot:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seaice</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_seaice.html">get_seaice</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_seaice.html">plot_seaice</a></span><span class="op">(</span><span class="va">seaice</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-si-1.png" width="60%"></p>
 <p><code><a href="reference/get_seaice.html">get_seaice()</a></code> arguments can be modified to download Antarctic sea ice, and allow any month.</p>
 <p>You can also visualize sea ice by month and year:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">arcticice</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_icecurves.html">get_icecurves</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_icecurves.html">plot_icecurves</a></span><span class="op">(</span><span class="va">arcticice</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-icecurves-1.png" width="60%"></p>
 <p>Retrieve Common Era temperature reconstruction and plot it with instrumental record:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anomaly2k</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_temp2k.html">get_temp2k</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_temp2k.html">plot_temp2k</a></span><span class="op">(</span><span class="va">anomaly2k</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-2ktemp-1.png" width="60%"></p>
 <p>Retrieve NOAA HURDAT2 hurricane data and plot:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hurricanes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_hurricanes.html">get_hurricanes</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_hurricanes.html">plot_hurricanes</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-hurricanes-1.png" width="60%"></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plot_hurricane_nrg.html">plot_hurricane_nrg</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-hurricanes-2.png" width="60%"></p>
 <p>Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cortinah.github.io/hockeystick/" class="external-link">hockeystick</a></span><span class="op">)</span></span>
-<span><span class="va">ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_methane.html">get_methane</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_methane.html">get_methane</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_methane.html">plot_methane</a></span><span class="op">(</span><span class="va">ch4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-methane-1.png" width="60%"></p>
 <p>Retrieve Vostok paleo ice core data and plot:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vostok</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_paleo.html">get_paleo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_paleo.html">plot_paleo</a></span><span class="op">(</span><span class="va">vostok</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-paleo-1.png" width="60%"></p>
@@ -174,7 +178,7 @@
 <div class="section level3">
 <h3 id="all-together-now-climate-data-grid">All together now: climate data grid<a class="anchor" aria-label="anchor" href="#all-together-now-climate-data-grid"></a>
 </h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/climate_grid.html">climate_grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-grid-1.png" width="80%"></p>
 </div>
@@ -200,6 +204,7 @@
 </li>
 <li>Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (<a href="https://gml.noaa.gov/ccgg/trends_ch4/" class="external-link uri">https://gml.noaa.gov/ccgg/trends_ch4/</a>).</li>
 <li>Thank you to Dirk Eddelbuettel for providing the .isConnected function from his <a href="https://CRAN.R-project.org/package=tint" class="external-link">tint</a> package to test for internet connectivity.</li>
+<li>Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken…Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.</li>
 </ul>
 </div>
 <div class="section level2">

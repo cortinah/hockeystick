@@ -31,6 +31,9 @@
     <loc>/reference/get_carbon.html</loc>
   </url>
   <url>
+    <loc>/reference/get_dailytemp.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_emissions.html</loc>
   </url>
   <url>
@@ -74,6 +77,9 @@
   </url>
   <url>
     <loc>/reference/plot_carbon.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot_dailytemp.html</loc>
   </url>
   <url>
     <loc>/reference/plot_emissions.html</loc>
