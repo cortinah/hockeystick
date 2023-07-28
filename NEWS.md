@@ -62,6 +62,10 @@
 
 * url-specific connectivity checks
 
+# hockeystick 0.7.3
+
+* Fix climate grid connectivity checks
+
 # hockeystick 0.8.0
 
 * Add daily temperature data from ClimateReanalyzer.org

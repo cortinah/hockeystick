@@ -119,7 +119,7 @@ plot_temp2k <- function(dataset = get_temp2k(), instrumental = TRUE,
 
   if (!instrumental) dataset <- filter(dataset, measure != "filtered_instrumental" & measure != "instrumental")
 
-plot <- ggplot(dataset, aes(x=year, y=value, color=measure)) +geom_line(aes(color=measure), size=1.05) + theme_bw(base_size=12) +  scale_y_continuous(n.breaks = 10, minor_breaks = NULL) +
+plot <- ggplot(dataset, aes(x=year, y=value, color=measure)) +geom_line(aes(color=measure), linewidth=1.05) + theme_bw(base_size=12) +  scale_y_continuous(n.breaks = 10, minor_breaks = NULL) +
   scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.3, 0.85),legend.background=element_blank()) +
   labs(title='Global Common Era Temperature Reconstruction', subtitle='Global surface temperature relative to 1961-1990 mean', x='Year C.E.',
        y='Temperature Anomaly (C\U00B0)', caption='Source: PAGES2k Consortium, NOAA\nhttps://www.ncei.noaa.gov/access/paleo-search/study/26872')
