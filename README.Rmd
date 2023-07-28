@@ -55,7 +55,7 @@ remotes::install_github("cortinah/hockeystick")
 
 New: Plot daily global temperatures since 1979 and current anomaly:
 
-```{r dailytemp, fig.retina=2, message=FALSE, out.width='60%', fig.asp=1.1}
+```{r dailytemp, fig.retina=2, message=FALSE, out.width='60%', fig.asp=1.05}
 library(hockeystick)
 globaldaily <- get_dailytemp()
 plot_dailytemp(globaldaily)
