@@ -41,16 +41,16 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**New in version 0.7.0:** Globally averaged methane (CH<sub>4</sub>)
-concentration from NOAA (see below).
+**New in version 0.8.0:** Daily temperature data from
+ClimateReanalyzer.com (see below).
 
-**New in version 0.7.0:** Cumulative emissions by country visualization
-(see below).
+New in version 0.7.0: Globally averaged methane (CH<sub>4</sub>)
+concentration from NOAA.
+
+New in version 0.7.0: Cumulative emissions by country visualization.
 
 New in version 0.6.0: Global CO<sub>2</sub> emissions by region and
 country from GCP.
-
-New in version 0.5.0: North Atlantic hurricane data from NOAA.
 
 ## Installation
 
@@ -69,11 +69,20 @@ remotes::install_github("cortinah/hockeystick")
 
 ## Downloading and viewing global heating data
 
+New: Plot daily global temperatures since 1979 and current anomaly:
+
+``` r
+library(hockeystick)
+globaldaily <- get_dailytemp()
+plot_dailytemp(globaldaily)
+```
+
+<img src="man/figures/README-dailytemp-1.png" width="60%" />
+
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
 data and plot:
 
 ``` r
-library(hockeystick)
 ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
 ```
@@ -184,7 +193,6 @@ plot_hurricane_nrg(hurricanes)
 Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
 
 ``` r
-library(hockeystick)
 ch4 <- get_methane()
 plot_methane(ch4)
 ```
@@ -260,6 +268,11 @@ climate_grid()
 - Thank you to Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
   test for internet connectivity.
+- Thank you to Chris Campbell and Steven Bernard of the FT Climate
+  Graphics Explained newsletter for sharing their code for
+  climatereanalyzer.org daily temperature chart (Temperature Records
+  Broken…Again, 9 July 2023). This code is the foundation of the
+  get_dailytemp() and plot_dailytemp() functions.
 
 ## Notes and resources
 

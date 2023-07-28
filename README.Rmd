@@ -29,13 +29,13 @@ The choice of data was originally based on [Professor Stefan Rahmstorf's ](http:
 
 `hockeystick` was highlighted on the RStudio [RViews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/) blog by Joseph Rickert as one of the "Top 40" new packages on CRAN in February 2021.
 
-**New in version 0.7.0:** Globally averaged methane (CH~4~) concentration from NOAA (see below).
+**New in version 0.8.0:** Daily temperature data from ClimateReanalyzer.com (see below).
 
-**New in version 0.7.0:** Cumulative emissions by country visualization (see below).
+New in version 0.7.0: Globally averaged methane (CH~4~) concentration from NOAA.
+
+New in version 0.7.0: Cumulative emissions by country visualization.
 
 New in version 0.6.0: Global CO~2~ emissions by region and country from GCP.
-
-New in version 0.5.0: North Atlantic hurricane data from NOAA.
 
 ## Installation
 To install the latest `hockeystick` release from CRAN type:
@@ -53,10 +53,17 @@ remotes::install_github("cortinah/hockeystick")
 
 ## Downloading and viewing global heating data
 
+New: Plot daily global temperatures since 1979 and current anomaly:
+
+```{r dailytemp, fig.retina=2, message=FALSE, out.width='60%', fig.asp=1.05}
+library(hockeystick)
+globaldaily <- get_dailytemp()
+plot_dailytemp(globaldaily)
+```
+
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and plot:
 
 ```{r carbon, fig.retina=2, message=FALSE, out.width='60%'}
-library(hockeystick)
 ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
 ```
@@ -130,7 +137,6 @@ plot_hurricane_nrg(hurricanes)
 Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
 
 ```{r methane, fig.retina=2, message=FALSE, out.width='60%'}
-library(hockeystick)
 ch4 <- get_methane()
 plot_methane(ch4)
 ```
@@ -165,6 +171,7 @@ Data Archive: https://nsidc.org/data/explore-data
 - Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (https://gml.noaa.gov/ccgg/trends_ch4/).
 - Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
+- Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken...Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.
 
 ## Notes and resources
 - All data is compiled to the best of my ability from reliable and peer-reviewed sources. Please open an issue if you are aware of enhanced or additional data that may be added to the package. Building `hockeystick` is driven by my interest in tracking climate data and making it easily available to the community.

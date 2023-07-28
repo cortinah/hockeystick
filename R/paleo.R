@@ -63,6 +63,9 @@ vostok <- readr::read_table(dl, col_names = FALSE, skip = 21)
 colnames(vostok) <- c('depth', 'age_ice', 'age_air', 'co2')
 
 file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/temp/vostok/vostok.1999.temp.dat'
+connected <- .isConnected(file_url)
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
 dl <- tempfile()
 download.file(file_url, dl)
 paleotemp <- readr::read_table(dl, col_names = FALSE, skip = 60)
