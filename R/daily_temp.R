@@ -1,21 +1,21 @@
 #' Download and plot essential climate data
 #'
-#' Retrieves the daily air temperature data since 1979 from ClimateReanalyzer.org
+#' Retrieves the daily air or sea-surface temperature data since 1979 from ClimateReanalyzer.org
 #' Source is University of Maine Climate Change Institute.
 #' \url{https://climatereanalyzer.org/clim/t2_daily/}
 #'
 #' @name get_dailytemp
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
 #' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)
-#' @param region (string) Region selection, defaults to world. Options are: World "W", Northern Hemisphere "NW", Southern Hemisphere "SW", Tropics "TR", Arctic "AR", and Antarctica "AN".
+#' @param region (string) Region selection, defaults to world air temperature. Options are: World Air "W", Northern Hemisphere Air "NW", Southern Hemisphere Air "SW", Tropics Air "TR", Arctic Air "AR", Antarctica Air "AN", World Sea Surface "WS", and North Atlantic Sea Surface "NS".
 #' @param mean_start (numeric) Start year for historic mean, defaults to 1979.
 #' @param mean_end (numeric) End year for historic mean, defaults to 2000.
 #'
-#' @return Invisibly returns a tibble with the daily 2-meter air temperatures since 1979 as well as historic mean by day-of-year and current anomaly versus mean.
+#' @return Invisibly returns a tibble with the daily 2-meter air or sea surface temperatures since 1979 as well as historic mean by day-of-year and current anomaly versus mean.
 #'
 #' `get_dailytemp` invisibly returns a tibble with the daily temperatures since 1979 as well as mean by day-of-year and anomaly. Default to world data, but region can be selected among six options.
 #'
-#' Regions include world (default), Northern Hemisphere, Southern Hemisphere, Tropics, Arctic, and Antarctica.
+#' Region options include world air (default), Northern Hemisphere air, Southern Hemisphere air, Tropics air, Arctic air, Antarctic air, World sea surface and North Atlantic sea surface and is stored in attribute of output.
 #' The historic daily mean-by-day period defaults to 1979-2000. This range can be optionally modified.
 #'
 #' Data are updated daily. For day-of-year mean removes observations from February 29 on leap years.
@@ -49,12 +49,16 @@
 #' \item ClimateReanalyzer.org: \url{https://climatereanalyzer.org/clim/t2_daily/}
 #'
 #' Notes: The "Daily 2-meter Air Temperature" page shows area-weighted daily means calculated from the 2-meter air temperature variable from the Climate Forecast System version 2 and Climate Forecast System Reanalysis, which are publicly available products of the NOAA National Centers for Environmental Prediction.
+#' Sea surface is from NOAA Optimum Interpolation SST (OISST) version 2.1. OISST is a 0.25°x0.25° gridded dataset that provides estimates of temperature based on a blend of satellite, ship, and buoy observations. The dataset spans 1 January 1982 to present with a 1 to 2-day lag from the current day.
+#'
 #' }
 #'
 #' @export
 
 get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"),
-                          region = 'W', mean_start = 1979, mean_end = 2020) {
+                          region = 'W',
+                          mean_start = if(region == 'WS' | region == 'AS') 1982 else 1979,
+                          mean_end = 2000) {
 
   hs_path <- tools::R_user_dir("hockeystick", "cache")
 
@@ -63,12 +67,14 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
   }
 
   file_url <- switch(region,
-                     W='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_world_t2_day.json',      # World
-                     NH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_nh_t2_day.json',        # Northern Hemi
-                     SH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_sh_t2_day.json',        # Southern Hemi
-                     AR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_arctic_t2_day.json',    # Arctic
-                     AN='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_antarctic_t2_day.json', # #Antarctic
-                     TR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_tropics_t2_day.json')   # Tropics
+                     W='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_world_t2_day.json',          # World Air
+                     NH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_nh_t2_day.json',            # Northern Hemi Air
+                     SH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_sh_t2_day.json',            # Southern Hemi Air
+                     AR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_arctic_t2_day.json',        # Arctic Air
+                     AN='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_antarctic_t2_day.json',     # #Antarctic Air
+                     TR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_tropics_t2_day.json',       # Tropics Air
+                     WS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_world2_sst_day.json',  # World Sea
+                     AS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json') # North Atlantic Sea
 
                      connected <- .isConnected(file_url)
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
@@ -107,6 +113,12 @@ dates <- data.frame(day_of_year=1:365,
 
 daily_temperature <- left_join(daily_temperature, dates, by='day_of_year')
 
+colnames(daily_temperature)[4] <- paste0(mean_start,'-',mean_end,' mean')
+
+if (region == 'WS' | region == 'AS') daily_temperature <- daily_temperature |> filter(year!=1981)
+
+attr(daily_temperature, "hs_daily_region") <- region
+
 if (write_cache) saveRDS(daily_temperature, file.path(hs_path, 'dailytemp.rds'))
 
 invisible(daily_temperature)
@@ -123,7 +135,7 @@ invisible(daily_temperature)
 #' @param print (boolean) Display daily temperature ggplot2 chart, defaults to TRUE. Use FALSE to not display chart.
 #' @param anomaly (boolean) Display current anomaly versus historic mean, defaults to TRUE.
 #' @param current_year (numeric) Year to highlight in alternate color, defaults to current year.
-#' @param title_lab (string) Title to override default chart name.
+#' @param title_lab (string) Title to override default chart title. Default title pulls region name from dataset attributes.
 #'
 #' @return Invisibly returns a ggplot2 object with daily temperature anomaly chart
 #'
@@ -156,32 +168,62 @@ invisible(daily_temperature)
 
 plot_dailytemp <- function(dataset = get_dailytemp(), print = TRUE, anomaly = TRUE,
                            current_year = as.numeric(substr(Sys.Date(), 1, 4)),
-                           title_lab = 'Daily Global Average Air Temperature') {
+                           title_lab = 'Daily Average Air Temperature') {
 
   if (is.null(dataset)) return(invisible(NULL))
 
 latest <- paste(pull(tail(dataset,1)[1]), substr(pull(tail(dataset,1)[6]),6,7), substr(pull(tail(dataset,1)[6]),9,10), sep = '-')
+meanperiod <- colnames(dataset)[4]
+colnames(dataset)[4] <- 'mean_temp'
+
+region <- attr(dataset, "hs_daily_region")
+
+subtitle_lab <- '2-meter temperature since 1979 and mean'
+
+if (region == 'WS' ||region == 'AS') subtitle_lab <- 'Sea surface temperature since 1982 and mean'
+
+if (title_lab == "Daily Average Air Temperature") {
+
+    if (region == 'WS' | region == 'AS') title_lab <- 'Daily Average Sea Surface Temperature'
+
+    region <- switch(region,
+                     W = 'World',
+                     NH = 'Northern Hemisphere',
+                     SH = 'Southern Hemisphere',
+                     AR = 'Arctic',
+                     AN = 'Antarctic',
+                     TR = 'Tropics',
+                     WS = 'World (60S-60N)',
+                     AS = 'North Atlantic')
+
+    title_lab <- paste(region, title_lab)}
 
 plot <- ggplot(dataset) +
-    geom_line(aes(dummy_date, temp, group = year), alpha = 0.7, color = 'grey') +
+    geom_line(aes(x = dummy_date, y = temp, group = year), alpha = 0.7, color = 'grey') +
     scale_fill_gradientn(name = 'Anomaly (C\U00B0)', colors = RColorBrewer::brewer.pal(9, 'YlOrRd'), labels = scales::label_number(accuracy = 0.1)) +
     geom_line(aes(dummy_date, mean_temp, color = 'M'), linetype = 'dashed', linewidth = 1.1) +
     scale_y_continuous(n.breaks = 9) +
     theme_bw(base_size = 12) +
-    scale_x_date(name=element_blank(), breaks = c(as.Date('1975-01-01'), as.Date('1975-04-01'),
+    scale_x_date(name = 'Day of year', breaks = c(as.Date('1975-01-01'), as.Date('1975-04-01'),
                                                   as.Date('1975-07-01'), as.Date('1975-10-01'), as.Date('1975-12-31')),
-                 date_labels = '%b-%d', date_minor_breaks = '1 month') +
-    labs(title = title_lab, subtitle = '2-meter temperature since 1979 and mean',
+                 date_labels = '%b%est', date_minor_breaks = '1 month') +
+    labs(title = title_lab, subtitle = subtitle_lab,
          y = 'Temperature (C\U00B0)',
          caption = paste0('Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ', latest),
          color = NULL) +
-    scale_color_manual(values = c('firebrick', 'black', 'grey'), labels = c(current_year, '1979-2000 Mean'), breaks = c('L', 'M')) +
+    scale_color_manual(values = c('firebrick', 'black', 'grey'), labels = c(current_year, meanperiod), breaks = c('L', 'M')) +
     geom_line(data = filter(dataset, year == current_year),
               aes(dummy_date, temp, color = 'L'), linewidth = 1.3) +
     theme(legend.position = "top") + theme(legend.key.size = unit(0.5, 'cm'),
                                          legend.margin = margin(5, 0, 0, 0))
 
-if (anomaly) plot <- plot +
+if (anomaly) {
+  subtitle_lab <- '2-meter temperature since 1979, mean, and current anomaly'
+
+  if (region == 'World (60S-60N)' | region == 'North Atlantic' | region == 'WS' | region == 'AS')
+      subtitle_lab <- 'Sea surface temperature since 1982, mean, and current anomaly'
+
+  plot <- plot +
           geom_rect(data = filter(dataset, year == current_year),
           aes(xmin = dummy_date - 1,
               xmax = dummy_date,
@@ -190,7 +232,7 @@ if (anomaly) plot <- plot +
               fill = temp_anom)) +
           geom_line(data = filter(dataset, year == current_year),
             aes(dummy_date, temp, color='L'), linewidth = 1.3) +
-  labs(subtitle = '2-meter temperature since 1979, mean, and current anomaly')
+  labs(subtitle = subtitle_lab) }
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)

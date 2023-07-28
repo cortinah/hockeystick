@@ -15,10 +15,10 @@ plot_temp(dataset = get_temp(), print = TRUE)
 Invisibly returns a ggplot2 object with temperature anomaly chart
 }
 \description{
-Plots the global temperature anomaly retrieved using \code{get_temp()} with ggplot2. The output ggplot2 object may be further modified.
+Plots the global annual mean temperature anomaly retrieved using \code{get_temp()} with ggplot2. The output ggplot2 object may be further modified.
 }
 \details{
-\code{plot_temp} invisibly returns a ggplot2 object with a pre-defined temperature anomaly chart using data from \code{get_temp}.
+\code{plot_temp} invisibly returns a ggplot2 object with a pre-defined temperature annual mean anomaly chart using data from \code{get_temp}.
 By default the chart is also displayed. Smooths using ggplot2's built-in loess smoother. Users may further modify the output ggplot2 chart.
 }
 \examples{

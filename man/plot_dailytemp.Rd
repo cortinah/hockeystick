@@ -9,7 +9,7 @@ plot_dailytemp(
   print = TRUE,
   anomaly = TRUE,
   current_year = as.numeric(substr(Sys.Date(), 1, 4)),
-  title_lab = "Daily Global Average Air Temperature"
+  title_lab = "Daily Average Air Temperature"
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ plot_dailytemp(
 
 \item{current_year}{(numeric) Year to highlight in alternate color, defaults to current year.}
 
-\item{title_lab}{(string) Title to override default chart name.}
+\item{title_lab}{(string) Title to override default chart title. Default title pulls region name from dataset attributes.}
 }
 \value{
 Invisibly returns a ggplot2 object with daily temperature anomaly chart

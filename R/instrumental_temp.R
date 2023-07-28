@@ -74,7 +74,7 @@ invisible(gisstemp)
 
 #' Download and plot essential climate data
 #'
-#' Plots the global temperature anomaly retrieved using `get_temp()` with ggplot2. The output ggplot2 object may be further modified.
+#' Plots the global annual mean temperature anomaly retrieved using `get_temp()` with ggplot2. The output ggplot2 object may be further modified.
 #'
 #'
 #' @name plot_temp
@@ -83,7 +83,7 @@ invisible(gisstemp)
 #'
 #' @return Invisibly returns a ggplot2 object with temperature anomaly chart
 #'
-#' @details `plot_temp` invisibly returns a ggplot2 object with a pre-defined temperature anomaly chart using data from `get_temp`.
+#' @details `plot_temp` invisibly returns a ggplot2 object with a pre-defined temperature annual mean anomaly chart using data from `get_temp`.
 #' By default the chart is also displayed. Smooths using ggplot2's built-in loess smoother. Users may further modify the output ggplot2 chart.
 #'
 #' @import ggplot2

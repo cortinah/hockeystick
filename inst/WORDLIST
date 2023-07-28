@@ -49,6 +49,7 @@ NOAA's
 NOAA’s
 NSIDC
 Neukom
+OISST
 ORCID
 OWID
 Organisation
@@ -75,10 +76,13 @@ Tellus
 Thoning
 Vostok
 WRL
+WS
 Waterman
 Zyss
 al
+climatereanalyzer
 config
+dailytemp
 decompositions
 dev
 doi
@@ -87,6 +91,7 @@ edX
 et
 ggplot
 github
+gridded
 hs
 https
 icecurves
