@@ -268,6 +268,11 @@ climate_grid()
 - Thank you to Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
   test for internet connectivity.
+- Thank you to Chris Campbell and Steven Bernard of the FT Climate
+  Graphics Explained newsletter for sharing their code for
+  climatereanalyzer.org daily temperature chart (Temperature Records
+  Broken…Again, 9 July 2023). This code is the foundation of the
+  get_dailytemp() and plot_dailytemp() functions.
 
 ## Notes and resources
 

@@ -171,6 +171,7 @@ Data Archive: https://nsidc.org/data/explore-data
 - Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (https://gml.noaa.gov/ccgg/trends_ch4/).
 - Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
+- Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken...Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.
 
 ## Notes and resources
 - All data is compiled to the best of my ability from reliable and peer-reviewed sources. Please open an issue if you are aware of enhanced or additional data that may be added to the package. Building `hockeystick` is driven by my interest in tracking climate data and making it easily available to the community.
