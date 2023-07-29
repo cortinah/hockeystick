@@ -91,15 +91,15 @@ Chart consists of one line per year showing monthly sea ice from January through
 <span class="r-in"><span><span class="co"># Fetch historic monthly sea ice data since 1979:</span></span></span>
 <span class="r-in"><span><span class="va">icecurves</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_icecurves.html">get_icecurves</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Please set use_cache=FALSE if you are changing pole or measure from last cached data.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Retrieving remote data requires internet connectivity.</span>
 <span class="r-in"><span><span class="co">#</span></span></span>
 <span class="r-in"><span><span class="co"># Plot output using package's built-in ggplot2 defaults</span></span></span>
 <span class="r-in"><span><span class="fu">plot_icecurves</span><span class="op">(</span><span class="va">icecurves</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_icecurves-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or just call plot_icecurves(), which defaults to get_icecurves() dataset</span></span></span>
 <span class="r-in"><span><span class="fu">plot_icecurves</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Please set use_cache=FALSE if you are changing pole or measure from last cached data.</span>
-<span class="r-plt img"><img src="plot_icecurves-1.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="plot_icecurves-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_icecurves</span><span class="op">(</span><span class="va">icecurves</span>, print <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Modify plot such as: p + ggplot2::labs(title='Shrinking Arctic Sea Ice') # }</span></span></span>
