@@ -1,0 +1,289 @@
+---
+title: "Hockeystick"
+subtitle: "Visualizing Global Heating With R"
+author: "Hernando Cortina"
+institute: "R in Finance Conference"
+date: "Chicago, May 2023"
+output:
+  xaringan::moon_reader:
+    self_contained: false
+    css:
+      - default
+      - default-fonts
+      - custom.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+class: nopagenum, center
+
+<br><br><br>
+# hockeystick
+# Visualizing Global Heating With R
+
+<br><br> 
+## Hernando Cortina
+## R in Finance Conference
+## Chicago, 19 May 2023
+
+
+---
+
+class: nopagenum
+
+background-image: url(https://github.com/cortinah/hockeystick/blob/main/man/figures/logo.png?raw=true)
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+---
+
+# hockeystick R Package
+
+- The impact of global heating on markets is an active research topic
+
+- Central Banks and regulators: ECB, FRB, BIS are studying policy and regulation
+
+- The EU has specific regulation on Paris-Aligned Benchmarks and funds
+
+- There are multitudes of climate-oriented active and passive funds  
+
+.footnote[
+Opinions are my own and may not reflect those of my employer.
+]
+
+
+--
+<br />
+
+- **The Challenge**: most finance practitioners are not climate experts
+
+- However, we like to look at data -- but which climate data?
+
+- The volume of climate research and data on the web is vast and complex  
+
+--
+<br />
+
+- `hockeystick` makes essential climate data easily available in R to non-climate experts
+
+---
+
+# Install hockeystick
+
+Install the **hockeystick** package from CRAN or [Github](https://github.com/cortinah/hockeystick):
+
+```{r eval=FALSE, tidy=FALSE}
+install.packages("hockeystick")
+```
+
+```{r eval=FALSE, tidy=FALSE}
+remotes::install_github("cortinah/hockeystick")
+```
+
+```{r message=FALSE}
+library(hockeystick)
+```
+
+--
+### Features:
+
+- Simple API to curated climate data
+
+- Fetches latest data from original source
+
+- Pre-defined plots
+
+- Optional caching
+
+- Very easy to use
+
+---
+class: top
+
+## A Brief and Incomplete History of Climate Science
+
+--
+<br />
+
+- 1856: Eunice Foote published a scientific paper demonstrating the absorption of heat by CO<sub>2</sub>.
+
+--
+
+- 1896: Svante Arrhenius predicted that more carbon in the atmosphere would lead to global warming.
+
+--
+
+-  1960: Charles Keeling demonstrated that the level of CO<sub>2</sub> in the atmosphere was rising.
+
+--
+
+- 1979 World Climate Conference: plausible that increased carbon dioxide in the atmosphere can contribute to a gradual warming.
+
+--
+
+- 1988: Jim Hansen assessed human-caused warming had already measurably affected the climate.
+
+--
+
+- 2020: `hockeystick` published on CRAN. 😄
+
+---
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Eunice_Foote_-_%22Circumstances_Affecting_the_Heat_of_the_Sun%27s_Rays%22_%281856%29.png/1920px-Eunice_Foote_-_%22Circumstances_Affecting_the_Heat_of_the_Sun%27s_Rays%22_%281856%29.png)
+background-size: 650px
+background-position: 50% 20%
+
+"Circumstances Affecting the Heat of the Sun's Rays" by Eunice Foote
+---
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/6c/Arrhenius2.jpg)
+background-size: 450px
+background-position: 50% 20%
+
+Svante Arrhenius
+---
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/19021015_Hint_to_Coal_Consumers_-_Svante_Arrhenius_-_The_Selma_Morning_Times_-_Global_warming.jpg/2560px-19021015_Hint_to_Coal_Consumers_-_Svante_Arrhenius_-_The_Selma_Morning_Times_-_Global_warming.jpg)
+background-size: 600px
+background-positio: 30% 10%
+
+Early Warning on Climate Change, 1902
+
+---
+
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/19120814_Coal_Consumption_Affecting_Climate_-_Rodney_and_Otamatea_Times.jpg/1445px-19120814_Coal_Consumption_Affecting_Climate_-_Rodney_and_Otamatea_Times.jpg?20220809225210)
+background-size: 600px
+background-positio: 30% 10%
+
+
+Prescient Warning from 1912, Based on Popular Mechanics article
+
+---
+class: middle, center
+
+# Let's Get to the Code!
+---
+class: left
+### Carbon Concentration in the Atmosphere, Mauna Loa, Since 1958
+
+.small-code[
+```{r carbon, fig.retina=2, message=FALSE, warning=FALSE, out.width='70%', fig.align='center'}
+co2 <- get_carbon()
+plot_carbon(co2)
+```
+]
+---
+class: left
+### Global Annual CO<sub>2</sub> Emissions:
+
+.small-code[
+```{r emissions, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+emissions <- get_emissions()
+plot_emissions(emissions)
+```
+]
+---
+class: left
+### Visualize Cumulative Emissions by Country:
+
+.small-code[
+```{r emissionsm, out.width='72%', fig.retina=2, message=FALSE, fig.align="center"}
+emissions_map(emissions)
+```
+]
+---
+class: left
+### Global Temperature Anomaly
+
+.small-code[
+```{r temp, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+anomaly <- get_temp()
+plot_temp(anomaly)
+```
+]
+---
+class: left
+### Warming Stripes Visualization
+
+.small-code[
+```{r sripes, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+warming_stripes()
+```
+]
+---
+class: left
+### Common Era Temperatures
+
+.small-code[
+```{r ce, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+anomaly2k <- get_temp2k()
+plot_temp2k(anomaly2k)
+```
+]
+---
+class: left
+### Sea Level Rising
+
+.small-code[
+```{r sl, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+gmsl <- get_sealevel()
+plot_sealevel(gmsl)
+```
+]
+---
+class: left
+### Shrinking Arctic Ice
+
+.small-code[
+```{r ice, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+arcticice <- get_icecurves()
+plot_icecurves(arcticice)
+```
+]
+---
+class: left
+### Increasing Hurricane Activity
+.small-code[
+```{r hurricanes, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+hurricanes <- get_hurricanes()
+plot_hurricanes(hurricanes)
+```
+]
+---
+class: left
+### Methane Traps 80x As Much Heat as CO<sub>2</sub> Over 20 Years
+.small-code[
+```{r methane, out.width='70%', fig.retina=2, message=FALSE, fig.align="center"}
+ch4 <- get_methane()
+plot_methane(ch4)
+```
+]
+
+---
+# hockeystick Summary
+
+ - Easy to use access to peer-reviewed climate data
+ 
+ - Returns data frames or pre-defined plots
+ 
+ - Plenty of customization options
+ 
+ - Please open issues or submit PRs via github
+ 
+ - Collaborators very welcome
+ 
+ ## https://github.com/cortinah/hockeystick
+ 
+ # Thank you!

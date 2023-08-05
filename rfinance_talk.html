@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Hockeystick</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Hernando Cortina" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: nopagenum, center
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+# hockeystick
+# Visualizing Global Heating With R
+
+&lt;br&gt;&lt;br&gt; 
+## Hernando Cortina
+## R in Finance Conference
+## Chicago, 19 May 2023
+
+
+---
+
+class: nopagenum
+
+background-image: url(https://github.com/cortinah/hockeystick/blob/main/man/figures/logo.png?raw=true)
+
+
+
+
+---
+
+# hockeystick R Package
+
+- The impact of global heating on markets is an active research topic
+
+- Central Banks and regulators: ECB, FRB, BIS are studying policy and regulation
+
+- The EU has specific regulation on Paris-Aligned Benchmarks and funds
+
+- There are multitudes of climate-oriented active and passive funds  
+
+.footnote[
+Opinions are my own and may not reflect those of my employer.
+]
+
+
+--
+&lt;br /&gt;
+
+- **The Challenge**: most finance practitioners are not climate experts
+
+- However, we like to look at data -- but which climate data?
+
+- The volume of climate research and data on the web is vast and complex  
+
+--
+&lt;br /&gt;
+
+- `hockeystick` makes essential climate data easily available in R to non-climate experts
+
+---
+
+# Install hockeystick
+
+Install the **hockeystick** package from CRAN or [Github](https://github.com/cortinah/hockeystick):
+
+
+```r
+install.packages("hockeystick")
+```
+
+
+```r
+remotes::install_github("cortinah/hockeystick")
+```
+
+
+```r
+library(hockeystick)
+```
+
+--
+### Features:
+
+- Simple API to curated climate data
+
+- Fetches latest data from original source
+
+- Pre-defined plots
+
+- Optional caching
+
+- Very easy to use
+
+---
+class: top
+
+## A Brief and Incomplete History of Climate Science
+
+--
+&lt;br /&gt;
+
+- 1856: Eunice Foote published a scientific paper demonstrating the absorption of heat by CO&lt;sub&gt;2&lt;/sub&gt;.
+
+--
+
+- 1896: Svante Arrhenius predicted that more carbon in the atmosphere would lead to global warming.
+
+--
+
+-  1960: Charles Keeling demonstrated that the level of CO&lt;sub&gt;2&lt;/sub&gt; in the atmosphere was rising.
+
+--
+
+- 1979 World Climate Conference: plausible that increased carbon dioxide in the atmosphere can contribute to a gradual warming.
+
+--
+
+- 1988: Jim Hansen assessed human-caused warming had already measurably affected the climate.
+
+--
+
+- 2020: `hockeystick` published on CRAN. 😄
+
+---
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Eunice_Foote_-_%22Circumstances_Affecting_the_Heat_of_the_Sun%27s_Rays%22_%281856%29.png/1920px-Eunice_Foote_-_%22Circumstances_Affecting_the_Heat_of_the_Sun%27s_Rays%22_%281856%29.png)
+background-size: 650px
+background-position: 50% 20%
+
+"Circumstances Affecting the Heat of the Sun's Rays" by Eunice Foote
+---
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/6c/Arrhenius2.jpg)
+background-size: 450px
+background-position: 50% 20%
+
+Svante Arrhenius
+---
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/19021015_Hint_to_Coal_Consumers_-_Svante_Arrhenius_-_The_Selma_Morning_Times_-_Global_warming.jpg/2560px-19021015_Hint_to_Coal_Consumers_-_Svante_Arrhenius_-_The_Selma_Morning_Times_-_Global_warming.jpg)
+background-size: 600px
+background-positio: 30% 10%
+
+Early Warning on Climate Change, 1902
+
+---
+
+class: bottom
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/19120814_Coal_Consumption_Affecting_Climate_-_Rodney_and_Otamatea_Times.jpg/1445px-19120814_Coal_Consumption_Affecting_Climate_-_Rodney_and_Otamatea_Times.jpg?20220809225210)
+background-size: 600px
+background-positio: 30% 10%
+
+
+Prescient Warning from 1912, Based on Popular Mechanics article
+
+---
+class: middle, center
+
+# Let's Get to the Code!
+---
+class: left
+### Carbon Concentration in the Atmosphere, Mauna Loa, Since 1958
+
+.small-code[
+
+```r
+co2 &lt;- get_carbon()
+plot_carbon(co2)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/carbon-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Global Annual CO&lt;sub&gt;2&lt;/sub&gt; Emissions:
+
+.small-code[
+
+```r
+emissions &lt;- get_emissions()
+plot_emissions(emissions)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/emissions-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Visualize Cumulative Emissions by Country:
+
+.small-code[
+
+```r
+emissions_map(emissions)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/emissionsm-1.png" width="72%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Global Temperature Anomaly
+
+.small-code[
+
+```r
+anomaly &lt;- get_temp()
+plot_temp(anomaly)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/temp-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Warming Stripes Visualization
+
+.small-code[
+
+```r
+warming_stripes()
+```
+
+&lt;img src="rfinance_talk_files/figure-html/sripes-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Common Era Temperatures
+
+.small-code[
+
+```r
+anomaly2k &lt;- get_temp2k()
+plot_temp2k(anomaly2k)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/ce-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Sea Level Rising
+
+.small-code[
+
+```r
+gmsl &lt;- get_sealevel()
+plot_sealevel(gmsl)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/sl-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Shrinking Arctic Ice
+
+.small-code[
+
+```r
+arcticice &lt;- get_icecurves()
+plot_icecurves(arcticice)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/ice-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Increasing Hurricane Activity
+.small-code[
+
+```r
+hurricanes &lt;- get_hurricanes()
+plot_hurricanes(hurricanes)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/hurricanes-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+---
+class: left
+### Methane Traps 80x As Much Heat as CO&lt;sub&gt;2&lt;/sub&gt; Over 20 Years
+.small-code[
+
+```r
+ch4 &lt;- get_methane()
+plot_methane(ch4)
+```
+
+&lt;img src="rfinance_talk_files/figure-html/methane-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# hockeystick Summary
+
+ - Easy to use access to peer-reviewed climate data
+ 
+ - Returns data frames or pre-defined plots
+ 
+ - Plenty of customization options
+ 
+ - Please open issues or submit PRs via github
+ 
+ - Collaborators very welcome
+ 
+ ## https://github.com/cortinah/hockeystick
+ 
+ # Thank you!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

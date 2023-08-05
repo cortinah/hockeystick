@@ -1,0 +1,9 @@
+.small-code .remark-code{
+  font-size: 70%
+}
+
+*{ margin-bottom: -6px; }
+
+.nopagenum .remark-slide-number {
+  display: none;
+}
