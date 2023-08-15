@@ -69,3 +69,7 @@
 # hockeystick 0.8.0
 
 * Add daily temperature data from ClimateReanalyzer.org
+
+# hockeystick 0.8.1
+
+* Select hurricane category in get_hurricanes() / Fix daily temp caching
