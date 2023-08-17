@@ -2,7 +2,7 @@
 #'
 #' Retrieves historical carbon dioxide and temperature records from the Vostok ice core during the past 420,000 years.
 #' Source of data is the U.S. Department of Energy’s (DOE) Environmental System Science Data Infrastructure for a Virtual Ecosystem (ESS-DIVE).
-#' \url{https://ess-dive.lbl.gov/} and \url{https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html}
+#' \url{https://ess-dive.lbl.gov/} and \url{https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/CLI.006}
 #'
 #' @name get_paleo
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
@@ -37,7 +37,7 @@
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
 #' \itemize{
-#' \item Historical Carbon Dioxide Record from the Vostok Ice Core (US Dept of Energy): \url{https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html}
+#' \item Historical Carbon Dioxide Record from the Vostok Ice Core (US Dept of Energy): \url{https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/CLI.006}
 #' \item Petit J R ; Raynaud D ; Lorius C ; Delaygue G ; Jouzel J ; Barkov N I ; Kotlyakov V M  (2000): Historical Isotopic Temperature Record from the Vostok Ice Core. CDIAC. doi:10.3334/CDIAC/CLI.006. \url{https://data.ess-dive.lbl.gov/view/doi:10.3334/CDIAC/CLI.006}
 #' \item Barnola J ; Raynaud D ; Lorius C ; Barkov N  (2003): Historical Carbon Dioxide Record from the Vostok Ice Core (417,160 - 2,342 years BP). None. doi:10.3334/CDIAC/ATG.009 \url{https://data.ess-dive.lbl.gov/view/doi:10.3334/CDIAC/ATG.009}
 #'  }
@@ -53,22 +53,22 @@ get_paleo <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"
     if (file.exists(file.path(hs_path,'paleo.rds'))) return(invisible(readRDS((file.path(hs_path,'paleo.rds')))))
   }
 
-file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'
+file_url <- 'https://data.ess-dive.lbl.gov/catalog/d1/mn/v2/object/ess-dive-457358fdc81d3a5-20180726T203952542'
 connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
 download.file(file_url, dl)
-vostok <- readr::read_table(dl, col_names = FALSE, skip = 21)
+vostok <- readr::read_table(dl, col_names = FALSE, skip = 21, show_col_types = FALSE)
 colnames(vostok) <- c('depth', 'age_ice', 'age_air', 'co2')
 
-file_url <- 'http://cdiac.ess-dive.lbl.gov/ftp/trends/temp/vostok/vostok.1999.temp.dat'
+file_url <- 'https://data.ess-dive.lbl.gov/catalog/d1/mn/v2/object/ess-dive-1e57f3f83864c10-20180717T104354142744'
 connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
 download.file(file_url, dl)
-paleotemp <- readr::read_table(dl, col_names = FALSE, skip = 60)
+paleotemp <- readr::read_table(dl, col_names = FALSE, skip = 60, show_col_types = FALSE)
 colnames(paleotemp) <- c('depth', 'age_ice', 'deuterium', 'temp')
 
 suppressMessages( paleo <- dplyr::full_join(vostok, paleotemp) )
@@ -129,7 +129,7 @@ b <- ggplot(dataset[dataset$name=='temp',], aes(x=age_ice, y=value)) +geom_line(
             labs(x='Millennia before present', y='Temperature (C\U00B0)') +theme_bw()
 
 plot <- patchwork::wrap_plots(a, b, ncol=1) + patchwork::plot_annotation(title = expression('Paleoclimate: The Link Between '*CO[2]*' and Temperature'),
-      caption = 'Source: U.S. Department of Energy ESS-DIVE\nhttp://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2\nhttp://cdiac.ess-dive.lbl.gov/ftp/trends/temp/vostok/vostok.1999.temp.dat',
+      caption = 'Source: U.S. Department of Energy ESS-DIVE\nhttps://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/ATG.009\nhttps://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/CLI.006',
       subtitle='420,000 years from the Vostok ice core, Antarctica.', theme = theme(  plot.title = element_text(size = 14)))
 
 if (print) suppressMessages( print(plot) )

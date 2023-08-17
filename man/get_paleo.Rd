@@ -22,7 +22,7 @@ Petit J R ; Raynaud D ; Lorius C ; Delaygue G ; Jouzel J ; Barkov N I ; Kotlyako
 \description{
 Retrieves historical carbon dioxide and temperature records from the Vostok ice core during the past 420,000 years.
 Source of data is the U.S. Department of Energy’s (DOE) Environmental System Science Data Infrastructure for a Virtual Ecosystem (ESS-DIVE).
-\url{https://ess-dive.lbl.gov/} and \url{https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html}
+\url{https://ess-dive.lbl.gov/} and \url{https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/CLI.006}
 }
 \examples{
 \donttest{
@@ -41,7 +41,7 @@ plot_paleo(vostok) }
 }
 \references{
 \itemize{
-\item Historical Carbon Dioxide Record from the Vostok Ice Core (US Dept of Energy): \url{https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html}
+\item Historical Carbon Dioxide Record from the Vostok Ice Core (US Dept of Energy): \url{https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/CLI.006}
 \item Petit J R ; Raynaud D ; Lorius C ; Delaygue G ; Jouzel J ; Barkov N I ; Kotlyakov V M  (2000): Historical Isotopic Temperature Record from the Vostok Ice Core. CDIAC. doi:10.3334/CDIAC/CLI.006. \url{https://data.ess-dive.lbl.gov/view/doi:10.3334/CDIAC/CLI.006}
 \item Barnola J ; Raynaud D ; Lorius C ; Barkov N  (2003): Historical Carbon Dioxide Record from the Vostok Ice Core (417,160 - 2,342 years BP). None. doi:10.3334/CDIAC/ATG.009 \url{https://data.ess-dive.lbl.gov/view/doi:10.3334/CDIAC/ATG.009}
 }

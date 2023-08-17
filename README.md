@@ -253,7 +253,7 @@ climate_grid()
   Center](https://nsidc.org/home). Data Archive:
   <https://nsidc.org/data/explore-data>
 - Vostok carbon dioxide and temperature data:
-  <https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html>
+  <https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/ATG.009>
 - Common Era reconstructed temperature data: [PAGES2k Consortium and
   NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)).
 - Hurricanes: National Oceanic and Atmospheric Administration HURDAT
@@ -284,6 +284,6 @@ climate_grid()
 - Here are some online resources I have found very helpful to learn mo
   re about climate science:
 - MIT edX Global Warming Science.
-  <https://www.edx.org/course/global-warming-science>
+  <https://www.edx.org/learn/physics/massachusetts-institute-of-technology-global-warming-science>
 - SDG Academy: Climate Change: The Science and Global Impact.
   <https://sdgacademy.org/course/climate-change-the-science-and-global-impact/>

@@ -63,7 +63,12 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
   hs_path <- tools::R_user_dir("hockeystick", "cache")
 
   if (use_cache) {
-    if (file.exists(file.path(hs_path, 'dailytemp.rds'))) return(invisible(readRDS((file.path(hs_path,'dailytemp.rds')))))
+    if (file.exists(file.path(hs_path, 'dailytemp.rds')))
+
+    {cached_temp <- readRDS((file.path(hs_path, 'dailytemp.rds')))
+     cached_region <- attr(cached_temp, "hs_daily_region")
+
+      if (region==cached_region) return(invisible(cached_temp)) }
   }
 
   file_url <- switch(region,

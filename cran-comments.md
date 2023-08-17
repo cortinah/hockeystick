@@ -13,5 +13,3 @@ If user chooses to cache data locally with (write_cache=TRUE option) then locati
 
 ## Internet connectivity
 Since version 0.7.2 tests for url-specific connectivity before initiating transfers to conform with CRAN rules.
-
-Version 0.7.3 fixes climate_grid bug
