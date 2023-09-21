@@ -4,22 +4,22 @@ old <- options(pillar.sigfig = 4)
 options(digits=4)
 ### Global heat
 
-t <- get_temp(use_cache = F)
+t <- get_temp(use_cache = F, write_cache = T)
 
-t |> rowwise() |> mutate(ytd=mean(c(Jan,Feb,Mar,Apr,May,Jun,Jul))) |> ungroup() -> t
+t |> rowwise() |> mutate(ytd=mean(c(Jan,Feb,Mar,Apr,May,Jun,Jul,Aug))) |> ungroup() -> t
 
-#Jan-Jul actual: 1.034
+#Jan-Aug actual: 1.06
 
 t |> mutate(diff=`J-D`-ytd) -> t
 
 
-tail(head(t,-1), 7) |> summarize(diff=mean(diff)) |> as.numeric() -> temp_diff
+tail(head(t,-1), 5) |> summarize(diff=mean(diff)) |> as.numeric() -> temp_diff
 slice_tail(t,n=1) |> select(ytd) |> as.numeric() + temp_diff
 
-# Implies annual avg: 1.043 20-yr
-# Implies annual avg: 1.039 10-yr
-# Implies annual avg: 1.019 7-yr
-# Implies annual avg: 1.034 5-yr
+# Implies annual avg: 1.069 20-yr
+# Implies annual avg: 1.067 10-yr
+# Implies annual avg: 1.051 7-yr
+# Implies annual avg: 1.064 5-yr
 
 
 ## daily temps
@@ -48,17 +48,27 @@ d |> filter(year==2023) |> filter(dummy_date>=as.Date('1975-09-01')) |>
 
 t <- get_temp()
 
-t |> rowwise() |> mutate(h1=mean(c(Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep))) |> ungroup() -> t
+t |> rowwise() |> mutate(ytd=mean(c(Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep))) |> ungroup() -> t
 
-t |> mutate(diff= `J-D`- h1) -> t
+t |> mutate(diff = `J-D`- ytd) -> t
 
 tail(head(t, -1), 7) |> summarize(diff=mean(diff)) |> as.numeric() -> temp_diff_new
 
 # August
 mean(c(as.numeric(tail(t,1)[2:8]), 0.77049 + 0.4999)) + -0.007857 ##1.056
 
-mean(c(as.numeric(tail(t,1)[2:8]), 1.27, mtddavg + daily_diff)) + temp_diff_new ##1.073
+# September
+mean(c(as.numeric(tail(t,1)[2:9]), mtddavg + daily_diff)) + temp_diff_new ##1.084 Sep 14
 
+# ALL --> 1.103
+mean(c(as.numeric(tail(t,1)[2:9]), mtddavg + daily_diff, 0.69 + daily_diff,0.69 + daily_diff,0.69 + daily_diff))
+
+# plot
+library(ggplot2)
+d |> filter(year==2023 | year==2022) |> filter(dummy_date > as.Date("1975-09-01")) |>
+  ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=1) + geom_smooth() + theme_minimal()
+
+plot_dailytemp()
 
 ## results data
 yearly<-read.csv("https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt", skip = 2,sep = '')
@@ -68,6 +78,5 @@ yearly<-yearly[-1, 1:2]
 
 mean(as.numeric(tail(t,4)[1,2:13]))
 
-## remaining Aug-Dec
-((1.0449 *12) - sum(t[144,2:8]))/5 #1.0597
-
+## remaining Sep-Dec < 1.11
+((1.1049 * 12) - sum(t[144,2:9]))/4 # 1.195  1.195 - 0.45 = 0.745
