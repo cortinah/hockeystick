@@ -73,3 +73,7 @@
 # hockeystick 0.8.1
 
 * Select hurricane category in get_hurricanes() / Fix daily temp caching
+
+# hockeystick 0.8.2
+
+* Update new get_dailytemp() urls

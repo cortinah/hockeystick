@@ -72,21 +72,26 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
   }
 
   file_url <- switch(region,
-                     W='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_world_t2_day.json',          # World Air
-                     NH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_nh_t2_day.json',            # Northern Hemi Air
-                     SH='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_sh_t2_day.json',            # Southern Hemi Air
-                     AR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_arctic_t2_day.json',        # Arctic Air
-                     AN='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_antarctic_t2_day.json',     # #Antarctic Air
-                     TR='https://climatereanalyzer.org/clim/t2_daily/json/cfsr_tropics_t2_day.json',       # Tropics Air
-                     WS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_world2_sst_day.json',  # World Sea
-                     AS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json') # North Atlantic Sea
+                      W='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_world_t2_day.json',       # World Air
+                     NH='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_nh_t2_day.json',          # Northern Hemi Air
+                     SH='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_sh_t2_day.json',          # Southern Hemi Air
+                     AR='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_arctic_t2_day.json',      # Arctic Air
+                     AN='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_antarctic_t2_day.json',   # #Antarctic Air
+                     TR='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_tropics_t2_day.json',     # Tropics Air
+                     WS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_world2_sst_day.json',     # World Sea
+                     AS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json')    # North Atlantic Sea
 
                      connected <- .isConnected(file_url)
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   dl <- tempfile()
   download.file(file_url, dl)
-  temp_json <- jsonlite::fromJSON(dl)
+  temp_json <- tryCatch (jsonlite::fromJSON(dl),
+                          error=function(error_msg) {
+                            message('Invalid JSON file, please check temperature data url.')
+                            return(NULL)
+                            } )
+  if (is.null(temp_json)) return(invisible(NULL))
 
 leap_years <- seq.int(1980, 2032, 4)
 

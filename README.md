@@ -284,6 +284,6 @@ climate_grid()
 - Here are some online resources I have found very helpful to learn mo
   re about climate science:
 - MIT edX Global Warming Science.
-  <https://www.edx.org/learn/physics/massachusetts-institute-of-technology-global-warming-science>
+  <https://www.edx.org/learn/global-warming/massachusetts-institute-of-technology-global-warming-science>
 - SDG Academy: Climate Change: The Science and Global Impact.
   <https://sdgacademy.org/course/climate-change-the-science-and-global-impact/>
