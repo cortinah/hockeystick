@@ -77,3 +77,7 @@
 # hockeystick 0.8.2
 
 * Update new get_dailytemp() urls
+
+# hockeystick 0.8.3
+
+* Make daily region codes consistent with documentation

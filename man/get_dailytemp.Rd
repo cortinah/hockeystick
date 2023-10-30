@@ -8,7 +8,7 @@ get_dailytemp(
   use_cache = TRUE,
   write_cache = getOption("hs_write_cache"),
   region = "W",
-  mean_start = if (region == "WS" | region == "AS") 1982 else 1979,
+  mean_start = if (region \%in\% c("WS", "NS", "ws", "ns")) 1982 else 1979,
   mean_end = 2000
 )
 }

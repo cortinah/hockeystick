@@ -57,10 +57,11 @@
 
 get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"),
                           region = 'W',
-                          mean_start = if(region == 'WS' | region == 'AS') 1982 else 1979,
+                          mean_start = if(region %in% c('WS','NS', 'ws', 'ns')) 1982 else 1979,
                           mean_end = 2000) {
 
   hs_path <- tools::R_user_dir("hockeystick", "cache")
+  region <- toupper(region)
 
   if (use_cache) {
     if (file.exists(file.path(hs_path, 'dailytemp.rds')))
@@ -72,17 +73,17 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
   }
 
   file_url <- switch(region,
-                      W='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_world_t2_day.json',       # World Air
-                     NH='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_nh_t2_day.json',          # Northern Hemi Air
-                     SH='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_sh_t2_day.json',          # Southern Hemi Air
-                     AR='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_arctic_t2_day.json',      # Arctic Air
-                     AN='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_antarctic_t2_day.json',   # #Antarctic Air
-                     TR='https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_tropics_t2_day.json',     # Tropics Air
-                     WS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_world2_sst_day.json',     # World Sea
-                     AS='https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json')    # North Atlantic Sea
+                      W = 'https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_world_t2_day.json',       # World Air
+                     NW = 'https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_nh_t2_day.json',          # Northern Hemi Air
+                     SW = 'https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_sh_t2_day.json',          # Southern Hemi Air
+                     AR = 'https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_arctic_t2_day.json',      # Arctic Air
+                     AN = 'https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_antarctic_t2_day.json',   # #Antarctic Air
+                     TR = 'https://climatereanalyzer.org/clim/t2_daily/json_cfsr/cfsr_tropics_t2_day.json',     # Tropics Air
+                     WS = 'https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_world2_sst_day.json',     # World Sea
+                     NS = 'https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json')    # North Atlantic Sea
 
                      connected <- .isConnected(file_url)
-  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+  if (!connected) {message("Retrieving remote data requires internet connectivity.\nAvailable regions are: W, NW, SW, AR, AN, TR, WS, NS."); return(invisible(NULL))}
 
   dl <- tempfile()
   download.file(file_url, dl)
@@ -125,7 +126,7 @@ daily_temperature <- left_join(daily_temperature, dates, by='day_of_year')
 
 colnames(daily_temperature)[4] <- paste0(mean_start,'-',mean_end,' mean')
 
-if (region == 'WS' | region == 'AS') daily_temperature <- daily_temperature |> filter(year!=1981)
+if (region == 'WS' | region == 'NS') daily_temperature <- daily_temperature |> filter(year!=1981)
 
 attr(daily_temperature, "hs_daily_region") <- region
 
@@ -190,21 +191,21 @@ region <- attr(dataset, "hs_daily_region")
 
 subtitle_lab <- '2-meter temperature since 1979 and mean'
 
-if (region == 'WS' ||region == 'AS') subtitle_lab <- 'Sea surface temperature since 1982 and mean'
+if (region == 'WS' ||region == 'NS') subtitle_lab <- 'Sea surface temperature since 1982 and mean'
 
 if (title_lab == "Daily Average Air Temperature") {
 
-    if (region == 'WS' | region == 'AS') title_lab <- 'Daily Average Sea Surface Temperature'
+    if (region == 'WS' | region == 'NS') title_lab <- 'Daily Average Sea Surface Temperature'
 
     region <- switch(region,
-                     W = 'World',
-                     NH = 'Northern Hemisphere',
-                     SH = 'Southern Hemisphere',
+                      W = 'World',
+                     NW = 'Northern Hemisphere',
+                     SW = 'Southern Hemisphere',
                      AR = 'Arctic',
                      AN = 'Antarctic',
                      TR = 'Tropics',
                      WS = 'World (60S-60N)',
-                     AS = 'North Atlantic')
+                     NS = 'North Atlantic')
 
     title_lab <- paste(region, title_lab)}
 
@@ -230,7 +231,7 @@ plot <- ggplot(dataset) +
 if (anomaly) {
   subtitle_lab <- '2-meter temperature since 1979, mean, and current anomaly'
 
-  if (region == 'World (60S-60N)' | region == 'North Atlantic' | region == 'WS' | region == 'AS')
+  if (region == 'World (60S-60N)' | region == 'North Atlantic' | region == 'WS' | region == 'NS')
       subtitle_lab <- 'Sea surface temperature since 1982, mean, and current anomaly'
 
   plot <- plot +
