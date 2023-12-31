@@ -77,3 +77,7 @@
 # hockeystick 0.8.2
 
 * Update new get_dailytemp() urls
+
+# hockeystick 0.8.3
+
+* Update to reflect climatereanalyzer switch to Copernicus data

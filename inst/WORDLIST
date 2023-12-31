@@ -15,6 +15,7 @@ ClimateReanalyzer
 Cowtan
 Delaygue
 Dlugokencky
+ECMWF
 ERSST
 ESRL
 ESS
@@ -49,7 +50,6 @@ NOAA's
 NOAA’s
 NSIDC
 Neukom
-OISST
 ORCID
 OWID
 Organisation
@@ -91,7 +91,7 @@ edX
 et
 ggplot
 github
-gridded
+gridcells
 hs
 https
 icecurves

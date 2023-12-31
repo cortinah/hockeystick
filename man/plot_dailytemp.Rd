@@ -27,7 +27,7 @@ plot_dailytemp(
 Invisibly returns a ggplot2 object with daily temperature anomaly chart
 }
 \description{
-Plots the daily temperatures and anomaly since 1979 retrieved using \code{get_dailytemp()} with ggplot2. The output ggplot2 object may be further modified.
+Plots the daily temperatures since 1940 and current anomaly data retrieved using \code{get_dailytemp()} with ggplot2. The output ggplot2 object may be further modified.
 }
 \details{
 \code{plot_temp} invisibly returns a ggplot2 object with a pre-defined daily temperature anomaly chart using data from \code{get_dailytemp}.

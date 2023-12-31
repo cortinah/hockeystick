@@ -8,7 +8,7 @@ get_dailytemp(
   use_cache = TRUE,
   write_cache = getOption("hs_write_cache"),
   region = "W",
-  mean_start = if (region == "WS" | region == "AS") 1982 else 1979,
+  mean_start = if (region \%in\% c("WS", "NS", "ws", "ns")) 1982 else 1979,
   mean_end = 2000
 )
 }
@@ -24,9 +24,9 @@ get_dailytemp(
 \item{mean_end}{(numeric) End year for historic mean, defaults to 2000.}
 }
 \value{
-Invisibly returns a tibble with the daily 2-meter air or sea surface temperatures since 1979 as well as historic mean by day-of-year and current anomaly versus mean.
+Invisibly returns a tibble with the daily 2-meter air or sea surface temperatures since 1940 as well as historic mean by day-of-year and current anomaly versus mean.
 
-\code{get_dailytemp} invisibly returns a tibble with the daily temperatures since 1979 as well as mean by day-of-year and anomaly. Default to world data, but region can be selected among six options.
+\code{get_dailytemp} invisibly returns a tibble with the daily temperatures since 1940 as well as mean by day-of-year and anomaly. Default to world data, but region can be selected among six options.
 
 Region options include world air (default), Northern Hemisphere air, Southern Hemisphere air, Tropics air, Arctic air, Antarctic air, World sea surface and North Atlantic sea surface and is stored in attribute of output.
 The historic daily mean-by-day period defaults to 1979-2000. This range can be optionally modified.
@@ -60,8 +60,8 @@ arctictemp <- get_dailytemp(region='AR', use_cache=FALSE)}
 \itemize{
 \item ClimateReanalyzer.org: \url{https://climatereanalyzer.org/clim/t2_daily/}
 
-Notes: The "Daily 2-meter Air Temperature" page shows area-weighted daily means calculated from the 2-meter air temperature variable from the Climate Forecast System version 2 and Climate Forecast System Reanalysis, which are publicly available products of the NOAA National Centers for Environmental Prediction.
-Sea surface is from NOAA Optimum Interpolation SST (OISST) version 2.1. OISST is a 0.25°x0.25° gridded dataset that provides estimates of temperature based on a blend of satellite, ship, and buoy observations. The dataset spans 1 January 1982 to present with a 1 to 2-day lag from the current day.
+Notes: daily mean surface air temperature (2-meter height) estimates from the ECMWF Reanalysis version 5 (ERA5) for the period January 1940 to present. ERA5 is a state-of-the-art numerical climate/weather modeling framework that ingests surface, radiosonde, and satellite observations to estimate the state of the atmosphere through time.
+ERA5 files have a horizontal grid resolution of 0.25° x 0.25° (about 31km x 31km at 45°N). Each daily temperature represents an average across all model gridcells within the defined latitude/longitude bounds for the selected domain. The means are area-weighted to account for the convergence of longitude lines at the poles
 
 }
 }
