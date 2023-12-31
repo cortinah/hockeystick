@@ -80,4 +80,4 @@
 
 # hockeystick 0.8.3
 
-* Make daily region codes consistent with documentation
+* Update to reflect climatereanalyzer switch to Copernicus data
