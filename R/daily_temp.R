@@ -193,7 +193,7 @@ invisible(daily_temperature)
 #'
 #' @export
 
-plot_dailytemp <- function(dataset = get_dailytemp(), print = TRUE, anomaly = TRUE,
+plot_dailytemp <- function(dataset = get_dailytemp(), print = TRUE, anomaly = TRUE, maxtemp = FALSE,
                            current_year = as.numeric(substr(Sys.Date(), 1, 4)),
                            title_lab = 'Daily Average Air Temperature') {
 
@@ -229,7 +229,6 @@ if (title_lab == "Daily Average Air Temperature") {
 
 plot <- ggplot(dataset) +
     geom_line(aes(x = dummy_date, y = temp, group = year, color = 'A'), alpha = 0.7) +
-    scale_fill_gradientn(name = 'Anomaly (C\U00B0)', colors = RColorBrewer::brewer.pal(9, 'YlOrRd'), labels = scales::label_number(accuracy = 0.1)) +
     geom_line(aes(dummy_date, mean_temp, color = 'M'), linetype = 'dashed', linewidth = 1.1) +
     scale_y_continuous(n.breaks = 9) +
     theme_bw(base_size = 12) +
@@ -252,7 +251,8 @@ if (anomaly) {
   if (region == 'World (60S-60N)' | region == 'North Atlantic' | region == 'WS' | region == 'NS')
       subtitle_lab <- 'Sea surface temperature since 1982, mean, and current anomaly'
 
-  plot <- plot +
+  plot <- plot + scale_fill_gradientn(name = 'Anomaly (C\U00B0)', colors = RColorBrewer::brewer.pal(9, 'YlOrRd'),
+                                      labels = scales::label_number(accuracy = 0.1)) +
           geom_rect(data = filter(dataset, year == current_year),
           aes(xmin = dummy_date - 1,
               xmax = dummy_date,
@@ -263,6 +263,28 @@ if (anomaly) {
             aes(dummy_date, temp, color='L'), linewidth = 1.3) +
     geom_line(aes(dummy_date, mean_temp, color = 'M'), linetype = 'dashed', linewidth = 1.2) +
   labs(subtitle = subtitle_lab) }
+
+if (maxtemp) {
+  subtitle_lab <- '2-meter temperature since 1979, mean, and deviation from prior max'
+
+  if (region == 'World (60S-60N)' | region == 'North Atlantic' | region == 'WS' | region == 'AS')
+    subtitle_lab <- 'Sea surface temperature since 1982, mean, and current anomaly'
+
+  max_temp <- dataset |> filter(year!=current_year) |> group_by(day_of_year) |> summarize(max_temp=max(temp))
+  dataset <- left_join(dataset, max_temp, by = "day_of_year")
+
+  plot <- plot +
+    scale_fill_gradientn(name = 'Deviation (C\U00B0)',
+                         colors = rev(RColorBrewer::brewer.pal(9, 'RdYlGn')), labels = scales::label_number(accuracy = 0.1)) +
+    geom_rect(data = filter(dataset, year == current_year),
+              aes(xmin = dummy_date - 1,
+                  xmax = dummy_date,
+                  ymin = max_temp,
+                  ymax = temp,
+                  fill = temp - max_temp)) +
+    geom_line(data = filter(dataset, year == current_year),
+              aes(dummy_date, temp, color='L'), linewidth = 1.3) +
+    labs(subtitle = subtitle_lab) }
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)
