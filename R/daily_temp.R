@@ -140,7 +140,10 @@ dates <- data.frame(day_of_year=1:365,
 
 daily_temperature <- left_join(daily_temperature, dates, by='day_of_year')
 
-colnames(daily_temperature)[4] <- paste0(mean_start,'-',mean_end,' mean')
+colnames(daily_temperature)[4] <- paste0(mean_start, '-', mean_end, ' mean')
+
+daily_temperature <- daily_temperature |> mutate(date=as.Date(paste0(year,'-','01','-','01')) + day_of_year - 1)
+daily_temperature <- daily_temperature |> relocate(date, .after=day_of_year)
 
 if (region == 'WS' | region == 'NS') daily_temperature <- daily_temperature |> filter(year!=1981)
 
@@ -199,9 +202,9 @@ plot_dailytemp <- function(dataset = get_dailytemp(), print = TRUE, anomaly = TR
 
   if (is.null(dataset)) return(invisible(NULL))
 
-latest <- paste(pull(tail(dataset,1)[1]), substr(pull(tail(dataset,1)[6]),6,7), substr(pull(tail(dataset,1)[6]),9,10), sep = '-')
-meanperiod <- colnames(dataset)[4]
-colnames(dataset)[4] <- 'mean_temp'
+latest <- pull(tail(dataset, 1)['date'])
+meanperiod <- colnames(dataset)[5]
+colnames(dataset)[5] <- 'mean_temp'
 
 region <- attr(dataset, "hs_daily_region")
 
