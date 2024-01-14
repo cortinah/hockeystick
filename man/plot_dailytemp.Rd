@@ -7,7 +7,8 @@
 plot_dailytemp(
   dataset = get_dailytemp(),
   print = TRUE,
-  anomaly = TRUE,
+  anomaly = FALSE,
+  maxtemp = FALSE,
   current_year = as.numeric(substr(Sys.Date(), 1, 4)),
   title_lab = "Daily Average Air Temperature"
 )
@@ -18,6 +19,8 @@ plot_dailytemp(
 \item{print}{(boolean) Display daily temperature ggplot2 chart, defaults to TRUE. Use FALSE to not display chart.}
 
 \item{anomaly}{(boolean) Display current anomaly versus historic mean, defaults to TRUE.}
+
+\item{maxtemp}{(boolean) Display current deviation versus historic max, defaults to FALSE.}
 
 \item{current_year}{(numeric) Year to highlight in alternate color, defaults to current year.}
 
