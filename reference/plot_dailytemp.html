@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_dailytemp</span><span class="op">(</span></span>
 <span>  dataset <span class="op">=</span> <span class="fu"><a href="get_dailytemp.html">get_dailytemp</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  print <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  anomaly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  anomaly <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  maxtemp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  current_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  title_lab <span class="op">=</span> <span class="st">"Daily Average Air Temperature"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -72,6 +73,10 @@
 
 <dt>anomaly</dt>
 <dd><p>(boolean) Display current anomaly versus historic mean, defaults to TRUE.</p></dd>
+
+
+<dt>maxtemp</dt>
+<dd><p>(boolean) Display current deviation versus historic max, defaults to FALSE.</p></dd>
 
 
 <dt>current_year</dt>
