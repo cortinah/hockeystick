@@ -122,6 +122,7 @@ invisible(plot)
 }
 
 
+
 #' Download and plot essential climate data
 #'
 #' Plots the monthly mean temperature anomaly retrieved using `get_temp()` with ggplot2. The output ggplot2 object may be further modified.
@@ -178,9 +179,6 @@ plot_temp_monthly <- function(dataset = get_temp(), print=TRUE) {
   if (print) suppressMessages( print(plot) )
   invisible(plot)
 }
-
-
-
 
 
 
