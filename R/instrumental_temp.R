@@ -228,7 +228,7 @@ plot_temp_scatter <- function(dataset = get_temp(), print=TRUE) {
   dataset <- dataset |> mutate(Date = ceiling_date(ym(paste(year(Year), Month)), 'month') - days(1))
 
   dataset <- dataset |> mutate(max = ifelse(Anomaly == max(dataset$Anomaly), T, F))
-  dataset <- dataset |> mutate(name = ifelse(max == T, as.character(Date), ''))
+  dataset <- dataset |> mutate(name = ifelse(max == T, substr(as.character(Date),1,7), ''))
 
   col_strip <- RColorBrewer::brewer.pal(11, "RdBu")[-(5:7)]
 
@@ -238,7 +238,7 @@ plot_temp_scatter <- function(dataset = get_temp(), print=TRUE) {
     labs(title='Global Land-Ocean Temperature Index (LOTI)', subtitle='Global surface temperature relative to 1951-1980 mean',
          y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/') +
     theme(legend.position = c(0.09, 0.825),legend.background=element_blank() ) +
-    scale_color_gradientn(colors = rev(col_strip)) + geom_text(aes(y = Anomaly+0.1, label=name))
+    scale_color_gradientn(colors = rev(col_strip)) + geom_text(aes(y = Anomaly+0.1, label=name), size=3)
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)
