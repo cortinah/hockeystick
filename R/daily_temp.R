@@ -144,7 +144,7 @@ colnames(daily_temperature)[4] <- paste0(mean_start, '-', mean_end, ' mean')
 
 daily_temperature <- mutate(daily_temperature, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', substr(dummy_date, 9, 10))))
 
-aily_temperature <- daily_temperature |> relocate(date, .after=day_of_year)
+daily_temperature <- daily_temperature |> relocate(date, .after=day_of_year)
 
 if (region == 'WS' | region == 'NS') daily_temperature <- daily_temperature |> filter(year!=1981)
 
