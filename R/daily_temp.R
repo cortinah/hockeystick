@@ -142,7 +142,8 @@ daily_temperature <- left_join(daily_temperature, dates, by='day_of_year')
 
 colnames(daily_temperature)[4] <- paste0(mean_start, '-', mean_end, ' mean')
 
-daily_temperature <- daily_temperature |> mutate(date=as.Date(paste0(year,'-','01','-','01')) + day_of_year - 1)
+daily_temperature <- mutate(daily_temperature, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', substr(dummy_date, 9, 10))))
+
 daily_temperature <- daily_temperature |> relocate(date, .after=day_of_year)
 
 if (region == 'WS' | region == 'NS') daily_temperature <- daily_temperature |> filter(year!=1981)

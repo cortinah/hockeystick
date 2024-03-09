@@ -81,3 +81,7 @@
 # hockeystick 0.8.3
 
 * Update to reflect climatereanalyzer switch to Copernicus data
+
+# hockeystick 0.8.4
+
+* Update to plot_temp_scatter() and plot_temp_monthly()

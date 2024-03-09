@@ -1,6 +1,6 @@
 ## Test environments:
 
-* local Windows install, R 4.3.1
+* local macOS install, R 4.3.3
 
 * GitHub Actions: ubuntu-latest (oldrel-1, release, and devel), macOS-latest (release), windows-latest (release) 
 
