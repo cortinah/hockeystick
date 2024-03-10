@@ -114,6 +114,7 @@ Source for satellite data is NOAA Laboratory for Satellite Altimetry:
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Fetch sea level from cache if available:</span></span></span>
 <span class="r-in"><span><span class="va">gmsl</span> <span class="op">&lt;-</span> <span class="fu">get_sealevel</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Retrieving remote data requires internet connectivity.</span>
 <span class="r-in"><span><span class="co">#</span></span></span>
 <span class="r-in"><span><span class="co"># Force cache refresh:</span></span></span>
 <span class="r-in"><span><span class="va">gmsl</span> <span class="op">&lt;-</span> <span class="fu">get_sealevel</span><span class="op">(</span>use_cache<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
