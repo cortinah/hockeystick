@@ -236,7 +236,6 @@ if (title_lab == "Daily Average Air Temperature") {
 
 plot <- ggplot(dataset) +
     geom_line(aes(x = dummy_date, y = temp, group = year, color = 'A'), alpha = 0.7) +
-    scale_fill_gradientn(name = 'Anomaly (C\U00B0)', colors = RColorBrewer::brewer.pal(9, 'YlOrRd'), labels = scales::label_number(accuracy = 0.1)) +
     geom_line(aes(dummy_date, mean_temp, color = 'M'), linetype = 'dashed', linewidth = 1.1) +
     scale_y_continuous(n.breaks = 9) +
     theme_bw(base_size = 12) +
