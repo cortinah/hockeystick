@@ -110,6 +110,7 @@ library(ggplot2)
 library(hockeystick)
 
 d <- get_dailytemp(use_cache = FALSE, write_cache = FALSE)
+pull(tail(d,1))
 
 d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date("1925-01-01")) |> # nolint: infix_spaces_linter.
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_smooth(se = F) + scale_y_continuous(n.breaks=6) + # nolint
@@ -136,7 +137,10 @@ extra <- tail(d,1)
 fcst <- pull(extra[1,6])
 
 extra <- data.frame(year=rep(2024, 90-pull(extra[1,2])), day_of_year=(pull(extra[1,2])+1):90, date=NA,temp=NA,`1979-2000 mean`=NA, temp_anom=fcst,dummy_date=pull(extra[1,7])+1:(90-pull(extra[1,2])))
+
 colnames(extra) <- colnames(d)
+mutate(extra, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', substr(dummy_date, 9, 10)))) -> extra
+
 f <- bind_rows(d,extra)
 
 f |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
@@ -145,27 +149,68 @@ f |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-0
 
 f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
-  theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
-  scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
+  theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
+  scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
 f |> filter(year==2016 | year==2024) |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
+# Fable
+library(fable)
+library(fable.prophet)
 
-## prophet
-library(prophet)
-fcst <- d |> select(ds=date, y=temp_anom) |> tail(366*3)
-m <- prophet(fcst)
-future <- make_future_dataframe(m, periods = 25)
-forecast <- predict(m, future)
-plot(m, forecast)
+fcst <- d |> select(date, y=temp_anom) |> tail(365*5)
 
-forecast |> select(ds, yhat) |> tail(31) -> forecast
-f |> tail(31) -> f
-f <- cbind(f, forecast)
+train <- as_tsibble(fcst,index=date) |> tsibble::fill_gaps() |>
+  tidyr::fill(y, .direction = "down")
+
+fit <- train |>
+  model(
+   arima = ARIMA(y),
+    ets = ETS(y),
+   prophet = prophet(y)
+)
+
+fc <- fit |> forecast(h='1 month')
+fc |> autoplot()
+
+f <- left_join(f, fc |> filter(.model=='arima')) |> rename(arima=.mean) |> select(-y,-.model)
+f <- left_join(f, fc |> filter(.model=='ets')) |> rename(ets=.mean) |> select(-y,-.model)
+f <- left_join(f, fc |> filter(.model=='prophet')) |> rename(prophet=.mean) |> select(-y,-.model)
 
 
 f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
-  theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
-  scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=yhat), color='red')
+  theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='Red: extend, Blue: ARIMA, Orange: ETS, Purple: Prophet', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
+  scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=arima), color='blue', size=1) + geom_point(aes(y=ets), color='orange', size=1) +
+  geom_point(aes(y=prophet), color='purple', size=1) + theme(legend.position='top')
 
+# substitute projection into temp_anom
+f[(nrow(f)-19):nrow(f),'temp_anom'] <- f[(nrow(f)-19):nrow(f),'arima']
+
+
+f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
+  ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
+  theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='Red: extend, Blue: ARIMA, Orange: ETS, Purple: Prophet', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
+  scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=arima), color='blue', size=1) + geom_point(aes(y=ets), color='orange', size=1) +
+  geom_point(aes(y=prophet), color='purple', size=1) + theme(legend.position='top')
+
+f |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
+
+
+## Prophet
+#library(prophet)
+# fcst <- d |> select(ds=date, y=temp_anom) |> tail(365*5)
+# m <- prophet::prophet(fcst)
+# future <- make_future_dataframe(m, periods = 23)
+# forecast <- predict(m, future)
+# plot(m, forecast)
+#
+# forecast |> select(ds, yhat) |> tail(31) -> forecast
+# f |> tail(31) -> f
+# f <- cbind(f, forecast)
+#
+#
+# f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
+#   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
+#   theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
+#   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=yhat), color='red')
