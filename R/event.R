@@ -184,9 +184,8 @@ f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=arima), color='dodgerblue', size=1) + geom_point(aes(y=ets), color='black', size=1) +
   geom_point(aes(y=prophet), color='orange', size=1) + theme(legend.position='top')
 
-# substitute projection into temp_anom # UPDATE 16
-f[(nrow(f)-14):nrow(f),'temp_anom'] <- f[(nrow(f)-14):nrow(f),'arima']
-
+  # substitute projection into temp_anom # UPDATE 16
+  f[(nrow(f)-14):nrow(f),'temp_anom'] <- f[(nrow(f)-14):nrow(f),'arima']
 
 f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
@@ -216,7 +215,7 @@ f |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-0
 #   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=yhat), color='red')
 
 
-###
+### checks
 d |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) -> mar
 mar |> filter(year!=2024) |> ggplot(aes(x=year, y=ytd)) + geom_col() + theme_bw()
 mar |> filter(year!=2024) |> arrange(-ytd)
