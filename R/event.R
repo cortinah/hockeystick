@@ -122,7 +122,7 @@ d |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-0
 d |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-d |> filter(year==2016 | year==2024) |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=20)
+d |> filter(year==2016 | year==2024) |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 
 d |> filter(year==2016 | year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
@@ -147,7 +147,7 @@ f |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-0
 f |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-f |> filter(year==2016 | year==2024 | year==2023) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
+f |> filter(year==2016 | year==2024 | year==2016) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-05-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
@@ -185,7 +185,7 @@ f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01
   geom_point(aes(y=prophet), color='orange', size=1) + theme(legend.position='top')
 
   # substitute projection into temp_anom # UPDATE 16
-  f[(nrow(f)-14):nrow(f),'temp_anom'] <- f[(nrow(f)-14):nrow(f),'arima']
+  f[(nrow(f)-00):nrow(f),'temp_anom'] <- f[(nrow(f)-00):nrow(f),'arima']
 
 f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date < as.Date("1925-04-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
@@ -195,6 +195,7 @@ f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01
 
 f |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
 
+f |> filter(year==2016 | year==2024) |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 ## Prophet
 #library(prophet)
