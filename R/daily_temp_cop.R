@@ -13,8 +13,8 @@ get_dailytempcop <- function(use_cache = TRUE, write_cache = getOption("hs_write
 
   file_url <- 'https://sites.ecmwf.int/data/climatepulse/data/series/era5_daily_series_2t_global.csv'
 
-  connected <- .isConnected(file_url)
-  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+ # connected <- .isConnected(file_url)
+  #if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   dl <- tempfile()
   download.file(file_url, dl)
