@@ -245,6 +245,7 @@ i <- get_icecurves(write_cache = T)
 i |> filter(year==2024) |> tail(1)
 i |> filter(mo==9) |> arrange(extent)
 i |> filter(mo==3) |> filter(year %in% c(2024,2020,2007)) |> arrange(extent)
+
 plot_icecurves() + geom_hline(yintercept = 4.2)
 
 fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extent)
@@ -269,9 +270,7 @@ accuracy(fit)
 
 fc <- fit |> forecast(h='6 month')
 fc |> autoplot(level = 66) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10)
-
 fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10)
-
 fc |> filter(date==tsibble::make_yearmonth(2024,09)) |> hilo(level = 68)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
