@@ -104,7 +104,7 @@ ggplot(l,aes(x=Name,y=Amount,fill=col)) +geom_col() + theme_minimal() + guides(f
 
 ##########################
 
-# plot Mar kalshi
+# plot May kalshi
 library(dplyr)
 library(ggplot2)
 library(hockeystick)
@@ -118,14 +118,14 @@ d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date
   scale_x_date(date_labels="%b") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
 
 
-d |> filter(dummy_date < as.Date("1925-05-01"), dummy_date >= as.Date("1925-04-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd)
-d |> filter(dummy_date < as.Date("1925-05-01"), dummy_date >= as.Date("1925-04-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
+d |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd)
+d |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-d |> filter(year==2016 | year==2024) |> filter(dummy_date < as.Date("1925-05-01"), dummy_date >= as.Date("1925-04-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
+d |> filter(year==2020 | year==2024) |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 
-d |> filter(year==2016 | year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date < as.Date("1925-05-01")) |>
+d |> filter(year==2020 | year==2020 | year==2024) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date < as.Date("1925-06-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
@@ -133,21 +133,23 @@ d |> filter(year==2016 | year==2016 | year==2024) |> filter(dummy_date >= as.Dat
 # FORECAST REST OF MONTH
 extra <- tail(d,1)
 
-# 0.28 is breakeven as of Feb 2
+# Get latest
 fcst <- pull(extra[1,"temp_anom"])
 
-extra <- data.frame(year=rep(2024, 120-pull(extra[1,2])), day_of_year=(pull(extra[1,2])+1):120, date=NA,temp=NA,`1979-2000 mean`=NA, temp_anom=fcst,dummy_date=pull(extra[1,7])+1:(120-pull(extra[1,2])))
+daysfc <- as.numeric(as.Date("2024-05-31")-as.Date("2024-01-01"))
+
+extra <- data.frame(year=rep(2024, daysfc-pull(extra[1,2])), day_of_year=(pull(extra[1,2])+1):daysfc, date=NA,temp=NA,`1979-2000 mean`=NA, temp_anom=fcst,dummy_date=pull(extra[1,7])+1:(daysfc-pull(extra[1,2])))
 
 colnames(extra) <- colnames(d)
 mutate(extra, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', substr(dummy_date, 9, 10)))) -> extra
 
 f <- bind_rows(d,extra)
 
-f |> filter(dummy_date < as.Date("1925-05-01"), dummy_date >= as.Date("1925-04-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
-f |> filter(dummy_date < as.Date("1925-05-01"), dummy_date >= as.Date("1925-04-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
+f |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
+f |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-f |> filter(year==2016 | year==2024 | year==2016) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date < as.Date("1925-05-01")) |>
+f |> filter(year==2016 | year==2024 | year==2016) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date < as.Date("1925-06-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
@@ -170,7 +172,7 @@ fit <- train |>
    prophet = prophet(y)
 )
 
-fc <- fit |> forecast(h='1 month')
+fc <- fit |> forecast(h='2 month')
 fc |> autoplot()
 accuracy(fit)
 
@@ -186,17 +188,17 @@ f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-04-01
   geom_point(aes(y=prophet), color='orange', size=1) + theme(legend.position='top')
 
   # substitute projection into temp_anom # UPDATE 16
-  f[(nrow(f)-15):nrow(f),'temp_anom'] <- f[(nrow(f)-15):nrow(f),'arima']
+  f[(nrow(f)-41):nrow(f),'temp_anom'] <- f[(nrow(f)-41):nrow(f),'ets']
 
-f |> filter(year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date < as.Date("1925-05-01")) |>
+f |> filter(year==2020 | year==2024) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date < as.Date("1925-06-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='Red: extend, Blue: ARIMA, Orange: ETS, Purple: Prophet', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=arima), color='blue', size=1) + geom_point(aes(y=ets), color='orange', size=1) +
   geom_point(aes(y=prophet), color='purple', size=1) + theme(legend.position='top')
 
-f |> filter(dummy_date < as.Date("1925-05-01"), dummy_date >= as.Date("1925-04-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
+f |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
 
-f |> filter(year==2016 | year==2024) |> filter(dummy_date < as.Date("1925-05-01"), dummy_date >= as.Date("1925-04-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
+f |> filter(year==2020 | year==2024) |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 ## Prophet
 #library(prophet)
@@ -218,9 +220,9 @@ f |> filter(year==2016 | year==2024) |> filter(dummy_date < as.Date("1925-05-01"
 
 
 ### checks
-d |> filter(dummy_date < as.Date("1925-04-01"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) -> mar
-mar |> filter(year!=2024) |> ggplot(aes(x=year, y=ytd)) + geom_col() + theme_bw()
-mar |> filter(year!=2024) |> arrange(-ytd)
+d |> filter(dummy_date < as.Date("1925-06-01"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) -> apr
+apr |> filter(year!=2024) |> ggplot(aes(x=year, y=ytd)) + geom_col() + theme_bw()
+apr |> filter(year!=2024) |> arrange(-ytd)
 #nasa march 2016: 1.34C, copernicus: 0.932
 
 1.34-0.932 +1.08
@@ -234,7 +236,7 @@ mar |> filter(year!=2024) |> arrange(-ytd)
 #
 d |> filter(year==2023) |> mutate(month=substr(dummy_date,6,7)) |> group_by(month) |> summarise(avg=mean(temp_anom))
 
-d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='03') |> group_by(year) |> summarise(avg=mean(temp_anom)) |> filter(year>=2013)
+d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(year) |> summarise(avg=mean(temp_anom)) |> filter(year>=2013)
 
 
 
