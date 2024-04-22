@@ -85,3 +85,7 @@
 # hockeystick 0.8.4
 
 * Update to plot_temp_scatter() and plot_temp_monthly()
+
+# hockeystick 0.8.5
+
+* Add plot_carbontemp() and get_dailytemp_cop()
