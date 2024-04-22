@@ -248,7 +248,7 @@ plot_temp_scatter <- function(dataset = get_temp(), print=TRUE, labelmax=FALSE, 
   if (labellatest) {
     if ( !exists("name", dataset) ) dataset$name <- ''
     dataset[nrow(dataset),'name'] <- substr(as.character(pull(dataset[nrow(dataset),'Date'])), 1, 7)
-    plot <- plot + geom_text(aes(y = Anomaly+0.1, label=dataset$name), size=3) }
+    plot <- plot + geom_text(aes(y = Anomaly+0.2, label=dataset$name), size=3) }
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)
