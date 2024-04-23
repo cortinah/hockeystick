@@ -1,6 +1,6 @@
 #' Download and plot essential climate data
 #'
-#' Retrieves the daily air or sea-surface temperature data since 1979 from ClimateReanalyzer.org
+#' Retrieves the daily air or sea-surface temperature data since 1940 from ClimateReanalyzer.org
 #' Source is University of Maine Climate Change Institute.
 #' \url{https://climatereanalyzer.org/clim/t2_daily/}
 #'
@@ -297,3 +297,93 @@ if (maxtemp) {
   if (print) suppressMessages( print(plot) )
   invisible(plot)
 }
+
+
+#' Download and plot essential climate data
+#'
+#' Retrieves the daily air temperature since 1940 from the EU Copernicus Service
+#' \url{https://cds.climate.copernicus.eu/#!/home}
+#'
+#' @name get_dailytempcop
+#' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)
+#' @param region (string) Region selection, defaults to world air temperature. Options are: World Air "W".
+#'
+#' @return Invisibly returns a tibble with the daily 2-meter air temperatures since 1940 as well as historic mean by day-of-year and current anomaly versus mean.
+#'
+#' `get_dailytempcop` invisibly returns a tibble with the daily temperatures since 1940 as well as mean by day-of-year and anomaly.
+#'
+#' Region options include world air (default).
+#' The historic daily mean-by-day period defaults to 1991-2020.
+#'
+#' Data are updated daily.
+#'
+#' @importFrom utils download.file head tail
+#' @importFrom readr parse_number
+#' @import tidyr
+#' @import dplyr
+#'
+#' @examples
+#' \donttest{
+#' # Fetch temp anomaly from cache if available:
+#' dailytemps <- get_dailytempcop()
+#' #
+#' # Force cache refresh:
+#' dailytemps <- get_dailytempcop(use_cache=FALSE)
+#' #
+#' # Review cache contents and last update dates:
+#' hockeystick_cache_details()
+#' #
+#' # Plot output using package's built-in ggplot2 settings
+#' plot_dailytempcop(dailytemps) }
+#'
+#' @author Hernando Cortina, \email{hch@@alum.mit.edu}
+#' @references
+#' \itemize{
+#' \item Copernicus: \url{https://cds.climate.copernicus.eu/#!/home}
+#'
+#' Notes: daily mean surface air temperature (2-meter height) estimates from the ECMWF Reanalysis version 5 (ERA5) for the period January 1940 to present. ERA5 is a state-of-the-art numerical climate/weather modeling framework that ingests surface, radiosonde, and satellite observations to estimate the state of the atmosphere through time.
+#' ERA5 files have a horizontal grid resolution of 0.25° x 0.25° (about 31km x 31km at 45°N). Each daily temperature represents an average across all model gridcells within the defined latitude/longitude bounds for the selected domain. The means are area-weighted to account for the convergence of longitude lines at the poles
+#'
+#' }
+#'
+#' @export
+
+
+get_dailytempcop <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"), region = 'W') {
+
+  hs_path <- tools::R_user_dir("hockeystick", "cache")
+
+  if (use_cache) {
+    if (file.exists(file.path(hs_path, 'dailytempcop.rds')))
+
+    {cached_temp <- readRDS((file.path(hs_path, 'dailytempcop.rds')))
+    cached_region <- attr(cached_temp, "hs_daily_region")
+
+    if (region==cached_region) return(invisible(cached_temp)) }
+  }
+
+  file_url <- 'https://sites.ecmwf.int/data/climatepulse/data/series/era5_daily_series_2t_global.csv'
+
+  connected <- .isConnected(file_url)
+  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
+  dl <- tempfile()
+  download.file(file_url, dl)
+  temp_csv <- read.csv(dl, skip = 18)
+
+  colnames(temp_csv) <- c('date', 'temp', '1991-2020 mean', 'temp_anom', 'status' )
+  temp_csv$date <- as.Date(temp_csv$date)
+  temp_csv$year <- lubridate::year(temp_csv$date)
+  temp_csv$dummy_date <- as.Date(paste("1925", lubridate::month(temp_csv$date), lubridate::day(temp_csv$date),sep = '-'))
+
+  temp_csv <- temp_csv |> filter(!is.na(dummy_date))
+  temp_csv <- temp_csv |> group_by(year) |> mutate(day_of_year = row_number()) |> ungroup()
+
+  daily_temperature <- temp_csv |> select(year, day_of_year, date, temp, `1991-2020 mean`, temp_anom, dummy_date) |> as_tibble()
+
+  attr(daily_temperature, "hs_daily_region") <- region
+
+  if (write_cache) saveRDS(daily_temperature, file.path(hs_path, 'dailytempcop.rds'))
+
+  invisible(daily_temperature) }
