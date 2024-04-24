@@ -34,7 +34,7 @@ The historic daily mean-by-day period defaults to 1979-2000. This range can be o
 Data are updated daily. For day-of-year mean removes observations from February 29 on leap years.
 }
 \description{
-Retrieves the daily air or sea-surface temperature data since 1979 from ClimateReanalyzer.org
+Retrieves the daily air or sea-surface temperature data since 1940 from ClimateReanalyzer.org
 Source is University of Maine Climate Change Institute.
 \url{https://climatereanalyzer.org/clim/t2_daily/}
 }
