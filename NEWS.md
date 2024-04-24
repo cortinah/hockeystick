@@ -88,4 +88,4 @@
 
 # hockeystick 0.8.5
 
-* Add plot_carbontemp() and get_dailytemp_cop()
+* Add plot_carbontemp() and get_dailytemp_cop(), default to Copernicus
