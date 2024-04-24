@@ -43,7 +43,7 @@ dailytemps <- get_dailytempcop(use_cache=FALSE)
 hockeystick_cache_details()
 #
 # Plot output using package's built-in ggplot2 settings
-plot_dailytempcop(dailytemps) }
+plot_dailytemp(dailytemps) }
 
 }
 \references{

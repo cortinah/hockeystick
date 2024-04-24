@@ -168,6 +168,7 @@ invisible(daily_temperature)
 #' @param maxtemp (boolean) Display current deviation versus historic max, defaults to FALSE.
 #' @param current_year (numeric) Year to highlight in alternate color, defaults to current year.
 #' @param title_lab (string) Title to override default chart title. Default title pulls region name from dataset attributes.
+#' @param cop (boolean) Flag for chart caption, TRUE = Copernicus, FALSE =. ClimateReanalyzer.org
 #'
 #' @return Invisibly returns a ggplot2 object with daily temperature anomaly chart
 #'
@@ -338,7 +339,7 @@ if (maxtemp) {
 #' hockeystick_cache_details()
 #' #
 #' # Plot output using package's built-in ggplot2 settings
-#' plot_dailytempcop(dailytemps) }
+#' plot_dailytemp(dailytemps) }
 #'
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references

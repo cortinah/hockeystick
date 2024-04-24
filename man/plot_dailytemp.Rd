@@ -26,6 +26,8 @@ plot_dailytemp(
 \item{current_year}{(numeric) Year to highlight in alternate color, defaults to current year.}
 
 \item{title_lab}{(string) Title to override default chart title. Default title pulls region name from dataset attributes.}
+
+\item{cop}{(boolean) Flag for chart caption, TRUE = Copernicus, FALSE =. ClimateReanalyzer.org}
 }
 \value{
 Invisibly returns a ggplot2 object with daily temperature anomaly chart
