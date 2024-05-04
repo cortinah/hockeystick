@@ -314,7 +314,7 @@ extra <- tail(d, avgdays)
 
 
 # Get latest
-fcst <- mean(pull(extra[avgdays,"temp_anom"]))
+fcst <- mean(pull(extra[,"temp_anom"]))
 
 daysfc <- as.numeric(as.Date("2024-12-31")-as.Date("2024-01-01"))
 
@@ -329,13 +329,8 @@ f |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice
 f |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-<<<<<<< HEAD
-f |> filter(year==2024 | year==2023) |> ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
-=======
 f |> filter(year==2023 | year==2024) |> ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
->>>>>>> 7bea0bf97bf58670fd66919cfd555ecbfbef1dc2
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
 f |> filter(year==2023 | year==2024) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
-
