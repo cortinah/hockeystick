@@ -243,11 +243,12 @@ d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(yea
 
 library(tidyverse)
 
-i <- get_icecurves(use_cache=F, write_cache = T)
+i <- get_icecurves(use_cache=T, write_cache = F)
 i |> filter(year==2024) |> tail(1)
 i |> filter(mo==9) |> arrange(extent)
-i |> filter(mo==5) |> filter(year %in% c(2024,2020,2007)) |> arrange(extent)
+i |> filter(mo==6) |> filter(year %in% c(2024,2020,2007)) |> arrange(extent)
 
+# to adjust for daily variation
 i |> mutate(extmin=extent*0.95) -> i
 
 plot_icecurves() + geom_hline(yintercept = 4.2) + geom_hline(yintercept = 3.8)
@@ -272,7 +273,7 @@ fit <- train |>
 accuracy(fit)
 
 
-fc <- fit |> forecast(h='6 month')
+fc <- fit |> forecast(h='4 month')
 fc |> autoplot(level = 66) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10)
 fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 3.8)
 fc |> filter(date==tsibble::make_yearmonth(2024,09)) |> hilo(level = 90)
@@ -297,7 +298,7 @@ library(ggplot2)
 library(hockeystick)
 
 d <- get_dailytempcop(use_cache = FALSE, write_cache = TRUE)
-tail(d,3)
+tail(d,5)
 
 d |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd)
 d |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
@@ -308,7 +309,7 @@ d |> filter(year==2023 | year==2024) |>   ggplot(aes(x=dummy_date, y=temp_anom, 
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) +theme(legend.position = 'top')
 
 # FORECAST REST OF YEAR
-avgdays <- 3
+avgdays <- 5
 extra <- tail(d, avgdays)
 
 
