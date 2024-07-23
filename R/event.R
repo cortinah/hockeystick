@@ -381,3 +381,23 @@ f |> filter(year==2023 | year==2024) |>
 
 f |> group_by(year) |> summarize(month=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=month)
 
+
+
+## hottest day ever
+
+maxy <- d |> group_by(year) |> summarize(maxy=max(temp))
+
+maxy |> ggplot(aes(x=year, y=maxy)) +geom_point(color='red', size=2.5) + geom_line(color='dodgerblue', linewidth=1) + theme_bw(base_size = 13) + scale_y_continuous(n.breaks = 8) +
+  scale_x_continuous(n.breaks = 20) +labs(x='Year', y='Highest Annual Temperature (C)', title='Highest-Ever Recorded Global Temperature on July 21, 2024',
+                                          caption='Source: EU Copernicus Climate Service\n cds.climate.copernicus.eu as of 2024-07-21')
+
+
+
+maxy |> ggplot(aes(x=year, y=maxy)) + geom_segment( aes(x=year, xend=year, y=15, yend=maxy), linetype = 2, linewidth = 0.1) +
+  geom_point( size=3, color="red")  + theme_bw(base_size = 13) + scale_y_continuous(n.breaks = 10, limits = c(15,17.25)) +
+  scale_x_continuous(n.breaks = 10) +labs(x=element_blank(), y='Highest Annual Temperature (C)', title='Highest-Ever Recorded Global Average Temperature on July 21, 2024',
+                                          caption='Source: EU Copernicus Climate Service\n cds.climate.copernicus.eu as of 2024-07-21') +
+  theme(axis.line = element_line(color='black'),
+        plot.background = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank()) + geom_smooth()
