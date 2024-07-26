@@ -107,7 +107,7 @@ library(dplyr)
 library(ggplot2)
 library(hockeystick)
 
-d <- get_dailytempcop(use_cache = FALSE, write_cache = FALSE)
+d <- get_dailytempcop(use_cache = FALSE, write_cache = TRUE)
 tail(d,3)
 
 d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date("1925-01-01")) |> # nolint: infix_spaces_linter.
@@ -126,13 +126,13 @@ d |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-08-01"
 d |> filter(year==2023 | year==2023 | year==2024) |> filter(dummy_date >= as.Date("1925-07-01") & dummy_date < as.Date("1925-08-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
-  scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
+  scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
 # FORECAST REST OF MONTH
 extra <- tail(d,1)
 
 # Get latest
-fcst <- pull(extra[1,"temp_anom"])
+fcst <- pull(extra[1, "temp_anom"])
 
 daysfc <- as.numeric(as.Date("2024-07-31")-as.Date("2024-01-01"))
 
@@ -383,20 +383,20 @@ f |> group_by(year) |> summarize(month=round(mean(temp_anom),digits = 2)) |> sli
 
 
 
-## hottest day ever
+#### hottest day ever ####
+options(pillar.sigfig = 4)
+maxtemp <- d |> group_by(year) |> top_n(n = 1, wt = temp)
 
-maxy <- d |> group_by(year) |> summarize(maxy=max(temp))
-
-maxy |> ggplot(aes(x=year, y=maxy)) +geom_point(color='red', size=2.5) + geom_line(color='dodgerblue', linewidth=1) + theme_bw(base_size = 13) + scale_y_continuous(n.breaks = 8) +
-  scale_x_continuous(n.breaks = 20) +labs(x='Year', y='Highest Annual Temperature (C)', title='Highest-Ever Recorded Global Temperature on July 21, 2024',
-                                          caption='Source: EU Copernicus Climate Service\n cds.climate.copernicus.eu as of 2024-07-21')
+maxtemp |> ggplot(aes(x=year, y=temp)) +geom_point(color='red', size=2.5) + geom_line(color='dodgerblue', linewidth=1) + theme_bw() + scale_y_continuous(n.breaks = 8) +
+  scale_x_continuous(n.breaks = 20) +labs(x='Year', y='Highest Annual Temperature (C)', title='Highest-Ever Recorded Global Temperature on July 22, 2024',
+                                          caption='Source: EU Copernicus Climate Service\n cds.climate.copernicus.eu as of 2024-07-22')
 
 
 
-maxy |> ggplot(aes(x=year, y=maxy)) + geom_segment( aes(x=year, xend=year, y=15, yend=maxy), linetype = 2, linewidth = 0.1) +
-  geom_point( size=3, color="red")  + theme_bw(base_size = 13) + scale_y_continuous(n.breaks = 10, limits = c(15,17.25)) +
-  scale_x_continuous(n.breaks = 10) +labs(x=element_blank(), y='Highest Annual Temperature (C)', title='Highest-Ever Recorded Global Average Temperature on July 21, 2024',
-                                          caption='Source: EU Copernicus Climate Service\n cds.climate.copernicus.eu as of 2024-07-21') +
+maxtemp |> ggplot(aes(x=year, y=temp)) + geom_segment( aes(x=year, xend=year, y=15, yend=temp), linetype = 2, linewidth = 0.1) +
+  geom_point( size=3, color="red")  + theme_bw(base_size = 11) + scale_y_continuous(n.breaks = 10, limits = c(15,17.25)) +
+  scale_x_continuous(n.breaks = 10) +labs(x=element_blank(), y='Highest Annual Temperature (C)', title='Highest-Ever Recorded Global Average Temperature on July 22, 2024',
+                                          caption='Source: EU Copernicus Climate Service\n cds.climate.copernicus.eu as of 2024-07-22') +
   theme(axis.line = element_line(color='black'),
         plot.background = element_blank(),
         panel.grid.minor = element_blank(),
