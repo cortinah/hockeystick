@@ -401,3 +401,5 @@ maxtemp |> ggplot(aes(x=year, y=temp)) + geom_segment( aes(x=year, xend=year, y=
         plot.background = element_blank(),
         panel.grid.minor = element_blank(),
         panel.grid.major.x = element_blank()) + geom_smooth()
+
+d |> top_n(wt = temp, n = 5) |> arrange(-temp)
