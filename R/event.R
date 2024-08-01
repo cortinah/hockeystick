@@ -107,6 +107,7 @@ library(dplyr)
 library(ggplot2)
 library(hockeystick)
 
+
 d <- get_dailytempcop(use_cache = FALSE, write_cache = TRUE)
 tail(d,3)
 
@@ -240,13 +241,13 @@ d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(yea
 
 
 #### Arctic Sea ice ####
-
+# https://nsidc.org/arcticseaicenews/sea-ice-tools/
 library(tidyverse)
 
 i <- get_icecurves(use_cache=T, write_cache = F)
 i |> filter(year==2024) |> tail(1)
 i |> filter(mo==9) |> arrange(extent)
-i |> filter(mo==6) |> filter(year %in% c(2024,2020,2007)) |> arrange(extent)
+i |> filter(mo==7) |> filter(year %in% c(2024,2020,2012, 2023)) |> arrange(extent)
 
 # to adjust for daily variation
 i |> mutate(extmin=extent*0.95) -> i
