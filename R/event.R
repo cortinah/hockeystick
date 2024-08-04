@@ -117,14 +117,14 @@ d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date
   scale_x_date(date_labels="%b") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
 
 
-d |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd)
-d |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
+d |> filter(dummy_date < as.Date("1925-09-01"), dummy_date >= as.Date("1925-08-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd)
+d |> filter(dummy_date < as.Date("1925-09-01"), dummy_date >= as.Date("1925-08-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-d |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
+d |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-09-01"), dummy_date >= as.Date("1925-07-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 
-d |> filter(year==2023 | year==2023 | year==2024) |> filter(dummy_date >= as.Date("1925-07-01") & dummy_date < as.Date("1925-08-01")) |>
+d |> filter(year==2023 | year==2023 | year==2024) |> filter(dummy_date >= as.Date("1925-07-01") & dummy_date < as.Date("1925-09-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
@@ -135,7 +135,7 @@ extra <- tail(d,1)
 # Get latest
 fcst <- pull(extra[1, "temp_anom"])
 
-daysfc <- as.numeric(as.Date("2024-07-31")-as.Date("2024-01-01"))
+daysfc <- as.numeric(as.Date("2024-08-31")-as.Date("2024-01-01"))
 
 extra <- data.frame(year=rep(2024, daysfc-pull(extra[1,2])), day_of_year=(pull(extra[1,2])+1):daysfc, date=NA,temp=NA,`1979-2000 mean`=NA, temp_anom=fcst,dummy_date=pull(extra[1,7])+1:(daysfc-pull(extra[1,2])))
 
@@ -144,16 +144,16 @@ mutate(extra, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', subs
 
 f <- bind_rows(d,extra)
 
-f |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
-f |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
+f |> filter(dummy_date < as.Date("1925-09-01"), dummy_date >= as.Date("1925-08-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
+f |> filter(dummy_date < as.Date("1925-09-01"), dummy_date >= as.Date("1925-08-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-f |> filter(year==2022 | year==2024 | year==2023) |> filter(dummy_date >= as.Date("1925-07-01") & dummy_date < as.Date("1925-08-01")) |>
+f |> filter(year==2022 | year==2024 | year==2023) |> filter(dummy_date >= as.Date("1925-07-01") & dummy_date < as.Date("1925-09-01")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
-f |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
+  f |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 # Fable
 library(fable)
@@ -242,17 +242,18 @@ d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(yea
 
 #### Arctic Sea ice ####
 # https://nsidc.org/arcticseaicenews/sea-ice-tools/
+# https://nsidc.org/arcticseaicenews/
 library(tidyverse)
 
 i <- get_icecurves(use_cache=T, write_cache = F)
 i |> filter(year==2024) |> tail(1)
-i |> filter(mo==9) |> arrange(extent)
+i |> filter(mo==7) |> arrange(extent)
 i |> filter(mo==7) |> filter(year %in% c(2024,2020,2012, 2023)) |> arrange(extent)
 
 # to adjust for daily variation
-i |> mutate(extmin=extent*0.95) -> i
+i |> mutate(extmin=extent*0.94) -> i
 
-plot_icecurves() + geom_hline(yintercept = 4.2) + geom_hline(yintercept = 3.8)
+i |> plot_icecurves() + geom_hline(yintercept = 4.2) + geom_hline(yintercept = 3.8)
 
 fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extmin)
 
@@ -260,7 +261,7 @@ fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrang
 library(fable)
 library(fable.prophet)
 
-fcst <- fcst |> select(date, y=extmin) |> tail(12*14)
+fcst <- fcst |> select(date, y=extmin) |> tail(12*15)
 
 train <- as_tsibble(fcst, index=date)
 
@@ -274,7 +275,7 @@ fit <- train |>
 accuracy(fit)
 
 
-fc <- fit |> forecast(h='4 month')
+fc <- fit |> forecast(h='3 month')
 fc |> autoplot(level = 66) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10)
 fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 3.8)
 fc |> filter(date==tsibble::make_yearmonth(2024,09)) |> hilo(level = 90)
@@ -283,7 +284,7 @@ fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.mode
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='prophet') |> rename(prophet=.mean) |> select(-y,-.model) |> full_join(fcst)
 
-tail(fcst, 6) |> as_tibble() |> select(prophet,ets,arima) |> as.matrix() |> min()
+tail(fcst, 3) |> as_tibble() |> select(prophet,ets,arima) |> as.matrix() |> min()
 
 
 fcst |> ggplot(aes(x=as.Date(date), y=y)) + geom_point(size=0) + geom_line(linewidth=1,color='darkgreen') + scale_y_continuous(n.breaks=12) +
