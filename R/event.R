@@ -106,10 +106,10 @@ ggplot(l,aes(x=Name,y=Amount,fill=col)) +geom_col() + theme_minimal() + guides(f
 library(dplyr)
 library(ggplot2)
 library(hockeystick)
-
+options(pillar.sigfig = 4)
 
 d <- get_dailytempcop(use_cache = FALSE, write_cache = TRUE)
-tail(d,3)
+tail(d,5)
 
 d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date("1925-01-01")) |> # nolint: infix_spaces_linter.
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_smooth(se = F) + scale_y_continuous(n.breaks=6) + # nolint
@@ -153,7 +153,7 @@ f |> filter(year==2022 | year==2024 | year==2023) |> filter(dummy_date >= as.Dat
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
-  f |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-08-01"), dummy_date >= as.Date("1925-07-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
+    f |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-09-01"), dummy_date >= as.Date("1925-08-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 # Fable
 library(fable)
@@ -245,15 +245,15 @@ d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(yea
 # https://nsidc.org/arcticseaicenews/
 library(tidyverse)
 
-i <- get_icecurves(use_cache=T, write_cache = F)
+i <- get_icecurves(use_cache=F, write_cache = T)
 i |> filter(year==2024) |> tail(1)
-i |> filter(mo==7) |> arrange(extent)
-i |> filter(mo==7) |> filter(year %in% c(2024,2020,2012, 2023)) |> arrange(extent)
+i |> filter(mo==8) |> arrange(extent)
+i |> filter(mo==8) |> filter(year %in% c(2024, 2020, 2012, 2023)) |> arrange(extent)
 
 # to adjust for daily variation
 i |> mutate(extmin=extent*0.94) -> i
 
-i |> plot_icecurves() + geom_hline(yintercept = 4.2) + geom_hline(yintercept = 3.8)
+i |> plot_icecurves() + geom_hline(yintercept = 4.0) + geom_hline(yintercept = 3.8)
 
 fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extmin)
 
@@ -276,8 +276,8 @@ accuracy(fit)
 
 
 fc <- fit |> forecast(h='3 month')
-fc |> autoplot(level = 66) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10)
-fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 4.2) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 3.8)
+fc |> autoplot(level = 75) + geom_hline(yintercept = 4.0) + scale_y_continuous(n.breaks = 10)
+fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 4.0) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 3.8)
 fc |> filter(date==tsibble::make_yearmonth(2024,09)) |> hilo(level = 90)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
