@@ -11,7 +11,7 @@ Description: Provides easy access to essential climate change datasets to non-cl
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 URL: https://cortinah.github.io/hockeystick/, https://github.com/cortinah/hockeystick
 BugReports: https://github.com/cortinah/hockeystick/issues
 Imports: ggplot2, lubridate, tools, readr, dplyr, tidyr, patchwork, scales, rvest, tibble, treemapify, RColorBrewer, jsonlite
