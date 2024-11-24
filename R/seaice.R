@@ -16,7 +16,7 @@
 #' `get_seaice` invisibly returns a tibble with annual series of monthly Sea Ice Index since 1979 (in million square km).
 #'
 #' User may select Arctic or Antarctic sea ice extent or area (in millions of square kilometers) by year for a given month, specified by argument `month`.
-#' Defaults to Arctic July sea ice extent.  \url{https://nsidc.org/arcticseaicenews/faq/#area_extent}
+#' Defaults to Arctic July sea ice extent.  \url{https://nsidc.org/sea-ice-today/about-data#area_extent}
 #'
 #' @importFrom lubridate ymd ceiling_date
 #' @importFrom utils download.file read.csv

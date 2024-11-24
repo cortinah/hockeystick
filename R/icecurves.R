@@ -15,7 +15,7 @@
 #' `get_icecurves` invisibly returns a tibble with time series of monthly Sea Ice Index since 1979 (in million square km).
 #'
 #' User may select monthly Arctic or Antarctic sea ice extent or area (in millions of square kilometers).
-#' Defaults to Arctic sea ice extent.  \url{https://nsidc.org/arcticseaicenews/faq/#area_extent}
+#' Defaults to Arctic sea ice extent.  \url{https://nsidc.org/sea-ice-today/about-data#area_extent}
 #'
 #' @importFrom utils download.file read.csv
 #' @importFrom tibble tibble

@@ -70,7 +70,7 @@ plot_carbon(ml_co2)
 
 Retrieve GCP global CO~2~ emissions and plot:
 
-```{r emissions, out.width='60%', fig.retina=2, message=FALSE}
+```{r emissions, out.width='65%', fig.retina=2, message=FALSE}
 emissions <- get_emissions()
 plot_emissions(emissions)
 plot_emissions_with_land(emissions)
@@ -86,6 +86,11 @@ Retrieve NASA/GISS global surface temperature anomaly data and plot:
 ```{r temp, out.width='60%', fig.retina=2}
 anomaly <- get_temp()
 plot_temp(anomaly)
+```
+
+Plot relationship between temperature anomaly and carbon:
+```{r tempcarbon, out.width='60%', fig.retina=2}
+plot_carbontemp()
 ```
 
 Visualize warming using Ed Hawkins styled "warming stripes":
