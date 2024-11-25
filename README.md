@@ -96,13 +96,13 @@ emissions <- get_emissions()
 plot_emissions(emissions)
 ```
 
-<img src="man/figures/README-emissions-1.png" width="60%" />
+<img src="man/figures/README-emissions-1.png" width="65%" />
 
 ``` r
 plot_emissions_with_land(emissions)
 ```
 
-<img src="man/figures/README-emissions-2.png" width="60%" />
+<img src="man/figures/README-emissions-2.png" width="65%" />
 
 Visualize cumulative emissions by country:
 
@@ -120,6 +120,14 @@ plot_temp(anomaly)
 ```
 
 <img src="man/figures/README-temp-1.png" width="60%" />
+
+Plot relationship between temperature anomaly and carbon:
+
+``` r
+plot_carbontemp()
+```
+
+<img src="man/figures/README-tempcarbon-1.png" width="60%" />
 
 Visualize warming using Ed Hawkins styled “warming stripes”:
 
@@ -139,10 +147,9 @@ Retrieve tide gauge and satellite sea level data and plot:
 
 ``` r
 gmsl <- get_sealevel()
+#> Retrieving remote data requires internet connectivity.
 plot_sealevel(gmsl)
 ```
-
-<img src="man/figures/README-sl-1.png" width="60%" />
 
 Retrieve July annual Arctic Sea Ice Index and plot:
 
@@ -228,9 +235,8 @@ Users may also cache data by default by adding
 
 ``` r
 climate_grid()
+#> Retrieving remote data requires internet connectivity.
 ```
-
-<img src="man/figures/README-grid-1.png" width="80%" />
 
 ## Acknowledgments
 
