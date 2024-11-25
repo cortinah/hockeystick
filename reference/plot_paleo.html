@@ -28,7 +28,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Download and plot essential climate data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/cortinah/hockeystick/blob/main/R/paleo.R" class="external-link"><code>R/paleo.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/cortinah/hockeystick/blob/v0.8.5/R/paleo.R" class="external-link"><code>R/paleo.R</code></a></small>
       <div class="d-none name"><code>plot_paleo.Rd</code></div>
     </div>
 
@@ -77,14 +77,14 @@ By default the chart is also displayed. Users may further modify the output ggpl
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Fetch Vostok data:</span></span></span>
 <span class="r-in"><span><span class="va">vostok</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_paleo.html">get_paleo</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Retrieving remote data requires internet connectivity.</span>
 <span class="r-in"><span><span class="co">#</span></span></span>
 <span class="r-in"><span><span class="co"># Plot output using package's built-in ggplot2 defaults</span></span></span>
 <span class="r-in"><span><span class="fu">plot_paleo</span><span class="op">(</span><span class="va">vostok</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_paleo-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Or just call plot_paleo(), which defaults to get_paleo() dataset</span></span></span>
 <span class="r-in"><span><span class="fu">plot_paleo</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_paleo-2.png" alt="" width="700" height="433"></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Retrieving remote data requires internet connectivity.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">plot_paleo</span><span class="op">(</span><span class="va">vostok</span>, print <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Modify plot such as: p + patchwork::plot_annotation(title='A Long History of Carbon') # }</span></span></span>
