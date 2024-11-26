@@ -407,3 +407,20 @@ maxtemp |> ggplot(aes(x=year, y=temp)) + geom_segment( aes(x=year, xend=year, y=
         panel.grid.major.x = element_blank()) + geom_smooth()
 
 d |> top_n(wt = temp, n = 5) |> arrange(-temp)
+
+
+# Forecast LOTI November
+library(tidyverse)
+loti <- get_temp()
+cop <- get_dailytemp()
+
+lotinov <- loti |> filter(Year>='2020-12-31') |> select(Nov) |> summarize(mean(Nov, na.rm = T)) |> pull()
+copnov <- cop |> filter(year>=2020, year<2024) |> filter(dummy_date >=as.Date('1925-11-01'), dummy_date <=as.Date('1925-11-30')) |> summarize(mean(temp_anom)) |> pull()
+gap <- lotinov - copnov
+
+copbeta <- get_dailytempcop()
+fcstcop <- cop |> filter(date>=as.Date('2024-11-01'), date <=as.Date('2024-11-30')) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
+
+fcst <- round(fcstcop + gap, 2)
+
+#1.36
