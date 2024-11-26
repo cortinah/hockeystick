@@ -407,3 +407,24 @@ maxtemp |> ggplot(aes(x=year, y=temp)) + geom_segment( aes(x=year, xend=year, y=
         panel.grid.major.x = element_blank()) + geom_smooth()
 
 d |> top_n(wt = temp, n = 5) |> arrange(-temp)
+
+
+#### Forecast Monthly LOTI temp ####
+library(tidyverse)
+loti <- get_temp()
+cop <- get_dailytempcop()
+monthforecast <- 'Nov'
+months = 1:12; names(months) = month.abb
+start <- paste("1925",months[monthforecast],"01",sep='-')
+end <- ceiling_date(as.Date(start),"month")-1
+
+
+lotihistory <- loti |> filter(Year>='2021-12-31') |> select(!!!monthforecast) |> pull() |> mean(x=_, na.rm = T)
+cophistory <- cop |> filter(year>=2020, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+gap <- lotihistory - cophistory
+
+start <- paste("2024",months[monthforecast],"01",sep='-')
+end <- ceiling_date(as.Date(start),"month")-1
+
+fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
+fcstloti <- round(fcstcop + gap, 2)

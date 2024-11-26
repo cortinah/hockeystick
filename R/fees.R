@@ -13,7 +13,7 @@ ggplot(fees, aes(x=P, y=F)) + geom_line() +theme_bw() +scale_y_continuous(n.brea
 ggplot(fees, aes(x=P, y=S)) + geom_line() +theme_bw() +scale_y_continuous(n.breaks = 12) +
   labs(y='Average % fee',title='Kalshi fees as % of P', subtitle=paste(contracts, "contracts")) +scale_x_continuous(n.breaks = 10)
 
-ggplot(fees[11:99,], aes(x=P, y=U)) + geom_line() +theme_bw() +scale_y_continuous(n.breaks = 12) +
-  labs(y='Return',title='Upside after fees', subtitle=paste(contracts, "contracts")) +scale_x_continuous(n.breaks = 10)
+ggplot(fees[11:99,], aes(x=P, y=U*100)) + geom_line() +theme_bw() +scale_y_continuous(n.breaks = 12) +
+  labs(y='Return %',title='Upside after fees', subtitle=paste(contracts, "contracts")) +scale_x_continuous(n.breaks = 10)
 
 
