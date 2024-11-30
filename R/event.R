@@ -103,16 +103,15 @@ ggplot(l,aes(x=Name,y=Amount,fill=col)) +geom_col() + theme_minimal() + guides(f
 
 
 #### Month ####
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 library(hockeystick)
 options(pillar.sigfig = 3)
 
 d <- get_dailytempcop(use_cache = FALSE, write_cache = TRUE)
 tail(d, 5)
 
-d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date("1925-01-01")) |> # nolint: infix_spaces_linter.
-  ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_smooth(se = F) + scale_y_continuous(n.breaks=6) + # nolint
+d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date("1925-01-01")) |>
+  ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_smooth(se = F) + scale_y_continuous(n.breaks=6) +
   theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Temp Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%b") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
 
@@ -411,8 +410,9 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 
 #### Forecast Monthly LOTI temp ####
 library(tidyverse)
+library(hockeystick)
 loti <- get_temp()
-cop <- get_dailytempcop()
+cop <- get_dailytempcop(use_cache = F)
 monthforecast <- 'Nov'
 months = 1:12; names(months) = month.abb
 start <- paste("1925",months[monthforecast],"01",sep='-')
@@ -420,7 +420,7 @@ end <- ceiling_date(as.Date(start),"month")-1
 
 
 lotihistory <- loti |> filter(Year>='2021-12-31') |> select(!!!monthforecast) |> pull() |> mean(x=_, na.rm = T)
-cophistory <- cop |> filter(year>=2020, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+cophistory <- cop |> filter(year>=2021, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- lotihistory - cophistory
 
 start <- paste("2024",months[monthforecast],"01",sep='-')
@@ -428,3 +428,22 @@ end <- ceiling_date(as.Date(start),"month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 2)
+
+
+# FRED
+library(fredr)
+fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
+
+employees <- fredr(series_id = "CES9091000001",
+  observation_start = as.Date("1970-01-01"),
+  observation_end = as.Date("2024-01-01"), frequency = "m")
+
+ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_bw()
+
+employees |> mutate(month=month(date)) -> employees
+
+employees |> filter(month==1) -> employees
+employees |> mutate(prev=lag(value)) |> mutate(change=value-prev) -> employees
+
+ggplot(drop_na(employees), aes(x=date, y=change)) +geom_col(color='black',fill='darkorange') +scale_x_date(date_labels = "'%y", date_breaks = "2 year") +
+  scale_y_continuous(n.breaks = 8) +labs(title='Federal Employment', x='Year', y='Annual Change in Fed Employment',caption='Source: FRED') +theme_bw()
