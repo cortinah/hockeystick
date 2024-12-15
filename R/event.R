@@ -408,20 +408,20 @@ maxtemp |> ggplot(aes(x=year, y=temp)) + geom_segment( aes(x=year, xend=year, y=
 d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 
 
-#### Forecast Monthly LOTI temp ####
+#### Forecast Monthly NCEI temp ####
 library(tidyverse)
 library(hockeystick)
-loti <- get_temp()
+ncei <- read_csv("R/ncei_december.csv")
 cop <- get_dailytempcop(use_cache = F)
-monthforecast <- 'Nov'
+monthforecast <- 'Dec'
 months = 1:12; names(months) = month.abb
 start <- paste("1925",months[monthforecast],"01",sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
 
 
-lotihistory <- loti |> filter(Year>='2021-12-31') |> select(!!!monthforecast) |> pull() |> mean(x=_, na.rm = T)
-cophistory <- cop |> filter(year>=2021, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
-gap <- lotihistory - cophistory
+nceihistory <- ncei |> filter(Year>=2020) |> select(Anomaly) |> pull() |> mean()
+cophistory <- cop |> filter(year>=2020, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+gap <- nceihistory - cophistory
 
 start <- paste("2024",months[monthforecast],"01",sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
