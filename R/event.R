@@ -116,8 +116,8 @@ d |> filter(year==2016 | year==2023 | year==2024) |> filter(dummy_date > as.Date
   scale_x_date(date_labels="%b") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
 
 
-d |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-12-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd)
-d |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-12-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
+d |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-12-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd)
+d |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-12-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd) |> pull(mtd, name=year) |> rev() |> diff()
 
 
 d |> filter(year==2023 | year==2024) |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-11-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
@@ -143,8 +143,8 @@ mutate(extra, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', subs
 
 f <- bind_rows(d,extra)
 
-f |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(ytd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=ytd)
-f |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
+f |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=mtd)
+f |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd) |> pull(mtd, name=year) |> rev() |> diff()
 
 
 f |> filter(year==2022 | year==2024 | year==2023) |> filter(dummy_date >= as.Date("1925-12-01") & dummy_date <= as.Date("1925-12-31")) |>
@@ -419,8 +419,9 @@ start <- paste("1925",months[monthforecast],"01",sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
 
 
-nceihistory <- ncei |> filter(Year>=2020) |> select(Anomaly) |> pull() |> mean()
-cophistory <- cop |> filter(year>=2020, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+
+nceihistory <- ncei |> filter(Year>=2022) |> select(Anomaly) |> pull() |> mean()
+cophistory <- cop |> filter(year>=2022, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- nceihistory - cophistory
 
 start <- paste("2024",months[monthforecast],"01",sep='-')
@@ -429,6 +430,7 @@ end <- ceiling_date(as.Date(start),"month")-1
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 2)
 
+f |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 2)) |> slice_max(n=2, order_by=mtd) |> filter(year==2024) |> pull(mtd) -> fcstcop
 
 # FRED
 library(fredr)
