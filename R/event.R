@@ -248,21 +248,24 @@ library(tidyverse)
 
 i <- get_icecurves(use_cache=F, write_cache = T)
 i |> filter(year==2024) |> tail(1)
-i |> filter(mo==8) |> arrange(extent)
-i |> filter(mo==8) |> filter(year %in% c(2024, 2020, 2012, 2023)) |> arrange(extent)
+i |> filter(mo==3) |> arrange(-extent)
+i |> filter(mo==3) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
 # to adjust for daily variation
-i |> mutate(extmin=extent*0.94) -> i
+#i |> mutate(extmin=extent*0.94) -> i
 
-i |> plot_icecurves() + geom_hline(yintercept = 4.0) + geom_hline(yintercept = 3.8)
+i |> mutate(extmin=extent*1) -> i
+
+i |> plot_icecurves() + geom_hline(yintercept = 14.0) + geom_hline(yintercept = 14.2)
 
 fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extmin)
 
 # Fable
+library(tsibble)
 library(fable)
 library(fable.prophet)
 
-fcst <- fcst |> select(date, y=extmin) |> tail(12*15)
+fcst <- fcst |> select(date, y=extmin) |> tail(12*8)
 
 train <- as_tsibble(fcst, index=date)
 
@@ -276,16 +279,16 @@ fit <- train |>
 accuracy(fit)
 
 
-fc <- fit |> forecast(h='3 month')
-fc |> autoplot(level = 75) + geom_hline(yintercept = 4.0) + scale_y_continuous(n.breaks = 10)
-fc |> filter(.model=='arima') |> autoplot(level = 66) + geom_hline(yintercept = 4.0) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 3.8)
-fc |> filter(date==tsibble::make_yearmonth(2024,09)) |> hilo(level = 66)
+fc <- fit |> forecast(h='5 month')
+fc |> autoplot(level = 75) + geom_hline(yintercept = 14.0) + scale_y_continuous(n.breaks = 10)
+fc |> filter(.model=='ets') |> autoplot(level = 50) + geom_hline(yintercept = 14.2) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14)
+fc |> filter(date==tsibble::make_yearmonth(2025,03)) |> hilo(level = 66)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='prophet') |> rename(prophet=.mean) |> select(-y,-.model) |> full_join(fcst)
 
-tail(fcst, 3) |> as_tibble() |> select(prophet,ets,arima) |> as.matrix() |> min()
+fcst |> filter(date==yearmonth('2025 Mar')) |> as_tibble() |> select(prophet,ets,arima) |> as.matrix() |> min()
 
 
 fcst |> ggplot(aes(x=as.Date(date), y=y)) + geom_point(size=0) + geom_line(linewidth=1,color='darkgreen') + scale_y_continuous(n.breaks=12) +
