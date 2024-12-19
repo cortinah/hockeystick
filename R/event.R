@@ -249,6 +249,7 @@ library(tidyverse)
 i <- get_icecurves(use_cache=F, write_cache = T)
 i |> filter(year==2024) |> tail(1)
 i |> filter(mo==3) |> arrange(-extent)
+<<<<<<< HEAD
 i |> filter(mo==3) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
 # to adjust for daily variation
@@ -256,6 +257,14 @@ i |> filter(mo==3) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
 i |> mutate(extmin=extent*1) -> i
 
+=======
+i |> filter(mo==3) |> filter(year %in% c(2024, 2023, 2022, 2021)) |> arrange(extent)
+
+# to adjust for daily variation
+#i |> mutate(extmin=extent*0.94) -> i
+i |> mutate(extmin=extent*1) -> i
+
+>>>>>>> 98368c5e8c28ef052853f8a2c5b1959519130d99
 i |> plot_icecurves() + geom_hline(yintercept = 14.0) + geom_hline(yintercept = 14.2)
 
 fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extmin)
