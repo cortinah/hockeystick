@@ -252,7 +252,7 @@ i |> filter(mo==3) |> arrange(extent)
 
 i |> filter(mo==3) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
-#i <- rbind(i, data.frame(year=2025, mo=1, extent=11.4185))
+i <- rbind(i, data.frame(year=2025, mo=1, extent=13))
 # to adjust for daily variation
 #i |> mutate(extmin=extent*0.94) -> i
 
@@ -291,7 +291,7 @@ fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.mode
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='prophet') |> rename(prophet=.mean) |> select(-y,-.model) |> full_join(fcst)
 
-ensemble <- fc |> filter(.model=="arima" |.model=="ets") |> index_by(date) |> summarize(ensemble=mean(.mean))
+ensemble <- fc |> filter(.model=="arima" |.model=="prophet") |> index_by(date) |> summarize(ensemble=mean(.mean))
 fcst <- ensemble |> full_join(fcst)
 
 fcst |> filter(date==yearmonth('2025 Mar')) |> as_tibble() |> select(ensemble,ets,arima) |> as.matrix() |> max()
@@ -420,9 +420,9 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 #### Forecast Monthly NCEI temp ####
 library(tidyverse)
 library(hockeystick)
-ncei <- read_csv("R/ncei_december.csv")
+ncei <- read_csv("R/ncei_jan.csv")
 cop <- get_dailytempcop(use_cache = F)
-monthforecast <- 'Dec'
+monthforecast <- 'Jan'
 months = 1:12; names(months) = month.abb
 start <- paste("1925",months[monthforecast],"01",sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
@@ -430,16 +430,16 @@ end <- ceiling_date(as.Date(start),"month")-1
 
 
 nceihistory <- ncei |> filter(Year>=2021) |> select(Anomaly) |> pull() |> mean()
-cophistory <- cop |> filter(year>=2021, year<2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+cophistory <- cop |> filter(year>=2021, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- nceihistory - cophistory
 
-start <- paste("2024",months[monthforecast],"01",sep='-')
+start <- paste("2025", months[monthforecast],"01",sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
 
-f |> filter(dummy_date <= as.Date("1925-12-31"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 2)) |> slice_max(n=2, order_by=mtd) |> filter(year==2024) |> pull(mtd) -> fcstcop
+f |> filter(dummy_date <= as.Date("1925-01-31"), dummy_date >= as.Date("1925-01-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=2, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
 
 # FRED
