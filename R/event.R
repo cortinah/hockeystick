@@ -260,7 +260,7 @@ i <- rbind(i, data.frame(year=2025, mo=1, extent=13))
 
 i |> mutate(extmin=extent*1.015) -> i
 
-i |> plot_icecurves() + geom_hline(yintercept = 14.6) + geom_hline(yintercept = 14.8)
+i |> plot_icecurves() + geom_hline(yintercept = 14.4) + geom_hline(yintercept = 14.8)
 
 fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extmin)
 
@@ -285,8 +285,8 @@ accuracy(fit)
 
 
 fc <- fit |> forecast(h='3 month')
-fc |> autoplot(level = 75) + geom_hline(yintercept = 14.6) + scale_y_continuous(n.breaks = 10)
-fc |> filter(.model=='arima') |> autoplot(level = 66) + geom_hline(yintercept = 14.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.8)
+fc |> autoplot(level = 75) + geom_hline(yintercept = 14.8) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 14.4)
+fc |> filter(.model=='prophet') |> autoplot(level = 70) + geom_hline(yintercept = 14.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
 fc |> filter(date==tsibble::make_yearmonth(2025,03)) |> hilo(level = 70)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -296,13 +296,13 @@ fcst <- fc |> filter(.model=='prophet') |> rename(prophet=.mean) |> select(-y,-.
 ensemble <- fc |> filter(.model=="arima" |.model=="prophet") |> index_by(date) |> summarize(ensemble=mean(.mean))
 fcst <- ensemble |> full_join(fcst)
 
-fcst |> filter(date==yearmonth('2025 Mar')) |> as_tibble() |> select(ensemble,ets,arima) |> as.matrix() |> max()
+fcst |> filter(date==yearmonth('2025 Mar')) |> as_tibble() |> select(ensemble,ets,arima) |> as.matrix() |> min()
 
 
 fcst |> ggplot(aes(x=as.Date(date), y=y)) + geom_point(size=0) + geom_line(linewidth=1,color='darkgreen') + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='Arctic Sea Ice', subtitle='Green: actual, Blue: ARIMA, Black: ETS, Orange: Prophet', x='Date',color ='Year',y='MM sqkm') +
   scale_x_date(date_labels="%m/%y") + geom_line(aes(y=arima), color='dodgerblue', size=1) + geom_line(aes(y=ets), color='black', size=1) +
-  geom_line(aes(y=prophet), color='orange', size=1) + theme(legend.position='top')
+  geom_line(aes(y=prophet), color='orange', linewidth=1) + theme(legend.position='top')
 
 
 
