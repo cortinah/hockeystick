@@ -426,7 +426,7 @@ ncei <- read_csv("R/ncei_jan.csv")
 cop <- get_dailytempcop(use_cache = F)
 monthforecast <- 'Jan'
 months = 1:12; names(months) = month.abb
-start <- paste("1925",months[monthforecast],"01",sep='-')
+start <- paste("1925",months[monthforecast],"01", sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
 
 
@@ -435,15 +435,15 @@ nceihistory <- ncei |> filter(Year>=2021) |> select(Anomaly) |> pull() |> mean()
 cophistory <- cop |> filter(year>=2021, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- nceihistory - cophistory
 
-start <- paste("2025", months[monthforecast],"01",sep='-')
+start <- paste("2025", months[monthforecast],"01", sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-#1.365
+# 1.377
 f |> filter(dummy_date <= as.Date("1925-01-31"), dummy_date >= as.Date("1925-01-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=2, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-#1.319
+# 1.402
 
 # FRED
 library(fredr)
@@ -451,7 +451,7 @@ fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
 
 employees <- fredr(series_id = "CES9091000001",
   observation_start = as.Date("1970-01-01"),
-  observation_end = as.Date("2025-01-01"), frequency = "m")
+  observation_end = as.Date("2026-01-01"), frequency = "m")
 
 ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_bw()
 
