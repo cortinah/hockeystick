@@ -20,5 +20,7 @@ Suggests:
     rmarkdown,
     knitr,
     spelling,
-    viridisLite
+    viridisLite,
+    quarto
 Language: en-US
+VignetteBuilder: quarto
