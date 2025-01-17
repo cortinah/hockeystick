@@ -10,3 +10,5 @@ cran-comments.md
 ^\.github$
 ^doc$
 ^Meta$
+^vignettes/\.quarto$
+^vignettes/*_files$

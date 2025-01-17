@@ -69,7 +69,7 @@ remotes::install_github("cortinah/hockeystick")
 
 ## Downloading and viewing global heating data
 
-New: Plot daily global temperatures since 1940 and current anomaly:
+Plot daily global temperatures since 1940 and current anomaly:
 
 ``` r
 library(hockeystick)

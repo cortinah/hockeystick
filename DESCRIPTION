@@ -1,6 +1,6 @@
 Package: hockeystick
 Title: Download and Visualize Essential Climate Change Data
-Version: 0.8.5
+Version: 0.8.6
 Authors@R: 
     person(given = "Hernando",
            family = "Cortina",
@@ -20,5 +20,7 @@ Suggests:
     rmarkdown,
     knitr,
     spelling,
-    viridisLite
+    viridisLite,
+    quarto
 Language: en-US
+VignetteBuilder: quarto
