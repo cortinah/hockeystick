@@ -64,7 +64,7 @@ You may alternatively install the development version from
 <https://github.com/cortinah/hockeystick> with:
 
 ``` r
-remotes::install_github("cortinah/hockeystick")
+remotes::install_github("cortinah/hockeystick@testing")
 ```
 
 ## Downloading and viewing global heating data
