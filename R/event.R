@@ -422,9 +422,9 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 #### Forecast Monthly NCEI temp ####
 library(tidyverse)
 library(hockeystick)
-ncei <- read_csv("R/ncei_jan.csv")
+ncei <- read_csv("R/ncei_feb.csv")
 cop <- get_dailytempcop(use_cache = F)
-monthforecast <- 'Jan'
+monthforecast <- 'Feb'
 months = 1:12; names(months) = month.abb
 start <- paste("1925",months[monthforecast],"01", sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
@@ -440,11 +440,11 @@ end <- ceiling_date(as.Date(start),"month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# 1.404
-f |> filter(dummy_date <= as.Date("1925-01-31"), dummy_date >= as.Date("1925-01-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=2, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
+# 1.349
+f |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# 1.405
-# 2024 was 1.29
+# 1.287
+# Feb 2024 was 1.41
 
 #### FRED ####
 
