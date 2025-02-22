@@ -181,7 +181,7 @@ f <- left_join(f, fc |> filter(.model=='ets')) |> rename(ets=.mean) |> select(-y
 f <- left_join(f, fc |> filter(.model=='prophet')) |> rename(prophet=.mean) |> select(-y,-.model)
 
 
-f |> filter(year==2025 | year==2024) |> filter(dummy_date >= as.Date("1925-01-01") & dummy_date <= as.Date("1925-01-31")) |>
+f |> filter(year==2025 | year==2024) |> filter(dummy_date >= as.Date("1925-02-01") & dummy_date <= as.Date("1925-02-28")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='Red: extend, Blue: ARIMA, Black: ETS, Orange: Prophet', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=arima), color='dodgerblue', size=1) + geom_point(aes(y=ets), color='black', size=1) +
@@ -440,10 +440,10 @@ end <- ceiling_date(as.Date(start),"month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# 1.349
+# 1.244
 f |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# 1.287
+# 1.1202
 # Feb 2024 was 1.41
 
 #### FRED ####
