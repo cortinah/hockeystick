@@ -429,10 +429,8 @@ months = 1:12; names(months) = month.abb
 start <- paste("1925",months[monthforecast],"01", sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
 
-
-
-nceihistory <- ncei |> filter(Year>=2021) |> select(Anomaly) |> pull() |> mean()
-cophistory <- cop |> filter(year>=2021, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+nceihistory <- ncei |> filter(Year>=2023) |> select(Anomaly) |> pull() |> mean()
+cophistory <- cop |> filter(year>=2023, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- nceihistory - cophistory
 
 start <- paste("2025", months[monthforecast],"01", sep='-')
@@ -440,10 +438,10 @@ end <- ceiling_date(as.Date(start),"month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# 1.244
+# 1.25
 f |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# 1.1202
+# 1.262
 # Feb 2024 was 1.41
 
 #### FRED ####
