@@ -147,9 +147,10 @@ Retrieve tide gauge and satellite sea level data and plot:
 
 ``` r
 gmsl <- get_sealevel()
-#> Retrieving remote data requires internet connectivity.
 plot_sealevel(gmsl)
 ```
+
+<img src="man/figures/README-sl-1.png" width="60%" />
 
 Retrieve July annual Arctic Sea Ice Index and plot:
 
@@ -235,8 +236,9 @@ Users may also cache data by default by adding
 
 ``` r
 climate_grid()
-#> Retrieving remote data requires internet connectivity.
 ```
+
+<img src="man/figures/README-grid-1.png" width="80%" />
 
 ## Acknowledgments
 
