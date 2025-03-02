@@ -420,17 +420,20 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 
 
 #### Forecast Monthly NCEI temp ####
+# https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/tavg/land_ocean/1/0/2023-2024
 library(tidyverse)
 library(hockeystick)
-ncei <- read_csv("R/ncei_feb.csv")
+ncei <- read_csv("R/ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
+ncei |> mutate(Year=year(Date)) |> filter(month(Date)==3) -> ncei
+
 cop <- get_dailytempcop(use_cache = F)
-monthforecast <- 'Feb'
+monthforecast <- 'Mar'
 months = 1:12; names(months) = month.abb
 start <- paste("1925",months[monthforecast],"01", sep='-')
 end <- ceiling_date(as.Date(start),"month")-1
 
-nceihistory <- ncei |> filter(Year>=2023) |> select(Anomaly) |> pull() |> mean()
-cophistory <- cop |> filter(year>=2023, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+nceihistory <- ncei |> filter(Year>=2020) |> select(Anomaly) |> pull() |> mean()
+cophistory <- cop |> filter(year>=2020, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- nceihistory - cophistory
 
 start <- paste("2025", months[monthforecast],"01", sep='-')
@@ -438,10 +441,10 @@ end <- ceiling_date(as.Date(start),"month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# 1.25
+# 1.269
 f |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# 1.262
+# 1.251
 # Feb 2024 was 1.41
 
 #### FRED ####
