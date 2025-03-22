@@ -107,7 +107,7 @@ library(tidyverse)
 library(hockeystick)
 options(pillar.sigfig = 3)
 
-d <- get_dailytempcop(use_cache = FALSE, write_cache = TRUE)
+d <- get_dailytempcop(use_cache = F, write_cache = TRUE)
 tail(d, 5)
 
 d |> filter(year==2025 | year==2023 | year==2024) |> filter(dummy_date > as.Date("1925-01-01")) |>
@@ -116,20 +116,20 @@ d |> filter(year==2025 | year==2023 | year==2024) |> filter(dummy_date > as.Date
   scale_x_date(date_labels="%b") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue"))
 
 
-d |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd)
-d |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd) |> pull(mtd, name=year) |> rev() |> diff()
+d |> filter(dummy_date <= as.Date("1925-03-31"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd)
+d |> filter(dummy_date <= as.Date("1925-03-31"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd) |> pull(mtd, name=year) |> rev() |> diff()
 
 
-d |> filter(year==2025 | year==2024) |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
+d |> filter(year==2025 | year==2024) |> filter(dummy_date <= as.Date("1925-03-31"), dummy_date >= as.Date("1925-02-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 
-d |> filter(year==2025 | year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-02-01") & dummy_date <= as.Date("1925-02-28")) |>
+d |> filter(year==2025 | year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date <= as.Date("1925-03-31")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
 # FORECAST REST OF MONTH
-avgdays <- 2
+avgdays <- 1
 extra <- tail(d, avgdays)
 
 
@@ -145,11 +145,11 @@ mutate(extra, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', subs
 
 f <- bind_rows(d,extra)
 
-f |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=mtd)
-f |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd) |> pull(mtd, name=year) |> rev() |> diff()
+f |> filter(dummy_date <= as.Date("1925-03-31"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=mtd)
+f |> filter(dummy_date <= as.Date("1925-03-31"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd) |> pull(mtd, name=year) |> rev() |> diff()
 
 
-  f |> filter(year==2025 | year==2024 | year==2023) |> filter(dummy_date >= as.Date("1925-02-01") & dummy_date <= as.Date("1925-02-28")) |>
+  f |> filter(year==2025 | year==2024 | year==2023) |> filter(dummy_date >= as.Date("1925-02-01") & dummy_date <= as.Date("1925-03-31")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
@@ -181,7 +181,7 @@ f <- left_join(f, fc |> filter(.model=='ets')) |> rename(ets=.mean) |> select(-y
 f <- left_join(f, fc |> filter(.model=='prophet')) |> rename(prophet=.mean) |> select(-y,-.model)
 
 
-f |> filter(year==2025 | year==2024) |> filter(dummy_date >= as.Date("1925-02-01") & dummy_date <= as.Date("1925-02-28")) |>
+f |> filter(year==2025 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date <= as.Date("1925-03-31")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='Red: extend, Blue: ARIMA, Black: ETS, Orange: Prophet', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=arima), color='dodgerblue', size=1) + geom_point(aes(y=ets), color='black', size=1) +
@@ -191,13 +191,13 @@ f |> filter(year==2025 | year==2024) |> filter(dummy_date >= as.Date("1925-02-01
 
 f[(nrow(f)-nrow(extra)+1):nrow(f),'temp_anom'] <- f[(nrow(f)-nrow(extra)+1):nrow(f),'arima']
 
-f |> filter(year==2025 | year==2024) |> filter(dummy_date >= as.Date("1925-01-01") & dummy_date <= as.Date("1925-01-31")) |>
+f |> filter(year==2025 | year==2024) |> filter(dummy_date >= as.Date("1925-03-01") & dummy_date <= as.Date("1925-03-31")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='Red: extend, Blue: ARIMA, Orange: ETS, Purple: Prophet', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + geom_point(aes(y=arima), color='blue', size=1) + geom_point(aes(y=ets), color='orange', size=1) +
   geom_point(aes(y=prophet), color='purple', size=1) + theme(legend.position='top')
 
-f |> filter(dummy_date <= as.Date("1925-01-31"), dummy_date >= as.Date("1925-01-01")) |> group_by(year) |> summarize(month=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=month)
+f |> filter(dummy_date <= as.Date("1925-03-31"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(month=round(mean(temp_anom),digits = 2)) |> slice_max(n=10, order_by=month)
 
 f |> filter(year==2023 | year==2024) |> filter(dummy_date < as.Date("1925-09-01"), dummy_date >= as.Date("1925-08-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
@@ -424,27 +424,27 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 library(tidyverse)
 library(hockeystick)
 ncei <- read_csv("R/ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
-ncei |> mutate(Year=year(Date)) |> filter(month(Date)==3) -> ncei
-
 cop <- get_dailytempcop(use_cache = F)
+
 monthforecast <- 'Mar'
 months = 1:12; names(months) = month.abb
-start <- paste("1925",months[monthforecast],"01", sep='-')
-end <- ceiling_date(as.Date(start),"month")-1
+start <- paste("1925", months[monthforecast],"01", sep='-')
+end <- ceiling_date(as.Date(start), "month")-1
+ncei |> mutate(Year=year(Date)) |> filter(month(Date)==which(month.abb==monthforecast)) -> ncei
 
-nceihistory <- ncei |> filter(Year>=2020) |> select(Anomaly) |> pull() |> mean()
-cophistory <- cop |> filter(year>=2020, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+nceihistory <- ncei |> filter(Year>=2022) |> select(Anomaly) |> pull() |> mean()
+cophistory <- cop |> filter(year>=2022, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- nceihistory - cophistory
 
-start <- paste("2025", months[monthforecast],"01", sep='-')
-end <- ceiling_date(as.Date(start),"month")-1
+start <- paste("2025", months[monthforecast], "01", sep='-')
+end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# 1.269
-f |> filter(dummy_date <= as.Date("1925-02-28"), dummy_date >= as.Date("1925-02-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
+# 1.399 1.395 1.392
+f |> filter(dummy_date <= as.Date("1925-03-31"), dummy_date >= as.Date("1925-03-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# 1.251
+# 1.3
 # Feb 2024 was 1.41
 
 #### FRED ####
@@ -455,10 +455,11 @@ fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
 employees <- fredr(series_id = "CES9091000001",
   observation_start = as.Date("1970-01-01"),
   observation_end = as.Date("2026-01-01"), frequency = "m")
-
-ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_bw()
+tail(employees)
+  ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_bw()
 
 employees |> mutate(month=month(date)) -> employees
+tail(employees)
 
 employees |> filter(month==1) -> employees
 employees |> mutate(prev=lag(value)) |> mutate(change=value-prev) -> employees
