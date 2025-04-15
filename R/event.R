@@ -123,9 +123,9 @@ d |> filter(dummy_date <= as.Date("1925-04-30"), dummy_date >= as.Date("1925-04-
 d |> filter(year==2025 | year==2024) |> filter(dummy_date <= as.Date("1925-04-30"), dummy_date >= as.Date("1925-04-01")) |> select(year, dummy_date, temp_anom) |> tidyr::pivot_wider(names_from = year, values_from = temp_anom) |> print(n=31)
 
 
-d |> filter(year==2025 | year==2016 | year==2024) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date <= as.Date("1925-04-30")) |>
+d |> filter(year==2025 | year==2023 | year==2024) |> filter(dummy_date >= as.Date("1925-04-01") & dummy_date <= as.Date("1925-04-30")) |>
   ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
-  theme_bw(base_size = 13) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
+  theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
 # FORECAST REST OF MONTH
@@ -441,10 +441,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# April 1.187
+# April 1.19
 f |> filter(dummy_date <= as.Date("1925-04-30"), dummy_date >= as.Date("1925-04-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# April 1.216
+# April 1.203
 
 #### FRED ####
 
