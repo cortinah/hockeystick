@@ -441,10 +441,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# April19: 1.214
+# April20: 1.212
 f |> filter(dummy_date <= as.Date("1925-04-30"), dummy_date >= as.Date("1925-04-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# April19: 1.2
+# April20: 1.192
 
 #### FRED ####
 
