@@ -456,6 +456,8 @@ employees <- fredr(series_id = "CES9091000001",
   observation_start = as.Date("1970-01-01"),
   observation_end = as.Date("2026-01-01"), frequency = "m")
 tail(employees)
+as.numeric(employees[nrow(employees),3])-as.numeric(employees[employees$date=='2025-01-01',3])
+
   ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_bw()
 
 employees |> mutate(month=month(date)) -> employees
