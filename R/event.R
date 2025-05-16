@@ -246,21 +246,22 @@ d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(yea
 # https://nsidc.org/arcticseaicenews/
 # https://nsidc.org/sea-ice-today/sea-ice-tools/charctic-interactive-sea-ice-graph
 
+# Arima forecast May 16:  4.28 [3.927041, 4.641047]70%
+
 library(tidyverse)
 library(hockeystick)
 i <- get_icecurves(use_cache=F, write_cache = T)
 i |> filter(year==2025) |> tail(1)
-i |> filter(mo==3) |> arrange(extent)
+i |> filter(mo==9) |> arrange(extent)
 
-i |> filter(mo==3) |> filter(year %in% c(2024, 2023, 2022, 2021))
+i |> filter(mo==9) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
-#i <- rbind(i, data.frame(year=2025, mo=1, extent=13.2))
-# to adjust for daily variation
-#i |> mutate(extmin=extent*0.94) -> i
+i <- rbind(i, data.frame(year=2025, mo=5, extent=12.7))
 
-i |> mutate(extmin=extent*1.015) -> i
+# to adjust for month min variation
+i |> mutate(extmin=extent*(1-0.042)) -> i
 
-i |> plot_icecurves() + geom_hline(yintercept = 14.4) + geom_hline(yintercept = 14.8)
+i |> plot_icecurves() + geom_hline(yintercept = 4) + geom_hline(yintercept = 3.8)
 
 fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extmin)
 
@@ -283,11 +284,10 @@ fit <- train |>
 
 accuracy(fit)
 
-
-fc <- fit |> forecast(h='2 month')
-fc |> autoplot(level =25) + geom_hline(yintercept = 14.8) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 14.4)
-fc |> filter(.model=='prophet') |> autoplot(level = 70) + geom_hline(yintercept = 14.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
-fc |> filter(date==tsibble::make_yearmonth(2025,03)) |> hilo(level = 70)
+fc <- fit |> forecast(h='4 month')
+fc |> autoplot(level =50) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 4)
+fc |> filter(.model=='arima') |> autoplot(level = 70) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 4)
+fc |> filter(date==tsibble::make_yearmonth(2025,09)) |> hilo(level = 70)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -296,7 +296,7 @@ fcst <- fc |> filter(.model=='prophet') |> rename(prophet=.mean) |> select(-y,-.
 ensemble <- fc |> filter(.model=="arima" |.model=="prophet") |> index_by(date) |> summarize(ensemble=mean(.mean))
 fcst <- ensemble |> full_join(fcst)
 
-fcst |> filter(date==yearmonth('2025 Mar')) |> as_tibble() |> select(ensemble,ets,arima) |> as.matrix() |> min()
+fcst |> filter(date==yearmonth('2025 Sep')) |> as_tibble() |> select(ensemble,ets,arima) |> as.matrix() |> min()
 
 
 fcst |> ggplot(aes(x=as.Date(date), y=y)) + geom_point(size=0) + geom_line(linewidth=1,color='darkgreen') + scale_y_continuous(n.breaks=12) +
@@ -441,10 +441,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# May12: 1.116
+# May16: 1.134
 f |> filter(dummy_date <= as.Date("1925-05-31"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# May12: 1.117
+# May16: 1.145
 
 #### FRED ####
 
