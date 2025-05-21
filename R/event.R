@@ -257,7 +257,7 @@ i |> filter(mo==9) |> arrange(extent)
 
 i |> filter(mo==9) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
-i <- rbind(i, data.frame(year=2025, mo=5, extent=12.7))
+i <- rbind(i, data.frame(year=2025, mo=5, extent=12.4))
 
 # to adjust for month min variation
 i |> mutate(extmin=extent*(1-0.042)) -> i
@@ -438,10 +438,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# May16: 1.134
+# May21: 1.107
 f |> filter(dummy_date <= as.Date("1925-05-31"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# May16: 1.145
+# May21: 1.1058
 
 #### FRED ####
 
@@ -455,7 +455,7 @@ employees <- fredr(series_id = "CES9091000001",
 tail(employees)
 as.numeric(employees[nrow(employees),3])-as.numeric(employees[employees$date=='2025-01-01',3])
 
-  ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_bw()
+ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_bw()
 
 employees |> mutate(month=month(date)) -> employees
 tail(employees)
