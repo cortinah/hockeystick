@@ -246,7 +246,7 @@ d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(yea
 # https://nsidc.org/arcticseaicenews/
 # https://nsidc.org/sea-ice-today/sea-ice-tools/charctic-interactive-sea-ice-graph
 
-# Arima forecast May 16:  4.28 [3.927041, 4.641047]70%
+# Arima forecast Jun 2:  4.11 [3.773607, 4.440481]70
 # Compare with 2020/12 curves
 
 library(tidyverse)
@@ -257,7 +257,7 @@ i |> filter(mo==9) |> arrange(extent)
 
 i |> filter(mo==9) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
-i <- rbind(i, data.frame(year=2025, mo=5, extent=12.4))
+i <- rbind(i, data.frame(year=2025, mo=6, extent=10.6))
 
 # to adjust for month min variation
 i |> mutate(extmin=extent*(1-0.042)) -> i
@@ -285,10 +285,10 @@ fit <- train |>
 
 accuracy(fit)
 
-fc <- fit |> forecast(h='4 month')
+fc <- fit |> forecast(h='3 month')
 fc |> autoplot(level =50) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 4)
 fc |> filter(.model=='arima') |> autoplot(level = 70) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 4)
-fc |> filter(date==tsibble::make_yearmonth(2025,09)) |> hilo(level = 70)
+fc |> filter(date==tsibble::make_yearmonth(2025, 09)) |> hilo(level = 70)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -438,10 +438,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# May29: 1.093
+# jun1: 1.089
 f |> filter(dummy_date <= as.Date("1925-05-31"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# May29: 1.09
+# jun1: 1.087
 
 #### FRED ####
 
