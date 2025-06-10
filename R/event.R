@@ -107,7 +107,7 @@ library(tidyverse)
 library(hockeystick)
 options(pillar.sigfig = 3)
 
-d <- get_dailytempcop(use_cache = T, write_cache = F)
+d <- get_dailytempcop(use_cache = F, write_cache = F)
 tail(d, 5)
 
 d |> filter(year==2025 | year==2023 | year==2024) |> filter(dummy_date > as.Date("1925-01-01")) |>
@@ -423,7 +423,7 @@ library(hockeystick)
 ncei <- read_csv("R/ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
 cop <- d
 
-monthforecast <- 'May'
+monthforecast <- 'Jun'
 months = 1:12; names(months) = month.abb
 start <- paste("1925", months[monthforecast],"01", sep='-')
 end <- ceiling_date(as.Date(start), "month")-1
@@ -438,10 +438,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# jun1: 1.089
-f |> filter(dummy_date <= as.Date("1925-05-31"), dummy_date >= as.Date("1925-05-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
+# jun10: 1.017
+f |> filter(dummy_date <= as.Date("1925-06-30"), dummy_date >= as.Date("1925-06-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# jun1: 1.087
+# jun10: 1.009
 
 #### FRED ####
 
