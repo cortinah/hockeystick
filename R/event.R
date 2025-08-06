@@ -257,7 +257,7 @@ i |> filter(mo==9) |> arrange(extent)
 
 i |> filter(mo==9) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
-i <- rbind(i, data.frame(year=2025, mo=6, extent=10.6))
+i <- rbind(i, data.frame(year=2025, mo=7, extent=6.2))
 
 # to adjust for month min variation
 i |> mutate(extmin=extent*(1-0.042)) -> i
@@ -285,9 +285,9 @@ fit <- train |>
 
 accuracy(fit)
 
-  fc <- fit |> forecast(h='3 month')
-fc |> autoplot(level =50) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 4)
-fc |> filter(.model=='arima') |> autoplot(level = 70) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 4)
+fc <- fit |> forecast(h='2 month')
+fc |> autoplot(level =75) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 4)
+fc |> filter(.model=='theta') |> autoplot(level = 70) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 4)
 fc |> filter(date==tsibble::make_yearmonth(2025, 09)) |> hilo(level = 70)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -421,7 +421,7 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 library(tidyverse)
 library(hockeystick)
 ncei <- read_csv("R/ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
-cop <- d
+  cop <- d
 
 monthforecast <- 'Jul'
 months = 1:12; names(months) = month.abb
@@ -438,10 +438,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 3)
-# jul16: 0.935
+# jul20: 0.981
 f |> filter(dummy_date <= as.Date("1925-07-31"), dummy_date >= as.Date("1925-07-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 3)
-# jul16: 1.063
+# jul20: 1.026
 
 #### FRED ####
 
