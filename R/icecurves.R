@@ -71,7 +71,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
   month <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
 
   curve <- function(month) {
-    filename <- paste0(pole, '_', month, '_extent_v3.0.csv')
+    filename <- paste0(pole, '_', month, '_extent_v4.0.csv')
 
     dl <- tempfile()
     download.file(file.path(file_url, filename), dl)

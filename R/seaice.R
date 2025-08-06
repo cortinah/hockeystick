@@ -68,7 +68,7 @@ get_seaice <- function(pole='N', month='07', measure='extent',
   if (pole=='N') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/'
   if (pole=='S') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/south/monthly/data/'
 
-  filename <- paste0(pole, '_', month, '_extent_v3.0.csv')
+  filename <- paste0(pole, '_', month, '_extent_v4.0.csv')
 
   dl <- tempfile()
   download.file(file.path(file_url, filename), dl)
