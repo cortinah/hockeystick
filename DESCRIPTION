@@ -15,7 +15,7 @@ RoxygenNote: 7.3.2
 URL: https://cortinah.github.io/hockeystick/, https://github.com/cortinah/hockeystick
 BugReports: https://github.com/cortinah/hockeystick/issues
 Imports: ggplot2, lubridate, tools, readr, dplyr, tidyr, patchwork, scales, rvest, tibble, treemapify, RColorBrewer, jsonlite
-Depends: R (>= 4.0.0)
+Depends: R (>= 4.1.0)
 Suggests: 
     rmarkdown,
     knitr,
