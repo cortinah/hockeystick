@@ -69,7 +69,7 @@ get_seaice <- function(pole='N', month=7, measure='extent',
   filename <- 'https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_with_Statistics_G02135_v4.0.xlsx'
 
   dl <- tempfile()
-  download.file(filename, dl)
+  download.file(filename, dl, mode = 'wb')
 
   sheet <- paste0(month.name[month], '-', pole, 'H')
   seaice <- suppressMessages( read_xlsx(dl, skip=9, sheet=sheet) )

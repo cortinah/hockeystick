@@ -277,6 +277,7 @@ plot_carbontemp <- function(dataset = merge_carbontemp(), print=TRUE) {
   plot <- ggplot(dataset, aes(x=Carbon, y=Anomaly, color=Year)) + geom_point() + theme_bw() + scale_y_continuous(n.breaks = 8) +
     scale_color_fermenter(palette = "YlOrRd", direction = 1, labels=c('1960-70s', '1980-90s', '2000-10s', '2020-40s')) +
     theme(legend.key.height = unit(1,"cm"), legend.text = element_text(vjust = -1.5)) +
+    scale_x_continuous(n.breaks = 6) +
     labs(title=expression('Global Heating and Atmospheric '*CO[2]*' Since 1959'),
          subtitle='Monthly temperature relative to 1951-80 mean and Mauna Loa monthly mean', x=expression(title='Atmospheric '*CO[2]*' (ppm)'),
          y='Global Temperature Anomaly (C\U00B0)', color='20-year\nperiods',

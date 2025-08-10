@@ -68,7 +68,7 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
   filename <- 'https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_with_Statistics_G02135_v4.0.xlsx'
 
   dl <- tempfile()
-  download.file(filename, dl)
+  download.file(filename, dl, mode='wb')
 
 
   curve <- function(month, pole) {
