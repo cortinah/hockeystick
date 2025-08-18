@@ -1,0 +1,119 @@
+---
+title: "Using Hockeystick"
+vignette: >
+  %\VignetteIndexEntry{Using Hockeystick}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: '#>'
+---
+`hockeystick` includes functions to download and visualized climate data.  Data is optionally cached.
+
+### Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and plot:
+```{r}
+#| label: carbon
+#| message: false
+library(hockeystick)
+ml_co2 <- get_carbon()
+plot_carbon(ml_co2)
+```
+
+### Retrieve GCP global CO~2~ emissions and plot:
+```{r}
+#| label: emissions
+#| message: false
+emissions <- get_emissions()
+plot_emissions(emissions)
+plot_emissions_with_land(emissions)
+```
+
+
+### Visualize cumulative emissions by country:
+```{r}
+#| label: emissionsmap
+#| message: false
+emissions_map()
+```
+
+### Retrieve NASA/GISS global surface temperature anomaly data and plot:
+```{r}
+#| label: anomaly
+#| message: false
+anomaly <- get_temp()
+plot_temp(anomaly)
+```
+
+### Plot relationship between temperature anomaly and carbon:
+```{r}
+#| label: tempcarbon
+#| message: false
+plot_carbontemp()
+```
+
+
+### Visualize warming using Ed Hawkins styled "warming stripes":
+```{r}
+#| label: stripes
+#| message: false
+warming_stripes()
+warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
+```
+
+### Retrieve tide gauge and satellite sea level data and plot:
+```{r}
+#| label: sealevel
+#| message: false
+gmsl <- get_sealevel()
+plot_sealevel(gmsl)
+```
+
+
+### Retrieve July annual Arctic Sea Ice Index and plot:
+```{r}
+#| label: ice
+#| message: false
+seaice <- get_seaice()
+plot_seaice(seaice)
+```
+
+`get_seaice()` arguments can be modified to download Antarctic sea ice, and allow any month.
+
+You can also visualize sea ice by month and year:
+```{r}
+#| label: ice2
+#| message: false
+arcticice <- get_icecurves()
+plot_icecurves(arcticice)
+```
+
+### Retrieve NOAA HURDAT2 hurricane data and plot:
+```{r}
+#| label: hurdat
+#| message: false
+hurricanes <- get_hurricanes()
+plot_hurricanes(hurricanes)
+plot_hurricane_nrg(hurricanes)
+```
+
+### Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
+```{r}
+#| label: methane
+#| message: false
+ch4 <- get_methane()
+plot_methane(ch4)
+```
+
+### Retrieve Vostok paleo ice core data and plot:
+```{r}
+#| label: paleo
+#| message: false
+vostok <- get_paleo()
+plot_paleo(vostok)
+```
+
+### Managing the cache
+By default, no climate data is cached, and all data is downloaded every time any of the `get_` functions is called. To cache data for future use, use the `write_cache = TRUE` option, available in all of the `get_` functions. To download and cache all data use `hockeystick_update_all()`. To view the files, date, and size of cached data use `hockeystick_cache_details()`.  To re-download data from the source use the `use_cache = FALSE` argument in any of the `get_` functions, for example: `get_carbon(use_cache = FALSE, write_cache = TRUE)`.  To delete all cached data use `hockeystick_cache_delete_all()`.
+
+Users may also cache data by default by adding `options(hs_write_cache = TRUE)`to their script or `.Rprofile` file.

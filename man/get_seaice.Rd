@@ -6,7 +6,7 @@
 \usage{
 get_seaice(
   pole = "N",
-  month = "07",
+  month = 7,
   measure = "extent",
   use_cache = TRUE,
   write_cache = getOption("hs_write_cache")
@@ -15,7 +15,7 @@ get_seaice(
 \arguments{
 \item{pole}{'N' for Arctic or 'S' for Antarctic}
 
-\item{month}{2-digit month to retrieve sea ice for, defaults to '07' (July)}
+\item{month}{2-digit month to retrieve sea ice for, defaults to 7 (July)}
 
 \item{measure}{Must be 'extent' or 'area', defaults to 'extent'. Please see terminology link in references for details.}
 
@@ -44,7 +44,7 @@ seaice <- get_seaice()
 # Force cache refresh:
 seaice <- get_seaice(use_cache = FALSE)
 # change region and month
-seaice <- get_seaice(pole='S', month='09', use_cache = FALSE)
+seaice <- get_seaice(pole='S', month=9, use_cache = FALSE)
 #
 # Review cache contents and last update dates:
 hockeystick_cache_details()

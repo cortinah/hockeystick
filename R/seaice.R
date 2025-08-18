@@ -6,7 +6,7 @@
 #'
 #' @name get_seaice
 #' @param pole 'N' for Arctic or 'S' for Antarctic
-#' @param month 2-digit month to retrieve sea ice for, defaults to '07' (July)
+#' @param month 2-digit month to retrieve sea ice for, defaults to 7 (July)
 #' @param measure Must be 'extent' or 'area', defaults to 'extent'. Please see terminology link in references for details.
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data, or to change pole or month in cache.
 #' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)
@@ -19,7 +19,8 @@
 #' Defaults to Arctic July sea ice extent.  \url{https://nsidc.org/sea-ice-today/about-data#area_extent}
 #'
 #' @importFrom lubridate ymd ceiling_date
-#' @importFrom utils download.file read.csv
+#' @importFrom utils download.file
+#' @importFrom readxl read_xlsx
 #' @importFrom tibble tibble
 #'
 #' @examples
@@ -30,7 +31,7 @@
 #' # Force cache refresh:
 #' seaice <- get_seaice(use_cache = FALSE)
 #' # change region and month
-#' seaice <- get_seaice(pole='S', month='09', use_cache = FALSE)
+#' seaice <- get_seaice(pole='S', month=9, use_cache = FALSE)
 #' #
 #' # Review cache contents and last update dates:
 #' hockeystick_cache_details()
@@ -48,11 +49,11 @@
 #'
 #' @export
 
-get_seaice <- function(pole='N', month='07', measure='extent',
+get_seaice <- function(pole='N', month=7, measure='extent',
                        use_cache = TRUE, write_cache = getOption("hs_write_cache")) {
 
   if (pole!='S' & pole!='N') stop("pole must be 'N' or 'S'")
-  if (!(month %in% c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'))) stop("Month must be one of '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12' ")
+  if (!(month %in% 1:12)) stop("Month must be a value between 1 and 12")
   if (measure != 'extent' & measure != 'area') stop("measure must be 'extent' or 'area'")
 
   hs_path <- tools::R_user_dir("hockeystick","cache")
@@ -62,19 +63,17 @@ get_seaice <- function(pole='N', month='07', measure='extent',
     if (file.exists(file.path(hs_path,'seaice.rds'))) return(invisible(readRDS((file.path(hs_path,'seaice.rds')))))
     }
 
-  connected <- .isConnected('ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/')
+  connected <- .isConnected('https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_with_Statistics_G02135_v4.0.xlsx')
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-  if (pole=='N') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/'
-  if (pole=='S') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/south/monthly/data/'
-
-  filename <- paste0(pole, '_', month, '_extent_v3.0.csv')
+  filename <- 'https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_with_Statistics_G02135_v4.0.xlsx'
 
   dl <- tempfile()
-  download.file(file.path(file_url, filename), dl)
+  download.file(filename, dl, mode = 'wb')
 
-  seaice <- utils::read.csv(dl, header = TRUE)
-  seaice$date <- lubridate::ceiling_date(lubridate::ymd(paste(seaice$year, seaice$mo, '01', sep='-')), 'month')-1
+  sheet <- paste0(month.name[month], '-', pole, 'H')
+  seaice <- suppressMessages( read_xlsx(dl, skip=9, sheet=sheet) )
+  seaice$date <- lubridate::ceiling_date(lubridate::ymd(paste(seaice$year, seaice$month, '01', sep='-')), 'month')-1
 
   if (measure == 'extent') seaice <- seaice[,c('date', 'extent')] else seaice <- seaice[,c('date', 'area')]
 
@@ -83,7 +82,6 @@ get_seaice <- function(pole='N', month='07', measure='extent',
   if (write_cache) saveRDS(seaice, file.path(hs_path, 'seaice.rds'))
 
   invisible(seaice) }
-
 
 
 

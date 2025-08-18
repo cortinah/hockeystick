@@ -48,12 +48,12 @@ install.packages("hockeystick")
 You may alternatively install the development version from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
   
 ``` r
-remotes::install_github("cortinah/hockeystick")
+remotes::install_github("cortinah/hockeystick@testing")
 ```
 
 ## Downloading and viewing global heating data
 
-New: Plot daily global temperatures since 1940 and current anomaly:
+Plot daily global temperatures since 1940 and current anomaly:
 
 ```{r dailytemp, fig.retina=2, message=FALSE, out.width='60%', fig.asp=1.03}
 library(hockeystick)
