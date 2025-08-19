@@ -83,6 +83,7 @@ Retrieve GCP global CO<sub>2</sub> emissions and plot:
 <img src="man/figures/README-emissions-1.png" width="65%" /><img src="man/figures/README-emissions-2.png" width="65%" />
 
 Visualize cumulative emissions by country:
+
 <img src="man/figures/README-emissionsmap-1.png" width="60%" />
 
 Retrieve NASA/GISS global surface temperature anomaly data and plot:

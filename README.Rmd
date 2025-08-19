@@ -84,6 +84,7 @@ plot_emissions_with_land(emissions)
 ```
 
 Visualize cumulative emissions by country:
+
 ```{r emissionsmap, out.width='60%', fig.retina=2}
 emissions_map()
 ```
