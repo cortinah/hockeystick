@@ -9,23 +9,6 @@ knitr:
     collapse: true
     comment: '#>'
 ---
-```{r, include=FALSE}
-knitr::knit_hooks$set(pngquant = knitr::hook_pngquant)
-
-knitr::opts_chunk$set(
-  echo = FALSE,
-  message = FALSE,
-  fig.path = "man/figures/README-",
-  collapse = TRUE,
-  comment = "#>",
-  dev = "ragg_png",
-  dpi = 72,
-  fig.retina = 2,
-  pngquant = "--speed=1 --quality=50"
-)
-```
-
-
 `hockeystick` includes functions to download and visualized climate data.  Data is optionally cached.
 
 ### Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and plot:
