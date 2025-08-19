@@ -71,93 +71,36 @@ remotes::install_github("cortinah/hockeystick@testing")
 
 Plot daily global temperatures since 1940 and current anomaly:
 
-``` r
-library(hockeystick)
-globaldaily <- get_dailytemp()
-plot_dailytemp(globaldaily)
-```
-
 <img src="man/figures/README-dailytemp-1.png" width="60%" />
 
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
 data and plot:
 
-``` r
-ml_co2 <- get_carbon()
-plot_carbon(ml_co2)
-```
-
 <img src="man/figures/README-carbon-1.png" width="60%" />
 
 Retrieve GCP global CO<sub>2</sub> emissions and plot:
 
-``` r
-emissions <- get_emissions()
-plot_emissions(emissions)
-```
-
-<img src="man/figures/README-emissions-1.png" width="65%" />
-
-``` r
-plot_emissions_with_land(emissions)
-```
-
-<img src="man/figures/README-emissions-2.png" width="65%" />
+<img src="man/figures/README-emissions-1.png" width="65%" /><img src="man/figures/README-emissions-2.png" width="65%" />
 
 Visualize cumulative emissions by country:
-
-``` r
-emissions_map()
-```
-
 <img src="man/figures/README-emissionsmap-1.png" width="60%" />
 
 Retrieve NASA/GISS global surface temperature anomaly data and plot:
 
-``` r
-anomaly <- get_temp()
-plot_temp(anomaly)
-```
-
 <img src="man/figures/README-temp-1.png" width="60%" />
 
 Plot relationship between temperature anomaly and carbon:
-
-``` r
-plot_carbontemp()
-```
-
 <img src="man/figures/README-tempcarbon-1.png" width="60%" />
 
 Visualize warming using Ed Hawkins styled “warming stripes”:
-
-``` r
-warming_stripes()
-```
-
 <img src="man/figures/README-stripes-1.png" width="60%" />
-
-``` r
-warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
-```
-
 <img src="man/figures/README-stripes2-1.png" width="53%" />
 
 Retrieve tide gauge and satellite sea level data and plot:
 
-``` r
-gmsl <- get_sealevel()
-plot_sealevel(gmsl)
-```
-
 <img src="man/figures/README-sl-1.png" width="60%" />
 
 Retrieve July annual Arctic Sea Ice Index and plot:
-
-``` r
-seaice <- get_seaice()
-plot_seaice(seaice)
-```
 
 <img src="man/figures/README-si-1.png" width="60%" />
 
@@ -166,53 +109,22 @@ and allow any month.
 
 You can also visualize sea ice by month and year:
 
-``` r
-arcticice <- get_icecurves()
-plot_icecurves(arcticice)
-```
-
 <img src="man/figures/README-icecurves-1.png" width="60%" />
 
 Retrieve Common Era temperature reconstruction and plot it with
 instrumental record:
 
-``` r
-anomaly2k <- get_temp2k()
-plot_temp2k(anomaly2k)
-```
-
 <img src="man/figures/README-2ktemp-1.png" width="60%" />
 
 Retrieve NOAA HURDAT2 hurricane data and plot:
 
-``` r
-hurricanes <- get_hurricanes()
-plot_hurricanes(hurricanes)
-```
-
-<img src="man/figures/README-hurricanes-1.png" width="60%" />
-
-``` r
-plot_hurricane_nrg(hurricanes)
-```
-
-<img src="man/figures/README-hurricanes-2.png" width="60%" />
+<img src="man/figures/README-hurricanes-1.png" width="60%" /><img src="man/figures/README-hurricanes-2.png" width="60%" />
 
 Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
-
-``` r
-ch4 <- get_methane()
-plot_methane(ch4)
-```
 
 <img src="man/figures/README-methane-1.png" width="60%" />
 
 Retrieve Vostok paleo ice core data and plot:
-
-``` r
-vostok <- get_paleo()
-plot_paleo(vostok)
-```
 
 <img src="man/figures/README-paleo-1.png" width="60%" />
 
@@ -233,10 +145,6 @@ Users may also cache data by default by adding
 `options(hs_write_cache = TRUE)`to their script or `.Rprofile` file.
 
 ### All together now: climate data grid
-
-``` r
-climate_grid()
-```
 
 <img src="man/figures/README-grid-1.png" width="80%" />
 
@@ -281,6 +189,8 @@ climate_grid()
   climatereanalyzer.org daily temperature chart (Temperature Records
   Broken…Again, 9 July 2023). This code is the foundation of the
   get_dailytemp() and plot_dailytemp() functions.
+- Thank you Nan Xiao for [PNG compression
+  approach](https://nanx.me/blog/post/rpkgs-pngquant-ragg/).
 
 ## Notes and resources
 
