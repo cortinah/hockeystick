@@ -66,3 +66,8 @@
 
 # hockeystick 0.8.5
 * Add plot_carbontemp() and get_dailytemp_cop(), default to Copernicus
+
+# hockeystick 0.8.6
+* Added vignette
+* Updated out-of-date urls for sea-ice and sealevel
+* Switched sea-ice to use http not ftp

@@ -16,7 +16,7 @@
 #' GISS Surface Temperature Analysis (GISTEMP v4) is an estimate of global surface temperature change.
 #'
 #' Data are updated around the middle of every month using current data files from NOAA GHCN v4 (meteorological stations) and ERSST v5 (ocean areas).
-#' Station data are combined as described in Hansen et al. (2010) \url{https://data.giss.nasa.gov/gistemp/references.html} and Lenssen et al. (2019) \url{https://pubs.giss.nasa.gov/abs/le05800h.html}
+#' Station data are combined as described in Hansen et al. (2010) \url{https://data.giss.nasa.gov/gistemp/references.html} and Lenssen et al. (2019) \url{https://www.giss.nasa.gov/pubs/abs/le05800h.html}
 #'
 #' @importFrom readr read_csv
 #' @importFrom lubridate ymd
@@ -42,7 +42,7 @@
 #' \item GISS Surface Temperature Analysis (GISTEMP v4): \url{https://data.giss.nasa.gov/gistemp/}
 #' \item GISTEMP Team, 2020: \emph{GISS Surface Temperature Analysis (GISTEMP), version 4.} NASA Goddard Institute for Space Studies.
 #' \item Lenssen, N., G. Schmidt, J. Hansen, M. Menne, A. Persin, R. Ruedy, and D. Zyss, 2019:  Improvements in the GISTEMP uncertainty model.
-#'  \emph{J. Geophys. Res. Atmos.}, 124, no. 12, 6307-6326, doi:10.1029/2018JD029522. \url{https://pubs.giss.nasa.gov/abs/le05800h.html}
+#'  \emph{J. Geophys. Res. Atmos.}, 124, no. 12, 6307-6326, doi:10.1029/2018JD029522. \url{https://www.giss.nasa.gov/pubs/abs/le05800h.html}
 #'  }
 #'
 #' @export

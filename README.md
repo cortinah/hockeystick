@@ -64,12 +64,12 @@ You may alternatively install the development version from
 <https://github.com/cortinah/hockeystick> with:
 
 ``` r
-remotes::install_github("cortinah/hockeystick")
+remotes::install_github("cortinah/hockeystick@testing")
 ```
 
 ## Downloading and viewing global heating data
 
-New: Plot daily global temperatures since 1940 and current anomaly:
+Plot daily global temperatures since 1940 and current anomaly:
 
 ``` r
 library(hockeystick)
@@ -96,13 +96,13 @@ emissions <- get_emissions()
 plot_emissions(emissions)
 ```
 
-<img src="man/figures/README-emissions-1.png" width="65%" />
+<img src="man/figures/README-emissions-1.png" width="60%" />
 
 ``` r
 plot_emissions_with_land(emissions)
 ```
 
-<img src="man/figures/README-emissions-2.png" width="65%" />
+<img src="man/figures/README-emissions-2.png" width="60%" />
 
 Visualize cumulative emissions by country:
 
@@ -141,15 +141,16 @@ warming_stripes()
 warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
 ```
 
-<img src="man/figures/README-stripes2-1.png" width="53%" />
+<img src="man/figures/README-stripes2-1.png" width="60%" />
 
 Retrieve tide gauge and satellite sea level data and plot:
 
 ``` r
 gmsl <- get_sealevel()
-#> Retrieving remote data requires internet connectivity.
 plot_sealevel(gmsl)
 ```
+
+<img src="man/figures/README-sl-1.png" width="60%" />
 
 Retrieve July annual Arctic Sea Ice Index and plot:
 
@@ -235,8 +236,9 @@ Users may also cache data by default by adding
 
 ``` r
 climate_grid()
-#> Retrieving remote data requires internet connectivity.
 ```
+
+<img src="man/figures/README-grid-1.png" width="80%" />
 
 ## Acknowledgments
 
@@ -279,6 +281,8 @@ climate_grid()
   climatereanalyzer.org daily temperature chart (Temperature Records
   Broken…Again, 9 July 2023). This code is the foundation of the
   get_dailytemp() and plot_dailytemp() functions.
+- Thank you Nan Xiao for [PNG compression
+  approach](https://nanx.me/blog/post/rpkgs-pngquant-ragg/).
 
 ## Notes and resources
 

@@ -4,12 +4,18 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r, include=FALSE}
+knitr::knit_hooks$set(pngquant = knitr::hook_pngquant)
+
 knitr::opts_chunk$set(
+  message = FALSE,
+  fig.path = "man/figures/README-",
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  dev = "ragg_png",
+  dpi = 72,
+  fig.retina = 2,
+  pngquant = "--speed=1 --quality=50"
 )
 ```
 
@@ -48,12 +54,12 @@ install.packages("hockeystick")
 You may alternatively install the development version from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
   
 ``` r
-remotes::install_github("cortinah/hockeystick")
+remotes::install_github("cortinah/hockeystick@testing")
 ```
 
 ## Downloading and viewing global heating data
 
-New: Plot daily global temperatures since 1940 and current anomaly:
+Plot daily global temperatures since 1940 and current anomaly:
 
 ```{r dailytemp, fig.retina=2, message=FALSE, out.width='60%', fig.asp=1.03}
 library(hockeystick)
@@ -70,13 +76,14 @@ plot_carbon(ml_co2)
 
 Retrieve GCP global CO~2~ emissions and plot:
 
-```{r emissions, out.width='65%', fig.retina=2, message=FALSE}
+```{r emissions, out.width='60%', fig.retina=2, message=FALSE}
 emissions <- get_emissions()
 plot_emissions(emissions)
 plot_emissions_with_land(emissions)
 ```
 
 Visualize cumulative emissions by country:
+
 ```{r emissionsmap, out.width='60%', fig.retina=2}
 emissions_map()
 ```
@@ -97,7 +104,7 @@ Visualize warming using Ed Hawkins styled "warming stripes":
 ```{r stripes, out.width='60%', fig.retina=2}
 warming_stripes()
 ```
-```{r stripes2, out.width='53%', fig.retina=2}
+```{r stripes2, out.width='60%', fig.retina=2}
 warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
 ```
 
@@ -177,6 +184,7 @@ Data Archive: https://nsidc.org/data/explore-data
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (https://gml.noaa.gov/ccgg/trends_ch4/).
 - Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
 - Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken...Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.
+- Thank you Nan Xiao for [PNG compression approach](https://nanx.me/blog/post/rpkgs-pngquant-ragg/).
 
 ## Notes and resources
 - All data is compiled to the best of my ability from reliable and peer-reviewed sources. Please open an issue if you are aware of enhanced or additional data that may be added to the package. Building `hockeystick` is driven by my interest in tracking climate data and making it easily available to the community.

@@ -62,35 +62,35 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
       if (all(c(pole, measure) == cached_type)) return(invisible(cached_ice)) }
   }
 
-  connected <- .isConnected('ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/')
+  connected <- .isConnected('https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_with_Statistics_G02135_v4.0.xlsx')
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
-  if (pole=='N') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/north/monthly/data/'
-  if (pole=='S') file_url <- 'ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/south/monthly/data/'
+  filename <- 'https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_with_Statistics_G02135_v4.0.xlsx'
 
-  month <- c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12')
+  dl <- tempfile()
+  download.file(filename, dl, mode='wb')
 
-  curve <- function(month) {
-    filename <- paste0(pole, '_', month, '_extent_v3.0.csv')
 
-    dl <- tempfile()
-    download.file(file.path(file_url, filename), dl)
+  curve <- function(month, pole) {
+    sheet <- paste0(month.name[month], '-', pole, 'H')
+    seaice <- suppressMessages( read_xlsx(dl, skip=9, sheet=sheet) )
+    seaice$date <- lubridate::ceiling_date(lubridate::ymd(paste(seaice$year, seaice$month, '01', sep='-')), 'month')-1
 
-    seaice <- utils::read.csv(dl, header = TRUE)
+    if (measure == 'extent') seaice <- seaice[,c('year', 'month', 'extent')] else seaice <- seaice[,c('year', 'month', 'area')]
+    seaice <- tibble::tibble(seaice)
 
-    if (measure == 'extent') seaice <- seaice[,c('year', 'mo', 'extent')] else seaice <- seaice[,c('year', 'mo', 'area')]
     return(seaice)
   }
 
-  icecurves <- lapply(month, curve)
+  icecurves <- lapply(1:12, curve, pole=pole)
   icecurves <- do.call("rbind", icecurves)
-  icecurves <- tibble::tibble(icecurves)
-
-    attr(icecurves, "hs_ice_type") <- c(pole, measure)
+  attr(icecurves, "hs_ice_type") <- c(pole, measure)
 
     if (write_cache) saveRDS(icecurves, file.path(hs_path, 'icecurves.rds'))
 
   invisible(icecurves) }
+
+
 
 #' Download and plot essential climate data
 #'
@@ -140,7 +140,7 @@ plot_icecurves <- function(dataset = get_icecurves(), print = TRUE) {
   colnames(dataset) <- c('year', 'month', 'measure')
   current_year <- max(dataset$year)
   dataset$linew <- ifelse(dataset$year == current_year, current_year, 'Previous')
-  dataset <- dataset[dataset[,3] != '-9999', ]
+  dataset <- na.omit(dataset)
 
   plot <- ggplot(dataset, aes(x=month, y=measure, alpha=as.factor(linew), linewidth=as.factor(linew), color=as.factor(year))) +
     geom_line() +scale_y_continuous(limits=c(0, 20)) +theme_bw() +
