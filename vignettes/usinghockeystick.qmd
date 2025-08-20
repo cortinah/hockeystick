@@ -1,5 +1,6 @@
 ---
 title: "Using Hockeystick"
+fig-format: svg
 vignette: >
   %\VignetteIndexEntry{Using Hockeystick}
   %\VignetteEngine{quarto::html}
