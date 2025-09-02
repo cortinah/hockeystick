@@ -21,6 +21,7 @@ Suggests:
     knitr,
     spelling,
     viridisLite,
-    quarto
+    quarto,
+    svglite
 Language: en-US
 VignetteBuilder: quarto

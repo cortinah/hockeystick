@@ -8,6 +8,7 @@ vignette: >
 knitr:
   opts_chunk:
     collapse: true
+    dev: "svglite"
     comment: '#>'
 ---
 `hockeystick` includes functions to download and visualized climate data.  Data is optionally cached.
