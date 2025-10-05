@@ -117,6 +117,13 @@ Retrieve NASA/GISS global surface temperature anomaly data and plot:
 ``` r
 anomaly <- get_temp()
 plot_temp(anomaly)
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> ℹ The deprecated feature was likely used in the hockeystick package.
+#>   Please report the issue at <https://github.com/cortinah/hockeystick/issues>.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
 <img src="man/figures/README-temp-1.png" width="60%" />

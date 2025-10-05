@@ -123,7 +123,7 @@ plot_emissions <- function(dataset = get_emissions(),
 
 plot <- ggplot(dataset, aes(x=year, y=get(field))) +geom_line(linewidth=1, color='firebrick1') + theme_bw(base_size=12) +
   scale_x_continuous(n.breaks = 10, minor_breaks = NULL) + scale_y_continuous(limits = c(0, max(dataset[, field])), n.breaks = 6)  +
-  labs(title =  title_expression, subtitle=dataset$country[1], x=element_blank(),
+  labs(title =  title_expression, subtitle=dataset$country[1], x=NULL,
     y = yaxis_expression, caption='Source: Global Carbon Project and Our World In Data.\nhttps://github.com/owid/co2-data')
 
 if (annot) {
@@ -202,11 +202,11 @@ plot_emissions_with_land <- function(dataset = get_emissions(),
   dataset <- pivot_longer(dataset,-c(year,country), values_to = c("co2"))
   dataset <- na.omit(mutate(dataset, co2=co2/1000))
 
-  plot <- ggplot(dataset, aes(x=year, y=co2, fill=name)) +geom_area(size=1, position='stack') + theme_bw(base_size=12) +
+  plot <- ggplot(dataset, aes(x=year, y=co2, fill=name)) +geom_area(linewidth=1, position='stack') + theme_bw(base_size=12) +
     scale_x_continuous(n.breaks = 10, minor_breaks = NULL) + theme(legend.position=c(0.18, 0.85), legend.title = element_blank()) +
     scale_y_continuous(limits = c( min(0, 1.2*min(dataset[, "co2"])) , 1.2*maxcombo ), n.breaks = 6) +
     scale_fill_manual(labels=c('Fossil Combustion', 'Land Use Change'), values=c("firebrick1","burlywood4")) +
-    labs(title =  title_expression, subtitle=dataset$country[1], x=element_blank(), y = yaxis_expression, caption='Source: Global Carbon Project and Our World In Data.\nhttps://github.com/owid/co2-data')
+    labs(title =  title_expression, subtitle=dataset$country[1], x=NULL, y = yaxis_expression, caption='Source: Global Carbon Project and Our World In Data.\nhttps://github.com/owid/co2-data')
 
   if (annot) {
 
