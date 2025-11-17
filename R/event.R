@@ -419,7 +419,7 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 # https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/tavg/land_ocean/1/0/2023-2024
 library(tidyverse)
 library(hockeystick)
-ncei <- read_csv("R/ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
+ncei <- read_csv("ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
 cop <- d
 
 monthforecast <- 'Nov'
@@ -437,14 +437,14 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 2)
-# Nov 13: 1.15
+# Nov 17: 1.16
 f |> filter(dummy_date <= as.Date("1925-11-30"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 2)
-# Nov 13: 1.12
+# Nov 17: 1.17
 
 #### FRED ####
 
-library(fredr)
+  library(fredr)
 library(tidyverse)
 fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
 
