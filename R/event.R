@@ -444,7 +444,7 @@ fcstloti <- round(fcstcop + gap, 2)
 
 #### FRED ####
 
-  library(fredr)
+library(fredr)
 library(tidyverse)
 fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
 
@@ -459,8 +459,8 @@ ggplot(employees, aes(x=date, y=value)) + geom_line() + scale_x_date() + theme_b
 employees |> mutate(month=month(date)) -> employees
 tail(employees)
 
-employees |> filter(month==1) -> employees
+filter(employees, date==as.Date("2025-11-01") | month==1) -> employees
 employees |> mutate(prev=lag(value)) |> mutate(change=value-prev) -> employees
 
 ggplot(drop_na(employees), aes(x=date, y=change)) +geom_col(color='black',fill='darkorange') +scale_x_date(date_labels = "'%y", date_breaks = "2 year") +
-  scale_y_continuous(n.breaks = 8) +labs(title='Federal Employment', x='Year', y='Annual Change in Fed Employment',caption='Source: FRED') +theme_bw()
+  scale_y_continuous(n.breaks = 8) +labs(title='Federal Employment', x='Year', y='Annual Change in Federal Employment',caption='Source: FRED') +theme_bw()
