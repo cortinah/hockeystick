@@ -252,25 +252,25 @@ library(tidyverse)
 library(hockeystick)
 i <- get_icecurves(use_cache=F, write_cache = T)
 i |> filter(year==2025) |> tail(1)
-i |> filter(mo==9) |> arrange(extent)
+i |> filter(month==3) |> arrange(-extent)
 
-i |> filter(mo==9) |> filter(year %in% c(2024, 2023, 2022, 2021))
+i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2021))
 
-i <- rbind(i, data.frame(year=2025, mo=7, extent=6.2))
+i <- rbind(i, data.frame(year=2025, mo=12, extent=10.76))
 
 # to adjust for month min variation
 i |> mutate(extmin=extent*(1-0.042)) -> i
 
 i |> plot_icecurves() + geom_hline(yintercept = 4) + geom_hline(yintercept = 3.8)
 
-fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=mo)) |> arrange(date) |> select(date, extmin)
+fcst <- i |> mutate(date=tsibble::make_yearmonth(year=year, month=month)) |> arrange(date) |> select(date, extent)
 
 # Fable
 library(tsibble)
 library(fable)
 library(fable.prophet)
 
-fcst <- fcst |> select(date, y=extmin) |> tail(12*6)
+fcst <- fcst |> select(date, y=extent) |> tail(12*6)
 
 train <- as_tsibble(fcst, index=date)
 
@@ -284,10 +284,10 @@ fit <- train |>
 
 accuracy(fit)
 
-fc <- fit |> forecast(h='2 month')
+fc <- fit |> forecast(h='4 month')
 fc |> autoplot(level =75) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 4)
-fc |> filter(.model=='theta') |> autoplot(level = 70) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 4)
-fc |> filter(date==tsibble::make_yearmonth(2025, 09)) |> hilo(level = 70)
+fc |> filter(.model=='prophet') |> autoplot(level = 70) + geom_hline(yintercept = 3.8) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 4)
+fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 70)
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -419,7 +419,7 @@ d |> top_n(wt = temp, n = 5) |> arrange(-temp)
 # https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/tavg/land_ocean/1/0/2023-2024
 library(tidyverse)
 library(hockeystick)
-ncei <- read_csv("ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
+ncei <- read_csv("R/ncei_allmonths.csv", col_types = cols(Date = col_date(format = "%Y%m")))
 cop <- d
 
 monthforecast <- 'Nov'
@@ -428,8 +428,8 @@ start <- paste("1925", months[monthforecast],"01", sep='-')
 end <- ceiling_date(as.Date(start), "month")-1
 ncei |> mutate(Year=year(Date)) |> filter(month(Date)==which(month.abb==monthforecast)) -> ncei
 
-nceihistory <- ncei |> filter(Year>=2020) |> select(Anomaly) |> pull() |> mean()
-cophistory <- cop |> filter(year>=2020, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
+nceihistory <- ncei |> filter(Year>=2021) |> select(Anomaly) |> pull() |> mean()
+cophistory <- cop |> filter(year>=2021, year<=2024) |> filter(dummy_date >=as.Date(start), dummy_date <=as.Date(end)) |> summarize(mean(temp_anom)) |> pull()
 gap <- nceihistory - cophistory
 
 start <- paste("2025", months[monthforecast], "01", sep='-')
@@ -437,14 +437,14 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 2)
-# Nov 17: 1.16
+# Nov 18: 1.16
 f |> filter(dummy_date <= as.Date("1925-11-30"), dummy_date >= as.Date("1925-11-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2025) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 2)
-# Nov 17: 1.17
+# Nov 18: 1.19
 
 #### FRED ####
 
-  library(fredr)
+library(fredr)
 library(tidyverse)
 fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
 
