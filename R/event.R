@@ -286,16 +286,17 @@ accuracy(fit)
 
 fc <- fit |> forecast(h='3 month')
 fc |> autoplot(level =75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 14.4)
-fc |> filter(.model=='prophet') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
-fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 75)
+fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
+fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 1)
 # max is 1.6% above month mean
-13.85*1.016
+14.14*1.016 #arima 14.37
+13.92*1.016 #ensemble 14.14
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='prophet') |> rename(prophet=.mean) |> select(-y,-.model) |> full_join(fcst)
 
-ensemble <- fc |> filter(.model=="arima" |.model=="prophet") |> index_by(date) |> summarize(ensemble=mean(.mean))
+ensemble <- fc |> filter(.model=="arima" |.model=="prophet"|.model=="ets") |> index_by(date) |> summarize(ensemble=mean(.mean))
 fcst <- ensemble |> full_join(fcst)
 
 fcst |> filter(date==yearmonth('2026 Mar')) |> as_tibble() |> select(ensemble,ets,arima) |> as.matrix() |> max()
