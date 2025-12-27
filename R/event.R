@@ -256,7 +256,7 @@ i |> filter(month==3) |> arrange(-extent)
 
 i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2021, 2025))
 
-i <- rbind(i, data.frame(year=2025, month=12, extent=11.11))
+i <- rbind(i, data.frame(year=2025, month=12, extent=11.23))
 
 # to adjust for month min variation
 #i |> mutate(extmin=extent*(1-0.042)) -> i
@@ -289,8 +289,8 @@ fc |> autoplot(level =75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n
 fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
 fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 1)
 # max is 1.6% above month mean
-14.05*1.016 #arima 14.27
-13.92*1.016 #ensemble 14.14
+14.11*1.016 #arima 14.34
+13.97*1.016 #ensemble 14.19
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
