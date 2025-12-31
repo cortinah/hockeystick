@@ -256,10 +256,12 @@ i |> filter(month==3) |> arrange(-extent)
 
 i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2021, 2025))
 
-i <- rbind(i, data.frame(year=2025, month=12, extent=11.23))
+i <- rbind(i, data.frame(year=2025, month=12, extent=11.24))
 
 # to adjust for month min variation
 #i |> mutate(extmin=extent*(1-0.042)) -> i
+
+cbind(i |> filter(month==12) |> filter(year %in% c(2024, 2023, 2022, 2021)),i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2025)))
 
 i |> plot_icecurves() + geom_hline(yintercept = 14.4) + geom_hline(yintercept = 14.3)
 
@@ -289,8 +291,9 @@ fc |> autoplot(level =75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n
 fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
 fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 1)
 # max is 1.6% above month mean
-14.11*1.016 #arima 14.34
-13.97*1.016 #ensemble 14.19
+14.12*1.016 #arima 14.35
+13.74*1.016 #prophet 13.96
+13.92*1.016 #ensemble 14.14
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -303,8 +306,8 @@ fcst |> filter(date==yearmonth('2026 Mar')) |> as_tibble() |> select(ensemble,et
 
 
 fcst |> ggplot(aes(x=as.Date(date), y=y)) + geom_point(size=0) + geom_line(linewidth=1,color='darkgreen') + scale_y_continuous(n.breaks=12) +
-  theme_bw(base_size = 12) +labs(title='Arctic Sea Ice', subtitle='Green: actual, Blue: ARIMA, Black: ETS, Orange: Prophet', x='Date',color ='Year',y='MM sqkm') +
-  scale_x_date(date_labels="%m/%y") + geom_line(aes(y=arima), color='dodgerblue', size=1) + geom_line(aes(y=ets), color='black', size=1) +
+  theme_bw(base_size = 12) +labs(title='Arctic Sea Ice', subtitle='Green: actual, Blue: ARIMA, Black: ETS, Orange: Prophet', x='Date',y='MM sqkm') +
+  scale_x_date(date_labels="%m/%y",date_breaks = '1 year') + geom_line(aes(y=arima), color='dodgerblue', size=1) + geom_line(aes(y=ets), color='black', size=1) +
   geom_line(aes(y=prophet), color='orange', linewidth=1) + theme(legend.position='top')
 
 
@@ -467,3 +470,16 @@ employees |> mutate(prev=lag(value)) |> mutate(change=value-prev) -> employees
 
 ggplot(drop_na(employees), aes(x=date, y=change)) +geom_col(color='black',fill='darkorange') +scale_x_date(date_labels = "'%y", date_breaks = "2 year") +
   scale_y_continuous(n.breaks = 8) +labs(title='Federal Employment', x='Year', y='Annual Change in Federal Employment',caption='Source: FRED') +theme_bw()
+
+
+#### daily sea ice
+library(janitor)
+icefile <- tempfile()
+download.file("https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Daily_Extent_G02135_v4.0.xlsx", destfile = icefile)
+dailyice <- readxl::read_xlsx(icefile)
+dailyice |> remove_empty() |> clean_names() -> dailyice
+dailyice |> rename(month=x1, day=x2) |> fill(month) -> dailyice
+dailyice |> filter(month=='December') |> select(x2025) |> summarize(m=mean(x2025, na.rm=T))
+
+dailyice |> filter(month=='December') -> dec
+plot(dec$x2025, type = 'l')
