@@ -256,12 +256,12 @@ i |> filter(month==3) |> arrange(-extent)
 
 i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2021, 2025))
 
-i <- rbind(i, data.frame(year=2025, month=12, extent=11.24))
+i <- rbind(i, data.frame(year=2026, month=1, extent=13.12))
 
 # to adjust for month min variation
 #i |> mutate(extmin=extent*(1-0.042)) -> i
 
-cbind(i |> filter(month==12) |> filter(year %in% c(2024, 2023, 2022, 2021)),i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2025)))
+cbind(i |> filter(month==1) |> filter(year %in% c(2025, 2024, 2023, 2022, 2021)),i |> filter(month==3) |> filter(year %in% c(2025, 2024, 2023, 2022, 2021)))
 
 i |> plot_icecurves() + geom_hline(yintercept = 14.4) + geom_hline(yintercept = 14.3)
 
@@ -272,7 +272,7 @@ library(tsibble)
 library(fable)
 library(fable.prophet)
 
-fcst <- fcst |> select(date, y=extent) |> tail(12*5)
+fcst <- fcst |> select(date, y=extent) |> tail(12*6)
 
 train <- as_tsibble(fcst, index=date)
 
@@ -286,14 +286,14 @@ fit <- train |>
 
 accuracy(fit)
 
-fc <- fit |> forecast(h='3 month')
+fc <- fit |> forecast(h='2 month')
 fc |> autoplot(level =75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 14.4)
 fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
-fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 1)
+fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 50)
 # max is 1.6% above month mean
-14.12*1.016 #arima 14.35
-13.74*1.016 #prophet 13.96
-13.92*1.016 #ensemble 14.14
+14.11*1.018 #arima 14.36
+14.01*1.018 #prophet 14.13
+13.91*1.018 #ensemble 14.13
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -472,14 +472,23 @@ ggplot(drop_na(employees), aes(x=date, y=change)) +geom_col(color='black',fill='
   scale_y_continuous(n.breaks = 8) +labs(title='Federal Employment', x='Year', y='Annual Change in Federal Employment',caption='Source: FRED') +theme_bw()
 
 
-#### daily sea ice
+#### daily sea ice ####
 library(janitor)
 icefile <- tempfile()
 download.file("https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Daily_Extent_G02135_v4.0.xlsx", destfile = icefile)
 dailyice <- readxl::read_xlsx(icefile)
 dailyice |> remove_empty() |> clean_names() -> dailyice
 dailyice |> rename(month=x1, day=x2) |> fill(month) -> dailyice
-dailyice |> filter(month=='December') |> select(x2025) |> summarize(m=mean(x2025, na.rm=T))
+dailyice |> filter(month=='January') |> select(x2026) |> summarize(m=mean(x2026, na.rm=T))
 
-dailyice |> filter(month=='December') -> dec
-plot(dec$x2025, type = 'l')
+dailyice |> filter(month=='January') |> select(x2026)  |> pull() -> jan26
+jan26 |> na.omit() |> length() -> daysice
+dailyice |> filter(month=='January') |> select(x2025)  |> pull() -> jan25
+(jan25/lag(jan25)) -> jan25ret
+for (i in ((daysice+1):31)) {jan26[i]=jan26[i-1]*jan25ret[i]}
+mean(jan26)
+plot(jan26, type = 'l')
+
+#max ice
+dailyice |> filter(month=='March') |> select(x2025)  |> pull() -> mar25
+max(mar25)/mean(mar25)
