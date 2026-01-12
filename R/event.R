@@ -256,7 +256,7 @@ i |> filter(month==3) |> arrange(-extent)
 
 i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2021, 2025))
 
-i <- rbind(i, data.frame(year=2026, month=1, extent=13.12))
+i <- rbind(i, data.frame(year=2026, month=1, extent=13.21))
 
 # to adjust for month min variation
 #i |> mutate(extmin=extent*(1-0.042)) -> i
@@ -288,12 +288,12 @@ accuracy(fit)
 
 fc <- fit |> forecast(h='2 month')
 fc |> autoplot(level =75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 14.4)
-fc |> filter(.model=='arima') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
+fc |> filter(.model=='prophet') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
 fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 50)
 # max is 1.6% above month mean
-14.11*1.018 #arima 14.36
-14.01*1.018 #prophet 14.13
-13.91*1.018 #ensemble 14.13
+14.2*1.016 #arima 14.42
+14.02*1.024 #prophet 14.36
+14.04*1.016 #ensemble 14.25
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
@@ -443,10 +443,10 @@ end <- ceiling_date(as.Date(start), "month")-1
 
 fcstcop <- cop |> filter(date>=as.Date(start), date <=as.Date(end)) |> select(temp_anom) |> summarize(mean(temp_anom)) |> pull()
 fcstloti <- round(fcstcop + gap, 2)
-# Jan 4: 1.21
+# Jan 12: 1.23
 f |> filter(dummy_date <= as.Date("1925-01-31"), dummy_date >= as.Date("1925-01-01")) |> group_by(year) |> summarize(mtd=round(mean(temp_anom),digits = 3)) |> slice_max(n=5, order_by=mtd) |> filter(year==2026) |> pull(mtd) -> fcstcop
 fcstloti <- round(fcstcop + gap, 2)
-# Jan 4: 1.23
+# Jan 12: 1.15
 
 #### FRED ####
 
@@ -473,6 +473,7 @@ ggplot(drop_na(employees), aes(x=date, y=change)) +geom_col(color='black',fill='
 
 
 #### daily sea ice ####
+library(tidyverse)
 library(janitor)
 icefile <- tempfile()
 download.file("https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Daily_Extent_G02135_v4.0.xlsx", destfile = icefile)
