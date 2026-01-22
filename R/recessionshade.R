@@ -1,7 +1,10 @@
-library(fredr)
-#fredr_set_key("insert_your_api_key")
+https://datacornering.com/plot-moving-average-in-r-using-ggplot2/
 
-fred_data<-fredr(series_id = "UNRATE",observation_start = as.Date("1920-01-01"))
+library(fredr)
+library(tidyverse)
+fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
+
+fred_data<-fredr(series_id = "UNRATE", observation_start = as.Date("1970-01-01"))
 
 head(fred_data)
 
@@ -30,8 +33,8 @@ theme_am <- function (base_size = 12, base_family = "")
     library(ggplot2)
     #fredr_set_key("insert_your_api_key")
 
-    #st_date<-as.Date("2001-06-01")
-    #ed_date<-as.Date(Sys.Date())
+   # st_date<-as.Date("1970-06-01")
+   # ed_date<-as.Date(Sys.Date())
 
     recession <- fredr(series_id = "USRECD",observation_start = as.Date(st_date),observation_end = as.Date(ed_date))
 
@@ -62,7 +65,7 @@ library(extrafont)
 
 ## Registering fonts with R
 
-library(ggplot2)
+  fred_data$MA <- zoo::rollmean(fred_data$value, 36, na.pad = TRUE, align = "right")
 
 my_plot <-
   ggplot(fred_data, aes(x=date)) +
@@ -71,6 +74,7 @@ my_plot <-
   add_rec_shade(min(fred_data$date),max(fred_data$date)) +
   #******************************************************************
   geom_line(aes(y=value/100),size = 0.8,color="#dd0400") +
+  geom_line(aes(y=MA/100),size = 0.8,color="blue") +
   scale_y_continuous(name="Unemployment Rate in %",labels = scales::percent_format(accuracy = 1)) +
   theme_am() +
   scale_x_date(labels = date_format("%m-%Y"))+
