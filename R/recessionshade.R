@@ -1,12 +1,15 @@
-https://datacornering.com/plot-moving-average-in-r-using-ggplot2/
+#https://datacornering.com/plot-moving-average-in-r-using-ggplot2/
 
 library(fredr)
 library(tidyverse)
 fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
 
-fred_data<-fredr(series_id = "UNRATE", observation_start = as.Date("1970-01-01"))
+fred_data<-fredr(series_id = "UNRATE", observation_start = as.Date("1994-01-01"))
 
-head(fred_data)
+tail(fred_data)
+#interpolate missing data due to shutdown
+fred_data[fred_data$date==as.Date('2025-10-01'),"value"] <- mean(as.numeric(fred_data[fred_data$date==as.Date('2025-09-01'),"value"]),as.numeric(fred_data[fred_data$date==as.Date('2025-11-01'),"value"]))
+tail(fred_data)
 
 #Generate a nice default layout for the plot
 
@@ -15,13 +18,13 @@ theme_am <- function (base_size = 12, base_family = "")
     library(ggthemes)
     library(scales)
     library(extrafont)
-    theme_hc(base_size = base_size, base_family = base_family) %+replace%
+    theme_minimal(base_size = base_size, base_family = base_family) %+replace%
       theme(
         axis.text.x = element_text(color = "grey20", size = 11,family="Calibri Light"),
         axis.text.y = element_text(color = "grey20", size = 11,family="Calibri Light"),
         axis.title.x = element_text(color = "grey20", size = 12,family="Calibri Light"),
         axis.title.y = element_text(color = "grey20", size = 12,family="Calibri Light"),
-        plot.title = element_text(color="#04103b", size=13, face="bold",family="Calibri Light"),
+        plot.title = element_text(color="#04103b", size=13, face="bold", family="Calibri Light"),
         legend.text = element_text(color = "grey20", size = 12,family="Calibri Light")
       )
   }
@@ -36,21 +39,22 @@ theme_am <- function (base_size = 12, base_family = "")
    # st_date<-as.Date("1970-06-01")
    # ed_date<-as.Date(Sys.Date())
 
-    recession <- fredr(series_id = "USRECD",observation_start = as.Date(st_date),observation_end = as.Date(ed_date))
+    recession <- fredr(series_id = "USRECD", observation_start = as.Date(st_date), observation_end = as.Date(ed_date))
 
     recession$diff <- recession$value-lag(recession$value)
-    recession<-recession[!is.na(recession$diff),]
+    recession <- recession[!is.na(recession$diff),]
     recession.start<-recession[recession$diff==1,]$date
     recession.end<-recession[recession$diff==(-1),]$date
 
-    if(length(recession.start)>length(recession.end))
-    {recession.end<-c(recession.end,Sys.Date())}
-    if(length(recession.end)>length(recession.start))
-    {recession.start<-c(min(recession$date),recession.start)}
+    if(length(recession.start) > length(recession.end))
+    {recession.end <- c(recession.end, Sys.Date())}
 
-    recs<-as.data.frame(cbind(recession.start,recession.end))
-    recs$recession.start<-as.Date(as.numeric(recs$recession.start),origin=as.Date("1970-01-01"))
-    recs$recession.end<-as.Date(recs$recession.end,origin=as.Date("1970-01-01"))
+    if(length(recession.end) > length(recession.start))
+    {recession.start < -c(min(recession$date), recession.start)}
+
+    recs <- as.data.frame(cbind(recession.start,recession.end))
+    recs$recession.start <- as.Date(as.numeric(recs$recession.start), origin=as.Date("1970-01-01"))
+    recs$recession.end <- as.Date(recs$recession.end, origin=as.Date("1970-01-01"))
     if(nrow(recs)>0)
     {
       rec_shade <- geom_rect(data=recs, inherit.aes=F,
@@ -62,10 +66,11 @@ theme_am <- function (base_size = 12, base_family = "")
 
 
 library(extrafont)
-
 ## Registering fonts with R
 
   fred_data$MA <- zoo::rollmean(fred_data$value, 36, na.pad = TRUE, align = "right")
+
+  tail(fred_data)
 
 my_plot <-
   ggplot(fred_data, aes(x=date)) +
@@ -75,10 +80,9 @@ my_plot <-
   #******************************************************************
   geom_line(aes(y=value/100),size = 0.8,color="#dd0400") +
   geom_line(aes(y=MA/100),size = 0.8,color="blue") +
-  scale_y_continuous(name="Unemployment Rate in %",labels = scales::percent_format(accuracy = 1)) +
-  theme_am() +
-  scale_x_date(labels = date_format("%m-%Y"))+
-  theme(plot.title = element_text(color="#04103b", size=13, face="bold",family="Arial"))+
-  labs(title="US Unemployment Rate and NBER Recessions",x ="")
+  scale_y_continuous(name="Unemployment Rate",labels = scales::percent_format(accuracy = 1)) +
+  theme_minimal(base_size = 14) +
+  scale_x_date(labels = date_format("%Y"), breaks = '5 years')+
+  labs(title="US Unemployment Rate and NBER Recessions", x=NULL, caption='Shading indicates recession.')
 
 my_plot
