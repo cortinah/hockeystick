@@ -1,3 +1,4 @@
+# From FT climate
 library(needs)
 needs(tidyverse, readxl, googlesheets4, stringr, plotly, magrittr, janitor, RcppRoll, lubridate, ggrepel, zoo, scales, rvest, sf,raster)
 options(scipen = 20)

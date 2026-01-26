@@ -495,5 +495,6 @@ mean(jan26)
 plot(jan26, type = 'l')
 
 #max ice
-dailyice |> filter(month=='March') |> select(x2025)  |> pull() -> mar25
-max(mar25)/mean(mar25)
+dailyice |> filter(month=='March') |> select(x2025,x2024,x2023)  |>
+  summarize_all(.funs = ~ max(.)/mean(.)) |> mutate(m=mean(c(x2025,x2024,x2023)),.keep = "none") |> pull()
+
