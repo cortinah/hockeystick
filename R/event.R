@@ -254,9 +254,9 @@ i <- get_icecurves(use_cache=F, write_cache = T)
 i |> filter(year==2026) |> tail(1)
 i |> filter(month==3) |> arrange(-extent)
 
-i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2021, 2025))
+i |> filter(month==1) |> filter(year %in% c(2024, 2023, 2022, 2021, 2025, 2026))
 
-i <- rbind(i, data.frame(year=2026, month=1, extent=13.08))
+i <- rbind(i, data.frame(year=2026, month=2, extent=14.06))
 
 # to adjust for month min variation
 #i |> mutate(extmin=extent*(1-0.042)) -> i
@@ -289,13 +289,13 @@ accuracy(fit)
 fc <- fit |> forecast(h='2 month')
 fc |> autoplot(level =75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 12) + geom_hline(yintercept = 14.4)
 fc |> filter(.model=='prophet') |> autoplot(level = 75) + geom_hline(yintercept = 14.3) + scale_y_continuous(n.breaks = 10) + geom_hline(yintercept = 14.4)
-fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 50)
+fc |> filter(date==tsibble::make_yearmonth(2026, 03)) |> hilo(level = 40)
 
 # max is 1.6% above month mean
-14.1*1.016 #arima 14.32
-14.005*1.024 #prophet 14.34
-14.22*1.016 # ets 14.50
-13.98*1.016 #ensemble 14.20
+14.4*1.015 #arima 14.63
+14.09*1.015 #prophet 14.31
+14.31*1.015 # ets 14.53
+14.175*1.015 #ensemble 14.40
 
 fcst <- fc |> filter(.model=='arima') |> rename(arima=.mean) |> select(-y,-.model) |> full_join(fcst)
 fcst <- fc |> filter(.model=='ets') |> rename(ets=.mean) |> select(-y,-.model) |> full_join(fcst)
