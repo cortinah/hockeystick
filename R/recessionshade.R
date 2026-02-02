@@ -76,11 +76,11 @@ my_plot <-
   ggplot(fred_data, aes(x=date)) +
   #Add recession shading here
   #******************************************************************
-  add_rec_shade(min(fred_data$date),max(fred_data$date)) +
+  add_rec_shade(min(fred_data$date), max(fred_data$date)) +
   #******************************************************************
-  geom_line(aes(y=value/100),size = 0.8,color="#dd0400") +
-  geom_line(aes(y=MA/100),size = 0.8,color="blue") +
-  scale_y_continuous(name="Unemployment Rate",labels = scales::percent_format(accuracy = 1)) +
+  geom_line(aes(y=value/100), size = 0.8, color="#dd0400") +
+  geom_line(aes(y=MA/100), size = 0.8, color="blue") +
+  scale_y_continuous(name="Unemployment Rate", labels = scales::percent_format(accuracy = 1)) +
   theme_minimal(base_size = 14) +
   scale_x_date(labels = date_format("%Y"), breaks = '5 years')+
   labs(title="US Unemployment Rate and NBER Recessions", x=NULL, caption='Shading indicates recession.')

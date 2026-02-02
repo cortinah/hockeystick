@@ -250,8 +250,8 @@ d |> mutate(month=substr(dummy_date,6,7)) |> filter(month=='05') |> group_by(yea
 
 library(tidyverse)
 library(hockeystick)
-i <- get_icecurves(use_cache=T, write_cache = T)
-i |> filter(year==2025) |> tail(1)
+i <- get_icecurves(use_cache=F, write_cache = T)
+i |> filter(year==2026) |> tail(1)
 i |> filter(month==3) |> arrange(-extent)
 
 i |> filter(month==3) |> filter(year %in% c(2024, 2023, 2022, 2021, 2025))
@@ -482,17 +482,17 @@ download.file("https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_I
 dailyice <- readxl::read_xlsx(icefile)
 dailyice |> remove_empty() |> clean_names() -> dailyice
 dailyice |> rename(month=x1, day=x2) |> fill(month) -> dailyice
-dailyice |> filter(month=='January') |> select(x2026) |> summarize(m=mean(x2026, na.rm=T))
+dailyice |> filter(month=='February') |> select(x2026) |> summarize(m=mean(x2026, na.rm=T))
 
-dailyice |> filter(month=='January') |> select(x2026)  |> pull() -> jan26
-jan26 |> na.omit() |> length() -> daysice
-plot(jan26, type = 'l')
+dailyice |> filter(month=='February') |> select(x2026)  |> pull() |> na.omit() -> feb26
+feb26 |> na.omit() |> length() -> daysice
+plot(feb26, type = 'l')
 
-dailyice |> filter(month=='January') |> select(x2025)  |> pull() -> jan25
-(jan25/lag(jan25)) -> jan25ret
-for (i in ((daysice+1):31)) {jan26[i]=jan26[i-1]*jan25ret[i]}
-mean(jan26)
-plot(jan26, type = 'l')
+dailyice |> filter(month=='February') |> select(x2025)  |> pull() -> feb25
+(feb25/lag(feb25)) -> feb25ret
+for (i in ((daysice+1):28)) {feb26[i]=feb26[i-1]*feb25ret[i]}
+mean(feb26)
+plot(feb26, type = 'l')
 
 #max ice
 dailyice |> filter(month=='March') |> select(x2025,x2024,x2023)  |>
