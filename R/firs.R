@@ -68,3 +68,17 @@ mapboxgl() |>
     include_legend = "TRUE",
     position = "bottom-right"
   )
+
+
+# other stuff: https://mhinfographics.com/tag/animation/
+
+## old
+fires <- fire_nrt_M_C61_649107 |>
+  st_as_sf(coords = c("longitude", "latitude"), crs=4326)
+
+library(geodata)
+mexico <- elevation_30s(country = "Mexico", path=tempdir())
+small <- aggregate(mexico, fact=4)
+plot(mexico)
+plot(fires['brightness'], add=T, pal=heat.colors(10), pch=20)
+
