@@ -11,7 +11,7 @@ symbols <- c(`MSCI`='MSCI',`Morningstar`='MORN',`S&P Global`='SPGI', `Moody\'s C
              'Thomson Reuters'='TRI')
 
 
-download <- riingo_prices(symbols, start_date = '2025-02-03', end_date = '2026-02-03')
+download <- riingo_prices(symbols, start_date = '2025-02-04', end_date = '2026-02-04')
 download |> select(ticker, date, adjClose) -> prices
 prices$date <- force_tz(prices$date, "America/New_York")
 
