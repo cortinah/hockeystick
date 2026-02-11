@@ -493,7 +493,12 @@ dailyice |> filter(month=='February') |> select(x2025)  |> pull() -> feb25
 (feb25/lag(feb25)) -> feb25ret
 for (i in ((daysice+1):28)) {feb26[i]=feb26[i-1]*feb25ret[i]}
 mean(feb26)
-plot(feb26, type = 'l')
+plot(feb26[1:daysice], type = 'l')
+
+plot(feb26, type = 'l', col='red')
+lines(feb26[1:daysice], lwd=2)
+lines(feb25, col='blue', lwd=2)
+
 feb26
 
 

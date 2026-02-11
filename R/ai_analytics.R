@@ -8,7 +8,7 @@ library(tidyverse)
 riingo_set_token(token = "d8b78cedabc0f68d7342f643b51264c4bedf9b38")
 
 symbols <- c(`MSCI`='MSCI',`Morningstar`='MORN',`S&P Global`='SPGI', `Moody\'s Corp`='MCO', `FactSet Research Systems`='FDS', `Broadridge Financial Solutions`='BR',
-             'Thomson Reuters'='TRI')
+             'Thomson Reuters'='TRI', 'LSEG'='LSEGY')
 
 
 download <- riingo_prices(symbols, start_date = '2025-02-04', end_date = '2026-02-04')
@@ -40,7 +40,7 @@ colnames(table)[1] <- 'Period'
 
 gt(table) -> rettable
 
-pivot_longer(table, cols = 2:8,names_to = "ticker",values_to = 'return') -> table
+pivot_longer(table, cols = 2:9,names_to = "ticker",values_to = 'return') -> table
 
 library(ggplot2)
 library(forcats)
@@ -48,18 +48,14 @@ table$Period <- as.factor(table$Period)
 table$ticker <- as.factor(table$ticker)
 
 table$Period<-fct_relevel(table$Period, "YTD", after=1)
-#table$Period<-fct_rev(table$Period)
+table$Period<-fct_rev(table$Period)
 
-table$ticker<-fct_relevel(table$ticker, "TRI", after=0)
-table$ticker<-fct_relevel(table$ticker, "SPGI", after=1)
-table$ticker<-fct_relevel(table$ticker, "FDS", after=2)
-table$ticker<-fct_relevel(table$ticker, "MORN", after=3)
-table$ticker<-fct_relevel(table$ticker, "MCO", after=4)
 
+table$ticker <- fct_relevel(table$ticker, colnames(ytd)[order(ytd)], after=0L)
 
 #table$ticker<-fct_rev(table$ticker)
 
-
+library(RColorBrewer)
 colors <- brewer.pal(n = 3, name="Set1")
 
 ggplot(table, aes(y=return, x=ticker, fill=Period)) + geom_bar(position = 'dodge', stat='identity') +
