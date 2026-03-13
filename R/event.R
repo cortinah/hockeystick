@@ -482,16 +482,16 @@ download.file("https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_I
 dailyice <- readxl::read_xlsx(icefile)
 dailyice |> remove_empty() |> clean_names() -> dailyice
 dailyice |> rename(month=x1, day=x2) |> fill(month) -> dailyice
-dailyice |> filter(month=='February') |> select(x2026) |> summarize(m=mean(x2026, na.rm=T))
+dailyice |> filter(month=='March') |> select(x2026) |> summarize(m=mean(x2026, na.rm=T))
 
-dailyice |> filter(month=='February') |> select(x2026)  |> pull() |> na.omit() -> feb26
+dailyice |> filter(month=='March') |> select(x2026)  |> pull() |> na.omit() -> feb26
 feb26 |> na.omit() |> length() -> daysice
 plot(feb26, type = 'l')
 feb26
 
-dailyice |> filter(month=='February') |> select(x2025)  |> pull() -> feb25
+dailyice |> filter(month=='March') |> select(x2025)  |> pull() -> feb25
 (feb25/lag(feb25)) -> feb25ret
-for (i in ((daysice+1):28)) {feb26[i]=feb26[i-1]*feb25ret[i]}
+for (i in ((daysice+1):31)) {feb26[i]=feb26[i-1]*feb25ret[i]}
 mean(feb26)
 plot(feb26[1:daysice], type = 'l')
 

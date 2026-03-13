@@ -22,9 +22,9 @@ theme_am <- function (base_size = 12, base_family = "")
       theme(
         axis.text.x = element_text(color = "grey20", size = 11,family="Calibri Light"),
         axis.text.y = element_text(color = "grey20", size = 11,family="Calibri Light"),
-        axis.title.x = element_text(color = "grey20", size = 12,family="Calibri Light"),
-        axis.title.y = element_text(color = "grey20", size = 12,family="Calibri Light"),
-        plot.title = element_text(color="#04103b", size=13, face="bold", family="Calibri Light"),
+        axis.title.x = element_text(color = "grey20", size = 13,family="Calibri Light"),
+        axis.title.y = element_text(color = "grey20", size = 13,family="Calibri Light",angle = 90),
+        plot.title = element_text(color="#04103b", size=14, face="bold", family="Calibri Light"),
         legend.text = element_text(color = "grey20", size = 12,family="Calibri Light")
       )
   }
@@ -78,11 +78,11 @@ my_plot <-
   #******************************************************************
   add_rec_shade(min(fred_data$date), max(fred_data$date)) +
   #******************************************************************
-  geom_line(aes(y=value/100), size = 0.8, color="#dd0400") +
-  geom_line(aes(y=MA/100), size = 0.8, color="blue") +
+  geom_line(aes(y=value/100), linewidth = 0.8, color="#dd0400") +
+  geom_line(aes(y=MA/100), linewidth = 0.8, color="blue") +
   scale_y_continuous(name="Unemployment Rate", labels = scales::percent_format(accuracy = 1)) +
   theme_minimal(base_size = 14) +
-  scale_x_date(labels = date_format("%Y"), breaks = '5 years')+
+  scale_x_date(labels = scales::date_format("%Y"), breaks = '5 years')+
   labs(title="US Unemployment Rate and NBER Recessions", x=NULL, caption='Shading indicates recession.')
 
 my_plot

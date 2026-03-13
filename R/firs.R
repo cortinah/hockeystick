@@ -4,7 +4,7 @@ library(sf)
 library(dplyr)
 library(glue)
 
-mi_key <- Sys.getenv("MAP_KEY")
+my_key <- Sys.getenv("MAP_KEY")
 
 area <- c("-72,-46,-63,-42")
 
@@ -17,7 +17,7 @@ get_nasa_data <- function(key, region) {
     st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
 }
 
-fires <- get_nasa_data(mi_key, area)
+fires <- get_nasa_data(my_key, area)
 
 fires <- fires %>%
   mutate(
