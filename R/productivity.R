@@ -1,7 +1,5 @@
 library(fredr)
 library(tidyverse)
-fredr_set_key("48da82a29bba2cf57b2cd0be421f9d47")
-
 
 prod <- fredr(
   series_id = "OPHNFB",
