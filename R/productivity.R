@@ -27,7 +27,7 @@ tail(prod)
 
 prod |>
   mutate(prev20 = lag(value, 20)) |>
-  mutate(change20 = (value / prev12)^(1 / 3) - 1) -> prod
+  mutate(change20 = (value / prev20)^(1 / 5) - 1) -> prod
 tail(prod)
 
 plot(prod$change4, type = 'l')
