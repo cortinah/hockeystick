@@ -5,13 +5,13 @@ library(riingo)
 library(gt)
 library(xts)
 library(tidyverse)
-riingo_set_token(token = "d8b78cedabc0f68d7342f643b51264c4bedf9b38")
+#riingo_set_token=.renviron
 
 symbols <- c(`MSCI`='MSCI',`Morningstar`='MORN',`S&P Global`='SPGI', `Moody\'s Corp`='MCO', `FactSet Research Systems`='FDS', `Broadridge Financial Solutions`='BR',
              'Thomson Reuters'='TRI', 'LSEG'='LSEGY')
 
 
-download <- riingo_prices(symbols, start_date = '2025-02-04', end_date = '2026-02-04')
+download <- riingo_prices(symbols, start_date = '2025-02-04', end_date = '2026-04-24')
 download |> select(ticker, date, adjClose) -> prices
 prices$date <- force_tz(prices$date, "America/New_York")
 
@@ -27,9 +27,9 @@ library(PerformanceAnalytics)
 
 returns <- Return.calculate(prices)
 
-day <- Return.cumulative(returns['2026-02-03'])
+day <- Return.cumulative(returns['2026-04-24'])
 ytd <- Return.cumulative(returns['2026-01-01/']) # ytd
-year <- Return.cumulative(returns['2025-02-04/']) # one year
+year <- Return.cumulative(returns['2025-04-24/']) # one year
 
 
 table <- as.data.frame(rbind(day,ytd,year))
@@ -60,7 +60,7 @@ colors <- brewer.pal(n = 3, name="Set1")
 
 ggplot(table, aes(y=return, x=ticker, fill=Period)) + geom_bar(position = 'dodge', stat='identity') +
   theme_bw(base_size = 13) +scale_y_continuous(labels = scales::percent_format()) +
-  labs(y='Return', x= NULL, title='Analytics stocks market performance', subtitle='As of Feb 3, 2026') +
+  labs(y='Return', x= NULL, title='Analytics stocks market performance', subtitle='As of April 24, 2026') +
   scale_x_discrete() +theme(legend.position = 'top') +
   scale_fill_manual(breaks = c('Today', 'YTD', '1 Year'), values = c("Today"=colors[1], "YTD"='orange', "1 Year"='brown')) +
   theme(axis.text.x = element_text(face="bold"))
@@ -70,6 +70,6 @@ rettable |> select(Period,TRI, SPGI,FDS,MORN,MCO,BR,MSCI) -> rettable
 rettable |>mutate(across(2:8, as.numeric)) -> rettable
 
 gt(rettable) |> fmt_percent(columns = 2:8,decimals = 1) |> tab_header(title = "Analytics stocks market performance",
-                                                    subtitle = "Feb 3, 2026") |>
+                                                    subtitle = "April 24, 2026") |>
   opt_stylize(style = 6, color='blue')
 
