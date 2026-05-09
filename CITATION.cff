@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+type: software
+title: "hockeystick: Download and Visualize Essential Climate Change Data"
+version: "0.8.6"
+date-released: "2026-05-09"
+authors:
+  - family-names: "Cortina"
+    given-names: "Hernando"
+    email: "hch@alum.mit.edu"
+    orcid: "https://orcid.org/0000-0001-6790-4870"
+    affiliation: "Alum MIT"
+    role: "author"
+description: |
+  Provides easy access to essential climate change datasets to non-climate experts. 
+  Users can download the latest raw data from authoritative sources and view it via 
+  pre-defined ggplot2 charts. Datasets include atmospheric CO2, methane, emissions, 
+  instrumental and proxy temperature records, sea levels, Arctic/Antarctic sea-ice, 
+  Hurricanes, and Paleoclimate data.
+license: MIT
+repository: "https://github.com/cortinah/hockeystick"
+repository-code: "https://github.com/cortinah/hockeystick"
+url: "https://cortinah.github.io/hockeystick/"
+bug-reports: "https://github.com/cortinah/hockeystick/issues"
+keywords:
+  - "climate"
+  - "climate-change"
+  - "climate-data"
+  - "climate-science"
+  - "temperature-data"
+  - "carbon-dioxide-data"
+  - "carbon-emissions"
+  - "methane"
+  - "sea-levels"
+  - "sea-ice"
+  - "warming-stripes"
+  - "ggplot2"
+  - "R"
+  - "rstats"
+  - "NOAA"
+references:
+  - type: dataset
+    title: "NOAA Mauna Loa Laboratory"
+    url: "https://gml.noaa.gov/ccgg/trends/data.html"
+  - type: dataset
+    title: "Global Carbon Project"
+    url: "https://www.globalcarbonproject.org/carbonbudget/"
+  - type: dataset
+    title: "NASA GISTEMP"
+    url: "https://data.giss.nasa.gov/gistemp/"
+  - type: dataset
+    title: "National Snow and Sea Ice Data Center"
+    url: "https://nsidc.org/home"
+  - type: dataset
+    title: "HURDAT Atlantic Hurricane Database"
+    url: "https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html"
