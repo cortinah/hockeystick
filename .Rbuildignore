@@ -13,3 +13,5 @@ cran-comments.md
 ^vignettes/\.quarto$
 ^vignettes/*_files$
 ^CITATION\.cff$
+^\.positai$
+^\.claude$

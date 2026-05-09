@@ -43,7 +43,7 @@ Manage cached datasets
 doesn't accept any names, but deletes all files. For deleting many
 specific files, use \code{cache_delete} in a \code{\link[=lapply]{lapply()}} type call
 
-We cache using \code{\link[tools:userdir]{tools::R_user_dir()}}, find your cache
+We cache using \code{\link[tools:R_user_dir]{tools::R_user_dir()}}, find your cache
 folder by executing \code{tools::R_user_dir("hockeystick","cache")}
 }
 \section{Functions}{
