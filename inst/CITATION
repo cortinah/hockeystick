@@ -1,11 +1,7 @@
-citHeader("To cite hockeystick in publications use:")
-
-bibentry(
-  bibtype    = "Manual",
-  title    = "hockeystick: Download and Visualize Essential Climate Change Data",
-  author   = "Hernando Cortina",
-  year     = "2020",
-  url      = "https://cortinah.github.io/hockeystick/",
-  textVersion = "Hernando Cortina. hockeystick: Download and Visualize Essential Climate Change Data (2020)"
-
-)
+citEntry(entry = "Package",
+         title = "hockeystick: Download and Visualize Essential Climate Change Data",
+         author = person("Hernando", "Cortina", email = "hch@alum.mit.edu", comment = c(ORCID = "0000-0001-6790-4870")),
+         year = "2026",
+         note = "R package version 0.8.6",
+         url = "https://cortinah.github.io/hockeystick/",
+         textVersion = "Cortina, H. (2026). hockeystick: Download and Visualize Essential Climate Change Data. R package version 0.8.6. https://cortinah.github.io/hockeystick/")
