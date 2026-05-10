@@ -6,8 +6,7 @@ test_that("Package loads without error", {
 
 test_that("Data getter functions are exported", {
   exported <- getNamespaceExports("hockeystick")
-  
-  # Check data getters
+
   expect_true("get_carbon" %in% exported)
   expect_true("get_methane" %in% exported)
   expect_true("get_temp" %in% exported)
@@ -18,22 +17,27 @@ test_that("Data getter functions are exported", {
   expect_true("get_hurricanes" %in% exported)
   expect_true("get_emissions" %in% exported)
   expect_true("get_dailytemp" %in% exported)
+  expect_true("get_dailytempcop" %in% exported)
   expect_true("get_icecurves" %in% exported)
-  expect_true("get_carbon" %in% exported)
 })
 
 test_that("Plot functions are exported", {
   exported <- getNamespaceExports("hockeystick")
-  
+
   expect_true("plot_carbon" %in% exported)
   expect_true("plot_methane" %in% exported)
   expect_true("plot_temp" %in% exported)
+  expect_true("plot_temp_monthly" %in% exported)
+  expect_true("plot_temp_scatter" %in% exported)
   expect_true("plot_temp2k" %in% exported)
   expect_true("plot_paleo" %in% exported)
   expect_true("plot_sealevel" %in% exported)
   expect_true("plot_seaice" %in% exported)
+  expect_true("plot_icecurves" %in% exported)
   expect_true("plot_hurricanes" %in% exported)
+  expect_true("plot_hurricane_nrg" %in% exported)
   expect_true("plot_emissions" %in% exported)
+  expect_true("plot_emissions_with_land" %in% exported)
   expect_true("plot_dailytemp" %in% exported)
   expect_true("warming_stripes" %in% exported)
 })
