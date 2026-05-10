@@ -241,14 +241,14 @@ plot_temp_scatter <- function(dataset = get_temp(), print=TRUE, labelmax=FALSE, 
 
   if (labelmax) {
     dataset <- dataset |> mutate(max = ifelse(Anomaly == max(dataset$Anomaly), T, F))
-    dataset <- dataset |> mutate(name = ifelse(max == T, substr(as.character(Date),1,7), ''))
-    plot <- plot + geom_text(aes(y = Anomaly+0.1, label=dataset$name), size=3) }
+    dataset <- dataset |> mutate(namemax = ifelse(max == T, substr(as.character(Date), 1, 7), ''))
+    plot <- plot + geom_text(aes(y = Anomaly+0.1, label=dataset$namemax), size=3) }
 
 
   if (labellatest) {
-    if ( !exists("name", dataset) ) dataset$name <- ''
-    dataset[nrow(dataset),'name'] <- substr(as.character(pull(dataset[nrow(dataset),'Date'])), 1, 7)
-    plot <- plot + geom_text(aes(y = Anomaly+0.2, label=dataset$name), size=3) }
+    dataset$namelatest <- ''
+    dataset[nrow(dataset),'namelatest'] <- substr(as.character(pull(dataset[nrow(dataset),'Date'])), 1, 7)
+    plot <- plot + geom_text(aes(y = Anomaly+0.3, label=dataset$namelatest), size=3) }
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)
