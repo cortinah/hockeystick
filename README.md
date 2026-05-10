@@ -250,7 +250,7 @@ climate_grid()
   <https://www.climate-lab-book.ac.uk/2018/warming-stripes/>. In
   addition grateful to Dr. Dominic Royé for posting his approach to
   plotting them using ggplot2, which `warming_stripes()` is based on.
-  <https://dominicroye.github.io/en/2018/how-to-create-warming-stripes-in-r/>
+  <https://dominicroye.github.io/blog/how-to-create-warming-stripes-in-r/>
 - Sea level data: [NOAA Laboratory for Satellite Altimetry
   (sat)](https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/) and
   [Commonwealth Scientific and Industrial Research Organisation (tide
@@ -259,6 +259,7 @@ climate_grid()
   Center](https://nsidc.org/home). Data Archive:
   <https://nsidc.org/data/explore-data>
 - Vostok carbon dioxide and temperature data:
+  <https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/ATG.009>
   <https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/ATG.009>
 - Common Era reconstructed temperature data: [PAGES2k Consortium and
   NOAA](https://www.ncei.noaa.gov/access/paleo-search/study/26872)).
