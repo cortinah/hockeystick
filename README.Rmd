@@ -54,7 +54,7 @@ install.packages("hockeystick")
 You may alternatively install the development version from [https://github.com/cortinah/hockeystick](https://github.com/cortinah/hockeystick) with:
   
 ``` r
-remotes::install_github("cortinah/hockeystick@testing")
+pak::pak("cortinah/hockeystick@testing")
 ```
 
 ## Downloading and viewing global heating data

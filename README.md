@@ -64,7 +64,7 @@ You may alternatively install the development version from
 <https://github.com/cortinah/hockeystick> with:
 
 ``` r
-remotes::install_github("cortinah/hockeystick@testing")
+pak::pak("cortinah/hockeystick@testing")
 ```
 
 ## Downloading and viewing global heating data
@@ -77,8 +77,6 @@ globaldaily <- get_dailytemp()
 plot_dailytemp(globaldaily)
 ```
 
-<img src="man/figures/README-dailytemp-1.png" width="60%" />
-
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
 data and plot:
 
@@ -87,7 +85,7 @@ ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
 ```
 
-<img src="man/figures/README-carbon-1.png" width="60%" />
+<img src="man/figures/README-carbon-1.png" alt="" width="60%" />
 
 Retrieve GCP global CO<sub>2</sub> emissions and plot:
 
@@ -96,13 +94,13 @@ emissions <- get_emissions()
 plot_emissions(emissions)
 ```
 
-<img src="man/figures/README-emissions-1.png" width="60%" />
+<img src="man/figures/README-emissions-1.png" alt="" width="60%" />
 
 ``` r
 plot_emissions_with_land(emissions)
 ```
 
-<img src="man/figures/README-emissions-2.png" width="60%" />
+<img src="man/figures/README-emissions-2.png" alt="" width="60%" />
 
 Visualize cumulative emissions by country:
 
@@ -110,23 +108,16 @@ Visualize cumulative emissions by country:
 emissions_map()
 ```
 
-<img src="man/figures/README-emissionsmap-1.png" width="60%" />
+<img src="man/figures/README-emissionsmap-1.png" alt="" width="60%" />
 
 Retrieve NASA/GISS global surface temperature anomaly data and plot:
 
 ``` r
 anomaly <- get_temp()
 plot_temp(anomaly)
-#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-#> ℹ Please use `linewidth` instead.
-#> ℹ The deprecated feature was likely used in the hockeystick package.
-#>   Please report the issue at <https://github.com/cortinah/hockeystick/issues>.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
 ```
 
-<img src="man/figures/README-temp-1.png" width="60%" />
+<img src="man/figures/README-temp-1.png" alt="" width="60%" />
 
 Plot relationship between temperature anomaly and carbon:
 
@@ -134,7 +125,7 @@ Plot relationship between temperature anomaly and carbon:
 plot_carbontemp()
 ```
 
-<img src="man/figures/README-tempcarbon-1.png" width="60%" />
+<img src="man/figures/README-tempcarbon-1.png" alt="" width="60%" />
 
 Visualize warming using Ed Hawkins styled “warming stripes”:
 
@@ -142,13 +133,13 @@ Visualize warming using Ed Hawkins styled “warming stripes”:
 warming_stripes()
 ```
 
-<img src="man/figures/README-stripes-1.png" width="60%" />
+<img src="man/figures/README-stripes-1.png" alt="" width="60%" />
 
 ``` r
 warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
 ```
 
-<img src="man/figures/README-stripes2-1.png" width="60%" />
+<img src="man/figures/README-stripes2-1.png" alt="" width="60%" />
 
 Retrieve tide gauge and satellite sea level data and plot:
 
@@ -157,7 +148,7 @@ gmsl <- get_sealevel()
 plot_sealevel(gmsl)
 ```
 
-<img src="man/figures/README-sl-1.png" width="60%" />
+<img src="man/figures/README-sl-1.png" alt="" width="60%" />
 
 Retrieve July annual Arctic Sea Ice Index and plot:
 
@@ -166,7 +157,7 @@ seaice <- get_seaice()
 plot_seaice(seaice)
 ```
 
-<img src="man/figures/README-si-1.png" width="60%" />
+<img src="man/figures/README-si-1.png" alt="" width="60%" />
 
 `get_seaice()` arguments can be modified to download Antarctic sea ice,
 and allow any month.
@@ -178,7 +169,7 @@ arcticice <- get_icecurves()
 plot_icecurves(arcticice)
 ```
 
-<img src="man/figures/README-icecurves-1.png" width="60%" />
+<img src="man/figures/README-icecurves-1.png" alt="" width="60%" />
 
 Retrieve Common Era temperature reconstruction and plot it with
 instrumental record:
@@ -188,7 +179,7 @@ anomaly2k <- get_temp2k()
 plot_temp2k(anomaly2k)
 ```
 
-<img src="man/figures/README-2ktemp-1.png" width="60%" />
+<img src="man/figures/README-2ktemp-1.png" alt="" width="60%" />
 
 Retrieve NOAA HURDAT2 hurricane data and plot:
 
@@ -197,13 +188,13 @@ hurricanes <- get_hurricanes()
 plot_hurricanes(hurricanes)
 ```
 
-<img src="man/figures/README-hurricanes-1.png" width="60%" />
+<img src="man/figures/README-hurricanes-1.png" alt="" width="60%" />
 
 ``` r
 plot_hurricane_nrg(hurricanes)
 ```
 
-<img src="man/figures/README-hurricanes-2.png" width="60%" />
+<img src="man/figures/README-hurricanes-2.png" alt="" width="60%" />
 
 Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
 
@@ -212,7 +203,7 @@ ch4 <- get_methane()
 plot_methane(ch4)
 ```
 
-<img src="man/figures/README-methane-1.png" width="60%" />
+<img src="man/figures/README-methane-1.png" alt="" width="60%" />
 
 Retrieve Vostok paleo ice core data and plot:
 
@@ -221,7 +212,7 @@ vostok <- get_paleo()
 plot_paleo(vostok)
 ```
 
-<img src="man/figures/README-paleo-1.png" width="60%" />
+<img src="man/figures/README-paleo-1.png" alt="" width="60%" />
 
 ### Managing the cache
 
@@ -245,7 +236,7 @@ Users may also cache data by default by adding
 climate_grid()
 ```
 
-<img src="man/figures/README-grid-1.png" width="80%" />
+<img src="man/figures/README-grid-1.png" alt="" width="80%" />
 
 ## Acknowledgments
 
