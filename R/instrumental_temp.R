@@ -170,7 +170,7 @@ plot_temp_monthly <- function(dataset = get_temp(), print=TRUE) {
 
   plot <- ggplot(dataset, aes(x=Date, y=Anomaly)) +geom_line(alpha=0.75, aes(color='Monthly mean')) + theme_bw(base_size=12) +
     scale_x_date(name=NULL, limits=c(as.Date('1878-01-01'), ymd(max(dataset$Year))), date_breaks='15 years', date_labels='%Y') +
-    scale_y_continuous(n.breaks = 10) +geom_smooth(size=1.1, se=F, span=0.3, aes(color='Loess smoothing')) +
+    scale_y_continuous(n.breaks = 10) +geom_smooth(linewidth=1.1, se=FALSE, span=0.3, aes(color='Loess smoothing')) +
     labs(title='Global Land-Ocean Temperature Index (LOTI)', subtitle='Global surface temperature relative to 1951-1980 mean',
          y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/') +
     scale_color_manual(name=NULL, values=c('firebrick1','dodgerblue2')) +

@@ -1,5 +1,3 @@
-context("Package exports and structure")
-
 test_that("Package loads without error", {
   expect_true("hockeystick" %in% loadedNamespaces())
 })

@@ -124,7 +124,7 @@ plot_hurricanes <- function(dataset = get_hurricanes(), cat='major', print=TRUE)
 
     plot <- ggplot(dataset, aes(x=Year, y=hurr_type)) +geom_line(alpha=0.75, aes(color='Hurricanes')) + theme_bw(base_size=12) +
     scale_x_continuous(name=NULL, breaks=seq(1850, 2025,25)) +
-    scale_y_continuous(n.breaks = 8) +geom_smooth(size=1.1, se=F, aes(color='Loess smooth')) +
+    scale_y_continuous(n.breaks = 8) +geom_smooth(linewidth=1.1, se=FALSE, aes(color='Loess smooth')) +
     scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.15, 0.825),legend.background=element_blank()) +
     labs(title='North Atlantic Hurricane Basin', subtitle = sub_label,
         y='Number per season', caption='Source: NOAA Hurricane Research Division, HURDAT2 re-analysis\nhttps://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html')
@@ -175,7 +175,7 @@ plot_hurricane_nrg <- function(dataset = get_hurricanes(), print=TRUE) {
 
   plot <- ggplot(dataset, aes(x=Year, y=RevisedACE)) +geom_line(alpha=0.75, aes(color='ACE')) + theme_bw(base_size=12) +
     scale_x_continuous(name=NULL, breaks=seq(1850, 2025,25)) +
-    scale_y_continuous(n.breaks = 8) +geom_smooth(size=1.1, se=F, aes(color='Loess smooth')) +
+    scale_y_continuous(n.breaks = 8) +geom_smooth(linewidth=1.1, se=FALSE, aes(color='Loess smooth')) +
     scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.15, 0.875),legend.background=element_blank()) +
     labs(title='North Atlantic Hurricane Basin', subtitle='Accumulated Cyclone Energy (ACE)',
          y=expression('10'^4*' kn'^2 ), caption='Source: NOAA Hurricane Research Division, HURDAT2 re-analysis\nhttps://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html')

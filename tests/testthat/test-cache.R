@@ -1,5 +1,3 @@
-context("Cache management functions")
-
 test_that("hockeystick_cache_list is callable", {
   expect_true(is.function(hockeystick_cache_list))
 })

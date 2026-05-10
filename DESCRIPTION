@@ -22,7 +22,8 @@ Suggests:
     viridisLite,
     quarto,
     svglite,
-    testthat
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Language: en-US
 VignetteBuilder: quarto
 Config/roxygen2/version: 8.0.0

@@ -1,5 +1,3 @@
-context("Behavioral tests using fixture data")
-
 # ---------------------------------------------------------------------------
 # Fixture data — mirrors the structure returned by each get_* function.
 # All tests use these fixtures so no network access is required.
