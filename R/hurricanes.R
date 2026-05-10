@@ -107,7 +107,7 @@ invisible(hurricanes)
 #' @export
 plot_hurricanes <- function(dataset = get_hurricanes(), cat='major', print=TRUE) {
 
-  if (is.null(dataset) | ncol(dataset)!=2) return(invisible(NULL))
+  if (is.null(dataset)) return(invisible(NULL))
 
   if(cat=='major') {dataset <- dataset[,c('Year', 'RevisedMajorHurricanes')]
                     sub_label <- 'Major Hurricanes (category 3-5)' }
@@ -119,6 +119,7 @@ plot_hurricanes <- function(dataset = get_hurricanes(), cat='major', print=TRUE)
                     sub_label <- 'Named Storms' }
 
   colnames(dataset)[2] <- 'hurr_type'
+  if (ncol(dataset) != 2) return(invisible(NULL))
 
 
     plot <- ggplot(dataset, aes(x=Year, y=hurr_type)) +geom_line(alpha=0.75, aes(color='Hurricanes')) + theme_bw(base_size=12) +
