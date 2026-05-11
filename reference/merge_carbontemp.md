@@ -40,5 +40,6 @@ Hernando Cortina, <hch@alum.mit.edu>
 # Create merged tibble
 
 mergedcarbontemp <- merge_carbontemp() # }
+#> Retrieving remote data requires internet connectivity.
 
 ```

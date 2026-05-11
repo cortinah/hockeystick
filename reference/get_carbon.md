@@ -55,9 +55,11 @@ Hernando Cortina, <hch@alum.mit.edu>
 # \donttest{
 # Fetch from cache if available, otherwise download:
 maunaloa <- get_carbon()
+#> Retrieving remote data requires internet connectivity.
 #
 # Force fetch from source:
 maunaloa <- get_carbon(use_cache=FALSE)
+#> Retrieving remote data requires internet connectivity.
 #
 # Review cache contents and last update dates:
 hockeystick_cache_details()
@@ -67,5 +69,4 @@ hockeystick_cache_details()
 #
 # Plot output using package's built-in ggplot2 settings
 plot_carbon(maunaloa) # }
-
 ```

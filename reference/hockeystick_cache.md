@@ -114,6 +114,8 @@ hockeystick_cache_delete(files = hockeystick_cache_list()[1])
 
 # Update all hockeystick data and place in cache
 hockeystick_update_all()
+#> Retrieving remote data requires internet connectivity.
+#> Retrieving remote data requires internet connectivity.
 
 # Delete all cached data
 hockeystick_cache_delete_all()
