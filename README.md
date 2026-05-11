@@ -7,7 +7,7 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-![R-CMD-check](https://github.com/cortinah/hockeystick/workflows/R-CMD-check/badge.svg)
+[![R-CMD-check](https://github.com/cortinah/hockeystick/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/cortinah/hockeystick/actions/workflows/check-standard.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-project.org/package=hockeystick)
 [![](https://cranlogs.r-pkg.org/badges/hockeystick)](https://cran.r-project.org/package=hockeystick)
@@ -73,9 +73,11 @@ Plot daily global temperatures since 1940 and current anomaly:
 
 ``` r
 library(hockeystick)
-globaldaily <- get_dailytemp()
+globaldaily <- get_dailytempcop()
 plot_dailytemp(globaldaily)
 ```
+
+<img src="man/figures/README-dailytemp-1.png" alt="" width="60%" />
 
 Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration
 data and plot:
