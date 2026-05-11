@@ -22,5 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Hernando Cortina \email{hch@alum.mit.edu} (\href{https://orcid.org/0000-0001-6790-4870}{ORCID})
 
+Authors:
+\itemize{
+  \item Hernando Cortina \email{hch@alum.mit.edu} (\href{https://orcid.org/0000-0001-6790-4870}{ORCID})
+}
+
 }
 \keyword{internal}

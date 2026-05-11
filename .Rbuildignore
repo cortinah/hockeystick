@@ -12,3 +12,6 @@ cran-comments.md
 ^Meta$
 ^vignettes/\.quarto$
 ^vignettes/*_files$
+^CITATION\.cff$
+^\.positai$
+^\.claude$

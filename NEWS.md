@@ -71,3 +71,6 @@
 * Added vignette
 * Updated out-of-date urls for sea-ice and sealevel
 * Switched sea-ice to use http not ftp
+
+# hockeystick 0.8.7
+* Maintenance release to fix deprecations and add test coverage

@@ -1,6 +1,6 @@
 Package: hockeystick
 Title: Download and Visualize Essential Climate Change Data
-Version: 0.8.6
+Version: 0.8.7
 Authors@R: 
     person(given = "Hernando",
            family = "Cortina",
@@ -11,7 +11,6 @@ Description: Provides easy access to essential climate change datasets to non-cl
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 URL: https://cortinah.github.io/hockeystick/, https://github.com/cortinah/hockeystick
 BugReports: https://github.com/cortinah/hockeystick/issues
 Imports: ggplot2, lubridate, tools, readr, dplyr, tidyr, patchwork, scales, rvest, tibble, treemapify, RColorBrewer, jsonlite, readxl
@@ -21,6 +20,10 @@ Suggests:
     knitr,
     spelling,
     viridisLite,
-    quarto
+    quarto,
+    svglite,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Language: en-US
 VignetteBuilder: quarto
+Config/roxygen2/version: 8.0.0

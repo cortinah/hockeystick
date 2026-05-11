@@ -112,7 +112,7 @@ if (is.null(dataset)) return(invisible(NULL))
 
 plot <- ggplot(dataset, aes(x=Year, y=`J-D`)) +geom_line(alpha=0.75, aes(color='Annual mean')) + theme_bw(base_size=12) +
   scale_x_date(name=NULL, limits=c(as.Date('1878-01-01'), ymd(max(dataset$Year))), date_breaks='15 years', date_labels='%Y') +
-  scale_y_continuous(n.breaks = 9) +geom_smooth(size=1.1, se=F, span=0.3, aes(color='Loess smoothing')) +
+  scale_y_continuous(n.breaks = 9) +geom_smooth(linewidth=1.1, se=F, span=0.3, aes(color='Loess smoothing')) +
   labs(title='Global Land-Ocean Temperature Index (LOTI)', subtitle='Global surface temperature relative to 1951-1980 mean',
        y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/') +
   scale_color_manual(name=NULL, values=c('dodgerblue2','firebrick1')) +theme(legend.position = c(0.175, 0.825),legend.background=element_blank())
@@ -170,7 +170,7 @@ plot_temp_monthly <- function(dataset = get_temp(), print=TRUE) {
 
   plot <- ggplot(dataset, aes(x=Date, y=Anomaly)) +geom_line(alpha=0.75, aes(color='Monthly mean')) + theme_bw(base_size=12) +
     scale_x_date(name=NULL, limits=c(as.Date('1878-01-01'), ymd(max(dataset$Year))), date_breaks='15 years', date_labels='%Y') +
-    scale_y_continuous(n.breaks = 10) +geom_smooth(size=1.1, se=F, span=0.3, aes(color='Loess smoothing')) +
+    scale_y_continuous(n.breaks = 10) +geom_smooth(linewidth=1.1, se=FALSE, span=0.3, aes(color='Loess smoothing')) +
     labs(title='Global Land-Ocean Temperature Index (LOTI)', subtitle='Global surface temperature relative to 1951-1980 mean',
          y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/') +
     scale_color_manual(name=NULL, values=c('firebrick1','dodgerblue2')) +
@@ -241,14 +241,14 @@ plot_temp_scatter <- function(dataset = get_temp(), print=TRUE, labelmax=FALSE, 
 
   if (labelmax) {
     dataset <- dataset |> mutate(max = ifelse(Anomaly == max(dataset$Anomaly), T, F))
-    dataset <- dataset |> mutate(name = ifelse(max == T, substr(as.character(Date),1,7), ''))
-    plot <- plot + geom_text(aes(y = Anomaly+0.1, label=dataset$name), size=3) }
+    dataset <- dataset |> mutate(namemax = ifelse(max == T, substr(as.character(Date), 1, 7), ''))
+    plot <- plot + geom_text(aes(y = Anomaly+0.1, label=dataset$namemax), size=3) }
 
 
   if (labellatest) {
-    if ( !exists("name", dataset) ) dataset$name <- ''
-    dataset[nrow(dataset),'name'] <- substr(as.character(pull(dataset[nrow(dataset),'Date'])), 1, 7)
-    plot <- plot + geom_text(aes(y = Anomaly+0.2, label=dataset$name), size=3) }
+    dataset$namelatest <- ''
+    dataset[nrow(dataset),'namelatest'] <- substr(as.character(pull(dataset[nrow(dataset),'Date'])), 1, 7)
+    plot <- plot + geom_text(aes(y = Anomaly+0.3, label=dataset$namelatest), size=3) }
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)
