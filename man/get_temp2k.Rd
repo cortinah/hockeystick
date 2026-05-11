@@ -24,7 +24,7 @@ Methodology described in PAGES2k (2019) \url{https://www.nature.com/articles/s41
 \description{
 Retrieves the Common Era Global Surface Temperature Reconstructions.
 Source is PAGES2k Consortium and NOAA National Centers for Environmental Information.
-\url{https://www.ncei.noaa.gov/access/paleo-search/study/26872)}
+\url{https://www.ncei.noaa.gov/access/paleo-search/study/26872}
 }
 \examples{
 \donttest{

@@ -47,13 +47,13 @@ if (use_cache & !write_cache) {
   if (file.exists(file.path(hs_path,'maunaloa.rds'))) return(invisible(readRDS((file.path(hs_path,'maunaloa.rds')))))
   }
 
-file_url <- 'ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt'
+file_url <- 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv'
 connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
 download.file(file_url, dl)
-maunaloa <- suppressMessages( read_table(dl, col_names = FALSE, skip = 63) )
+maunaloa <- suppressMessages( read_csv(dl, col_names = FALSE, skip = 41) )
 colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'trend', 'ndays','stdev','unc')
 maunaloa$date <- ceiling_date(ymd(paste(maunaloa$year, maunaloa$month, '01',sep='-')), unit='month')-1
 

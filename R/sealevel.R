@@ -58,7 +58,7 @@ get_sealevel <- function(use_cache = TRUE, write_cache = getOption("hs_write_cac
     if (file.exists(file.path(hs_path,'sealevel.rds'))) return(invisible(readRDS((file.path(hs_path,'sealevel.rds')))))
   }
 
-file_url <- 'https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/slr/slr_sla_gbl_free_txj1j2_90.csv'
+file_url <- 'https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/slr/slr_sla_gbl_free_ref_90.csv'
 connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
