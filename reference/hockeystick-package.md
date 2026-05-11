@@ -1,0 +1,39 @@
+# hockeystick: Download and Visualize Essential Climate Change Data
+
+Provides easy access to essential climate change datasets to non-climate
+experts. Users can download the latest raw data from authoritative
+sources and view it via pre-defined 'ggplot2' charts. Datasets include
+atmospheric CO2, methane, emissions, instrumental and proxy temperature
+records, sea levels, Arctic/Antarctic sea-ice, Hurricanes, and
+Paleoclimate data. Sources include: NOAA Mauna Loa Laboratory
+<https://gml.noaa.gov/ccgg/trends/data.html>, Global Carbon Project
+<https://www.globalcarbonproject.org/carbonbudget/>, NASA GISTEMP
+<https://data.giss.nasa.gov/gistemp/>, National Snow and Sea Ice Data
+Center <https://nsidc.org/home>, CSIRO
+<https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/>,
+NOAA Laboratory for Satellite Altimetry
+<https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/> and HURDAT
+Atlantic Hurricane Database
+<https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html>, Vostok Paleo
+carbon dioxide and temperature data:
+[doi:10.3334/CDIAC/ATG.009](https://doi.org/10.3334/CDIAC/ATG.009) .
+
+## See also
+
+Useful links:
+
+- <https://cortinah.github.io/hockeystick/>
+
+- <https://github.com/cortinah/hockeystick>
+
+- Report bugs at <https://github.com/cortinah/hockeystick/issues>
+
+## Author
+
+**Maintainer**: Hernando Cortina <hch@alum.mit.edu>
+([ORCID](https://orcid.org/0000-0001-6790-4870))
+
+Authors:
+
+- Hernando Cortina <hch@alum.mit.edu>
+  ([ORCID](https://orcid.org/0000-0001-6790-4870))

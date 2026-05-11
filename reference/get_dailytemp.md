@@ -1,0 +1,107 @@
+# Download and plot essential climate data
+
+Retrieves the daily air or sea-surface temperature data since 1940 from
+ClimateReanalyzer.org Source is University of Maine Climate Change
+Institute. <https://climatereanalyzer.org/clim/t2_daily/>
+
+## Usage
+
+``` r
+get_dailytemp(
+  use_cache = TRUE,
+  write_cache = getOption("hs_write_cache"),
+  region = "W",
+  mean_start = if (region %in% c("WS", "NS", "ws", "ns")) 1982 else 1979,
+  mean_end = 2000
+)
+```
+
+## Arguments
+
+- use_cache:
+
+  (boolean) Return cached data if available, defaults to TRUE. Use FALSE
+  to fetch updated data.
+
+- write_cache:
+
+  (boolean) Write data to cache, defaults to FALSE. Use TRUE to write
+  data to cache for later use. Can also be set using
+  options(hs_write_cache=TRUE)
+
+- region:
+
+  (string) Region selection, defaults to world air temperature. Options
+  are: World Air "W", Northern Hemisphere Air "NW", Southern Hemisphere
+  Air "SW", Tropics Air "TR", Arctic Air "AR", Antarctica Air "AN",
+  World Sea Surface "WS", and North Atlantic Sea Surface "NS".
+
+- mean_start:
+
+  (numeric) Start year for historic mean, defaults to 1979.
+
+- mean_end:
+
+  (numeric) End year for historic mean, defaults to 2000.
+
+## Value
+
+Invisibly returns a tibble with the daily 2-meter air or sea surface
+temperatures since 1940 as well as historic mean by day-of-year and
+current anomaly versus mean.
+
+`get_dailytemp` invisibly returns a tibble with the daily temperatures
+since 1940 as well as mean by day-of-year and anomaly. Default to world
+data, but region can be selected among six options.
+
+Region options include world air (default), Northern Hemisphere air,
+Southern Hemisphere air, Tropics air, Arctic air, Antarctic air, World
+sea surface and North Atlantic sea surface and is stored in attribute of
+output. The historic daily mean-by-day period defaults to 1979-2000.
+This range can be optionally modified.
+
+Data are updated daily. For day-of-year mean removes observations from
+February 29 on leap years.
+
+## References
+
+- ClimateReanalyzer.org: <https://climatereanalyzer.org/clim/t2_daily/>
+
+  Notes: daily mean surface air temperature (2-meter height) estimates
+  from the ECMWF Reanalysis version 5 (ERA5) for the period January 1940
+  to present. ERA5 is a state-of-the-art numerical climate/weather
+  modeling framework that ingests surface, radiosonde, and satellite
+  observations to estimate the state of the atmosphere through time.
+  ERA5 files have a horizontal grid resolution of 0.25° x 0.25° (about
+  31km x 31km at 45°N). Each daily temperature represents an average
+  across all model gridcells within the defined latitude/longitude
+  bounds for the selected domain. The means are area-weighted to account
+  for the convergence of longitude lines at the poles
+
+## Author
+
+Hernando Cortina, <hch@alum.mit.edu>
+
+## Examples
+
+``` r
+# \donttest{
+# Fetch temp anomaly from cache if available:
+dailytemps <- get_dailytemp()
+#
+# Force cache refresh:
+dailytemps <- get_dailytemp(use_cache=FALSE)
+#
+# Review cache contents and last update dates:
+hockeystick_cache_details()
+#> <hockeystick cached files>
+#>   directory: /home/runner/.cache/R/hockeystick
+#> 
+#
+# Plot output using package's built-in ggplot2 settings
+plot_dailytemp(dailytemps)
+
+
+# Change region to Arctic
+arctictemp <- get_dailytemp(region='AR', use_cache=FALSE)# }
+```
