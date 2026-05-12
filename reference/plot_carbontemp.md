@@ -42,14 +42,14 @@ Hernando Cortina, <hch@alum.mit.edu>
 # \donttest{
 # Fetch temperature anomaly:
 mergedtemp <- merge_carbontemp()
-#> Retrieving remote data requires internet connectivity.
 #
 # Plot output using package's built-in ggplot2 defaults
 plot_carbontemp(mergedtemp)
 
+
 # Or just call plot_carbontemp(), which defaults to merge_carbontemp() dataset
 plot_carbontemp()
-#> Retrieving remote data requires internet connectivity.
+
 
 p <- plot_carbontemp(mergedtemp, print = FALSE)
 # Modify plot such as: p + ggplot2::labs(title='The Signature of Climate Change') # }

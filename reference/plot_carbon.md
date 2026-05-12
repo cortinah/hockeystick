@@ -46,14 +46,14 @@ Hernando Cortina, <hch@alum.mit.edu>
 # \donttest{
 # Fetch carbon dioxide data:
 maunaloa <- get_carbon()
-#> Retrieving remote data requires internet connectivity.
 #
 # Plot output using package's built-in ggplot2 defaults
 plot_carbon(maunaloa)
 
+
 # Or just call plot_carbon(), which defaults to get_carbon() dataset
 plot_carbon()
-#> Retrieving remote data requires internet connectivity.
+
 
 p <- plot_carbon(maunaloa, print = FALSE)
 # Modify plot such as: p + ggplot2::labs(title='The Keeling Curve') # }

@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/cortinah/hockeystick/blob/v0.8.7/inst/CITATION)
+[`inst/CITATION`](https://github.com/cortinah/hockeystick/blob/main/inst/CITATION)
 
 Hernando Cortina. hockeystick: Download and Visualize Essential Climate
 Change Data (2020)

@@ -62,9 +62,11 @@ Plot daily global temperatures since 1940 and current anomaly:
 ``` r
 
 library(hockeystick)
-globaldaily <- get_dailytemp()
+globaldaily <- get_dailytempcop()
 plot_dailytemp(globaldaily)
 ```
+
+![](reference/figures/README-dailytemp-1.png)
 
 Retrieve NOAA/ESRL Mauna Loa CO₂ Observatory concentration data and
 plot:
