@@ -63,7 +63,7 @@ ggplot(df, aes(x = date)) +theme_minimal() +geom_ribbon(data=df,aes(ymin=area_ha
 
 
 ggplot(df, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_area_ha_min, ymax=cum_area_ha_max, fill='Min - Max Range\n(since 2012)')) +
-  geom_line(aes(y=cum_area_ha, col='Year-to-date'), linewidth=1.1) + geom_line(aes(y=cum_area_ha_avg, col="Average\n(since 2012)")) +
+  geom_line(aes(y=cum_area_ha, col='Year-to-date'), linewidth=1.1, na.rm = T) + geom_line(aes(y=cum_area_ha_avg, col="Average\n(since 2012)")) +
   labs(y='Cumulative Burnt Area (thousands of ha)', x=NULL, title='2026 Wildfire Area Burnt', subtitle='World',caption='Source: GWIS') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .001)) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Year-to-date","Average\n(since 2012)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
