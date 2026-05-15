@@ -1,3 +1,59 @@
+#' Download and plot essential climate data
+#'
+#' Retrieves global wildfire burnt area and fire count data from the
+#' Global Wildfire Information System (GWIS), operated by the Copernicus
+#' Emergency Management Service.
+#' \url{https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend}
+#'
+#' @name get_fires_area
+#' @param place (string) Region or country for which to retrieve data. May be one of the
+#'   following regional aggregates: \code{"WORLD"} (default), \code{"UN_EUR"} (Europe),
+#'   \code{"UN_AFR"} (Africa), \code{"UN_ASI"} (Asia), \code{"UN_AME"} (Americas),
+#'   or \code{"UN_OCE"} (Oceania). Alternatively, supply an ISO 3166-1 alpha-3 country
+#'   code such as \code{"USA"}, \code{"CAN"}, or \code{"BRA"}.
+#' @param year (numeric) Four-digit year for which to retrieve data. Must be 2012 or later.
+#'   Defaults to the current year.
+#' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)
+#'
+#' @return Invisibly returns a tibble with weekly and cumulative wildfire burnt area and fire
+#'   count data for the requested place and year. Weekly columns include \code{date},
+#'   \code{events}, \code{events_min}, \code{events_max}, \code{events_avg},
+#'   \code{area_ha}, \code{area_ha_min}, \code{area_ha_avg}, and \code{area_ha_max}.
+#'   Cumulative columns are prefixed with \code{cum_}.
+#'
+#' @details `get_fires_area` invisibly returns a tibble with weekly and year-to-date cumulative
+#'   wildfire burnt area (in hectares) and fire event counts sourced from the GWIS API.
+#'   Historical minimum, maximum, and average baselines are included for comparison.
+#'   Data coverage begins in 2012. Cache filenames include the place and year so that
+#'   multiple queries can be cached independently.
+#'
+#' @examples
+#' \donttest{
+#' # Fetch global data for the current year from cache if available:
+#' fires <- get_fires_area()
+#' #
+#' # Fetch data for Canada in 2023:
+#' fires_can <- get_fires_area(place = 'CAN', year = 2023)
+#' #
+#' # Force cache refresh:
+#' fires <- get_fires_area(use_cache = FALSE)
+#' #
+#' # Review cache contents and last update dates:
+#' hockeystick_cache_details() }
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr bind_cols select mutate
+#'
+#' @author Hernando Cortina, \email{hch@@alum.mit.edu}
+#' @references
+#' Global Wildfire Information System (GWIS), Copernicus Emergency Management Service / European Commission Joint Research Centre.
+#' \url{https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend}
+#'
+#' API: \url{https://api2.effis.emergency.copernicus.eu/statistics/v2/gwis/}
+#'
+#' @export
 get_fires_area <- function(place='WORLD', year=as.numeric(format(Sys.Date(), "%Y")), use_cache = TRUE,
                       write_cache = getOption("hs_write_cache")) {
 
@@ -51,6 +107,63 @@ get_fires_area <- function(place='WORLD', year=as.numeric(format(Sys.Date(), "%Y
 
 
 
+#' Download and plot essential climate data
+#'
+#' Retrieves global wildfire greenhouse gas emissions data from the
+#' Global Wildfire Information System (GWIS), operated by the Copernicus
+#' Emergency Management Service.
+#' \url{https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend}
+#'
+#' @name get_fires_emissions
+#' @param place (string) Region or country for which to retrieve data. May be one of the
+#'   following regional aggregates: \code{"WORLD"} (default), \code{"UN_EUR"} (Europe),
+#'   \code{"UN_AFR"} (Africa), \code{"UN_ASI"} (Asia), \code{"UN_AME"} (Americas),
+#'   or \code{"UN_OCE"} (Oceania). Alternatively, supply an ISO 3166-1 alpha-3 country
+#'   code such as \code{"USA"}, \code{"CAN"}, or \code{"BRA"}.
+#' @param year (numeric) Four-digit year for which to retrieve data. Must be 2012 or later.
+#'   Defaults to the current year.
+#' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
+#' @param write_cache (boolean) Write data to cache, defaults to FALSE. Use TRUE to write data to cache for later use. Can also be set using options(hs_write_cache=TRUE)
+#'
+#' @return Invisibly returns a tibble with weekly and cumulative wildfire emissions data for
+#'   the requested place and year. The \code{plt} column identifies the pollutant
+#'   (e.g. \code{"CO2"}, \code{"CO"}, \code{"PM2.5"}). Weekly value columns include
+#'   \code{curv} (current), \code{minv}, \code{maxv}, and \code{avgv}. Cumulative
+#'   columns are prefixed with \code{cum_}.
+#'
+#' @details `get_fires_emissions` invisibly returns a tibble with weekly and year-to-date
+#'   cumulative wildfire emissions by pollutant, sourced from the GWIS emissions API.
+#'   Historical minimum, maximum, and average baselines are included for comparison.
+#'   Data coverage begins in 2012. Filter on the \code{plt} column to select a specific
+#'   pollutant (e.g. \code{filter(plt == "CO2")}). Cache filenames include the place
+#'   and year so that multiple queries can be cached independently.
+#'
+#' @examples
+#' \donttest{
+#' # Fetch global emissions data for the current year from cache if available:
+#' emissions <- get_fires_emissions()
+#' #
+#' # Fetch CO2 emissions for the USA in 2023:
+#' emissions_usa <- get_fires_emissions(place = 'USA', year = 2023)
+#' #
+#' # Force cache refresh:
+#' emissions <- get_fires_emissions(use_cache = FALSE)
+#' #
+#' # Review cache contents and last update dates:
+#' hockeystick_cache_details() }
+#'
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr bind_cols select mutate
+#'
+#' @author Hernando Cortina, \email{hch@@alum.mit.edu}
+#' @references
+#' Global Wildfire Information System (GWIS), Copernicus Emergency Management Service / European Commission Joint Research Centre.
+#' \url{https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend}
+#'
+#' API: \url{https://api2.effis.emergency.copernicus.eu/statistics/v2/emissions/}
+#'
+#' @export
 get_fires_emissions <- function(place='WORLD', year=as.numeric(format(Sys.Date(), "%Y")), use_cache = TRUE,
                            write_cache = getOption("hs_write_cache")) {
 
@@ -106,7 +219,7 @@ df <- get_fires_area(place = 'CAN', year = 2023)
 e <- get_fires_emissions(place = 'USA', year = 2023)
 #=======
 ggplot(df, aes(x = date)) +theme_minimal() +geom_ribbon(data=df,aes(ymin=cum_area_ha_min, ymax=cum_area_ha_max), fill='gray90') + geom_line(aes(y=cum_area_ha),col='red') + geom_line(data=df, aes(y=cum_area_ha_avg),col="dodgerblue") +
-  labs(y='Cumulative Burnt Area (thousanfs of ha)', x=NULL, title='Wildfire Burnt Area') + scale_y_continuous(labels = scales::label_comma(scale = .001))
+  labs(y='Cumulative Burnt Area (thousands of ha)', x=NULL, title='Wildfire Burnt Area') + scale_y_continuous(labels = scales::label_comma(scale = .001))
 
 
 
