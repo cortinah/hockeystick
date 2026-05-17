@@ -99,11 +99,12 @@ get_fires_area <- function(place='WORLD', year=as.numeric(format(Sys.Date(), "%Y
   fires <- bind_cols(weekly, cumul)
   fires <- fires |>  mutate(date= as.Date(mddate, format = "%Y%m%d"), .keep='unused', .after="week")
   lubridate::year(fires$date) = year
-
+  colnames(fires)[1] <- 'place'
+  
   if (write_cache) saveRDS(fires, file.path(hs_path, cachename))
   return(fires)
 
-  }
+}
 
 
 
@@ -265,7 +266,7 @@ plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), 
   var <- match.arg(var)
 
   fireyear <- dataset[1,3] |> pull() |> year()
-  firelocation <- dataset[1,'aoi'] |> pull()
+  firelocation <- dataset[1, 'place'] |> pull()
   if (var=='area') firetitle <- paste0('Wildfire Area Burnt in ', fireyear)
   if (var=='count') firetitle <- paste0('Number of Wildfires in ', fireyear)
   plot <- NULL
