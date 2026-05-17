@@ -206,15 +206,13 @@ get_fires_emissions <- function(place='WORLD', year=as.numeric(format(Sys.Date()
   cumul <- cumul |> select(cum_curvs=curv, cum_minv=minv, cum_maxv=maxv, cum_avvg=avgv)
 
   emissions <- bind_cols(weekly, cumul)
-  emissions <- emissions |>  mutate(date= as.Date(dt, format = "%Y%m%d"), .keep='unused', .before = 'plt')
+  emissions <- emissions |>  mutate(date = as.Date(dt, format = "%Y%m%d"), .keep='unused', .before = 'plt')
+  emissions <- emissions |>  mutate(place = place, .keep='unused', .before = 'date')
+  
   lubridate::year(emissions$date) = year
 
   if (write_cache) saveRDS(fires, file.path(hs_path, cachename))
   return(emissions) }
-
-
-dataset <- get_fires_emissions(place = 'USA', year = 2023)
-#=======
 
 
 #' Download and plot essential climate data
@@ -267,7 +265,7 @@ plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), 
   var <- match.arg(var)
 
   fireyear <- dataset[1,3] |> pull() |> year()
-  firelocation <- dataset[1,1] |> pull()
+  firelocation <- dataset[1,'aoi'] |> pull()
   if (var=='area') firetitle <- paste0('Wildfire Area Burnt in ', fireyear)
   if (var=='count') firetitle <- paste0('Number of Wildfires in ', fireyear)
   plot <- NULL
@@ -308,16 +306,31 @@ plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), 
   invisible(plot) 
 }
 
+plot_fires_emissions <- function(dataset = get_fires_emissions(), pollutant=c('CO2', 'BC', 'C', 'CH4', 'CO', 'NMHC', 'NOX', 'OC', 'PM2.5', 'SO2', 'TC' ),
+ style=c('cumulative', 'weekly'), print=TRUE) {
 
-####### emissions cumulative ##
-e |> filter(plt=='CO2') |> ggplot(aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_minv, ymax=cum_maxv, fill='Min - Max Range\n(since 2003)')) +
-  geom_line(aes(y=cum_curvs, col='Year-to-date'), linewidth=1.1) + geom_line(aes(y=cum_avvg, col="Average\n(since 2003)")) + labs(y='Cumulative Emissions (millions of tons)', x=NULL, title='2026 CO2 Emissions from Wildfires', subtitle='World',caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .000001)) +
+  if (is.null(dataset)) return(invisible(NULL))
+  pollutant <- match.arg(pollutant)
+  style <- match.arg(style)
+
+  fireyear <- dataset[1, "date"] |> pull() |> year()
+  firearea <- dataset[1,"place"] |> pull()
+  firetitle <- paste0(fireyear," ", pollutant, " Emissions from Wildfires")
+  plot <- NULL
+ 
+if(style=='cumulative') {
+  plot <- dataset |> filter(plt==pollutant) |> ggplot(aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_minv, ymax=cum_maxv, fill='Min - Max Range\n(since 2003)')) +
+  geom_line(aes(y=cum_curvs, col='Year-to-date'), linewidth=1.1, na.rm = T) + geom_line(aes(y=cum_avvg, col="Average\n(since 2003)")) + labs(y='Cumulative Emissions (millions of tons)', x=NULL, title=firetitle, subtitle=firearea, caption='Source: Global Wildfire Information System.') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .000001)) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Year-to-date","Average\n(since 2003)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
-
-
-####### emissions weekly ##
-e |> filter(plt=='CO2') |> ggplot(aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=minv, ymax=maxv, fill='Min - Max Range\n(since 2003)')) +
-  geom_line(aes(y=curv, col='Week    '), linewidth=1.1) + geom_line(aes(y=avgv, col="Average\n(since 2003)")) + labs(y='Weekly Emissions (millions of tons)', x=NULL, title='2026 CO2 Emissions from Wildfires', subtitle='World',caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .000001)) +
+}
+  
+if(style=='weekly') {
+  plot <- dataset |> filter(plt==pollutant) |>  ggplot(aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=minv, ymax=maxv, fill='Min - Max Range\n(since 2003)')) +
+  geom_line(aes(y=curv, col='Week    '), linewidth=1.1, na.rm = T) + geom_line(aes(y=avgv, col="Average\n(since 2003)")) + labs(y='Weekly Emissions (millions of tons)', x=NULL, title=firetitle, subtitle=firearea, caption='Source: Global Wildfire Information System.') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .000001)) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Week    ","Average\n(since 2003)"))+
-  scale_fill_manual('', values="grey90") +theme(legend.position = "top")
+  scale_fill_manual('', values="grey90") +theme(legend.position = "top") }
+
+    if (print) print(plot)
+  invisible(plot) 
+}
