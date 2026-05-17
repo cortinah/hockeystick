@@ -213,49 +213,57 @@ get_fires_emissions <- function(place='WORLD', year=as.numeric(format(Sys.Date()
   return(emissions) }
 
 
-
-
-df <- get_fires_area(place = 'CAN', year = 2023)
-e <- get_fires_emissions(place = 'USA', year = 2023)
+dataset <- get_fires_emissions(place = 'USA', year = 2023)
 #=======
-ggplot(df, aes(x = date)) +theme_minimal() +geom_ribbon(data=df,aes(ymin=cum_area_ha_min, ymax=cum_area_ha_max), fill='gray90') + geom_line(aes(y=cum_area_ha),col='red') + geom_line(data=df, aes(y=cum_area_ha_avg),col="dodgerblue") +
-  labs(y='Cumulative Burnt Area (thousands of ha)', x=NULL, title='Wildfire Burnt Area') + scale_y_continuous(labels = scales::label_comma(scale = .001))
 
 
+plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), style=c('cumulative', 'weekly'), print=TRUE) {
 
-ggplot(df, aes(x = date)) +theme_minimal() +geom_ribbon(data=df,aes(ymin=area_ha_min, ymax=area_ha_max),fill='gray90') + geom_line(aes(y=area_ha),col='red') + geom_line(data=df, aes(y=area_ha_avg),col="blue")
+  if (is.null(dataset)) return(invisible(NULL))
+  style <- match.arg(style)
+  var <- match.arg(var)
 
-
-
-## Area cumulative ##
-ggplot(df, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_area_ha_min, ymax=cum_area_ha_max, fill='Min - Max Range\n(since 2012)')) +
+  fireyear <- dataset[1,3] |> pull() |> year()
+  firelocation <- dataset[1,1] |> pull()
+  if (var=='area') firetitle <- paste0('Wildfire Area Burnt in ', fireyear)
+  if (var=='count') firetitle <- paste0('Number of Wildfires in ', fireyear)
+  plot <- NULL
+ 
+  if(var=='area' && style=='cumulative') {
+  plot <- ggplot(dataset, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_area_ha_min, ymax=cum_area_ha_max, fill='Min - Max Range\n(since 2012)')) +
   geom_line(aes(y=cum_area_ha, col='Year-to-date'), linewidth=1.1, na.rm = T) + geom_line(aes(y=cum_area_ha_avg, col="Average\n(since 2012)")) +
-  labs(y='Cumulative Burnt Area (thousands of ha)', x=NULL, title='Wildfire Area Burnt in 2026', subtitle='World',caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .001)) +
+  labs(y='Cumulative Burnt Area (thousands of ha)', x=NULL, title=firetitle, subtitle=firelocation, caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .001)) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Year-to-date","Average\n(since 2012)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
-
-## Area weekly ##
-ggplot(df, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=area_ha_min, ymax=area_ha_max, fill='Min - Max Range\n(since 2012)')) +
+  }
+      
+  if(var=='area' && style=='weekly') {
+  plot <- ggplot(dataset, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=area_ha_min, ymax=area_ha_max, fill='Min - Max Range\n(since 2012)')) +
   geom_line(aes(y=area_ha, col='Week'), linewidth=1.1, na.rm = T) + geom_line(aes(y=area_ha_avg, col="Average\n(since 2012)")) +
-  labs(y='Weekly Burnt Area (thousands of ha)', x=NULL, title='Wildfire Area Burnt in 2026', subtitle='World',caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .001)) +
+  labs(y='Weekly Burnt Area (thousands of ha)', x=NULL, title=firetitle, subtitle=firelocation, caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .001)) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Week","Average\n(since 2012)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
+  }
 
-
-## num fires cumulative ##
-ggplot(df, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_events_min, ymax=cum_events_max, fill='Min - Max Range\n(since 2012)')) +
-  geom_line(aes(y=cum_events, col='Year-to-date'), linewidth=1.1) + geom_line(aes(y=cum_events_avg, col="Average\n(since 2012)")) +
-  labs(y='Cumulative Number', x=NULL, title='2026 Number of Wildfires', subtitle='World',caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma()) +
+  if(var=='count' && style=='cumulative') {
+  plot <- ggplot(dataset, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_events_min, ymax=cum_events_max, fill='Min - Max Range\n(since 2012)')) +
+  geom_line(aes(y=cum_events, col='Year-to-date'), linewidth=1.1, na.rm=T) + geom_line(aes(y=cum_events_avg, col="Average\n(since 2012)")) +
+  labs(y='Cumulative Number', x=NULL, title=firetitle, subtitle=firelocation, caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma()) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Year-to-date","Average\n(since 2012)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
-
-## num fires weekly ##
-ggplot(df, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=events_min, ymax=events_max, fill='Min - Max Range\n(since 2012)')) +
-  geom_line(aes(y=events, col='Week'), linewidth=1.1) + geom_line(aes(y=events_avg, col="Average\n(since 2012)")) +
-  labs(y='Weekly Number', x=NULL, title='Number of Wildfires in 2026', subtitle='World',caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma()) +
+  }
+  
+  if(var=='count' && style=='weekly') {
+  plot <- ggplot(dataset, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=events_min, ymax=events_max, fill='Min - Max Range\n(since 2012)')) +
+  geom_line(aes(y=events, col='Week'), linewidth=1.1, na.rm=T) + geom_line(aes(y=events_avg, col="Average\n(since 2012)")) +
+  labs(y='Weekly Number', x=NULL, title=firetitle, subtitle=firelocation, caption='Source: Global Wildfire Information System') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma()) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Week","Average\n(since 2012)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
+  }
 
+  if (print) print(plot)
+  invisible(plot) 
+}
 
 
 ####### emissions cumulative ##
