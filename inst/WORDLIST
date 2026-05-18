@@ -11,6 +11,7 @@ CDIAC
 CLI
 CMD
 CSIRO
+Centre
 ClimateReanalyzer
 Cowtan
 Delaygue
@@ -28,6 +29,7 @@ GISS
 GISTEMP
 GML
 GMSL
+GWIS
 Geophys
 Geosci
 Guenther
@@ -84,6 +86,7 @@ al
 carbontemp
 climatereanalyzer
 dailytemp
+deprecations
 dev
 doi
 dominicroye
@@ -115,4 +118,3 @@ tibble
 treemap
 uk
 www
-deprecations
