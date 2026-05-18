@@ -188,6 +188,113 @@ test_that("plot functions return NULL invisibly when passed NULL", {
 })
 
 # ---------------------------------------------------------------------------
+# Fixtures for fires functions
+# ---------------------------------------------------------------------------
+
+fires_area_fixture <- tibble::tibble(
+  place        = rep("WORLD", 4L),
+  week         = 1:4,
+  date         = as.Date(c("2024-01-07", "2024-01-14", "2024-01-21", "2024-01-28")),
+  events       = c(100L, 120L, 110L, 130L),
+  events_min   = c( 80L,  90L,  85L, 100L),
+  events_max   = c(150L, 160L, 155L, 170L),
+  events_avg   = c(110L, 115L, 112L, 120L),
+  area_ha      = c(5000L, 6000L, 5500L, 7000L),
+  area_ha_min  = c(3000L, 3500L, 3200L, 4000L),
+  area_ha_avg  = c(4500L, 5000L, 4800L, 5500L),
+  area_ha_max  = c(8000L, 9000L, 8500L, 9500L),
+  cum_events      = c(100L,  220L,  330L,  460L),
+  cum_events_min  = c( 80L,  170L,  255L,  355L),
+  cum_events_max  = c(150L,  310L,  465L,  635L),
+  cum_events_avg  = c(110L,  225L,  337L,  457L),
+  cum_area_ha     = c(5000L, 11000L, 16500L, 23500L),
+  cum_area_ha_min = c(3000L,  6500L,  9700L, 13700L),
+  cum_area_ha_avg = c(4500L,  9500L, 14300L, 19800L),
+  cum_area_ha_max = c(8000L, 17000L, 25500L, 35000L)
+)
+
+fires_emissions_fixture <- tibble::tibble(
+  place      = rep("WORLD", 6L),
+  date       = rep(as.Date(c("2024-01-07", "2024-01-14", "2024-01-21")), 2L),
+  plt        = c(rep("CO2", 3L), rep("PM2.5", 3L)),
+  curv       = c(100, 120, 110, 10, 12, 11),
+  minv       = c( 80,  90,  85,  8,  9,  8),
+  maxv       = c(150, 160, 155, 15, 16, 15),
+  avgv       = c(110, 115, 112, 11, 11, 11),
+  cum_curvs  = c(100, 220, 330, 10, 22, 33),
+  cum_minv   = c( 80, 170, 255,  8, 17, 25),
+  cum_maxv   = c(150, 310, 465, 15, 31, 46),
+  cum_avvg   = c(110, 225, 337, 11, 22, 33)
+)
+
+# ---------------------------------------------------------------------------
+# Input validation — fires functions
+# ---------------------------------------------------------------------------
+
+test_that("get_fires_area rejects years before 2012", {
+  expect_error(get_fires_area(year = 2011), "year must be greater than 2011")
+})
+
+test_that("get_fires_emissions rejects years before 2012", {
+  expect_error(get_fires_emissions(year = 2011), "year must be greater than 2011")
+})
+
+# ---------------------------------------------------------------------------
+# plot_fires_area — all var/style combinations return ggplot
+# ---------------------------------------------------------------------------
+
+test_that("plot_fires_area var=area style=cumulative returns a ggplot", {
+  p <- plot_fires_area(fires_area_fixture, var = "area", style = "cumulative", print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+test_that("plot_fires_area var=area style=weekly returns a ggplot", {
+  p <- plot_fires_area(fires_area_fixture, var = "area", style = "weekly", print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+test_that("plot_fires_area var=count style=cumulative returns a ggplot", {
+  p <- plot_fires_area(fires_area_fixture, var = "count", style = "cumulative", print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+test_that("plot_fires_area var=count style=weekly returns a ggplot", {
+  p <- plot_fires_area(fires_area_fixture, var = "count", style = "weekly", print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+# ---------------------------------------------------------------------------
+# plot_fires_emissions — pollutant/style combinations return ggplot
+# ---------------------------------------------------------------------------
+
+test_that("plot_fires_emissions pollutant=CO2 style=cumulative returns a ggplot", {
+  p <- plot_fires_emissions(fires_emissions_fixture, pollutant = "CO2", style = "cumulative", print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+test_that("plot_fires_emissions pollutant=CO2 style=weekly returns a ggplot", {
+  p <- plot_fires_emissions(fires_emissions_fixture, pollutant = "CO2", style = "weekly", print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+test_that("plot_fires_emissions pollutant=PM2.5 style=cumulative returns a ggplot", {
+  p <- plot_fires_emissions(fires_emissions_fixture, pollutant = "PM2.5", style = "cumulative", print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+# ---------------------------------------------------------------------------
+# NULL propagation — fires plot functions
+# ---------------------------------------------------------------------------
+
+test_that("plot_fires_area returns NULL invisibly when passed NULL", {
+  expect_null(plot_fires_area(NULL, print = FALSE))
+})
+
+test_that("plot_fires_emissions returns NULL invisibly when passed NULL", {
+  expect_null(plot_fires_emissions(NULL, print = FALSE))
+})
+
+# ---------------------------------------------------------------------------
 # merge_carbontemp output structure
 # ---------------------------------------------------------------------------
 
