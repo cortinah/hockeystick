@@ -2,7 +2,7 @@
 #'
 #' Retrieves the Common Era Global Surface Temperature Reconstructions.
 #' Source is PAGES2k Consortium and NOAA National Centers for Environmental Information.
-#' \url{https://www.ncei.noaa.gov/access/paleo-search/study/26872)}
+#' \url{https://www.ncei.noaa.gov/access/paleo-search/study/26872}
 #'
 #' @name get_temp2k
 #' @param use_cache (boolean) Return cached data if available, defaults to TRUE. Use FALSE to fetch updated data.
@@ -50,7 +50,7 @@ hs_path <- tools::R_user_dir("hockeystick","cache")
 if (use_cache) {
   if (file.exists(file.path(hs_path,'temp2k.rds'))) return(invisible(readRDS((file.path(hs_path,'temp2k.rds')))))   }
 
-file_url <- 'https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/neukom2019temp/recons/Full_ensemble_median_and_95pct_range.txt'
+file_url <- 'https://www.ncei.noaa.gov/pub/data/paleo/pages2k/neukom2019temp/recons/Full_ensemble_median_and_95pct_range.txt'
 connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 

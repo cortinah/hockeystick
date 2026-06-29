@@ -13,3 +13,5 @@ cran-comments.md
 ^\.positai$
 ^\.claude$
 ^\.posit/assistant$
+^vignettes/\.quarto$
+^vignettes/*_files$

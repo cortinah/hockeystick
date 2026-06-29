@@ -64,12 +64,12 @@ You may alternatively install the development version from
 <https://github.com/cortinah/hockeystick> with:
 
 ``` r
-remotes::install_github("cortinah/hockeystick")
+remotes::install_github("cortinah/hockeystick@testing")
 ```
 
 ## Downloading and viewing global heating data
 
-New: Plot daily global temperatures since 1979 and current anomaly:
+Plot daily global temperatures since 1940 and current anomaly:
 
 ``` r
 library(hockeystick)
@@ -121,6 +121,14 @@ plot_temp(anomaly)
 
 <img src="man/figures/README-temp-1.png" width="60%" />
 
+Plot relationship between temperature anomaly and carbon:
+
+``` r
+plot_carbontemp()
+```
+
+<img src="man/figures/README-tempcarbon-1.png" width="60%" />
+
 Visualize warming using Ed Hawkins styled “warming stripes”:
 
 ``` r
@@ -133,7 +141,7 @@ warming_stripes()
 warming_stripes(stripe_only = TRUE, col_strip = viridisLite::viridis(11))
 ```
 
-<img src="man/figures/README-stripes2-1.png" width="53%" />
+<img src="man/figures/README-stripes2-1.png" width="60%" />
 
 Retrieve tide gauge and satellite sea level data and plot:
 
@@ -273,6 +281,8 @@ climate_grid()
   climatereanalyzer.org daily temperature chart (Temperature Records
   Broken…Again, 9 July 2023). This code is the foundation of the
   get_dailytemp() and plot_dailytemp() functions.
+- Thank you Nan Xiao for [PNG compression
+  approach](https://nanx.me/blog/post/rpkgs-pngquant-ragg/).
 
 ## Notes and resources
 
@@ -284,6 +294,6 @@ climate_grid()
 - Here are some online resources I have found very helpful to learn mo
   re about climate science:
 - MIT edX Global Warming Science.
-  <https://www.edx.org/learn/physics/massachusetts-institute-of-technology-global-warming-science>
+  <https://www.edx.org/learn/global-warming/massachusetts-institute-of-technology-global-warming-science>
 - SDG Academy: Climate Change: The Science and Global Impact.
   <https://sdgacademy.org/course/climate-change-the-science-and-global-impact/>

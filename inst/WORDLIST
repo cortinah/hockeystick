@@ -15,6 +15,7 @@ ClimateReanalyzer
 Cowtan
 Delaygue
 Dlugokencky
+ECMWF
 ERSST
 ESRL
 ESS
@@ -49,7 +50,6 @@ NOAA's
 NOAA’s
 NSIDC
 Neukom
-OISST
 ORCID
 OWID
 Organisation
@@ -74,12 +74,14 @@ Scripps
 TOPEX
 Tellus
 Thoning
+Tibble
 Vostok
 WRL
 WS
 Waterman
 Zyss
 al
+carbontemp
 climatereanalyzer
 config
 dailytemp
@@ -91,7 +93,7 @@ edX
 et
 ggplot
 github
-gridded
+gridcells
 hs
 https
 icecurves

@@ -41,7 +41,7 @@ By default the chart is also displayed. Users may further modify the output ggpl
 
 co2map <- emissions_map()
 
-co2map <- emissions_map(since=2000, number=20, title="Top 20 Cumulative Emitters Since 2000")}
+co2map <- emissions_map(since=2000, number=20, title="Top 20 Cumulative Emitters Since 2000") }
 
 }
 \author{
