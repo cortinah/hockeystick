@@ -203,12 +203,12 @@ get_fires_emissions <- function(place='WORLD', year=as.numeric(format(Sys.Date()
   weekly <- raw$emissionsweekly |> as_tibble()
   cumul <- raw$emissionsweeklycum |> as_tibble()
 
-  cumul <- cumul |> select(cum_curvs=curv, cum_minv=minv, cum_maxv=maxv, cum_avvg=avgv)
+  cumul <- cumul |> select(cum_curv=curv, cum_minv=minv, cum_maxv=maxv, cum_avgv=avgv)
 
-  emissions <- bind_cols(weekly, cumul)
+  emissions <- left_join(weekly, cumul)
   emissions <- emissions |>  mutate(date = as.Date(dt, format = "%Y%m%d"), .keep='unused', .before = 'plt')
   emissions <- emissions |>  mutate(place = place, .keep='unused', .before = 'date')
-  
+
   lubridate::year(emissions$date) = year
 
   if (write_cache) saveRDS(fires, file.path(hs_path, cachename))
@@ -269,7 +269,7 @@ plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), 
   if (var=='area') firetitle <- paste0('Wildfire Area Burnt in ', fireyear)
   if (var=='count') firetitle <- paste0('Number of Wildfires in ', fireyear)
   plot <- NULL
- 
+
   if(var=='area' && style=='cumulative') {
   plot <- ggplot(dataset, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_area_ha_min, ymax=cum_area_ha_max, fill='Min - Max Range\n(since 2012)')) +
   geom_line(aes(y=cum_area_ha, col='Year-to-date'), linewidth=1.1, na.rm = T) + geom_line(aes(y=cum_area_ha_avg, col="Average\n(since 2012)")) +
@@ -277,7 +277,7 @@ plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), 
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Year-to-date","Average\n(since 2012)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
   }
-      
+
   if(var=='area' && style=='weekly') {
   plot <- ggplot(dataset, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=area_ha_min, ymax=area_ha_max, fill='Min - Max Range\n(since 2012)')) +
   geom_line(aes(y=area_ha, col='Week'), linewidth=1.1, na.rm = T) + geom_line(aes(y=area_ha_avg, col="Average\n(since 2012)")) +
@@ -293,7 +293,7 @@ plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), 
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Year-to-date","Average\n(since 2012)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
   }
-  
+
   if(var=='count' && style=='weekly') {
   plot <- ggplot(dataset, aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=events_min, ymax=events_max, fill='Min - Max Range\n(since 2012)')) +
   geom_line(aes(y=events, col='Week'), linewidth=1.1, na.rm=T) + geom_line(aes(y=events_avg, col="Average\n(since 2012)")) +
@@ -303,7 +303,7 @@ plot_fires_area <- function(dataset = get_fires_area(), var=c('area', 'count'), 
   }
 
   if (print) print(plot)
-  invisible(plot) 
+  invisible(plot)
 }
 
 #' Download and plot essential climate data
@@ -362,14 +362,14 @@ plot_fires_emissions <- function(dataset = get_fires_emissions(), pollutant=c('C
   firearea <- dataset[1,"place"] |> pull()
   firetitle <- paste0(fireyear," ", pollutant, " Emissions from Wildfires")
   plot <- NULL
- 
+
 if(style=='cumulative') {
   plot <- dataset |> filter(plt==pollutant) |> ggplot(aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=cum_minv, ymax=cum_maxv, fill='Min - Max Range\n(since 2003)')) +
-  geom_line(aes(y=cum_curvs, col='Year-to-date'), linewidth=1.1, na.rm = T) + geom_line(aes(y=cum_avvg, col="Average\n(since 2003)")) + labs(y='Cumulative Emissions (millions of tons)', x=NULL, title=firetitle, subtitle=firearea, caption='Source: Global Wildfire Information System.') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .000001)) +
+  geom_line(aes(y=cum_curv, col='Year-to-date'), linewidth=1.1, na.rm = T) + geom_line(aes(y=cum_avgv, col="Average\n(since 2003)")) + labs(y='Cumulative Emissions (millions of tons)', x=NULL, title=firetitle, subtitle=firearea, caption='Source: Global Wildfire Information System.') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .000001)) +
   scale_colour_manual("",values=c("red", "dodgerblue"), breaks=c("Year-to-date","Average\n(since 2003)"))+
   scale_fill_manual('', values="grey90") +theme(legend.position = "top")
 }
-  
+
 if(style=='weekly') {
   plot <- dataset |> filter(plt==pollutant) |> ggplot(aes(x = date)) +theme_bw(base_size = 13) +geom_ribbon(aes(ymin=minv, ymax=maxv, fill='Min - Max Range\n(since 2003)')) +
   geom_line(aes(y=curv, col='Week    '), linewidth=1.1, na.rm = T) + geom_line(aes(y=avgv, col="Average\n(since 2003)")) + labs(y='Weekly Emissions (millions of tons)', x=NULL, title=firetitle, subtitle=firearea, caption='Source: Global Wildfire Information System.') + scale_y_continuous(n.breaks = 8, labels = scales::label_comma(scale = .000001)) +
@@ -377,5 +377,5 @@ if(style=='weekly') {
   scale_fill_manual('', values="grey90") +theme(legend.position = "top") }
 
   if (print) print(plot)
-  invisible(plot) 
+  invisible(plot)
 }
