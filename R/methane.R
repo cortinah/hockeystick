@@ -53,7 +53,9 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
 ch4 <- suppressMessages( read_table(dl, col_names = FALSE, skip = 65) )
 colnames(ch4) <- c('year', 'month', 'date', 'average', 'average_unc', 'trend','trend_unc')
 ch4$date <- ceiling_date(ymd(paste(ch4$year, ch4$month, '01',sep='-')), unit='month')-1

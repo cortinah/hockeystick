@@ -58,7 +58,9 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
 vostok <- readr::read_table(dl, col_names = FALSE, skip = 21, show_col_types = FALSE)
 colnames(vostok) <- c('depth', 'age_ice', 'age_air', 'co2')
 
@@ -67,7 +69,9 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
 paleotemp <- readr::read_table(dl, col_names = FALSE, skip = 60, show_col_types = FALSE)
 colnames(paleotemp) <- c('depth', 'age_ice', 'deuterium', 'temp')
 

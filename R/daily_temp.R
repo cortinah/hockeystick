@@ -86,7 +86,9 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
   if (!connected) {message("Retrieving remote data requires internet connectivity.\nAvailable regions are: W, NW, SW, AR, AN, TR, WS, NS."); return(invisible(NULL))}
 
   dl <- tempfile()
-  download.file(file_url, dl)
+  tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
   temp_json <- tryCatch (jsonlite::fromJSON(dl),
                           error=function(error_msg) {
                             message('Invalid JSON file, please check temperature data url.')
@@ -373,7 +375,9 @@ get_dailytempcop <- function(use_cache = TRUE, write_cache = getOption("hs_write
   if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   dl <- tempfile()
-  download.file(file_url, dl)
+  tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
   temp_csv <- read.csv(dl, skip = 18)
 
   colnames(temp_csv) <- c('date', 'temp', '1991-2020 mean', 'temp_anom', 'status' )

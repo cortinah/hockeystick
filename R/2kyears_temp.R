@@ -55,7 +55,9 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
 temp2k <- suppressMessages( read_table(dl, col_names = FALSE, skip = 5,
                                          col_types = 'innnnnnnn') )
 

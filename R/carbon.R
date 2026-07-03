@@ -52,7 +52,9 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
 maunaloa <- suppressMessages( read_csv(dl, col_names = FALSE, skip = 41) )
 colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'trend', 'ndays','stdev','unc')
 maunaloa$date <- ceiling_date(ymd(paste(maunaloa$year, maunaloa$month, '01',sep='-')), unit='month')-1
