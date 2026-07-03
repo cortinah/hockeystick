@@ -73,6 +73,9 @@ gmsl_sat$date <- lubridate::ymd(lubridate::round_date(lubridate::date_decimal(gm
 
 
 file_url <- 'https://research.csiro.au/slrwavescoast/?ddownload=327'
+connected <- .isConnected(file_url)
+if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+
 td <- tempdir()
 dl <- tempfile(tmpdir=td)
 download.file(file_url, dl, mode='wb')

@@ -14,4 +14,6 @@ cran-comments.md
 ^vignettes/*_files$
 ^CITATION\.cff$
 ^\.positai$
+^\.posit$
 ^\.claude$
+^\.posit/assistant$
