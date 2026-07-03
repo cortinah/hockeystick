@@ -50,7 +50,7 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
 dl <- tempfile()
-tryCatch({  download.file(file_url, dl) }, error = function(e) {connected <- FALSE}, warning = function(w) {connected <- FALSE} )
+connected <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
 if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 emissions <- suppressMessages( read_csv(dl,  col_types = cols(other_industry_co2 = col_skip(), other_co2_per_capita = col_skip())) )
 
