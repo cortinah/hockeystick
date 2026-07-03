@@ -60,7 +60,7 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 
 dl <- tempfile()
 status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 gisstemp <- suppressMessages( readr::read_csv(dl, skip=1, na='***') )
 # Compute year-to-date mean for current year

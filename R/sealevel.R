@@ -65,7 +65,7 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 dl <- tempfile()
 
 status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
-if (status!=0L) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 gmsl_sat <- utils::read.csv(dl, header = FALSE, skip = 6)
 gmsl_sat$gmsl_sat <- rowMeans(gmsl_sat[,2:5], na.rm = TRUE)
@@ -82,7 +82,7 @@ td <- tempdir()
 dl <- tempfile(tmpdir=td)
 
 status <- tryCatch({  download.file(file_url, dl, mode='wb') }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
-if (status!=0L) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 unzip(dl, 'church_white_gmsl_2011_up/CSIRO_Recons_gmsl_mo_2015.csv', exdir = td, overwrite = TRUE)
 gmsl_tide <- readr::read_csv(file.path(td,'church_white_gmsl_2011_up/CSIRO_Recons_gmsl_mo_2015.csv'), col_types = readr::cols(`GMSL uncertainty (mm)` = readr::col_skip()))

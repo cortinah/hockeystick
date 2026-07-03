@@ -87,7 +87,7 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
 
   dl <- tempfile()
   status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
-  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+  if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
   temp_json <- tryCatch (jsonlite::fromJSON(dl),
                           error=function(error_msg) {
@@ -376,7 +376,7 @@ get_dailytempcop <- function(use_cache = TRUE, write_cache = getOption("hs_write
 
   dl <- tempfile()
   status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
-  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+  if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
   temp_csv <- read.csv(dl, skip = 18)
 

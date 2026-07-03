@@ -54,7 +54,7 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 
 dl <- tempfile()
 status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 ch4 <- suppressMessages( read_table(dl, col_names = FALSE, skip = 65) )
 colnames(ch4) <- c('year', 'month', 'date', 'average', 'average_unc', 'trend','trend_unc')

@@ -53,7 +53,7 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 
 dl <- tempfile()
 status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 maunaloa <- suppressMessages( read_csv(dl, col_names = FALSE, skip = 41) )
 colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'trend', 'ndays','stdev','unc')

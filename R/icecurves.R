@@ -68,8 +68,8 @@ get_icecurves <- function(pole='N', measure='extent', use_cache = TRUE, write_ca
   filename <- 'https://noaadata.apps.nsidc.org/NOAA/G02135/seaice_analysis/Sea_Ice_Index_Monthly_Data_with_Statistics_G02135_v4.0.xlsx'
 
   dl <- tempfile()
-  download.file(filename, dl, mode='wb')
-
+  status <- tryCatch({  download.file(file_url, dl, mode='wb') }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
+  if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
   curve <- function(month, pole) {
     sheet <- paste0(month.name[month], '-', pole, 'H')
