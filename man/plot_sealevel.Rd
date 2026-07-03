@@ -24,7 +24,7 @@ By default the chart is also displayed. Users may further modify the output ggpl
 \examples{
 \donttest{
 # Fetch sealevel data:
-gmsl <- get_sealevel()
+gmsl <- get_sealevel(use_cache=F)
 #
 # Plot output using package's built-in ggplot2 defaults
 plot_sealevel(gmsl)
