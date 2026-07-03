@@ -64,7 +64,7 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 
 dl <- tempfile()
 
-status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
+status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
 if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 gmsl_sat <- utils::read.csv(dl, header = FALSE, skip = 6)
@@ -81,7 +81,7 @@ if (!connected) {message("Retrieving remote data requires internet connectivity.
 td <- tempdir()
 dl <- tempfile(tmpdir=td)
 
-status <- tryCatch({  download.file(file_url, dl, mode='wb') }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
+status <- tryCatch({  download.file(file_url, dl, mode='wb') }, error = function(e) {TRUE}, error = function(e) {TRUE} )
 if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 unzip(dl, 'church_white_gmsl_2011_up/CSIRO_Recons_gmsl_mo_2015.csv', exdir = td, overwrite = TRUE)

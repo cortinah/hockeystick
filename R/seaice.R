@@ -70,7 +70,7 @@ get_seaice <- function(pole='N', month=7, measure='extent',
 
   dl <- tempfile()
 
-  status <- tryCatch({  download.file(filename, dl, mode = 'wb') }, error = function(e) {FALSE}, warning = function(w) {FALSE} )
+  status <- tryCatch({  download.file(filename, dl, mode = 'wb') }, error = function(e) {TRUE}, error = function(e) {TRUE} )
   if (status!=0L){message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   sheet <- paste0(month.name[month], '-', pole, 'H')
