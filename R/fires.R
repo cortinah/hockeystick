@@ -194,7 +194,7 @@ get_fires_emissions <- function(place='WORLD', year=as.numeric(format(Sys.Date()
       return(invisible(cached_fires)) }}
 
   connected <- .isConnected('https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend')
-  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+  if (status!=0L) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
 
   con <- url(url, open = "rb")
   resp <- readLines(con, warn = FALSE)
