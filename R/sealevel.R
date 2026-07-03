@@ -123,7 +123,7 @@ invisible(gmsl) }
 #' @examples
 #' \donttest{
 #' # Fetch sealevel data:
-#' gmsl <- get_sealevel(use_cache=F)
+#' gmsl <- get_sealevel()
 #' #
 #' # Plot output using package's built-in ggplot2 defaults
 #' plot_sealevel(gmsl)
