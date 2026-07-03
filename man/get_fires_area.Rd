@@ -63,8 +63,6 @@ hockeystick_cache_details() }
 \references{
 Global Wildfire Information System (GWIS), Copernicus Emergency Management Service / European Commission Joint Research Centre.
 \url{https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend}
-
-API: \url{https://api2.effis.emergency.copernicus.eu/statistics/v2/gwis/}
 }
 \author{
 Hernando Cortina, \email{hch@alum.mit.edu}
