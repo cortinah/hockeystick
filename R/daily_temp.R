@@ -83,7 +83,7 @@ get_dailytemp <- function(use_cache = TRUE, write_cache = getOption("hs_write_ca
                      NS = 'https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json')    # North Atlantic Sea
 
                      connected <- .isConnected(file_url)
-  if (!connected) {message("Retrieving remote data requires internet connectivity.\nAvailable regions are: W, NW, SW, AR, AN, TR, WS, NS."); return(invisible(NULL))}
+  if (!connected) {message("Retrieving remote data requires connectivity to source.\nAvailable regions are: W, NW, SW, AR, AN, TR, WS, NS."); return(invisible(NULL))}
 
   dl <- tempfile()
   status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
@@ -372,7 +372,7 @@ get_dailytempcop <- function(use_cache = TRUE, write_cache = getOption("hs_write
   file_url <- 'https://sites.ecmwf.int/data/climatepulse/data/series/era5_daily_series_2t_global.csv'
 
   connected <- .isConnected(file_url)
-  if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+  if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
   dl <- tempfile()
   status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )

@@ -60,7 +60,7 @@ get_sealevel <- function(use_cache = TRUE, write_cache = getOption("hs_write_cac
 
 file_url <- 'https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/slr/slr_sla_gbl_free_ref_90.csv'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
 
@@ -76,7 +76,7 @@ gmsl_sat$date <- lubridate::ymd(lubridate::round_date(lubridate::date_decimal(gm
 
 file_url <- 'https://research.csiro.au/slrwavescoast/?ddownload=327'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 td <- tempdir()
 dl <- tempfile(tmpdir=td)

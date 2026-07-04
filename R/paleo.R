@@ -55,7 +55,7 @@ get_paleo <- function(use_cache = TRUE, write_cache = getOption("hs_write_cache"
 
 file_url <- 'https://data.ess-dive.lbl.gov/catalog/d1/mn/v2/object/ess-dive-457358fdc81d3a5-20180726T203952542'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
 status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
@@ -66,7 +66,7 @@ colnames(vostok) <- c('depth', 'age_ice', 'age_air', 'co2')
 
 file_url <- 'https://data.ess-dive.lbl.gov/catalog/d1/mn/v2/object/ess-dive-1e57f3f83864c10-20180717T104354142744'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
 status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )

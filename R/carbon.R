@@ -49,7 +49,7 @@ if (use_cache & !write_cache) {
 
 file_url <- 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
 status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
