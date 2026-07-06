@@ -59,7 +59,7 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
-status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
+status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, warning = function(w) {TRUE} )
 if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 gisstemp <- suppressMessages( readr::read_csv(dl, skip=1, na='***') )

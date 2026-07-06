@@ -84,9 +84,13 @@ get_fires_area <- function(place='WORLD', year=as.numeric(format(Sys.Date(), "%Y
   connected <- .isConnected('https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend')
   if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
-  con <- url(url, open = "rb")
+
+  con <- tryCatch({  url(url, open = "rb") }, error = function(e) {TRUE}, warning = function(w) {TRUE} )
+  if (isTRUE(con)) {message("Unable to access remote resource."); return(invisible(NULL))}
+
   resp <- readLines(con, warn = FALSE)
   close(con)
+
   raw <- fromJSON(resp, flatten = TRUE)
 
   weekly <- raw$banfweekly |> as_tibble()
