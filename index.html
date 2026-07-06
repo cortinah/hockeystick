@@ -6,9 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Download and Visualize Essential Climate Change Data • hockeystick</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Download and Visualize Essential Climate Change Data">
 <meta name="description" content="hockeystick provides easy access to essential Climate Change datasets to non-climate experts. Users can download the latest raw data from authoritative sources and view it via pre-defined ggplot2 charts.">
@@ -23,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,10 +69,10 @@
 <p>The goal of <code>hockeystick</code> is to make essential Global Heating datasets easily available in R to non-climate experts. <code>hockeystick</code> users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.</p>
 <p>The choice of data was originally based on <a href="http://www.pik-potsdam.de/~stefan/" class="external-link">Professor Stefan Rahmstorf’s</a> presentation on <a href="http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf" class="external-link">The 5 Most Important Data Sets of Climate Science</a>. I came across this on a post on the <a href="https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/" class="external-link">Open Mind blog</a>. I wrote my own <a href="https://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/" class="external-link">post</a> on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over The name of the package stems from the well known <a href="https://en.wikipedia.org/wiki/Hockey_stick_graph" class="external-link">hockeystick</a> temperature chart.</p>
 <p><code>hockeystick</code> was highlighted on the RStudio <a href="https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/" class="external-link">RViews</a> blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in February 2021.</p>
-<p><strong>New in version 0.8.0:</strong> Daily temperature data from ClimateReanalyzer.com (see below).</p>
+<p><strong>New in version 0.9.0:</strong> Global wildfire area burnt and emissions data from GWIS.</p>
+<p>New in version 0.8.0: Daily temperature data from ClimateReanalyzer.com.</p>
 <p>New in version 0.7.0: Globally averaged methane (CH<sub>4</sub>) concentration from NOAA.</p>
 <p>New in version 0.7.0: Cumulative emissions by country visualization.</p>
-<p>New in version 0.6.0: Global CO<sub>2</sub> emissions by region and country from GCP.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -149,13 +154,21 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plot_hurricane_nrg.html">plot_hurricane_nrg</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-hurricanes-2.png" alt="" width="60%"></p>
-<p>Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:</p>
+<p>Retrieve GWIS wildfire data and plot:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">usfires</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_fires_area.html">get_fires_area</a></span><span class="op">(</span>place<span class="op">=</span><span class="st">'USA'</span>, year <span class="op">=</span> <span class="fl">2026</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/plot_fires_area.html">plot_fires_area</a></span><span class="op">(</span><span class="va">usfires</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-fires-1.png" alt="" width="60%"></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_fires_area.html">plot_fires_area</a></span><span class="op">(</span><span class="va">usfires</span>, style <span class="op">=</span> <span class="st">'weekly'</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-fires-2.png" alt="" width="60%"></p>
+<p>Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_methane.html">get_methane</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_methane.html">plot_methane</a></span><span class="op">(</span><span class="va">ch4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-methane-1.png" alt="" width="60%"></p>
 <p>Retrieve Vostok paleo ice core data and plot:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vostok</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_paleo.html">get_paleo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/plot_paleo.html">plot_paleo</a></span><span class="op">(</span><span class="va">vostok</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-paleo-1.png" alt="" width="60%"></p>
@@ -168,7 +181,7 @@
 <div class="section level3">
 <h3 id="all-together-now-climate-data-grid">All together now: climate data grid<a class="anchor" aria-label="anchor" href="#all-together-now-climate-data-grid"></a>
 </h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/climate_grid.html">climate_grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-grid-1.png" alt="" width="80%"></p>
 </div>
@@ -193,7 +206,9 @@
 <li>Carbon Dioxide emissions: <a href="https://www.globalcarbonproject.org/carbonbudget/" class="external-link">Global Carbon Project</a> and <a href="https://github.com/owid/co2-data" class="external-link">Our World In Data</a>
 </li>
 <li>Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (<a href="https://gml.noaa.gov/ccgg/trends_ch4/" class="external-link uri">https://gml.noaa.gov/ccgg/trends_ch4/</a>).</li>
-<li>Thank you to Dirk Eddelbuettel for providing the .isConnected function from his <a href="https://CRAN.R-project.org/package=tint" class="external-link">tint</a> package to test for internet connectivity.</li>
+<li>Wildfire data: <a href="https://gwis.jrc.ec.europa.eu/" class="external-link">Global Wildfire Information System (GWIS)</a>
+</li>
+<li>Thank you Dirk Eddelbuettel for providing the .isConnected function from his <a href="https://CRAN.R-project.org/package=tint" class="external-link">tint</a> package to test for internet connectivity.</li>
 <li>Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken…Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.</li>
 <li>Thank you Nan Xiao for <a href="https://nanx.me/blog/post/rpkgs-pngquant-ragg/" class="external-link">PNG compression approach</a>.</li>
 </ul>

@@ -14,6 +14,8 @@
 <url><loc>/reference/get_dailytemp.html</loc></url>
 <url><loc>/reference/get_dailytempcop.html</loc></url>
 <url><loc>/reference/get_emissions.html</loc></url>
+<url><loc>/reference/get_fires_area.html</loc></url>
+<url><loc>/reference/get_fires_emissions.html</loc></url>
 <url><loc>/reference/get_hurricanes.html</loc></url>
 <url><loc>/reference/get_icecurves.html</loc></url>
 <url><loc>/reference/get_methane.html</loc></url>
@@ -33,6 +35,8 @@
 <url><loc>/reference/plot_dailytemp.html</loc></url>
 <url><loc>/reference/plot_emissions.html</loc></url>
 <url><loc>/reference/plot_emissions_with_land.html</loc></url>
+<url><loc>/reference/plot_fires_area.html</loc></url>
+<url><loc>/reference/plot_fires_emissions.html</loc></url>
 <url><loc>/reference/plot_hurricane_nrg.html</loc></url>
 <url><loc>/reference/plot_hurricanes.html</loc></url>
 <url><loc>/reference/plot_icecurves.html</loc></url>

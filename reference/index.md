@@ -15,6 +15,10 @@
   essential climate data
 - [`get_emissions()`](get_emissions.md) : Download and plot essential
   climate data
+- [`get_fires_area()`](get_fires_area.md) : Download and plot essential
+  climate data
+- [`get_fires_emissions()`](get_fires_emissions.md) : Download and plot
+  essential climate data
 - [`get_hurricanes()`](get_hurricanes.md) : Download and plot essential
   climate data
 - [`get_icecurves()`](get_icecurves.md) : Download and plot essential
@@ -51,6 +55,10 @@
   climate data
 - [`plot_emissions_with_land()`](plot_emissions_with_land.md) : Download
   and plot essential climate data
+- [`plot_fires_area()`](plot_fires_area.md) : Download and plot
+  essential climate data
+- [`plot_fires_emissions()`](plot_fires_emissions.md) : Download and
+  plot essential climate data
 - [`plot_hurricane_nrg()`](plot_hurricane_nrg.md) : Download and plot
   essential climate data
 - [`plot_hurricanes()`](plot_hurricanes.md) : Download and plot

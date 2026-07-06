@@ -27,16 +27,15 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**New in version 0.8.0:** Daily temperature data from
-ClimateReanalyzer.com (see below).
+**New in version 0.9.0:** Global wildfire area burnt and emissions data
+from GWIS.
+
+New in version 0.8.0: Daily temperature data from ClimateReanalyzer.com.
 
 New in version 0.7.0: Globally averaged methane (CH₄) concentration from
 NOAA.
 
 New in version 0.7.0: Cumulative emissions by country visualization.
-
-New in version 0.6.0: Global CO₂ emissions by region and country from
-GCP.
 
 ## Installation
 
@@ -201,6 +200,23 @@ plot_hurricane_nrg(hurricanes)
 
 ![](reference/figures/README-hurricanes-2.png)
 
+Retrieve GWIS wildfire data and plot:
+
+``` r
+
+usfires <- get_fires_area(place='USA', year = 2026)
+plot_fires_area(usfires)
+```
+
+![](reference/figures/README-fires-1.png)
+
+``` r
+
+plot_fires_area(usfires, style = 'weekly')
+```
+
+![](reference/figures/README-fires-2.png)
+
 Retrieve NOAA/ESRL CH₄ Globally averaged mean data and plot:
 
 ``` r
@@ -283,7 +299,9 @@ climate_grid()
   World In Data](https://github.com/owid/co2-data)
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global
   Monitoring Laboratory (<https://gml.noaa.gov/ccgg/trends_ch4/>).
-- Thank you to Dirk Eddelbuettel for providing the .isConnected function
+- Wildfire data: [Global Wildfire Information System
+  (GWIS)](https://gwis.jrc.ec.europa.eu/)
+- Thank you Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
   test for internet connectivity.
 - Thank you to Chris Campbell and Steven Bernard of the FT Climate

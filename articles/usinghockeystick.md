@@ -125,6 +125,23 @@ plot_hurricane_nrg(hurricanes)
 
 ![](usinghockeystick_files/figure-html/hurdat-2.svg)
 
+### Retrieve GWIS wildfire data and plot:
+
+``` r
+
+usfires <- get_fires_area(place='USA', year = 2026)
+plot_fires_area(usfires)
+```
+
+![](usinghockeystick_files/figure-html/fires-1.svg)
+
+``` r
+
+plot_fires_area(usfires, style = 'weekly')
+```
+
+![](usinghockeystick_files/figure-html/fires-2.svg)
+
 ### Retrieve NOAA/ESRL CH₄ Globally averaged mean data and plot:
 
 ``` r

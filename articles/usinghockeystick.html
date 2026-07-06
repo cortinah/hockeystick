@@ -6,9 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Using Hockeystick • hockeystick</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="usinghockeystick_files/libs/quarto-html/popper.min.js"></script><script src="usinghockeystick_files/libs/quarto-html/tippy.umd.min.js"></script><link href="usinghockeystick_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="usinghockeystick_files/libs/quarto-html/light-border.css" rel="stylesheet">
@@ -23,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -221,10 +226,31 @@
 </div>
 </div>
 </div>
-</section><section class="level3"><h3 id="retrieve-noaaesrl-ch4-globally-averaged-mean-data-and-plot">Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-noaaesrl-ch4-globally-averaged-mean-data-and-plot"></a>
+</section><section class="level3"><h3 id="retrieve-gwis-wildfire-data-and-plot">Retrieve GWIS wildfire data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-gwis-wildfire-data-and-plot"></a>
 </h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">usfires</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_fires_area.html">get_fires_area</a></span><span class="op">(</span>place<span class="op">=</span><span class="st">'USA'</span>, year <span class="op">=</span> <span class="fl">2026</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_fires_area.html">plot_fires_area</a></span><span class="op">(</span><span class="va">usfires</span><span class="op">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img src="usinghockeystick_files/figure-html/fires-1.svg"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_fires_area.html">plot_fires_area</a></span><span class="op">(</span><span class="va">usfires</span>, style <span class="op">=</span> <span class="st">'weekly'</span><span class="op">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img src="usinghockeystick_files/figure-html/fires-2.svg"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section class="level3"><h3 id="retrieve-noaaesrl-ch4-globally-averaged-mean-data-and-plot">Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-noaaesrl-ch4-globally-averaged-mean-data-and-plot"></a>
+</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_methane.html">get_methane</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_methane.html">plot_methane</a></span><span class="op">(</span><span class="va">ch4</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -237,7 +263,7 @@
 </section><section class="level3"><h3 id="retrieve-vostok-paleo-ice-core-data-and-plot">Retrieve Vostok paleo ice core data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-vostok-paleo-ice-core-data-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vostok</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_paleo.html">get_paleo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_paleo.html">plot_paleo</a></span><span class="op">(</span><span class="va">vostok</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">

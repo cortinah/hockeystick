@@ -138,3 +138,7 @@ CRAN release: 2025-08-19
 CRAN release: 2026-05-11
 
 - Maintenance release to fix deprecations and add test coverage
+
+## hockeystick 0.9.0
+
+- Add Global Wildfire Information System data and plots
