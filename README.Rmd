@@ -191,7 +191,8 @@ https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/ATG.009
 - Hurricanes: National Oceanic and Atmospheric Administration HURDAT Atlantic Hurricane Database [Re-analysis Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html), particularly Dr. Chris Landsea.
 - Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (https://gml.noaa.gov/ccgg/trends_ch4/).
-- Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
+- Wildfire data: [Global Wildfire Information System (GWIS)](https://gwis.jrc.ec.europa.eu/)
+- Thank you Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
 - Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken...Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.
 - Thank you Nan Xiao for [PNG compression approach](https://nanx.me/blog/post/rpkgs-pngquant-ragg/).
 

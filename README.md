@@ -288,7 +288,9 @@ climate_grid()
   World In Data](https://github.com/owid/co2-data)
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global
   Monitoring Laboratory (<https://gml.noaa.gov/ccgg/trends_ch4/>).
-- Thank you to Dirk Eddelbuettel for providing the .isConnected function
+- Wildfire data: [Global Wildfire Information System
+  (GWIS)](https://gwis.jrc.ec.europa.eu/)
+- Thank you Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
   test for internet connectivity.
 - Thank you to Chris Campbell and Steven Bernard of the FT Climate
