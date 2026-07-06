@@ -35,13 +35,13 @@ The choice of data was originally based on [Professor Stefan Rahmstorf's ](http:
 
 `hockeystick` was highlighted on the RStudio [RViews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/) blog by Joseph Rickert as one of the "Top 40" new packages on CRAN in February 2021.
 
-**New in version 0.8.0:** Daily temperature data from ClimateReanalyzer.com (see below).
+**New in version 0.9.0:** Global wildfire area burnt and emissions data from GWIS.
+
+New in version 0.8.0: Daily temperature data from ClimateReanalyzer.com.
 
 New in version 0.7.0: Globally averaged methane (CH~4~) concentration from NOAA.
 
 New in version 0.7.0: Cumulative emissions by country visualization.
-
-New in version 0.6.0: Global CO~2~ emissions by region and country from GCP.
 
 ## Installation
 To install the latest `hockeystick` release from CRAN type:
@@ -146,6 +146,14 @@ plot_hurricanes(hurricanes)
 plot_hurricane_nrg(hurricanes)
 ```
 
+Retrieve GWIS wildfire data and plot:
+
+```{r fires, out.width='60%', fig.retina=2, message=FALSE}
+usfires <- get_fires_area(place='USA', year = 2026)
+plot_fires_area(usfires)
+plot_fires_area(usfires, style = 'weekly')
+```
+
 Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
 
 ```{r methane, fig.retina=2, message=FALSE, out.width='60%'}
@@ -183,7 +191,8 @@ https://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/ATG.009
 - Hurricanes: National Oceanic and Atmospheric Administration HURDAT Atlantic Hurricane Database [Re-analysis Project](https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html), particularly Dr. Chris Landsea.
 - Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (https://gml.noaa.gov/ccgg/trends_ch4/).
-- Thank you to Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
+- Wildfire data: [Global Wildfire Information System (GWIS)](https://gwis.jrc.ec.europa.eu/)
+- Thank you Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
 - Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken...Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.
 - Thank you Nan Xiao for [PNG compression approach](https://nanx.me/blog/post/rpkgs-pngquant-ragg/).
 

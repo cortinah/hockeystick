@@ -50,7 +50,7 @@ if (use_cache) {
 
 file_url <- "https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html"
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 hurricanes <- read_html(file_url)
 hurricanes <- html_node(hurricanes, xpath='//*[(@id = "tdcontent")]//table')

@@ -50,10 +50,12 @@ if (use_cache & !write_cache) {
 
 file_url <- 'https://gml.noaa.gov/webdata/ccgg/trends/ch4/ch4_mm_gl.txt'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
+
 ch4 <- suppressMessages( read_table(dl, col_names = FALSE, skip = 65) )
 colnames(ch4) <- c('year', 'month', 'date', 'average', 'average_unc', 'trend','trend_unc')
 ch4$date <- ceiling_date(ymd(paste(ch4$year, ch4$month, '01',sep='-')), unit='month')-1

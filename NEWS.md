@@ -74,3 +74,6 @@
 
 # hockeystick 0.8.7
 * Maintenance release to fix deprecations and add test coverage
+
+# hockeystick 0.9.0
+* Add Global Wildfire Information System data and plots

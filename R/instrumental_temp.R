@@ -56,10 +56,12 @@ if (use_cache) {
 
 file_url <- 'https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
+
 gisstemp <- suppressMessages( readr::read_csv(dl, skip=1, na='***') )
 # Compute year-to-date mean for current year
 gisstemp[nrow(gisstemp), 'J-D'] <- mean(as.numeric(gisstemp[nrow(gisstemp), 2:13]), na.rm = T)

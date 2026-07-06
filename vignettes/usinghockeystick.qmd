@@ -99,6 +99,15 @@ plot_hurricanes(hurricanes)
 plot_hurricane_nrg(hurricanes)
 ```
 
+### Retrieve GWIS wildfire data and plot:
+```{r}
+#| label: fires
+#| message: false
+usfires <- get_fires_area(place='USA', year = 2026)
+plot_fires_area(usfires)
+plot_fires_area(usfires, style = 'weekly')
+```
+
 ### Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
 ```{r}
 #| label: methane

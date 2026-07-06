@@ -49,10 +49,12 @@ if (use_cache & !write_cache) {
 
 file_url <- 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
+
 maunaloa <- suppressMessages( read_csv(dl, col_names = FALSE, skip = 41) )
 colnames(maunaloa) <- c('year', 'month', 'date', 'average', 'trend', 'ndays','stdev','unc')
 maunaloa$date <- ceiling_date(ymd(paste(maunaloa$year, maunaloa$month, '01',sep='-')), unit='month')-1

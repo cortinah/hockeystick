@@ -47,10 +47,11 @@ if (use_cache & !write_cache) {
 
 file_url <- 'https://github.com/owid/co2-data/raw/master/owid-co2-data.csv'
 connected <- .isConnected(file_url)
-if (!connected) {message("Retrieving remote data requires internet connectivity."); return(invisible(NULL))}
+if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
-download.file(file_url, dl)
+status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, error = function(e) {TRUE} )
+if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 emissions <- suppressMessages( read_csv(dl,  col_types = cols(other_industry_co2 = col_skip(), other_co2_per_capita = col_skip())) )
 
 dir.create(hs_path, showWarnings = FALSE, recursive = TRUE)
