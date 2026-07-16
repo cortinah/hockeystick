@@ -77,3 +77,6 @@
 
 # hockeystick 0.9.0
 * Add Global Wildfire Information System data and plots
+
+# hockeystick 0.9.2
+* Connectivity checks bug fixes

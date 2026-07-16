@@ -55,7 +55,6 @@ if (!connected) {message("Retrieving remote data requires connectivity to source
 hurricanes <- tryCatch({  read_html(file_url) }, error = function(e) {TRUE}, warning = function(w) {TRUE} )
 if (!is.list(hurricanes)) {message("Unable to access remote resource."); return(invisible(NULL))}
 
-hurricanes <- read_html(file_url)
 hurricanes <- html_node(hurricanes, xpath='//*[(@id = "tdcontent")]//table')
 hurricanes <- html_table(hurricanes)
 
