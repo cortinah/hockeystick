@@ -52,8 +52,8 @@ file_url <- "https://www.aoml.noaa.gov/hrd/hurdat/comparison_table.html"
 connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
-hurricanes <- tryCatch({  read_html(file_url) }, error = function(e) {TRUE}, warning = function(w) {TRUE} )
-if (!is.list(hurricanes)) {message("Unable to access remote resource."); return(invisible(NULL))}
+hurricanes <- tryCatch(read_html(file_url), error = function(e) NULL)
+if (is.null(hurricanes)) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 hurricanes <- html_node(hurricanes, xpath='//*[(@id = "tdcontent")]//table')
 hurricanes <- html_table(hurricanes)

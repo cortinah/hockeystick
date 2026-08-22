@@ -58,7 +58,7 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
-status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, warning = function(w) {TRUE} )
+status <- tryCatch(suppressWarnings(download.file(file_url, dl)), error = function(e) 1L)
 if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 vostok <- readr::read_table(dl, col_names = FALSE, skip = 21, show_col_types = FALSE)
@@ -69,7 +69,7 @@ connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
 dl <- tempfile()
-status <- tryCatch({  download.file(file_url, dl) }, error = function(e) {TRUE}, warning = function(w) {TRUE} )
+status <- tryCatch(suppressWarnings(download.file(file_url, dl)), error = function(e) 1L)
 if (status!=0L) {message("Unable to access remote resource."); return(invisible(NULL))}
 
 paleotemp <- readr::read_table(dl, col_names = FALSE, skip = 60, show_col_types = FALSE)
