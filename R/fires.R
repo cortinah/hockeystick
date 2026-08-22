@@ -214,7 +214,7 @@ get_fires_emissions <- function(place='WORLD', year=as.numeric(format(Sys.Date()
 
   lubridate::year(emissions$date) = year
 
-  if (write_cache) saveRDS(fires, file.path(hs_path, cachename))
+  if (write_cache) saveRDS(emissions, file.path(hs_path, cachename))
   return(emissions) }
 
 
