@@ -19,7 +19,7 @@ plot_dailytemp(
 
 \item{print}{(boolean) Display daily temperature ggplot2 chart, defaults to TRUE. Use FALSE to not display chart.}
 
-\item{anomaly}{(boolean) Display current anomaly versus historic mean, defaults to TRUE.}
+\item{anomaly}{(boolean) Display current anomaly versus historic mean, defaults to FALSE.}
 
 \item{maxtemp}{(boolean) Display current deviation versus historic max, defaults to FALSE.}
 
