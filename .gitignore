@@ -12,3 +12,5 @@ rfinance_talk_selfcontained.html
 **/.quarto/
 .positai
 .posit/assistant
+AGENTS.md
+settings.json

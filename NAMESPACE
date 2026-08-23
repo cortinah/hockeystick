@@ -4,6 +4,8 @@ S3method(print,hockeystick_cache_info)
 export(climate_grid)
 export(emissions_map)
 export(get_carbon)
+export(get_cmip6)
+export(get_cmip6_anom)
 export(get_dailytemp)
 export(get_dailytempcop)
 export(get_emissions)
@@ -25,6 +27,8 @@ export(hockeystick_update_all)
 export(merge_carbontemp)
 export(plot_carbon)
 export(plot_carbontemp)
+export(plot_cmip6)
+export(plot_cmip6_anom)
 export(plot_dailytemp)
 export(plot_emissions)
 export(plot_emissions_with_land)
@@ -81,7 +85,10 @@ importFrom(readr,
   read_table
 )
 importFrom(readxl,read_xlsx)
-importFrom(scales,unit_format)
+importFrom(scales,
+  label_number,
+  unit_format
+)
 importFrom(stats,na.omit)
 importFrom(tibble,
   as_tibble,
