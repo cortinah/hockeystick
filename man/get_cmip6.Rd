@@ -20,7 +20,17 @@ get_cmip6(
 the default), \code{"tmin"}, \code{"tmax"}, or \code{"prec"} (precipitation).}
 
 \item{bio}{(numeric) If \code{var = "bioc"}, which bioclimatic variable to return
-(1-19). Defaults to 1 (Annual Mean Temperature). See references for definitions.}
+(1-19). Defaults to 1 (Annual Mean Temperature). The variables are:
+1 = Annual Mean Temperature; 2 = Mean Diurnal Range; 3 = Isothermality (BIO2/BIO7);
+4 = Temperature Seasonality (standard deviation); 5 = Max Temperature of Warmest Month;
+6 = Min Temperature of Coldest Month; 7 = Temperature Annual Range (BIO5-BIO6);
+8 = Mean Temperature of Wettest Quarter; 9 = Mean Temperature of Driest Quarter;
+10 = Mean Temperature of Warmest Quarter; 11 = Mean Temperature of Coldest Quarter;
+12 = Annual Precipitation; 13 = Precipitation of Wettest Month; 14 = Precipitation of Driest Month;
+15 = Precipitation Seasonality (coefficient of variation); 16 = Precipitation of Wettest Quarter;
+17 = Precipitation of Driest Quarter; 18 = Precipitation of Warmest Quarter;
+19 = Precipitation of Coldest Quarter. Variables 1-11 are in degrees C
+(seasonality variables 4 and 7 as applicable), 12-19 in mm.}
 
 \item{ssp}{(string) Shared Socioeconomic Pathway scenario. One of "126", "245",
 "370", or "585" (the default). SSP5-8.5 is the high-emissions upper bound and
