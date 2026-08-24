@@ -120,8 +120,9 @@ get_cmip6 <- function(var = 'bioc', bio = 1,
   } else layer_name <- var
 
   # Aggregate 10 arc-min cells (~18km) up to ~1 degree to keep output manageable
-  fact <- round(60 / as.numeric(gsub('[a-z]', '', res)))
-  agg <- terra::aggregate(r, fact = max(fact, 1), fun = mean, na.rm = TRUE)
+  # Aggregate by a constant factor of 6 so output resolution scales with
+  # the source: 1 degree at 10m, 0.5 at 5m, 0.25 at 2.5m
+  agg <- terra::aggregate(r, fact = 6, fun = mean, na.rm = TRUE)
   df <- terra::as.data.frame(agg, xy = TRUE, na.rm = TRUE)
   colnames(df)[1:3] <- c('lon', 'lat', 'value')
 
@@ -165,8 +166,7 @@ get_cmip6 <- function(var = 'bioc', bio = 1,
     if (!file.exists(layer_path)) {message('Unexpected baseline archive contents.'); return(NULL)}
   }
 
-  fact <- max(round(60 / as.numeric(gsub('[a-z]', '', res))), 1L)
-  agg <- terra::aggregate(terra::rast(layer_path), fact = fact, fun = mean, na.rm = TRUE)
+  agg <- terra::aggregate(terra::rast(layer_path), fact = 6, fun = mean, na.rm = TRUE)
   df <- terra::as.data.frame(agg, xy = TRUE, na.rm = TRUE)
   colnames(df)[1:3] <- c('lon', 'lat', 'value')
   as_tibble(df)
@@ -259,6 +259,9 @@ get_cmip6_anom <- function(var = 'bioc', bio = 1,
 #'   zoom the map to a region, e.g. \code{xlim = c(-130, -60), ylim = c(20, 70)}.
 #' @param country (string) Optional country name or ISO 3166-1 alpha-3 code to
 #'   zoom the map to that country. Requires the `geodata` package.
+#' @param state (string) Optional state/province name (admin-1), used together
+#'   with \code{country} to zoom to a subnational region, e.g.
+#'   \code{country = "MEX", state = "Sonora"}. Requires the `geodata` package.
 #' @param mask (boolean) If \code{country} is given, blank cells outside the
 #'   country border, defaults to TRUE.
 #' @param print (boolean) Display map, defaults to TRUE.
@@ -266,17 +269,29 @@ get_cmip6_anom <- function(var = 'bioc', bio = 1,
 #' @return Invisibly returns a ggplot2 object with the projection map.
 #'
 #' @details `plot_cmip6` returns a pre-defined ggplot2 world map of projected
-#'   values. Regions may be selected by coordinates (\code{xlim}/\code{ylim})
-#'   or by country. Users may further modify the output chart.
+#'   values. Regions may be selected by coordinates (\code{xlim}/\code{ylim}),
+#'   by country, or by state/province. Users may further modify the output chart.
+#'
+#' @examples
+#' \donttest{
+#' proj <- get_cmip6()
+#' plot_cmip6(proj)
+#' #
+#' # Zoom to the contiguous United States. Explicit xlim/ylim override the
+#' # country's bounding box, excluding Alaska and Hawaii from the view:
+#' plot_cmip6(proj, country = 'USA', xlim = c(-125, -66), ylim = c(24, 50))
+#' #
+#' # Or zoom to a single state:
+#' plot_cmip6(proj, country = 'MEX', state = 'Sonora') }
 #'
 #' @import ggplot2
 #'
 #' @export
 
-# Restrict a cmip6 tibble to a bounding box and/or country. Returns the
+# Restrict a cmip6 tibble to a bounding box and/or country/state. Returns the
 # cropped tibble, an optional border data frame for drawing, and a region label.
 .crop_region <- function(dataset, xlim = NULL, ylim = NULL,
-                         country = NULL, mask = TRUE) {
+                         country = NULL, state = NULL, mask = TRUE) {
 
   border <- NULL
   region_lab <- NULL
@@ -287,16 +302,32 @@ get_cmip6_anom <- function(var = 'bioc', bio = 1,
     if (!requireNamespace("terra", quietly = TRUE))
       stop("Plotting by country requires the 'terra' package. Install with install.packages('terra')")
 
-    cntry_all <- geodata::world(level = 0,
-                                path = tools::R_user_dir("hockeystick", "cache"))
-    iso <- toupper(country)
-    sel <- cntry_all$GID_0 == iso |
-      tolower(cntry_all$NAME_0) == tolower(country)
-    if (!any(sel)) {
-      message("Country not recognized: ", country)
-      return(NULL)
+    if (!is.null(state)) {
+      # Admin-1 (state/province) boundaries from GADM; requires the country
+      cntry_all <- geodata::gadm(country = country, level = 1,
+                                 path = tools::R_user_dir("hockeystick", "cache"))
+      sel <- tolower(cntry_all$NAME_1) == tolower(state)
+      if (!any(sel)) {
+        message("State/province not recognized: ", state, " (in ", country, "). Available:")
+        message(paste(sort(unique(cntry_all$NAME_1)), collapse = ', '))
+        return(NULL)
+      }
+      cntry <- cntry_all[which(sel), ]
+      region_lab <- cntry$NAME_1[1]
+    } else {
+      cntry_all <- geodata::world(level = 0,
+                                  path = tools::R_user_dir("hockeystick", "cache"))
+      iso <- toupper(country)
+      sel <- cntry_all$GID_0 == iso |
+        tolower(cntry_all$NAME_0) == tolower(country)
+      if (!any(sel)) {
+        message("Country not recognized: ", country)
+        return(NULL)
+      }
+      cntry <- cntry_all[which(sel), ]
+      region_lab <- cntry$NAME_0[1]
     }
-    cntry <- cntry_all[which(sel), ]
+
     e <- terra::ext(cntry)
     if (is.null(xlim)) xlim <- c(e$xmin, e$xmax)
     if (is.null(ylim)) ylim <- c(e$ymin, e$ymax)
@@ -308,7 +339,6 @@ get_cmip6_anom <- function(var = 'bioc', bio = 1,
     }
 
     border <- as.data.frame(terra::geom(cntry))[c('x', 'y', 'hole', 'part')]
-    region_lab <- cntry$name[1]
   }
 
   if (!is.null(xlim)) dataset <- dataset[dataset$lon >= xlim[1] & dataset$lon <= xlim[2], ]
@@ -319,12 +349,12 @@ get_cmip6_anom <- function(var = 'bioc', bio = 1,
 }
 
 plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
-                       xlim = NULL, ylim = NULL, country = NULL, mask = TRUE,
-                       print = TRUE) {
+                       xlim = NULL, ylim = NULL, country = NULL, state = NULL,
+                       mask = TRUE, print = TRUE) {
 
   if (is.null(dataset)) return(invisible(NULL))
 
-  reg <- .crop_region(dataset, xlim, ylim, country, mask)
+  reg <- .crop_region(dataset, xlim, ylim, country, state, mask)
   dataset <- reg$dataset
   if (nrow(dataset) == 0) {message('No data cells in the selected region.'); return(invisible(NULL))}
 
@@ -374,7 +404,8 @@ plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
     labs(title = title_lab,
          subtitle = 'Downscaled CMIP6 projection, WorldClim v2.1',
          fill = fill_lab,
-         caption = paste0('Model: ', meta[['model']], ' | Source: WorldClim.org, CC-BY 4.0'))
+         caption = paste0(meta[['model']], ' ', meta[['ssp']],
+                          ' | Source: WorldClim.org'))
 
   if (!is.null(reg$border))
     plot <- plot + geom_polygon(data = reg$border, aes(x = x, y = y, group = part, fill = NULL),
@@ -399,6 +430,9 @@ plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
 #'   The color scale is recomputed on the visible region.
 #' @param country (string) Optional country name or ISO 3166-1 alpha-3 code to
 #'   zoom the map to that country. Requires the `geodata` package.
+#' @param state (string) Optional state/province name (admin-1), used together
+#'   with \code{country} to zoom to a subnational region, e.g.
+#'   \code{country = "MEX", state = "Sonora"}. Requires the `geodata` package.
 #' @param mask (boolean) If \code{country} is given, blank cells outside the
 #'   country border, defaults to TRUE.
 #' @param print (boolean) Display map, defaults to TRUE.
@@ -425,12 +459,12 @@ plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
 #' @export
 
 plot_cmip6_anom <- function(dataset = get_cmip6_anom(), zero_centered = FALSE,
-                            xlim = NULL, ylim = NULL, country = NULL, mask = TRUE,
-                            print = TRUE) {
+                            xlim = NULL, ylim = NULL, country = NULL, state = NULL,
+                            mask = TRUE, print = TRUE) {
 
   if (is.null(dataset)) return(invisible(NULL))
 
-  reg <- .crop_region(dataset, xlim, ylim, country, mask)
+  reg <- .crop_region(dataset, xlim, ylim, country, state, mask)
   dataset <- reg$dataset
   if (nrow(dataset) == 0) {message('No data cells in the selected region.'); return(invisible(NULL))}
 
@@ -492,7 +526,7 @@ plot_cmip6_anom <- function(dataset = get_cmip6_anom(), zero_centered = FALSE,
          subtitle = expression("Versus 1970-2000 baseline, WorldClim CMIP6 downscaled"),
          fill = if (is_prec) expression(Delta * " (%)") else expression(Delta * "T (" * degree * "C)"),
          caption = paste0(meta[['model']], ' ', meta[['ssp']],
-                          ' | Source: WorldClim.org, CC-BY 4.0'))
+                          ' | Source: WorldClim.org'))
 
   if (!is.null(reg$border))
     plot <- plot + geom_polygon(data = reg$border, aes(x = x, y = y, group = part, fill = NULL),

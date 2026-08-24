@@ -24,7 +24,11 @@ get_cmip6_anom(
 }
 \value{
 Invisibly returns a tibble with columns \code{lon}, \code{lat}, and
-\code{delta}: the projected change versus the 1970-2000 baseline for each cell.
+\code{delta}: the projected change versus the 1970-2000 baseline for each
+cell. For temperature variables \code{delta} is the absolute change in
+degrees C; for precipitation variables (var "prec", or bioc 12-19) it is
+the percent change, capped at +/-100\\% to limit instability where the
+baseline is near zero.
 }
 \description{
 Computes expected climate change as the difference between a CMIP6 projection

@@ -10,6 +10,7 @@ plot_cmip6_anom(
   xlim = NULL,
   ylim = NULL,
   country = NULL,
+  state = NULL,
   mask = TRUE,
   print = TRUE
 )
@@ -27,6 +28,10 @@ The color scale is recomputed on the visible region.}
 \item{country}{(string) Optional country name or ISO 3166-1 alpha-3 code to
 zoom the map to that country. Requires the \code{geodata} package.}
 
+\item{state}{(string) Optional state/province name (admin-1), used together
+with \code{country} to zoom to a subnational region, e.g.
+\code{country = "MEX", state = "Sonora"}. Requires the \code{geodata} package.}
+
 \item{mask}{(boolean) If \code{country} is given, blank cells outside the
 country border, defaults to TRUE.}
 
@@ -41,8 +46,10 @@ Plots expected climate change (projection minus 1970-2000 baseline) computed by
 }
 \details{
 \code{plot_cmip6_anom} returns a pre-defined ggplot2 world map of expected
-change in degrees C, with blue for cooling and red for warming. Users may
-further modify the output chart.
+change in degrees C (or percent for precipitation variables), with blue for
+cooling/drying and red for warming/wetting. Precipitation maps with both
+increases and decreases automatically use the diverging scale even when
+\code{zero_centered = FALSE}. Users may further modify the output chart.
 }
 \examples{
 \donttest{
