@@ -30,7 +30,9 @@ the default), \code{"tmin"}, \code{"tmax"}, or \code{"prec"} (precipitation).}
 15 = Precipitation Seasonality (coefficient of variation); 16 = Precipitation of Wettest Quarter;
 17 = Precipitation of Driest Quarter; 18 = Precipitation of Warmest Quarter;
 19 = Precipitation of Coldest Quarter. Variables 1-11 are in degrees C
-(seasonality variables 4 and 7 as applicable), 12-19 in mm.}
+(seasonality variables 4 and 7 as applicable), 12-19 in mm. For the monthly
+variables (\code{var = "prec"}, \code{"tmin"}, or \code{"tmax"}), \code{bio}
+instead selects the calendar month, 1-12 (1 = January).}
 
 \item{ssp}{(string) Shared Socioeconomic Pathway scenario. One of "126", "245",
 "370", or "585" (the default). SSP5-8.5 is the high-emissions upper bound and
