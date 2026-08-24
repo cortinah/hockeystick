@@ -350,6 +350,8 @@ get_cmip6_anom <- function(var = 'bioc', bio = 1,
        xlim = xlim, ylim = ylim)
 }
 
+#' @export
+
 plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
                        xlim = NULL, ylim = NULL, country = NULL, state = NULL,
                        mask = TRUE, print = TRUE) {

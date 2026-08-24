@@ -41,15 +41,11 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**New in version 0.9.0:** Global wildfire area burnt and emissions data
-from GWIS.
+**New in version 1.0.0:** Retrieve and plot global maps of future cmip6
+projections from WorldClim.
 
-New in version 0.8.0: Daily temperature data from ClimateReanalyzer.com.
-
-New in version 0.7.0: Globally averaged methane (CH<sub>4</sub>)
-concentration from NOAA.
-
-New in version 0.7.0: Cumulative emissions by country visualization.
+New in version 0.9.0: Global wildfire area burnt and emissions data from
+GWIS.
 
 ## Installation
 
@@ -87,6 +83,24 @@ plot_carbon(ml_co2)
 ```
 
 <img src="man/figures/README-carbon-1.png" alt="" width="60%" />
+
+Retrieve 2081-2100 temperature projections and map:
+
+``` r
+proj <- get_cmip6()
+plot_cmip6(proj)
+```
+
+<img src="man/figures/README-cmip6-1.png" alt="" width="62%" />
+
+Retrieve 2081-2100 precipation anomaly and map:
+
+``` r
+anom <- get_cmip6_anom(var = 'prec')
+plot_cmip6_anom(anom)
+```
+
+<img src="man/figures/README-cmip6anom-1.png" alt="" width="62%" />
 
 Retrieve GCP global CO<sub>2</sub> emissions and plot:
 

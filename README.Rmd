@@ -35,13 +35,10 @@ The choice of data was originally based on [Professor Stefan Rahmstorf's ](http:
 
 `hockeystick` was highlighted on the RStudio [RViews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/) blog by Joseph Rickert as one of the "Top 40" new packages on CRAN in February 2021.
 
-**New in version 0.9.0:** Global wildfire area burnt and emissions data from GWIS.
+**New in version 1.0.0:** Retrieve and plot global maps of future cmip6 projections from WorldClim.
 
-New in version 0.8.0: Daily temperature data from ClimateReanalyzer.com.
+New in version 0.9.0: Global wildfire area burnt and emissions data from GWIS.
 
-New in version 0.7.0: Globally averaged methane (CH~4~) concentration from NOAA.
-
-New in version 0.7.0: Cumulative emissions by country visualization.
 
 ## Installation
 To install the latest `hockeystick` release from CRAN type:
@@ -73,6 +70,22 @@ Retrieve NOAA/ESRL Mauna Loa CO<sub>2</sub> Observatory concentration data and p
 ml_co2 <- get_carbon()
 plot_carbon(ml_co2)
 ```
+
+
+Retrieve 2081-2100 temperature projections and map:
+
+```{r cmip6, out.width='62%', fig.retina=2, message=FALSE}
+proj <- get_cmip6()
+plot_cmip6(proj)
+```
+
+Retrieve 2081-2100 precipation anomaly and map:
+
+```{r cmip6anom, out.width='62%', fig.retina=2, message=FALSE}
+anom <- get_cmip6_anom(var = 'prec')
+plot_cmip6_anom(anom)
+```
+
 
 Retrieve GCP global CO~2~ emissions and plot:
 

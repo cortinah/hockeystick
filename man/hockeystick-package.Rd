@@ -4,7 +4,7 @@
 \name{hockeystick-package}
 \alias{hockeystick}
 \alias{hockeystick-package}
-\title{hockeystick: Download and Visualize Essential Climate Change Data}
+\title{hockeystick: Download and Visualize Essential Global Heating Data}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
