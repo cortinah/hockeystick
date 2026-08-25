@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hockeystick <img src='man/figures/logo.png' align="right" height="139" />
+# hockeystick <img src="man/figures/logo.png" align="right" height="139"/>
 
 <!-- badges: start -->
 
@@ -216,15 +216,8 @@ Retrieve GWIS wildfire data and plot:
 ``` r
 usfires <- get_fires_area(place='USA', year = 2026)
 plot_fires_area(usfires)
-```
-
-<img src="man/figures/README-fires-1.png" alt="" width="60%" />
-
-``` r
 plot_fires_area(usfires, style = 'weekly')
 ```
-
-<img src="man/figures/README-fires-2.png" alt="" width="60%" />
 
 Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
 
@@ -304,6 +297,9 @@ climate_grid()
   Monitoring Laboratory (<https://gml.noaa.gov/ccgg/trends_ch4/>).
 - Wildfire data: [Global Wildfire Information System
   (GWIS)](https://gwis.jrc.ec.europa.eu/)
+- WorldClim [CMIP6](https://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6)
+  datasets:
+  [WorldClim](https://worldclim.org/data/cmip6/cmip6climate.html#).
 - Thank you Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
   test for internet connectivity.
@@ -322,8 +318,8 @@ climate_grid()
   enhanced or additional data that may be added to the package. Building
   `hockeystick` is driven by my interest in tracking climate data and
   making it easily available to the community.
-- Here are some online resources I have found very helpful to learn mo
-  re about climate science:
+- Here are some online resources I have found very helpful to learn more
+  about climate science:
 - MIT edX Global Warming Science.
   <https://www.edx.org/learn/global-warming/massachusetts-institute-of-technology-global-warming-science>
 - SDG Academy: Climate Change: The Science and Global Impact.
