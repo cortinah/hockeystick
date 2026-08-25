@@ -382,19 +382,20 @@ plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
     bio_n <- as.integer(sub('Bio', '', v))
     var_lab <- bio_names[bio_n]
     fill_lab <- if (bio_n %in% c(3,4,15)) 'Percent' else
-                if (bio_n >= 12) expression("Precipitation (mm)") else
+                if (bio_n >= 12) expression("Precip (mm)") else
                 if (bio_n %in% c(2,7)) expression("Range (" * degree * "C)") else
-                expression("Temperature (" * degree * "C)")
+                expression("Temp (" * degree * "C)")
   } else if (grepl('^month[0-9]+$', v)) {
     month_n <- as.integer(sub('month', '', v))
     var_lab <- paste(month.name[month_n], if (meta[['var0']] == 'prec') 'Precipitation' else 'Temperature')
-    fill_lab <- if (meta[['var0']] == 'prec') expression("Precipitation (mm)") else expression("Temperature (" * degree * "C)")
+    fill_lab <- if (meta[['var0']] == 'prec') expression("Precip (mm)") else expression("Temp (" * degree * "C)")
   } else {
     var_lab <- switch(v, prec = 'Precipitation', tmin = 'Minimum Temperature', tmax = 'Maximum Temperature', v)
-    fill_lab <- if (v == 'prec') expression("Precipitation (mm)") else expression("Temperature (" * degree * "C)")
+    fill_lab <- if (v == 'prec') expression("Precip (mm)") else expression("Temp (" * degree * "C)")
   }
 
-  title_lab <- if (!is.null(reg$region_lab)) paste0(var_lab, ' - ', reg$region_lab) else var_lab
+  title_lab <- paste0(var_lab, ', ', meta[['period']])
+  if (!is.null(reg$region_lab)) title_lab <- paste(title_lab, '-', reg$region_lab)
   n_colors <- min(9, length(unique(dataset$value)))
 
   lon_breaks <- if (is.null(reg$xlim) || diff(reg$xlim) > 180) seq(-180, 180, 60) else seq(-180, 180, 20)

@@ -2,7 +2,7 @@
 * local macOS install, R 4.6.1
 * GitHub Actions: ubuntu-latest (oldrel-1, release, and devel), macOS-latest (release), windows-latest (release) 
 
-## Internet connectivity
+## Internet connectivity checks
 Since version 0.9.0 fail gracefully if internet connections do not succeed
 Since version 0.7.2 tests for url-specific connectivity before initiating transfers to conform with CRAN rules.
 

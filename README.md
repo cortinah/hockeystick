@@ -216,8 +216,15 @@ Retrieve GWIS wildfire data and plot:
 ``` r
 usfires <- get_fires_area(place='USA', year = 2026)
 plot_fires_area(usfires)
+```
+
+<img src="man/figures/README-fires-1.png" alt="" width="60%" />
+
+``` r
 plot_fires_area(usfires, style = 'weekly')
 ```
+
+<img src="man/figures/README-fires-2.png" alt="" width="60%" />
 
 Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:
 
