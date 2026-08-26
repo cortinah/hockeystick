@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The goal of `hockeystick` is to make essential Global Heating datasets easily available in R to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include atmospheric CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.
+The goal of `hockeystick` is to make essential Global Heating datasets easily available in R to non-climate experts. `hockeystick` users can download the latest raw data from authoritative sources as well as view it via pre-defined ggplot2 charts. Datasets include climate projects through 2100, atmospheric CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental, reconstructed, and paleo ice-core temperature records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.
 
 The choice of data was originally based on [Professor Stefan Rahmstorf's](http://www.pik-potsdam.de/~stefan/) presentation on [The 5 Most Important Data Sets of Climate Science](http://www.pik-potsdam.de/~stefan/5datasets_rahmstorf.pdf). I came across this on a post on the [Open Mind blog](https://tamino.wordpress.com/2018/11/01/the-5-most-important-data-sets-of-climate-science/). I wrote my own [post](https://rethinking.rbind.io/2018/11/16/the-top-five-climate-charts-using-ggplot2/) on obtaining and visualizing this data (now out of date), which is the basis for this package. Additional datasets and visualizations have been added over The name of the package stems from the well known [hockeystick](https://en.wikipedia.org/wiki/Hockey_stick_graph) temperature chart.
 
@@ -204,7 +204,7 @@ climate_grid()
 - Carbon Dioxide emissions: [Global Carbon Project](https://www.globalcarbonproject.org/carbonbudget/) and [Our World In Data](https://github.com/owid/co2-data)
 - Methane: Lan, X., K.W. Thoning, and E.J. Dlugokencky, NOAA Global Monitoring Laboratory (<https://gml.noaa.gov/ccgg/trends_ch4/>).
 - Wildfire data: [Global Wildfire Information System (GWIS)](https://gwis.jrc.ec.europa.eu/)
-- WorldClim [CMIP6](https://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6) datasets: [WorldClim](https://worldclim.org/data/cmip6/cmip6climate.html#).
+- WorldClim [CMIP6](https://wcrp-cmip.org/cmip-phases/cmip6/) datasets: [WorldClim](https://worldclim.org/data/cmip6/cmip6climate.html#).
 - Thank you Dirk Eddelbuettel for providing the .isConnected function from his [tint](https://CRAN.R-project.org/package=tint) package to test for internet connectivity.
 - Thank you to Chris Campbell and Steven Bernard of the FT Climate Graphics Explained newsletter for sharing their code for climatereanalyzer.org daily temperature chart (Temperature Records Broken...Again, 9 July 2023). This code is the foundation of the get_dailytemp() and plot_dailytemp() functions.
 - Thank you Nan Xiao for [PNG compression approach](https://nanx.me/blog/post/rpkgs-pngquant-ragg/).

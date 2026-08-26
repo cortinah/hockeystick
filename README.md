@@ -17,10 +17,10 @@ status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-projec
 The goal of `hockeystick` is to make essential Global Heating datasets
 easily available in R to non-climate experts. `hockeystick` users can
 download the latest raw data from authoritative sources as well as view
-it via pre-defined ggplot2 charts. Datasets include atmospheric
-CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental,
-reconstructed, and paleo ice-core temperature records, sea levels,
-hurricanes, and Arctic/Antarctic sea-ice.
+it via pre-defined ggplot2 charts. Datasets include climate projects
+through 2100, atmospheric CO<sub>2</sub> and CH<sub>4</sub>, carbon
+emissions, instrumental, reconstructed, and paleo ice-core temperature
+records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.
 
 The choice of data was originally based on [Professor Stefan
 Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on [The 5
@@ -304,8 +304,7 @@ climate_grid()
   Monitoring Laboratory (<https://gml.noaa.gov/ccgg/trends_ch4/>).
 - Wildfire data: [Global Wildfire Information System
   (GWIS)](https://gwis.jrc.ec.europa.eu/)
-- WorldClim [CMIP6](https://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6)
-  datasets:
+- WorldClim [CMIP6](https://wcrp-cmip.org/cmip-phases/cmip6/) datasets:
   [WorldClim](https://worldclim.org/data/cmip6/cmip6climate.html#).
 - Thank you Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
