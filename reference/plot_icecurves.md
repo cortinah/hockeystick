@@ -44,14 +44,14 @@ Hernando Cortina, <hch@alum.mit.edu>
 # \donttest{
 # Fetch historic monthly sea ice data since 1979:
 icecurves <- get_icecurves()
+#> Retrieving remote data requires connectivity to source.
 #
 # Plot output using package's built-in ggplot2 defaults
 plot_icecurves(icecurves)
 
-
 # Or just call plot_icecurves(), which defaults to get_icecurves() dataset
 plot_icecurves()
-
+#> Retrieving remote data requires connectivity to source.
 
 p <- plot_icecurves(icecurves, print = FALSE)
 # Modify plot such as: p + ggplot2::labs(title='Shrinking Arctic Sea Ice') # }

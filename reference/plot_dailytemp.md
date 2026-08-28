@@ -32,7 +32,7 @@ plot_dailytemp(
 - anomaly:
 
   (boolean) Display current anomaly versus historic mean, defaults to
-  TRUE.
+  FALSE.
 
 - maxtemp:
 

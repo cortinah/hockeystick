@@ -9,6 +9,10 @@
 - [`file_info_()`](file_info_.md) : Display cached file info
 - [`get_carbon()`](get_carbon.md) : Download and plot essential climate
   data
+- [`get_cmip6()`](get_cmip6.md) : Download and plot essential climate
+  data
+- [`get_cmip6_anom()`](get_cmip6_anom.md) : Download and plot essential
+  climate data
 - [`get_dailytemp()`](get_dailytemp.md) : Download and plot essential
   climate data
 - [`get_dailytempcop()`](get_dailytempcop.md) : Download and plot
@@ -48,6 +52,10 @@
 - [`plot_carbon()`](plot_carbon.md) : Download and plot essential
   climate data
 - [`plot_carbontemp()`](plot_carbontemp.md) : Download and plot
+  essential climate data
+- [`plot_cmip6()`](plot_cmip6.md) : Download and plot essential climate
+  data
+- [`plot_cmip6_anom()`](plot_cmip6_anom.md) : Download and plot
   essential climate data
 - [`plot_dailytemp()`](plot_dailytemp.md) : Download and plot essential
   climate data

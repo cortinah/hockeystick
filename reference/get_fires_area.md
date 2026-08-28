@@ -78,6 +78,7 @@ fires <- get_fires_area()
 #
 # Fetch data for Canada in 2023:
 fires_can <- get_fires_area(place = 'CAN', year = 2023)
+#> Warning: GWIS returned dates outside the requested year 2023
 #
 # Force cache refresh:
 fires <- get_fires_area(use_cache = FALSE)
@@ -86,5 +87,9 @@ fires <- get_fires_area(use_cache = FALSE)
 hockeystick_cache_details() # }
 #> <hockeystick cached files>
 #>   directory: /home/runner/.cache/R/hockeystick
+#> 
+#>   file: /cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds
+#>   size: 105.8 kB
+#>   date: 2026-08-28 11:57:51.051818
 #> 
 ```

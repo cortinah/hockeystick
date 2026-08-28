@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
 
 
 
-      <small class="dont-index">Source: <a href="https://github.com/cortinah/hockeystick/blob/v0.9.0/vignettes/usinghockeystick.qmd" class="external-link"><code>vignettes/usinghockeystick.qmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/cortinah/hockeystick/blob/main/vignettes/usinghockeystick.qmd" class="external-link"><code>vignettes/usinghockeystick.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
     </div>
 
@@ -109,10 +109,36 @@
 </div>
 </div>
 </div>
-</section><section class="level3"><h3 id="visualize-cumulative-emissions-by-country">Visualize cumulative emissions by country:<a class="anchor" aria-label="anchor" href="#visualize-cumulative-emissions-by-country"></a>
+</section><section class="level3"><h3 id="retrieve-2081-2100-temperature-projections-and-map">Retrieve 2081-2100 temperature projections and map:<a class="anchor" aria-label="anchor" href="#retrieve-2081-2100-temperature-projections-and-map"></a>
 </h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">proj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_cmip6.html">get_cmip6</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_cmip6.html">plot_cmip6</a></span><span class="op">(</span><span class="va">proj</span><span class="op">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img src="usinghockeystick_files/figure-html/cmip6-1.svg"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section class="level3"><h3 id="retrieve-2081-2100-precipation-anomaly-and-map">Retrieve 2081-2100 precipation anomaly and map:<a class="anchor" aria-label="anchor" href="#retrieve-2081-2100-precipation-anomaly-and-map"></a>
+</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">anom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_cmip6_anom.html">get_cmip6_anom</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">'prec'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_cmip6_anom.html">plot_cmip6_anom</a></span><span class="op">(</span><span class="va">anom</span><span class="op">)</span></span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img src="usinghockeystick_files/figure-html/cmip6anom-1.svg"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section class="level3"><h3 id="visualize-cumulative-emissions-by-country">Visualize cumulative emissions by country:<a class="anchor" aria-label="anchor" href="#visualize-cumulative-emissions-by-country"></a>
+</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/emissions_map.html">emissions_map</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
@@ -124,7 +150,7 @@
 </section><section class="level3"><h3 id="retrieve-nasagiss-global-surface-temperature-anomaly-data-and-plot">Retrieve NASA/GISS global surface temperature anomaly data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-nasagiss-global-surface-temperature-anomaly-data-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anomaly</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_temp.html">get_temp</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_temp.html">plot_temp</a></span><span class="op">(</span><span class="va">anomaly</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -137,7 +163,7 @@
 </section><section class="level3"><h3 id="plot-relationship-between-temperature-anomaly-and-carbon">Plot relationship between temperature anomaly and carbon:<a class="anchor" aria-label="anchor" href="#plot-relationship-between-temperature-anomaly-and-carbon"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_carbontemp.html">plot_carbontemp</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
@@ -149,7 +175,7 @@
 </section><section class="level3"><h3 id="visualize-warming-using-ed-hawkins-styled-warming-stripes">Visualize warming using Ed Hawkins styled “warming stripes”:<a class="anchor" aria-label="anchor" href="#visualize-warming-using-ed-hawkins-styled-warming-stripes"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/warming_stripes.html">warming_stripes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
@@ -157,7 +183,7 @@
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/warming_stripes.html">warming_stripes</a></span><span class="op">(</span>stripe_only <span class="op">=</span> <span class="cn">TRUE</span>, col_strip <span class="op">=</span> <span class="fu">viridisLite</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">viridis</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
@@ -169,7 +195,7 @@
 </section><section class="level3"><h3 id="retrieve-tide-gauge-and-satellite-sea-level-data-and-plot">Retrieve tide gauge and satellite sea level data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-tide-gauge-and-satellite-sea-level-data-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gmsl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_sealevel.html">get_sealevel</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_sealevel.html">plot_sealevel</a></span><span class="op">(</span><span class="va">gmsl</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -182,54 +208,29 @@
 </section><section class="level3"><h3 id="retrieve-july-annual-arctic-sea-ice-index-and-plot">Retrieve July annual Arctic Sea Ice Index and plot:<a class="anchor" aria-label="anchor" href="#retrieve-july-annual-arctic-sea-ice-index-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seaice</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_seaice.html">get_seaice</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_seaice.html">plot_seaice</a></span><span class="op">(</span><span class="va">seaice</span><span class="op">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure><p><img src="usinghockeystick_files/figure-html/ice-1.svg"></p>
-</figure>
-</div>
-</div>
 </div>
 <p><code><a href="../reference/get_seaice.html">get_seaice()</a></code> arguments can be modified to download Antarctic sea ice, and allow any month.</p>
 <p>You can also visualize sea ice by month and year:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">arcticice</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_icecurves.html">get_icecurves</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_icecurves.html">plot_icecurves</a></span><span class="op">(</span><span class="va">arcticice</span><span class="op">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure><p><img src="usinghockeystick_files/figure-html/ice2-1.svg"></p>
-</figure>
-</div>
-</div>
 </div>
 </section><section class="level3"><h3 id="retrieve-noaa-hurdat2-hurricane-data-and-plot">Retrieve NOAA HURDAT2 hurricane data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-noaa-hurdat2-hurricane-data-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hurricanes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_hurricanes.html">get_hurricanes</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plot_hurricanes.html">plot_hurricanes</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure><p><img src="usinghockeystick_files/figure-html/hurdat-1.svg"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_hurricane_nrg.html">plot_hurricane_nrg</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure><p><img src="usinghockeystick_files/figure-html/hurdat-2.svg"></p>
-</figure>
-</div>
-</div>
+<span><span class="fu"><a href="../reference/plot_hurricanes.html">plot_hurricanes</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_hurricane_nrg.html">plot_hurricane_nrg</a></span><span class="op">(</span><span class="va">hurricanes</span><span class="op">)</span></span></code></pre></div>
 </div>
 </section><section class="level3"><h3 id="retrieve-gwis-wildfire-data-and-plot">Retrieve GWIS wildfire data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-gwis-wildfire-data-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">usfires</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_fires_area.html">get_fires_area</a></span><span class="op">(</span>place<span class="op">=</span><span class="st">'USA'</span>, year <span class="op">=</span> <span class="fl">2026</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_fires_area.html">plot_fires_area</a></span><span class="op">(</span><span class="va">usfires</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -238,7 +239,7 @@
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_fires_area.html">plot_fires_area</a></span><span class="op">(</span><span class="va">usfires</span>, style <span class="op">=</span> <span class="st">'weekly'</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div>
@@ -250,7 +251,7 @@
 </section><section class="level3"><h3 id="retrieve-noaaesrl-ch4-globally-averaged-mean-data-and-plot">Retrieve NOAA/ESRL CH<sub>4</sub> Globally averaged mean data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-noaaesrl-ch4-globally-averaged-mean-data-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_methane.html">get_methane</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_methane.html">plot_methane</a></span><span class="op">(</span><span class="va">ch4</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -263,7 +264,7 @@
 </section><section class="level3"><h3 id="retrieve-vostok-paleo-ice-core-data-and-plot">Retrieve Vostok paleo ice core data and plot:<a class="anchor" aria-label="anchor" href="#retrieve-vostok-paleo-ice-core-data-and-plot"></a>
 </h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vostok</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_paleo.html">get_paleo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_paleo.html">plot_paleo</a></span><span class="op">(</span><span class="va">vostok</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -370,7 +371,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -11,6 +11,8 @@
 <url><loc>/reference/emissions_map.html</loc></url>
 <url><loc>/reference/file_info_.html</loc></url>
 <url><loc>/reference/get_carbon.html</loc></url>
+<url><loc>/reference/get_cmip6.html</loc></url>
+<url><loc>/reference/get_cmip6_anom.html</loc></url>
 <url><loc>/reference/get_dailytemp.html</loc></url>
 <url><loc>/reference/get_dailytempcop.html</loc></url>
 <url><loc>/reference/get_emissions.html</loc></url>
@@ -32,6 +34,8 @@
 <url><loc>/reference/merge_carbontemp.html</loc></url>
 <url><loc>/reference/plot_carbon.html</loc></url>
 <url><loc>/reference/plot_carbontemp.html</loc></url>
+<url><loc>/reference/plot_cmip6.html</loc></url>
+<url><loc>/reference/plot_cmip6_anom.html</loc></url>
 <url><loc>/reference/plot_dailytemp.html</loc></url>
 <url><loc>/reference/plot_emissions.html</loc></url>
 <url><loc>/reference/plot_emissions_with_land.html</loc></url>

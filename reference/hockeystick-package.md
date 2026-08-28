@@ -1,12 +1,13 @@
-# hockeystick: Download and Visualize Essential Climate Change Data
+# hockeystick: Download and Visualize Essential Global Heating Data
 
 Provides easy access to essential climate change datasets to non-climate
 experts. Users can download the latest raw data from authoritative
 sources and view it via pre-defined 'ggplot2' charts. Datasets include
 atmospheric CO2, methane, emissions, instrumental and proxy temperature
-records, sea levels, Arctic/Antarctic sea-ice, Hurricanes, and
-Paleoclimate data. Sources include: NOAA Mauna Loa Laboratory
-<https://gml.noaa.gov/ccgg/trends/data.html>, Global Carbon Project
+records, CMIP6 projections, sea levels, Arctic/Antarctic sea-ice,
+Hurricanes, Wildfires, and Paleoclimate data. Sources include: NOAA
+Mauna Loa Laboratory <https://gml.noaa.gov/ccgg/trends/data.html>,
+Global Carbon Project
 <https://www.globalcarbonproject.org/carbonbudget/>, NASA GISTEMP
 <https://data.giss.nasa.gov/gistemp/>, National Snow and Sea Ice Data
 Center <https://nsidc.org/home>, CSIRO

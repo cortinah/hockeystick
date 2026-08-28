@@ -37,5 +37,4 @@ Hernando Cortina, <hch@alum.mit.edu>
 # Draw grid
 
 grid <- climate_grid() # }
-
 ```

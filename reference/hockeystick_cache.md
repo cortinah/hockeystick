@@ -81,16 +81,16 @@ packages: https://blog.r-hub.io/2020/03/12/user-preferences/
 # \donttest{
 # list files in cache
 hockeystick_cache_list()
-#> character(0)
+#> [1] "/home/runner/.cache/R/hockeystick/cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds"
 
 # List info for single files
 hockeystick_cache_details(files = hockeystick_cache_list()[1])
 #> <hockeystick cached files>
 #>   directory: /home/runner/.cache/R/hockeystick
 #> 
-#>   file: NA
-#>   size: NA kB
-#>   date: NA
+#>   file: /cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds
+#>   size: 105.8 kB
+#>   date: 2026-08-28 11:57:51.051818
 #> 
 hockeystick_cache_details(files = hockeystick_cache_list()[2])
 #> <hockeystick cached files>
@@ -106,14 +106,20 @@ hockeystick_cache_details()
 #> <hockeystick cached files>
 #>   directory: /home/runner/.cache/R/hockeystick
 #> 
+#>   file: /cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds
+#>   size: 105.8 kB
+#>   date: 2026-08-28 11:57:51.051818
+#> 
 
 # Delete cached files by name
 hockeystick_cache_delete(files = hockeystick_cache_list()[1])
-#> These files don't exist or can't be found: 
-#>      NAFALSE
 
 # Update all hockeystick data and place in cache
 hockeystick_update_all()
+#> Retrieving remote data requires connectivity to source.
+#> Retrieving remote data requires connectivity to source.
+#> Unable to access remote resource.
+#> Retrieving remote data requires connectivity to source.
 
 # Delete all cached data
 hockeystick_cache_delete_all()

@@ -31,6 +31,26 @@ plot_emissions_with_land(emissions)
 
 ![](usinghockeystick_files/figure-html/emissions-2.svg)
 
+### Retrieve 2081-2100 temperature projections and map:
+
+``` r
+
+proj <- get_cmip6()
+plot_cmip6(proj)
+```
+
+![](usinghockeystick_files/figure-html/cmip6-1.svg)
+
+### Retrieve 2081-2100 precipation anomaly and map:
+
+``` r
+
+anom <- get_cmip6_anom(var = 'prec')
+plot_cmip6_anom(anom)
+```
+
+![](usinghockeystick_files/figure-html/cmip6anom-1.svg)
+
 ### Visualize cumulative emissions by country:
 
 ``` r
@@ -93,8 +113,6 @@ seaice <- get_seaice()
 plot_seaice(seaice)
 ```
 
-![](usinghockeystick_files/figure-html/ice-1.svg)
-
 [`get_seaice()`](../reference/get_seaice.md) arguments can be modified
 to download Antarctic sea ice, and allow any month.
 
@@ -106,24 +124,14 @@ arcticice <- get_icecurves()
 plot_icecurves(arcticice)
 ```
 
-![](usinghockeystick_files/figure-html/ice2-1.svg)
-
 ### Retrieve NOAA HURDAT2 hurricane data and plot:
 
 ``` r
 
 hurricanes <- get_hurricanes()
 plot_hurricanes(hurricanes)
-```
-
-![](usinghockeystick_files/figure-html/hurdat-1.svg)
-
-``` r
-
 plot_hurricane_nrg(hurricanes)
 ```
-
-![](usinghockeystick_files/figure-html/hurdat-2.svg)
 
 ### Retrieve GWIS wildfire data and plot:
 

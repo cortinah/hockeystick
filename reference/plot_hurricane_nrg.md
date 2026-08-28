@@ -49,14 +49,14 @@ Hernando Cortina, <hch@alum.mit.edu>
 # \donttest{
 # Fetch hurricane data:
 hurricanes <- get_hurricanes()
+#> Retrieving remote data requires connectivity to source.
 #
 # Plot output using package's built-in ggplot2 defaults
 plot_hurricane_nrg(hurricanes)
 
-
 # Or just call plot_hurricane_nrg(), which defaults to get_hurricanes() dataset
 plot_hurricane_nrg()
-
+#> Retrieving remote data requires connectivity to source.
 
 p <- plot_hurricane_nrg(hurricanes, print = FALSE)
 # Modify plot such as: p + ggplot2::labs(title='Accumulated Cyclone Energy') # }

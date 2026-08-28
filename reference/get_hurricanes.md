@@ -63,17 +63,22 @@ Hernando Cortina, <hch@alum.mit.edu>
 # \donttest{
 # Fetch from cache if available:
 hurricanes <- get_hurricanes()
+#> Retrieving remote data requires connectivity to source.
 #
 # Force cache refresh:
 hurricanes <- get_hurricanes(use_cache=FALSE)
+#> Retrieving remote data requires connectivity to source.
 #
 # Review cache contents and last update dates:
 hockeystick_cache_details()
 #> <hockeystick cached files>
 #>   directory: /home/runner/.cache/R/hockeystick
 #> 
+#>   file: /cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds
+#>   size: 105.8 kB
+#>   date: 2026-08-28 11:57:51.051818
+#> 
 #
 # Plot output using package's built-in ggplot2 settings
 plot_hurricanes(hurricanes) # }
-
 ```

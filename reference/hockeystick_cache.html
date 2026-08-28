@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">hockeystick</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Manage cached datasets</h1>
-      <small class="dont-index">Source: <a href="https://github.com/cortinah/hockeystick/blob/v0.9.0/R/data_cache.R" class="external-link"><code>R/data_cache.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/cortinah/hockeystick/blob/main/R/data_cache.R" class="external-link"><code>R/data_cache.R</code></a></small>
       <div class="d-none name"><code>hockeystick_cache.Rd</code></div>
     </div>
 
@@ -102,16 +102,16 @@ file names in cache</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># list files in cache</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/home/runner/.cache/R/hockeystick/cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List info for single files</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_details</span><span class="op">(</span>files <span class="op">=</span> <span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;hockeystick cached files&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   directory: /home/runner/.cache/R/hockeystick</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   file: NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   size: NA kB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   date: NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   file: /cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   size: 105.8 kB</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date: 2026-08-28 11:57:51.051818</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_details</span><span class="op">(</span>files <span class="op">=</span> <span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;hockeystick cached files&gt;</span>
@@ -127,14 +127,20 @@ file names in cache</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;hockeystick cached files&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   directory: /home/runner/.cache/R/hockeystick</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   file: /cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   size: 105.8 kB</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   date: 2026-08-28 11:57:51.051818</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Delete cached files by name</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_delete</span><span class="op">(</span>files <span class="op">=</span> <span class="fu">hockeystick_cache_list</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> These files don't exist or can't be found: </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>      NAFALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Update all hockeystick data and place in cache</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_update_all</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Retrieving remote data requires connectivity to source.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Retrieving remote data requires connectivity to source.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Unable to access remote resource.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Retrieving remote data requires connectivity to source.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Delete all cached data</span></span></span>
 <span class="r-in"><span><span class="fu">hockeystick_cache_delete_all</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -150,7 +156,7 @@ file names in cache</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

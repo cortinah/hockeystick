@@ -47,15 +47,15 @@ Hernando Cortina, <hch@alum.mit.edu>
 # Fetch sea ice data:
 seaice <- get_seaice()
 #> Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.
+#> Retrieving remote data requires connectivity to source.
 #
 # Plot output using package's built-in ggplot2 defaults
 plot_seaice(seaice)
 
-
 # Or just call plot_seaice(), which defaults to get_seaice() dataset
 plot_seaice()
 #> Please set use_cache=FALSE if you are changing pole, month, or measure from last cached data.
-
+#> Retrieving remote data requires connectivity to source.
 
 p <- plot_seaice(seaice, print = FALSE)
 # Modify plot such as: p + ggplot2::labs(title='Shrinking Arctic Sea Ice') # }

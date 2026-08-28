@@ -79,6 +79,7 @@ emissions <- get_fires_emissions()
 #
 # Fetch CO2 emissions for the USA in 2023:
 emissions_usa <- get_fires_emissions(place = 'USA', year = 2023)
+#> Warning: GWIS returned dates outside the requested year 2023
 #
 # Force cache refresh:
 emissions <- get_fires_emissions(use_cache = FALSE)
@@ -87,5 +88,9 @@ emissions <- get_fires_emissions(use_cache = FALSE)
 hockeystick_cache_details() # }
 #> <hockeystick cached files>
 #>   directory: /home/runner/.cache/R/hockeystick
+#> 
+#>   file: /cmip6_bioc1_MPI-ESM1-2-HR_ssp585_2081-2100.rds
+#>   size: 105.8 kB
+#>   date: 2026-08-28 11:57:51.051818
 #> 
 ```
