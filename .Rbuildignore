@@ -17,3 +17,4 @@ cran-comments.md
 ^\.posit$
 ^\.claude$
 ^\.posit/assistant$
+^AGENTS\.md$

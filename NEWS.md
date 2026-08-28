@@ -77,3 +77,9 @@
 
 # hockeystick 0.9.0
 * Add Global Wildfire Information System data and plots
+
+# hockeystick 0.9.2
+* Connectivity checks bug fixes
+
+# hockeystick 1.0.0
+* Add CMIP6 climate projections and anomalies from Worldclim

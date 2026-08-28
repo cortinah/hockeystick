@@ -84,9 +84,13 @@ get_fires_area <- function(place='WORLD', year=as.numeric(format(Sys.Date(), "%Y
   connected <- .isConnected('https://gwis.jrc.ec.europa.eu/apps/gwis.statistics/seasonaltrend')
   if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 
-  con <- url(url, open = "rb")
+
+  con <- tryCatch(url(url, open = "rb"), error = function(e) NULL)
+  if (is.null(con)) {message("Unable to access remote resource."); return(invisible(NULL))}
+
   resp <- readLines(con, warn = FALSE)
   close(con)
+
   raw <- fromJSON(resp, flatten = TRUE)
 
   weekly <- raw$banfweekly |> as_tibble()
@@ -96,8 +100,9 @@ get_fires_area <- function(place='WORLD', year=as.numeric(format(Sys.Date(), "%Y
              cum_area_ha=area_ha, cum_area_ha_min=area_ha_min, cum_area_ha_avg=area_ha_avg,  cum_area_ha_max=area_ha_max)
 
   fires <- bind_cols(weekly, cumul)
-  fires <- fires |>  mutate(date= as.Date(mddate, format = "%Y%m%d"), .keep='unused', .after="week")
-  lubridate::year(fires$date) = year
+  fires <- fires |> mutate(date= as.Date(mddate, format = "%Y%m%d"), .keep='unused', .after="week")
+  if (any(is.na(fires$date)) || !all(lubridate::year(fires$date) == year))
+    warning("GWIS returned dates outside the requested year ", year)
   colnames(fires)[1] <- 'place'
 
   if (write_cache) saveRDS(fires, file.path(hs_path, cachename))
@@ -206,11 +211,12 @@ get_fires_emissions <- function(place='WORLD', year=as.numeric(format(Sys.Date()
 
   emissions <- left_join(weekly, cumul, by=c('plt', 'dt'))
   emissions <- emissions |>  mutate(date = as.Date(dt, format = "%Y%m%d"), .keep='unused', .before = 'plt')
-  emissions <- emissions |>  mutate(place = place, .keep='unused', .before = 'date')
+  emissions <- emissions |> mutate(place = place, .keep='unused', .before = 'date')
 
-  lubridate::year(emissions$date) = year
+  if (any(is.na(emissions$date)) || !all(lubridate::year(emissions$date) == year))
+    warning("GWIS returned dates outside the requested year ", year)
 
-  if (write_cache) saveRDS(fires, file.path(hs_path, cachename))
+  if (write_cache) saveRDS(emissions, file.path(hs_path, cachename))
   return(emissions) }
 
 

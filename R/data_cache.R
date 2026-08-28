@@ -145,5 +145,8 @@ hockeystick_update_all <- function() {
   get_emissions(use_cache = FALSE, write_cache = TRUE)
   get_methane(use_cache = FALSE, write_cache = TRUE)
   get_dailytemp(use_cache = FALSE, write_cache = TRUE)
+get_dailytempcop(use_cache = FALSE, write_cache = TRUE)
+get_fires_area(use_cache = FALSE, write_cache = TRUE)
+get_fires_emissions(use_cache = FALSE, write_cache = TRUE)
   invisible(0)
 }

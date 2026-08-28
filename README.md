@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hockeystick <img src='man/figures/logo.png' align="right" height="139" />
+# hockeystick <img src="man/figures/logo.png" align="right" height="139"/>
 
 <!-- badges: start -->
 
@@ -17,10 +17,10 @@ status](https://www.r-pkg.org/badges/version/hockeystick)](https://CRAN.R-projec
 The goal of `hockeystick` is to make essential Global Heating datasets
 easily available in R to non-climate experts. `hockeystick` users can
 download the latest raw data from authoritative sources as well as view
-it via pre-defined ggplot2 charts. Datasets include atmospheric
-CO<sub>2</sub> and CH<sub>4</sub>, carbon emissions, instrumental,
-reconstructed, and paleo ice-core temperature records, sea levels,
-hurricanes, and Arctic/Antarctic sea-ice.
+it via pre-defined ggplot2 charts. Datasets include climate projects
+through 2100, atmospheric CO<sub>2</sub> and CH<sub>4</sub>, carbon
+emissions, instrumental, reconstructed, and paleo ice-core temperature
+records, sea levels, hurricanes, and Arctic/Antarctic sea-ice.
 
 The choice of data was originally based on [Professor Stefan
 Rahmstorf’s](http://www.pik-potsdam.de/~stefan/) presentation on [The 5
@@ -41,15 +41,11 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**New in version 0.9.0:** Global wildfire area burnt and emissions data
-from GWIS.
+**New in version 1.0.0:** Retrieve and plot global maps of future cmip6
+projections from WorldClim.
 
-New in version 0.8.0: Daily temperature data from ClimateReanalyzer.com.
-
-New in version 0.7.0: Globally averaged methane (CH<sub>4</sub>)
-concentration from NOAA.
-
-New in version 0.7.0: Cumulative emissions by country visualization.
+New in version 0.9.0: Global wildfire area burnt and emissions data from
+GWIS.
 
 ## Installation
 
@@ -87,6 +83,24 @@ plot_carbon(ml_co2)
 ```
 
 <img src="man/figures/README-carbon-1.png" alt="" width="60%" />
+
+Retrieve 2081-2100 temperature projections and map:
+
+``` r
+proj <- get_cmip6()
+plot_cmip6(proj)
+```
+
+<img src="man/figures/README-cmip6-1.png" alt="" width="62%" />
+
+Retrieve 2081-2100 precipation anomaly and map:
+
+``` r
+anom <- get_cmip6_anom(var = 'prec')
+plot_cmip6_anom(anom)
+```
+
+<img src="man/figures/README-cmip6anom-1.png" alt="" width="62%" />
 
 Retrieve GCP global CO<sub>2</sub> emissions and plot:
 
@@ -290,6 +304,8 @@ climate_grid()
   Monitoring Laboratory (<https://gml.noaa.gov/ccgg/trends_ch4/>).
 - Wildfire data: [Global Wildfire Information System
   (GWIS)](https://gwis.jrc.ec.europa.eu/)
+- WorldClim [CMIP6](https://wcrp-cmip.org/cmip-phases/cmip6/) datasets:
+  [WorldClim](https://worldclim.org/data/cmip6/cmip6climate.html#).
 - Thank you Dirk Eddelbuettel for providing the .isConnected function
   from his [tint](https://CRAN.R-project.org/package=tint) package to
   test for internet connectivity.
@@ -308,8 +324,8 @@ climate_grid()
   enhanced or additional data that may be added to the package. Building
   `hockeystick` is driven by my interest in tracking climate data and
   making it easily available to the community.
-- Here are some online resources I have found very helpful to learn mo
-  re about climate science:
+- Here are some online resources I have found very helpful to learn more
+  about climate science:
 - MIT edX Global Warming Science.
   <https://www.edx.org/learn/global-warming/massachusetts-institute-of-technology-global-warming-science>
 - SDG Academy: Climate Change: The Science and Global Impact.
