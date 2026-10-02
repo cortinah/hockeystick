@@ -136,7 +136,10 @@ get_cmip6 <- function(var = 'bioc', bio = 1,
   attr(out, "hs_cmip6_meta") <- c(var = layer_name, var0 = var, model = model,
                                   ssp = paste0('SSP', ssp), period = period)
 
-  if (write_cache) saveRDS(out, file.path(hs_path, cachename))
+  if (write_cache) {
+    dir.create(hs_path, showWarnings = FALSE, recursive = TRUE)
+    saveRDS(out, file.path(hs_path, cachename))
+  }
   invisible(out)
 }
 
@@ -248,7 +251,10 @@ get_cmip6_anom <- function(var = 'bioc', bio = 1,
   attr(out, "hs_cmip6_meta") <- c(var = layer_name, var0 = var, model = model,
                                   ssp = paste0('SSP', ssp), period = period)
 
-  if (write_cache) saveRDS(out, file.path(hs_path, cachename))
+  if (write_cache) {
+    dir.create(hs_path, showWarnings = FALSE, recursive = TRUE)
+    saveRDS(out, file.path(hs_path, cachename))
+  }
   invisible(out)
 }
 
@@ -402,12 +408,12 @@ plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
   plot <- ggplot(dataset, aes(x = lon, y = lat, fill = value)) +
     geom_tile(width = 1, height = 1) +
     scale_fill_gradientn(colors = rev(RColorBrewer::brewer.pal(n_colors, palette)),
-                         na.value = 'transparent', n.breaks = 8) +
+                         na.value = 'white', n.breaks = 8) +
     scale_x_continuous(name = NULL, breaks = lon_breaks) +
     scale_y_continuous(name = NULL, breaks = seq(-60, 80, 20)) +
     coord_fixed(ratio = 1, expand = FALSE, xlim = reg$xlim, ylim = reg$ylim) +
     theme_bw(base_size = 12) +
-    theme(panel.grid = element_blank(), panel.background = element_rect(fill = 'lightgray')) +
+    theme(panel.grid = element_blank(), panel.background = element_rect(fill = 'lightgrey')) +
     labs(title = title_lab,
          subtitle = 'Downscaled CMIP6 projection, WorldClim v2.1',
          fill = fill_lab,
@@ -508,13 +514,13 @@ plot_cmip6_anom <- function(dataset = get_cmip6_anom(), zero_centered = FALSE,
     high_col <- if (is_prec) '#2166ac' else '#b2182b'
     fill_scale <- scale_fill_gradient2(low = low_col, mid = 'white', high = high_col,
                                        midpoint = 0, limits = c(-hi, hi), n.breaks = 8,
-                                       na.value = 'transparent', oob = scales::squish,
+                                       na.value = 'white', oob = scales::squish,
                                        labels = if (is_prec) scales::label_percent(scale = 1, accuracy = 1)
                                                 else scales::label_number(accuracy = 1))
   } else {
     fill_scale <- scale_fill_gradientn(colors = RColorBrewer::brewer.pal(9, 'YlOrRd'),
                                        limits = c(0, hi), n.breaks = 8,
-                                       na.value = 'transparent', oob = scales::squish,
+                                       na.value = 'white', oob = scales::squish,
                                        labels = if (is_prec) scales::label_percent(scale = 1, accuracy = 1)
                                                 else scales::label_number(accuracy = 1))
   }
