@@ -407,7 +407,7 @@ plot_cmip6 <- function(dataset = get_cmip6(), palette = 'Spectral',
     scale_y_continuous(name = NULL, breaks = seq(-60, 80, 20)) +
     coord_fixed(ratio = 1, expand = FALSE, xlim = reg$xlim, ylim = reg$ylim) +
     theme_bw(base_size = 12) +
-    theme(panel.grid = element_blank()) +
+    theme(panel.grid = element_blank(), panel.background = element_rect(fill = 'lightgray')) +
     labs(title = title_lab,
          subtitle = 'Downscaled CMIP6 projection, WorldClim v2.1',
          fill = fill_lab,
@@ -527,7 +527,7 @@ plot_cmip6_anom <- function(dataset = get_cmip6_anom(), zero_centered = FALSE,
     scale_y_continuous(name = NULL, breaks = seq(-60, 80, 20)) +
     coord_fixed(ratio = 1, expand = FALSE, xlim = reg$xlim, ylim = reg$ylim) +
     theme_bw(base_size = 12) +
-    theme(panel.grid = element_blank()) +
+    theme(panel.grid = element_blank(), panel.background = element_rect(fill = 'lightgrey')) +
     labs(title = paste('Expected Change in', var_lab, 'by', meta[['period']],
                        if (!is.null(reg$region_lab)) paste('-', reg$region_lab)),
          subtitle = expression("Versus 1970-2000 baseline, WorldClim CMIP6 downscaled"),
