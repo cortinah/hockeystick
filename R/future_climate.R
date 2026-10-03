@@ -516,13 +516,13 @@ plot_cmip6_anom <- function(dataset = get_cmip6_anom(), zero_centered = FALSE,
                                        midpoint = 0, limits = c(-hi, hi), n.breaks = 8,
                                        na.value = 'white', oob = scales::squish,
                                        labels = if (is_prec) scales::label_percent(scale = 1, accuracy = 1)
-                                                else scales::label_number(accuracy = 1))
+                                                else scales::label_number(accuracy = 0.1))
   } else {
     fill_scale <- scale_fill_gradientn(colors = RColorBrewer::brewer.pal(9, 'YlOrRd'),
                                        limits = c(0, hi), n.breaks = 8,
                                        na.value = 'white', oob = scales::squish,
                                        labels = if (is_prec) scales::label_percent(scale = 1, accuracy = 1)
-                                                else scales::label_number(accuracy = 1))
+                                                else scales::label_number(accuracy = 0.1))
   }
 
   lon_breaks <- if (is.null(reg$xlim) || diff(reg$xlim) > 180) seq(-180, 180, 60) else seq(-180, 180, 20)
