@@ -308,3 +308,85 @@ test_that("merge_carbontemp returns NULL when either input is NULL", {
   expect_null(merge_carbontemp(carbon = NULL,          temp = temp_fixture))
   expect_null(merge_carbontemp(carbon = carbon_fixture, temp = NULL))
 })
+
+# ---------------------------------------------------------------------------
+# plot_hockeystick — spliced PAGES2k + NASA record
+# ---------------------------------------------------------------------------
+
+# Long format returned by get_temp2k: one row per year per measure.
+temp2k_fixture <- tibble::tibble(
+  year    = c(1L, 1000L, 1849L, 1850L, 1900L, 2017L),
+  measure = c(rep("ensemble_median", 3L), rep("instrumental", 3L)),
+  value   = c(-0.30, -0.40, -0.20, 0.10, 0.15, 0.30)
+)
+
+# get_temp format. Years must span the baseline window and extend past 2017 so
+# the NASA branch of the splice is non-empty.
+temp_hockey_fixture <- tibble::tibble(
+  Year = as.Date(c("1965-12-31", "1975-12-31", "1985-12-31", "2020-12-31", "2021-12-31")),
+  `J-D` = c(0.10, 0.15, 0.20, 1.10, 1.15),
+  `D-N` = c(0.10, 0.15, 0.20, 1.10, 1.15)
+)
+
+test_that("plot_hockeystick returns a ggplot", {
+  p <- plot_hockeystick(dataset = temp2k_fixture, temp = temp_hockey_fixture, print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+test_that("plot_hockeystick no_legend defaults to FALSE", {
+  expect_false(formals(plot_hockeystick)$no_legend)
+})
+
+test_that("plot_hockeystick color-codes sources by default", {
+  p <- plot_hockeystick(dataset = temp2k_fixture, temp = temp_hockey_fixture, print = FALSE)
+
+  expect_true("colour" %in% names(p$mapping))
+  expect_false(is.null(p$scales$get_scales("colour")))
+  expect_equal(p$theme$legend.position, "top")
+
+  d <- ggplot2::ggplot_build(p)$data[[1]]
+  expect_equal(length(unique(d$group)), 3)
+})
+
+test_that("plot_hockeystick no_legend draws a single black line with no legend", {
+  p <- plot_hockeystick(dataset = temp2k_fixture, temp = temp_hockey_fixture,
+                        no_legend = TRUE, print = FALSE)
+
+  expect_false("colour" %in% names(p$mapping))
+  expect_null(p$scales$get_scales("colour"))
+  expect_equal(p$theme$legend.position, "none")
+
+  d <- ggplot2::ggplot_build(p)$data[[1]]
+  expect_length(unique(d$group), 1)
+  expect_true(all(d$colour == "black"))
+
+  # No key is laid out in the rendered figure
+  g <- ggplot2::ggplotGrob(p)
+  expect_false(any(grepl("key", g$layout$name)))
+})
+
+test_that("plot_hockeystick no_legend plots the same data as the default", {
+  pd <- plot_hockeystick(dataset = temp2k_fixture, temp = temp_hockey_fixture, print = FALSE)
+  pn <- plot_hockeystick(dataset = temp2k_fixture, temp = temp_hockey_fixture,
+                         no_legend = TRUE, print = FALSE)
+
+  dd <- ggplot2::ggplot_build(pd)$data[[1]]
+  dn <- ggplot2::ggplot_build(pn)$data[[1]]
+
+  # Grouped geoms emit rows group-by-group, so compare after sorting by year
+  expect_equal(dd$x[order(dd$x)], dn$x[order(dn$x)])
+  expect_equal(dd$y[order(dd$x)], dn$y[order(dn$x)])
+})
+
+test_that("plot_hockeystick returns NULL invisibly when passed NULL", {
+  expect_null(plot_hockeystick(dataset = NULL, temp = temp_hockey_fixture, print = FALSE))
+  expect_null(plot_hockeystick(dataset = temp2k_fixture, temp = NULL, print = FALSE))
+})
+
+test_that("plot_hockeystick returns NULL when the baseline period has no data", {
+  expect_message(
+    expect_null(plot_hockeystick(dataset = temp2k_fixture, temp = temp_hockey_fixture,
+                                 baseline = c(1850, 1860), print = FALSE)),
+    "baseline offset"
+  )
+})
