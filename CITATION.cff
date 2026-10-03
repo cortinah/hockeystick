@@ -8,7 +8,7 @@ message: 'To cite package "hockeystick" in publications use:'
 type: software
 license: MIT
 title: 'hockeystick: Download and Visualize Essential Climate Change Data'
-version: 0.8.7
+version: 1.1.0
 identifiers:
 - type: doi
   value: 10.32614/CRAN.package.hockeystick

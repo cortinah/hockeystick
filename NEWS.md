@@ -83,3 +83,6 @@
 
 # hockeystick 1.0.0
 * Add CMIP6 climate projections and anomalies from Worldclim
+
+# hockeystick 1.1.0
+* Add plot_hockeystick() to splice the PAGES2k temperatures with NASA GISS

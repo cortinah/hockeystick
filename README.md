@@ -41,7 +41,7 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**New in version 1.0.0:** Retrieve and plot global maps of future cmip6
+**New in version 1.0.0:** Retrieve and plot global maps of future CMIP6
 projections from WorldClim.
 
 New in version 0.9.0: Global wildfire area burnt and emissions data from
@@ -163,8 +163,6 @@ gmsl <- get_sealevel()
 plot_sealevel(gmsl)
 ```
 
-<img src="man/figures/README-sl-1.png" alt="" width="60%" />
-
 Retrieve July annual Arctic Sea Ice Index and plot:
 
 ``` r
@@ -190,11 +188,10 @@ Retrieve Common Era temperature reconstruction and plot it with
 instrumental record:
 
 ``` r
-anomaly2k <- get_temp2k()
-plot_temp2k(anomaly2k)
+plot_hockeystick()
 ```
 
-<img src="man/figures/README-2ktemp-1.png" alt="" width="60%" />
+<img src="man/figures/README-2ktemp-1.png" alt="" width="60%" height="65%" />
 
 Retrieve NOAA HURDAT2 hurricane data and plot:
 
@@ -265,8 +262,6 @@ Users may also cache data by default by adding
 ``` r
 climate_grid()
 ```
-
-<img src="man/figures/README-grid-1.png" alt="" width="80%" />
 
 ## Acknowledgments
 
