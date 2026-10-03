@@ -363,17 +363,17 @@ plot_hockeystick <- function(dataset = get_temp2k(), temp = get_temp(),
   }
 
   nasa <- temp |>
-    mutate(year = year(Year), temp_anomaly = `J-D` - offset, source = 'NASA GISS') |>
-    select(year, temp_anomaly, source)
+    mutate(year = year(Year), temp_anom = `J-D` - offset, source = 'NASA GISS') |>
+    select(year, temp_anom, source)
 
   reconstruction <- dataset |>
     filter(measure == 'ensemble_median', year <= 1849) |>
-    select(year, temp_anomaly = value) |>
+    select(year, temp_anom = value) |>
     mutate(source = 'PAGES2k reconstruction')
 
   instrumental <- dataset |>
     filter(measure == 'instrumental', year > 1849) |>
-    select(year, temp_anomaly = value) |>
+    select(year, temp_anom = value) |>
     mutate(source = 'PAGES2k instrumental')
 
   spliced <- bind_rows(reconstruction, instrumental, nasa |> filter(year > 2017)) |>
@@ -384,12 +384,12 @@ plot_hockeystick <- function(dataset = get_temp2k(), temp = get_temp(),
   if (no_legend) {
     # Single line through all sources: drop the color mapping so the three
     # segments are drawn as one continuous black record.
-    plot <- ggplot(spliced, aes(x = year, y = temp_anomaly)) +
+    plot <- ggplot(spliced, aes(x = year, y = temp_anom)) +
       geom_line(color = 'black', linewidth = 1.0) +
       theme_bw(base_size = 12) +
       theme(legend.position = 'none')
   } else {
-    plot <- ggplot(spliced, aes(x = year, y = temp_anomaly, color = source)) +
+    plot <- ggplot(spliced, aes(x = year, y = temp_anom, color = source)) +
       geom_line(linewidth = 1.0) +
       theme_bw(base_size = 12) +
       scale_color_manual(name = NULL,
@@ -401,10 +401,10 @@ plot_hockeystick <- function(dataset = get_temp2k(), temp = get_temp(),
 
   plot <- plot +
     labs(title = 'Global Surface Temperature Anomaly',
-         subtitle = paste0('PAGES2k reconstruction (1-2017) and NASA GISS (2018-present)\nAligned to ',
+         subtitle = paste0('PAGES2k dataset (1-2017) and NASA GISS (2018-present)\nAligned to ',
                            baseline[1], '-', baseline[2], ' baseline'),
          x = 'Year C.E.',
-         y = 'Temperature Anomaly (°C)',
+         y = expression("Temperature Anomaly (" * degree * "C)"),
          caption = 'Source: PAGES2k Consortium, NASA Goddard Institute for Space Studies')
 
   if (print) suppressMessages( print(plot) )
