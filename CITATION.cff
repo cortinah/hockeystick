@@ -19,7 +19,7 @@ abstract: 'Provides easy access to essential climate change datasets to non-clim
   sea-ice, Hurricanes, and Paleoclimate data. Sources include: NOAA Mauna Loa Laboratory
   <https://gml.noaa.gov/ccgg/trends/data.html>, Global Carbon Project <https://www.globalcarbonproject.org/carbonbudget/>,
   NASA GISTEMP <https://data.giss.nasa.gov/gistemp/>, National Snow and Sea Ice Data
-  Center <https://nsidc.org/home>, CSIRO <https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/>,
+  Center <https://nsidc.org/home>, CSIRO <https://doi.org/10.1007/s10712-011-9119-1>,
   NOAA Laboratory for Satellite Altimetry <https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/>
   and HURDAT Atlantic Hurricane Database <https://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html>,
   Vostok Paleo carbon dioxide and temperature data: <https://doi.org/10.3334/CDIAC/ATG.009>.'

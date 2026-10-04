@@ -2,7 +2,7 @@
 #'
 #' Retrieves global mean sea level (GMSL) data from historic tide gauge and recent satellite altimeter observations (in mm).
 #' Source for tide gauge data is Commonwealth Scientific and Industrial Research Organisation (CSIRO) as described in Church and White (2011).
-#' \url{https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/} \cr \cr
+#' \doi{10.1007/s10712-011-9119-1} \cr \cr
 #' Source for satellite data is NOAA Laboratory for Satellite Altimetry:
 #' \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/}
 #'
@@ -16,7 +16,7 @@
 #'
 #' The satellite observations have been releveled so that their mean level in 1993 matches that of the tide gauges.
 #'
-#' The tide gauge data are no longer updated and cover the period from 1880 to 2013, per Church, J. A. and N.J. White (2011) \url{https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/}
+#' The tide gauge data are no longer updated and cover the period from 1880 to 2013, per Church, J. A. and N.J. White (2011) \doi{10.1007/s10712-011-9119-1}
 #'
 #' Satellite data are updated monthly or more frequently from the NOAA Laboratory for Satellite Altimetry. TOPEX and Jason-1,-2,-3 satellites dataset, with seasonal signals removed. \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/}
 #'
@@ -43,7 +43,7 @@
 #' @author Hernando Cortina, \email{hch@@alum.mit.edu}
 #' @references
 #' \itemize{
-#' \item CSIRO reconstructed tide gauge GMSL for 1880 to 2009: \url{https://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/}
+#' \item CSIRO reconstructed tide gauge GMSL for 1880 to 2009
 #' \item Church, J. A. and N.J. White (2011), Sea-level rise from the late 19th to the early 21st Century. \emph{Surveys in Geophysics}, doi:10.1007/s10712-011-9119-1. \url{https://link.springer.com/article/10.1007/s10712-011-9119-1}
 #' \item NOAA Laboratory for Satellite Altimetry \url{https://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise/}
 #'  }
@@ -147,7 +147,7 @@ plot <-  ggplot(dataset, aes(x=date, color=method, y=gmsl)) +geom_line(linewidth
          scale_color_manual(values=c('dodgerblue2','firebrick1'), labels=c('Satellite observations','Coastal tide gauge records')) +theme(legend.position = c(0.30,0.84), legend.background=element_blank(), legend.title = element_blank()) +
          scale_y_continuous(n.breaks = 8) +
          labs(title='Sea Level Rise', subtitle='Tide gauges: 1880-2013; Satellite: 1992-present, calibrated to 1993 mean tide gauge.', y= 'Variation (mm)',
-         caption='Sources: NOAA Laboratory for Satellite Altimetry (sat)\nhttps://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise\nCommonwealth Scientific and Industrial Research Organisation (tide gauge)\nhttps://research.csiro.au/slrwavescoast/sea-level/measurements-and-data/sea-level-data/')
+         caption='Sources: NOAA Laboratory for Satellite Altimetry (sat)\nhttps://www.star.nesdis.noaa.gov/socd/lsa/SeaLevelRise\nCommonwealth Scientific and Industrial Research Organisation (tide gauge)\nhttps://doi.org/10.1007/s10712-011-9119-1')
 
   if (print) suppressMessages( print(plot) )
   invisible(plot)
