@@ -74,7 +74,7 @@ gmsl_sat <- gmsl_sat[,c('date', 'gmsl_sat')]
 gmsl_sat$date <- lubridate::ymd(lubridate::round_date(lubridate::date_decimal(gmsl_sat$date), 'day'))
 
 
-file_url <- 'https://research.csiro.au/slrwavescoast/?ddownload=327'
+file_url <- 'https://www.cmar.csiro.au/sealevel/downloads/church_white_gmsl_2011_up.zip'
 connected <- .isConnected(file_url)
 if (!connected) {message("Retrieving remote data requires connectivity to source."); return(invisible(NULL))}
 

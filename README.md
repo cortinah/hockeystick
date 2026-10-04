@@ -163,6 +163,8 @@ gmsl <- get_sealevel()
 plot_sealevel(gmsl)
 ```
 
+<img src="man/figures/README-sl-1.png" alt="" width="60%" />
+
 Retrieve July annual Arctic Sea Ice Index and plot:
 
 ``` r
@@ -262,6 +264,8 @@ Users may also cache data by default by adding
 ``` r
 climate_grid()
 ```
+
+<img src="man/figures/README-grid-1.png" alt="" width="80%" />
 
 ## Acknowledgments
 
