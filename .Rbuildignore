@@ -11,7 +11,8 @@ cran-comments.md
 ^doc$
 ^Meta$
 ^vignettes/\.quarto$
-^vignettes/*_files$
+^vignettes/.*_files$
+^vignettes/.*\.html$
 ^CITATION\.cff$
 ^\.positai$
 ^\.posit$
