@@ -9,6 +9,7 @@ type: software
 license: MIT
 title: 'hockeystick: Download and Visualize Essential Climate Change Data'
 version: 1.1.0
+date-released: '2026-10-04'
 identifiers:
 - type: doi
   value: 10.32614/CRAN.package.hockeystick
