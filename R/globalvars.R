@@ -6,5 +6,5 @@ utils::globalVariables(c('average', 'trend', 'year','Year', 'J-D', 'gmsl', 'meth
                          'area_ha', 'area_ha_avg', 'area_ha_max', 'area_ha_min', 'avgv', 'cum_area_ha',
                          'cum_area_ha_avg', 'cum_area_ha_max', 'cum_area_ha_min', 'cum_avgv', 'cum_curv',
                          'cum_events', 'cum_events_avg', 'cum_events_max', 'cum_events_min', 'cum_maxv',
-                         'cum_minv curv', 'dt', 'events', 'events_avg', 'events_max', 'events_min', 'fires', 'maxv',
+                         'cum_minv curv', 'dt', 'events', 'events_avg', 'events_max', 'events_min', 'fires', 'max_anom', 'maxv',
                          'mddate', 'minv', 'plt', 'cum_minv', 'curv' ))

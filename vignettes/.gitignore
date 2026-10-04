@@ -4,3 +4,4 @@
 
 /.quarto/
 **/*.quarto_ipynb
+man/

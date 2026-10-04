@@ -390,3 +390,119 @@ test_that("plot_hockeystick returns NULL when the baseline period has no data", 
     "baseline offset"
   )
 })
+
+# ---------------------------------------------------------------------------
+# plot_dailyanom — daily temperature anomaly
+# ---------------------------------------------------------------------------
+
+# Mirrors the layout returned by get_dailytempcop(): the 5th column holds the
+# historic day-of-year mean, which plot_dailyanom renames to mean_temp.
+# Temps are built as mean + offset so temp_anom is exactly the per-year offset.
+daily_fixture <- {
+  days  <- 1:10L
+  years <- c(2018L, 2019L, 2020L)
+  mean_daily <- seq(10, 19, length.out = length(days))
+  offsets <- c(-0.2, 0.1, 0.4)
+
+  df <- expand.grid(day_of_year = days, year = years)
+  df <- df[order(df$year, df$day_of_year), ]
+  m <- mean_daily[match(df$day_of_year, days)]
+  o <- offsets[match(df$year, years)]
+
+  out <- tibble::tibble(
+    year            = df$year,
+    day_of_year     = df$day_of_year,
+    date            = as.Date(sprintf('%d-01-%02d', df$year, df$day_of_year)),
+    temp            = m + o,
+    `1991-2020 mean` = m,
+    temp_anom       = o,
+    dummy_date      = as.Date(sprintf('1925-01-%02d', df$day_of_year))
+  )
+  attr(out, "hs_daily_region") <- 'W'
+  out
+}
+
+test_that("plot_dailyanom returns a ggplot", {
+  p <- plot_dailyanom(daily_fixture, current_year = 2020, print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})
+
+test_that("plot_dailyanom has no anomaly argument", {
+  expect_false("anomaly" %in% names(formals(plot_dailyanom)))
+})
+
+test_that("plot_dailyanom plots the anomaly rather than the temperature", {
+  p <- plot_dailyanom(daily_fixture, current_year = 2020, print = FALSE)
+  d <- ggplot2::ggplot_build(p)$data[[1]]
+
+  expect_equal(sort(d$y), sort(daily_fixture$temp_anom))
+  # Absolute temperatures are an order of magnitude larger and must not appear
+  expect_false(isTRUE(all.equal(sort(d$y), sort(daily_fixture$temp))))
+})
+
+test_that("plot_dailyanom draws the historic mean as a flat line at zero", {
+  p <- plot_dailyanom(daily_fixture, current_year = 2020, print = FALSE)
+  b <- ggplot2::ggplot_build(p)
+
+  expect_true(inherits(p$layers[[2]]$geom, "GeomLine"))
+  expect_true(all(b$data[[2]]$y == 0))
+  # The mean stays in the legend, so its period is still named
+  expect_true("1991-2020 mean" %in% p$scales$get_scales("colour")$labels)
+})
+
+test_that("plot_dailyanom maxtemp shades deviation from historic max on the anomaly scale", {
+  p <- plot_dailyanom(daily_fixture, current_year = 2020, maxtemp = TRUE, print = FALSE)
+
+  expect_true(inherits(p$layers[[4]]$geom, "GeomRect"))
+  expect_match(p$labels$subtitle, "deviation from historic max")
+
+  r <- ggplot2::ggplot_build(p)$data[[4]]
+  expect_equal(nrow(r), sum(daily_fixture$year == 2020))
+  # Bounds are anomalies, not absolute temperatures: ymin is max offset over
+  # the other years (0.1) and ymax this year's offset (0.4). Derived by
+  # subtracting absolute temps, so allow for floating point drift.
+  expect_true(all(abs(r$ymin - 0.1) < 1e-6))
+  expect_true(all(abs(r$ymax - 0.4) < 1e-6))
+})
+
+test_that("plot_dailyanom labels use a plotmath degree sign", {
+  p <- plot_dailyanom(daily_fixture, current_year = 2020, print = FALSE)
+
+  # Labels are plotmath expressions rather than literal strings, keeping the
+  # source ASCII-only. Assert the symbol is `degree`, which distinguishes a
+  # correct label from one whose \U escape decoded to some other codepoint.
+  expect_true(inherits(p$labels$y, "expression"))
+  expect_true("degree" %in% all.names(p$labels$y))
+
+  pm <- plot_dailyanom(daily_fixture, current_year = 2020, maxtemp = TRUE, print = FALSE)
+  fill_name <- pm$scales$get_scales("fill")$name
+  expect_true(inherits(fill_name, "expression"))
+  expect_true("degree" %in% all.names(fill_name))
+})
+
+test_that("plot_dailyanom titles follow the dataset region", {
+  air <- plot_dailyanom(daily_fixture, current_year = 2020, print = FALSE)
+  expect_equal(air$labels$title, "World Daily Air Temperature Anomaly")
+  expect_match(air$labels$subtitle, "since 1940")
+
+  sea <- daily_fixture
+  attr(sea, "hs_daily_region") <- 'WS'
+  p <- plot_dailyanom(sea, current_year = 2020, print = FALSE)
+  expect_equal(p$labels$title, "World (60S-60N) Daily Sea Surface Temperature Anomaly")
+  expect_match(p$labels$subtitle, "since 1982")
+})
+
+test_that("plot_dailyanom honours a custom title", {
+  p <- plot_dailyanom(daily_fixture, current_year = 2020,
+                      title_lab = "Record Warmth", print = FALSE)
+  expect_equal(p$labels$title, "Record Warmth")
+})
+
+test_that("plot_dailyanom returns NULL invisibly when passed NULL", {
+  expect_null(plot_dailyanom(NULL, print = FALSE))
+})
+
+test_that("plot_dailyanom builds when current_year is absent from the data", {
+  p <- plot_dailyanom(daily_fixture, current_year = 1900, print = FALSE)
+  expect_true(inherits(p, "ggplot"))
+})

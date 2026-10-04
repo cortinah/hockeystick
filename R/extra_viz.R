@@ -116,7 +116,7 @@ climate_grid <- function(print = TRUE) {
 
     b <- plot_temp(print = FALSE) +theme_bw(base_size = 9) +theme(legend.position = "none") +
     labs(title='Global Land-Ocean Temperature Index', subtitle='Global surface temperature relative to 1951-80 mean',
-         y='Temperature Anomaly (C\U00B0)', caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/')
+         y=expression("Temperature Anomaly (" * degree * "C)"), caption='Source: NASA Goddard Institute for Space Studies\nhttps://data.giss.nasa.gov/gistemp/')
   c <- suppressMessages( plot_seaice(print = FALSE) +theme_bw(base_size = 9) )
 
   d <- plot_sealevel(print = FALSE)
@@ -280,7 +280,7 @@ plot_carbontemp <- function(dataset = merge_carbontemp(), print=TRUE) {
     scale_x_continuous(n.breaks = 6) +
     labs(title=expression('Global Heating and Atmospheric '*CO[2]*' Since 1959'),
          subtitle='Monthly temperature relative to 1951-80 mean and Mauna Loa monthly mean', x=expression(title='Atmospheric '*CO[2]*' (ppm)'),
-         y='Global Temperature Anomaly (C\U00B0)', color='20-year\nperiods',
+         y=expression("Global Temperature Anomaly (" * degree * "C)"), color='20-year\nperiods',
          caption='Sources: NASA Goddard Institute for Space Studies\nNOAA/ESRL and Scripps Institution of Oceanography')
 
   if (print) suppressMessages( print(plot) )

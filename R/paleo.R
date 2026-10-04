@@ -130,7 +130,7 @@ a <- ggplot(dataset[dataset$name=='co2',], aes(x=age_ice, y=value)) +geom_line(l
             theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank()) +labs(y=expression(CO[2]*' concentration' ))
 
 b <- ggplot(dataset[dataset$name=='temp',], aes(x=age_ice, y=value)) +geom_line(linewidth=.8, col='dodgerblue2') +scale_x_reverse(lim=c(423000, 0), labels = scales::unit_format(unit='', scale = 1e-3)) +
-            labs(x='Millennia before present', y='Temperature (C\U00B0)') +theme_bw()
+            labs(x='Millennia before present', y=expression("Temperature (" * degree * "C)")) +theme_bw()
 
 plot <- patchwork::wrap_plots(a, b, ncol=1) + patchwork::plot_annotation(title = expression('Paleoclimate: The Link Between '*CO[2]*' and Temperature'),
       caption = 'Source: U.S. Department of Energy ESS-DIVE\nhttps://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/ATG.009\nhttps://data.ess-dive.lbl.gov/datasets/doi:10.3334/CDIAC/CLI.006',
