@@ -33,7 +33,9 @@ The choice of data was originally based on [Professor Stefan Rahmstorf's](http:/
 
 `hockeystick` was highlighted on the RStudio [RViews](https://rviews.rstudio.com/2021/03/19/february-2021-top-40-new-cran-packages/) blog by Joseph Rickert as one of the "Top 40" new packages on CRAN in February 2021.
 
-**New in version 1.0.0:** Retrieve and plot global maps of future CMIP6 projections from WorldClim.
+**New in version 1.1.0:** Plot the [hockeystick graph](https://en.wikipedia.org/wiki/Hockey_stick_graph_(global_temperature)) with `plot_hockeystick()`.
+
+New in version 1.0.0: Retrieve and plot global maps of future CMIP6 projections from WorldClim.
 
 New in version 0.9.0: Global wildfire area burnt and emissions data from GWIS.
 
@@ -142,9 +144,9 @@ arcticice <- get_icecurves()
 plot_icecurves(arcticice)
 ```
 
-Retrieve Common Era temperature reconstruction and plot it with instrumental record:
+*Hockeystick* graph: Common Era temperature reconstruction and up-to-date instrumental record:
 
-```{r 2ktemp, out.width='60%', out.height='65%', fig.retina=2}
+```{r 2ktemp, out.width='60%', out.height='70%', fig.retina=2}
 plot_hockeystick()
 ```
 

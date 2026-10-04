@@ -41,7 +41,11 @@ temperature chart.
 blog by Joseph Rickert as one of the “Top 40” new packages on CRAN in
 February 2021.
 
-**New in version 1.0.0:** Retrieve and plot global maps of future CMIP6
+**New in version 1.1.0:** Plot the [hockeystick
+graph](https://en.wikipedia.org/wiki/Hockey_stick_graph_(global_temperature))
+with `plot_hockeystick()`.
+
+New in version 1.0.0: Retrieve and plot global maps of future CMIP6
 projections from WorldClim.
 
 New in version 0.9.0: Global wildfire area burnt and emissions data from
@@ -186,14 +190,14 @@ plot_icecurves(arcticice)
 
 <img src="man/figures/README-icecurves-1.png" alt="" width="60%" />
 
-Retrieve Common Era temperature reconstruction and plot it with
-instrumental record:
+*Hockeystick* graph: Common Era temperature reconstruction and
+up-to-date instrumental record:
 
 ``` r
 plot_hockeystick()
 ```
 
-<img src="man/figures/README-2ktemp-1.png" alt="" width="60%" height="65%" />
+<img src="man/figures/README-2ktemp-1.png" alt="" width="60%" height="70%" />
 
 Retrieve NOAA HURDAT2 hurricane data and plot:
 
