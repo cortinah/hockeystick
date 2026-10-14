@@ -128,21 +128,24 @@ d |> filter(year==2026 | year==2025 | year==2023) |> filter(dummy_date >= as.Dat
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
 # FORECAST REST OF MONTH
-avgdays <- 2
+avgdays <- 4
 extra <- tail(d, avgdays)
 
 
 # Get latest
 fcst <- mean(pull(extra[,"temp_anom"]))
 
-daysfc <- as.numeric(as.Date("2026-12-31")-as.Date("2026-01-01"))
+daysfc <- as.numeric(as.Date("2026-12-31")-as.Date("2026-01-01"))+1
 
-extra <- data.frame(year=rep(2026, daysfc-pull(extra[1,2])), day_of_year=(pull(extra[1,2])+1):daysfc, date=NA, temp=NA,`1979-2000 mean`=NA, temp_anom=fcst, dummy_date=pull(extra[1,7])+1:(daysfc-pull(extra[1,2])))
+extra <- data.frame(year=rep(2026, daysfc-pull(extra[avgdays,2])), day_of_year=(pull(extra[avgdays,2])+1):daysfc, date=NA, temp=NA, `1979-2000 mean`=NA, temp_anom=fcst,dummy_date=pull(extra[avgdays,7])+1:(daysfc-pull(extra[avgdays,2])))
 
 colnames(extra) <- colnames(d)
 mutate(extra, date = as.Date(paste0(year, '-', substr(dummy_date,6,7), '-', substr(dummy_date, 9, 10)))) -> extra
 
-extra<-extra[-1,]
+d |> filter(day_of_year %in% extra$day_of_year, year==2025) |> select(`1991-2020 mean`) |> pull() -> meantemp
+extra$`1991-2020 mean` <- meantemp
+extra$temp <- extra$temp_anom + extra$`1991-2020 mean`
+
 f <- bind_rows(d,extra)
 
 f |> filter(dummy_date <= as.Date("1925-10-31"), dummy_date >= as.Date("1925-10-01")) |> group_by(year) |> summarize(mtd=mean(temp_anom)) |> slice_max(n=10, order_by=mtd) |> pull(mtd, name=year) |> rev() |> diff()
@@ -339,7 +342,7 @@ fcst <- mean(pull(extra[,"temp_anom"]))
 #fcst <- fcst*.75
 #fcst <- 0.44
 
-daysfc <- as.numeric(as.Date("2026-12-31")-as.Date("2026-01-01"))
+daysfc <- as.numeric(as.Date("2026-12-31")-as.Date("2026-01-01"))+1
 
 extra <- data.frame(year=rep(2026, daysfc-pull(extra[avgdays,2])), day_of_year=(pull(extra[avgdays,2])+1):daysfc, date=NA, temp=NA, `1979-2000 mean`=NA, temp_anom=fcst,dummy_date=pull(extra[avgdays,7])+1:(daysfc-pull(extra[avgdays,2])))
 
