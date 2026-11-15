@@ -355,13 +355,14 @@ extra$temp <- extra$temp_anom + extra$`1991-2020 mean`
 
 f <- bind_rows(d,extra)
 
-# 2024 offset: 1.28-0.719
+# 2024 cop offset: 1.28-0.719
+# 2024 goddard offset 1.28-1.02
 f |> group_by(year) |> summarize(ytd=mean(temp_anom)) |> slice_max(n=10, order_by=ytd)
-f |> group_by(year) |> summarize(ytd=mean(temp_anom)+0.561) |> slice_max(n=10, order_by=ytd)
+f |> group_by(year) |> summarize(ytd=mean(temp_anom)+0.26) |> slice_max(n=10, order_by=ytd)
 f |> group_by(year) |> summarize(ytd=mean(temp)) |> slice_max(n=10, order_by=ytd) |> pull(ytd, name=year) |> rev() |> diff()
 
 
-f |> filter(year==2026 | year==2024) |> ggplot(aes(x=dummy_date, y=temp, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
+f |> filter(year==2026 | year==2024) |> ggplot(aes(x=dummy_date, y=temp_anom, color=as.factor(year))) + geom_point(size=0) + geom_line(linewidth=1) + scale_y_continuous(n.breaks=12) +
   theme_bw(base_size = 12) +labs(title='World Daily Average Air Temperature', subtitle='2-meter air temperature', x='Date',color ='Year',y='Anomaly (C)', caption = paste0("Source: Climate Change Institute, University of Maine\nClimateReanalyzer.org as of ", pull(tail(d,1)["date"]))) +
   scale_x_date(date_labels="%m/%d") + scale_color_manual(values = c("darkgreen", "red", "dodgerblue")) + theme(legend.position = 'top')
 
